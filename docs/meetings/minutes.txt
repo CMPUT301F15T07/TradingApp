@@ -1,0 +1,19 @@
+October 5, 2015
+Anson, Jake, Josh, Elias, Salim
+
+Discussion on whether we should allow borrowing in addition to trading?
+	Stories seem to support borrowing, but lending cards doesn't make sense
+	Need to confirm that requirements dont mandate borrowing
+
+Went over the UI design
+	Need To Add:
+		Trade instance activity
+		Configuration activity (offline viewing, making trades. Enable downloading of images)
+	
+How will people chat/ coordinate to trade?
+	Add a trade dialog/ messaging system to a trade activity
+
+What picture to put in the item page? Real Picture/ stock picture
+	Album would be ideal, could combine images from multiple sources (online/ taken on phone)
+
+
