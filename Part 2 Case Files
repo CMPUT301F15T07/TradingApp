@@ -1,0 +1,31 @@
+//User case	US01.01.01
+public void testUS010101(){
+	Inventory inventory = new Inventory();
+
+
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	
+	Card card = new Card(name, quantity, quality, catagory, tradable, comments);
+
+	assertEquals(name, card.getName());
+	assertEquals(quantity, card.getQuantity());
+	assertEquals(quality, card.getQuality());
+	assertEquals(catagorty, card.getCatagory());
+	assertEquals(tradable, Card.isTradable());
+	assertEquals(comments, Card.getComments());
+
+	Inventory inventory = new Inventory(card);
+	assertEquals(inventory.size(), 1);
+
+	inventory.removeCard("Charizard");
+	assertEquals(inventory.size(),0);
+
+
+
+
+}
