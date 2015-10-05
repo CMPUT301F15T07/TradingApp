@@ -1,5 +1,5 @@
 October 5, 2015
-Anson, Jake, Josh, Elias, Salim
+Anson, Jake, Josh, Elias, Salim, Aaron
 
 Discussion on whether we should allow borrowing in addition to trading?
 	Stories seem to support borrowing, but lending cards doesn't make sense
@@ -16,4 +16,10 @@ How will people chat/ coordinate to trade?
 What picture to put in the item page? Real Picture/ stock picture
 	Album would be ideal, could combine images from multiple sources (online/ taken on phone)
 
+Project Actors:
+	Cards
+	Inventory
+	Users -> User, Friends
+	Profile
+	Photograph
 
