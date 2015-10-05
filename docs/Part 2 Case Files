@@ -93,6 +93,16 @@ public void testUS010501(){
 
 }
 
+//user case US01.06.01
+public void testUS010601(){
+
+	Card card = new Card();
+
+	ArrayList<String> releventcatagories = new ArrayList<String>("Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
+												"Cards Against Hummanity","Super Fight", "Animal Crossing", "Shrek Trading Cards");
+	assertEquals(releventcatagories, card.getRelevantCatagories());
+}
+
 -----------
 
 
