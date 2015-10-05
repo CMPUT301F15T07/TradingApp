@@ -1,4 +1,185 @@
-  User Case: Jasper Pumpernickle
+Inventory
 
-> Jasper wants to trade some of his cards for new ones
-	> Jasper 
+//User case	US01.01.01/US01.05.01
+public void testUS010101(){
+	Inventory inventory = new Inventory();
+
+
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+	assertEquals(name, card.getName());
+	assertEquals(quantity, card.getQuantity());
+	assertEquals(quality, card.getQuality());
+	assertEquals(catagorty, card.getCatagory());
+	assertEquals(tradable, Card.isTradable());
+	assertEquals(comments, Card.getComments());
+
+	Inventory inventory = new Inventory(card);
+	assertEquals(inventory.size(), 1);
+
+	inventory.removeCard("Charizard");
+	assertEquals(inventory.size(),0);
+
+}
+
+
+//User case US01.04.01
+public void testUS010401{
+
+
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+	assertEquals(name, card.getName());
+	assertEquals(quantity, card.getQuantity());
+	assertEquals(quality, card.getQuality());
+	assertEquals(catagorty, card.getCatagory());
+	assertEquals(tradable, card.isTradable());
+	assertEquals(comments, card.getComments());
+
+
+	String newname = "Blue Eyes White Dragon";
+	Integer newquantity = 9;
+	Quality newquality = new Quality(3);
+	String newcatagory = "YuGiOh";
+	String newseries = "stupid series";
+	boolean newtradable = false;
+	String newcomments = "Dime a dozen";
+
+	card.setName(newname);
+	card.setQuantity(newquanitity);
+	card.setQuality(newquality);
+	card.setCatagory(newcatagory);
+	card.setSeries(newseries);
+	card.setTradable(newtradable);
+	card.setComments(newcomments);
+
+	assertEquals(newname, card.getName());
+	assertEquals(newquantity, card.getQuantity());
+	assertEquals(newquality, card.getQuality());
+	assertEquals(newcatagorty, card.getCatagory());
+	assertEquals(newtradable, card.isTradable());
+	assertEquals(newcomments, card.getComments());
+
+}
+
+//user case US01.05.01
+public void testUS010501(){
+
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+}
+
+//user case US01.06.01
+public void testUS010601(){
+
+	Card card = new Card();
+
+	ArrayList<String> releventcatagories = new ArrayList<String>("Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
+												"Cards Against Hummanity","Super Fight", "Animal Crossing", "Shrek Trading Cards");
+	assertEquals(releventcatagories, card.getRelevantCatagories());
+}
+
+-----------
+
+
+
+
+
+
+Browse Search Inventories of Friends
+
+Helper Functions:
+
+User GetMockUser(){
+	User user = new User("Snape", "Hogwartz");
+	Card blackLotus = new Card(
+}
+
+User GetMockFriend(){
+
+}
+
+US03.01.01
+>The User opens a friends' profile and then opens thier inventory
+>The User can then browse the friends' cards
+
+void testUS030101(){
+	User myuser = GetMockUser();
+	const myTestFriendName = "Harry Potter";
+	User myTestFriend = GetMockFriend();
+	myuser.friends.add(myTestFriend);
+	User friend = myuser.friends.getFriend(myTestFriendName);
+	Inventory friendInventory = friend.getInventory();
+}
+
+US03.01.02
+>The User has thier friends profile
+>The User searches thier friends profile by category
+
+void testUS030102(){
+	User friend = GetMockFriend();
+	Inventory friendInventory = friend.getInventory();
+	String searchCategory = "MTG";
+	List<Card> results = friendInventory.searchByCategory(searchCategory);
+}
+
+US03.01.03
+>The User has thier friends profile
+>The User searches thier friends profile by category
+
+void testUS030102(){
+	User friend = GetMockFriend();
+	Inventory friendInventory = friend.getInventory();
+	String searchQuery = "Black Lotus";
+	List<Card> results = friendInventory.searchByText(searchQuery);
+}
+
+US03.02.01
+>The Owner Has Publicly Available Items
+>The Owner's Friends Can Browse Those Items
+
+void testUS030201(){
+	User owner = GetMockUser();
+	Inventory inventory = owner.getInventory();
+	Card publicCard = inventory.searchByText("Black Lotus");
+	Card privateCard = inventory.serachByText("Time Walk");
+	publicCard.setPublic();
+	privateCard.setPrivate();
+	User friend = GetMockFriend();
+	friend.friends.add(owner);
+	User anotheOwner = friend.friends.getFriend("Snape");
+	Inventory ownerInventory = anotherOwner.getInventory();
+	List<Card> ownerCards = ownerInventory.searchByText("*");
+	assertEqual(ownerCards.get(0), publicCard);
+	assertEqual(ownerCards.get(1), null); //we should only get the public card
+}
+
+-----
+
+
+
+
