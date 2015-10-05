@@ -1,4 +1,4 @@
-//User case	US01.01.01
+//User case	US01.01.01/US01.05.01
 public void testUS010101(){
 	Inventory inventory = new Inventory();
 
@@ -73,5 +73,20 @@ public void testUS010401{
 	assertEquals(newcatagorty, card.getCatagory());
 	assertEquals(newtradable, card.isTradable());
 	assertEquals(newcomments, card.getComments());
+
+}
+
+//user case US01.05.01
+public void testUS010501(){
+
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
 
 }
