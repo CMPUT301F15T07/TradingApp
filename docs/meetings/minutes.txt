@@ -23,3 +23,22 @@ Project Actors:
 	Profile
 	Photograph
 
+Card Categories:
+	Magic The Gathering
+	Pokemon
+	Yu-Gi-Oh
+	Digimon
+	Sports
+	Steam Trading Card
+	Cards Against Humanity
+	Super Fight
+	Animal Crossing
+	Shrek Trading Cards
+
+TODO:
+	Elias: write requirements test cases for "browse search inventories of friends photograph of items"
+	Aaron: write requirements test cases for "trade with friends"
+	Jake: write requirements test cases for "offline behaviour and configuration"
+	Josh: write requirements test cases for "inventory"
+	Salim: write requirements test cases for "friends"
+	Anson: finish UI prototyping

@@ -106,11 +106,29 @@ Helper Functions:
 
 User GetMockUser(){
 	User user = new User("Snape", "Hogwartz");
-	Card blackLotus = new Card(
+	String name = "Black Lotus";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Magic The Gathering";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	Card blackLotus = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+	name = "Time Walk";
+	Card timeWalk = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+	Inventory inventory = new Inventory();
+	inventory.addCard(blackLotus);
+	inventory.addCard(timeWalk);
+	user.addInventory(inventory);
+	return user;
 }
 
 User GetMockFriend(){
-
+	User user = GetMockUser();
+	user.changeUsername("Harry Potter");
+	return user;
 }
 
 US03.01.01
@@ -169,6 +187,83 @@ void testUS030201(){
 }
 
 -----
+
+
+Photographs of Items
+
+
+US06.01.01
+>Claimant attaches photograph to an item
+
+void testUS030201(){
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+	Image firstImage = new Image("myImageUrl");
+	Image secondImage = new Image("myImageUrl");
+	card.addImage(firstImage);
+	card.addImage(secondImage);
+	List<Image> cardImages = card.getImages();
+	assertTrue(cardImages.contains(firstImage));
+	assertTrue(cardImages.contains(secondImage));
+}
+
+US06.02.01
+>Owner has an Item
+>Owner gets photos attached to items
+
+void testUS060201(){
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+	Image firstImage = new Image("myImageUrl");
+	Image secondImage = new Image("myImageUrl");
+	card.addImage(firstImage);
+	card.addImage(secondImage);
+	List<Image> cardImages = card.getImages();
+	assertTrue(cardImages.contains(firstImage));
+	assertTrue(cardImages.contains(secondImage));
+}
+
+US06.03.01
+>User has an Item
+>User deletes image from item
+
+void testUS060301(){
+	String name = "Charizard";
+	Integer quantity = 2;
+	Quality quality = new Quality(73);
+	String catagory = "Pokemon";
+	String series = "series";
+	boolean tradable = true;
+	String comments = "Gently bent edge, 100HP";
+	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+	Image firstImage = new Image("myImageUrl");
+	Image secondImage = new Image("myImageUrl");
+	card.addImage(firstImage);
+	card.addImage(secondImage);
+	List<Image> cardImages = card.getImages();
+	assertTrue(cardImages.contains(firstImage));
+	assertTrue(cardImages.contains(secondImage));
+	card.deleteImage(firstImage);
+	List<Image> cardImages = card.getImages();
+	assertTrue(!cardImages.contains(firstImage));
+	assertTrue(cardImages.contains(secondImage));
+}
+
+US06.04.01
+>User adds an Item larger than 65536 bytes
+>
 
 
 
