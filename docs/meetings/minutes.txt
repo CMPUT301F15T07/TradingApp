@@ -42,3 +42,23 @@ TODO:
 	Josh: write requirements test cases for "inventory"
 	Salim: write requirements test cases for "friends"
 	Anson: finish UI prototyping
+
+
+October 5, 2015
+Steven, Aaron, Salim, Jake, Anson, Josh, Elias
+
+Standup
+	Joshua: did first section of requirements, will start on UML for next week
+	Anson: did the wiki, user stories, UI. working on UML next.
+	Jake: started on rough jUnit tests. working on UML next.
+	Salim: working on user test cases. working on UML and merging test cases
+	Aaron: working on test cases for trading with friends. will review UI changes and give feedback
+	
+Dont need to test gui for project part 2, will test in part 4
+
+Trade UI will have separate "accept", "decline", and "counteroffer" buttons.
+
+Should we make custom currency based off of "Black Lotus"?
+	1 Goblin Guide = 0.00008 BL???
+
+
