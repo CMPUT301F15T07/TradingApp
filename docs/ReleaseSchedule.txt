@@ -1,0 +1,15 @@
+Features:
+
+1.) Users can sign in locally, setup their profile, and add cards to inventory
+2.) Users can sign into server? (elastisearch) and upload profile information to server as well as cards. Persistent across devices.
+3.) Users can add friends and view others' inventory (no trading)
+4.) Users can make, accept, decline, and counter offer trades. also view current and past trades
+
+
+Timeline:
+
+1.) October 19, 2 Wk, finished UML and first milestone. 
+2.) October 26, 1 Wk, fairly simple, just serialization.
+3.) November 2, 2 Wk, backend not too bad, but lots of UI work
+4.) November 16, 2 Wk, lengthy, but during reading break...
+5.) November 30, 2 Wk, 2 weeks of polish, update, and integration
