@@ -99,7 +99,7 @@ public void testUS010601(){
 	Card card = new Card();
 
 	ArrayList<String> releventcatagories = new ArrayList<String>("Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
-												"Neopets",, "Animal Crossing", "Shrek Trading Cards", "MISC");
+												"Neopets",, "Amiibo Cards", "Shrek Trading Cards", "MISC");
 	assertEquals(releventcatagories, card.getRelevantCatagories());
 }
 
