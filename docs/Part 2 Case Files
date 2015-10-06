@@ -272,9 +272,30 @@ void testUS060301(){
 }
 
 US06.04.01
->User adds an Item larger than 65536 bytes
->
+>User adds an Image larger than 65536 bytes
+>Card notifies that it cannot add a image file of that size
 
+void testUS060401{
+	Boolean exceptionThrown = false;
+	Image image = new Image("largeImageUrl");
+	try {
+		String name = "Charizard";
+		Integer quantity = 2;
+		Quality quality = new Quality(73);
+		String catagory = "Pokemon";
+		String series = "series";
+		boolean tradable = true;
+		String comments = "Gently bent edge, 100HP";
+		Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+		card.addImage(image); //this should throw IOexption
+	} catch (IOexception ex) {
+		exceptionThrown = true;
+	}
+	assertTrue(exceptionThrown);
+}
+
+US06.04.01
+See: US10.01.01
 
 
 
