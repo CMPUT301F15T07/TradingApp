@@ -78,20 +78,6 @@ public void testUS010401{
 
 }
 
-//user case US01.05.01
-public void testUS010501(){
-
-	String name = "Charizard";
-	Integer quantity = 2;
-	Quality quality = new Quality(73);
-	String catagory = "Pokemon";
-	String series = "series";
-	boolean tradable = true;
-	String comments = "Gently bent edge, 100HP";
-	
-	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
-
-}
 
 //user case US01.06.01
 public void testUS010601(){
