@@ -1,10 +1,19 @@
+Project Actors:
+	Cards
+	Inventory
+	Users -> User, Friends
+	Profile
+	Photograph
+
 Inventory
 
 //User case	US01.01.01/US01.05.01
 public void testUS010101(){
 	Inventory inventory = new Inventory();
 
-
+	//User decides to create a new card from their
+	//inventory view.  He is prompted on the UI for
+	// the following data
 	String name = "Charizard";
 	Integer quantity = 2;
 	Quality quality = new Quality(73);
@@ -13,6 +22,8 @@ public void testUS010101(){
 	boolean tradable = true;
 	String comments = "Gently bent edge, 100HP";
 	
+	//The card is created after the user approves the data
+	//they have entered
 	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
 
 	assertEquals(name, card.getName());
@@ -22,9 +33,12 @@ public void testUS010101(){
 	assertEquals(tradable, Card.isTradable());
 	assertEquals(comments, Card.getComments());
 
+
+	//It gets added to their inventory
 	Inventory inventory = new Inventory(card);
 	assertEquals(inventory.size(), 1);
 
+	//They can remove the card from their inventory
 	inventory.removeCard("Charizard");
 	assertEquals(inventory.size(),0);
 
@@ -34,7 +48,7 @@ public void testUS010101(){
 //User case US01.04.01
 public void testUS010401{
 
-
+	//The user creates a card
 	String name = "Charizard";
 	Integer quantity = 2;
 	Quality quality = new Quality(73);
@@ -52,7 +66,9 @@ public void testUS010401{
 	assertEquals(tradable, card.isTradable());
 	assertEquals(comments, card.getComments());
 
-
+	//Then realized that they got all the info wrong/
+	//From the item view UI, they can enter the edit mode and
+	//Change the card info.
 	String newname = "Blue Eyes White Dragon";
 	Integer newquantity = 9;
 	Quality newquality = new Quality(3);
@@ -84,6 +100,7 @@ public void testUS010601(){
 
 	Card card = new Card();
 
+	//When the user creates a card, they can choose a default catagory from the drop down menu
 	ArrayList<String> releventcatagories = new ArrayList<String>("Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
 												"Neopets",, "Amiibo Cards", "Shrek Trading Cards", "MISC");
 	assertEquals(releventcatagories, card.getRelevantCatagories());
