@@ -67,7 +67,7 @@ public void testUS010401{
 	assertEquals(tradable, card.isTradable());
 	assertEquals(comments, card.getComments());
 
-	//Then realized that they got all the info wrong/
+	//Then realized that they got all the info wrong
 	//From the item view UI, they can enter the edit mode and
 	//Change the card info.
 	String newname = "Blue Eyes White Dragon";
@@ -103,7 +103,7 @@ public void testUS010601(){
 
 	//When the user creates a card, they can choose a default catagory from the drop down menu
 	ArrayList<String> releventcatagories = new ArrayList<String>("Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
-												"Neopets",, "Amiibo Cards", "Shrek Trading Cards", "MISC");
+												"Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC");
 	assertEquals(releventcatagories, card.getRelevantCatagories());
 }
 
@@ -146,8 +146,8 @@ User GetMockFriend(){
 }
 
 US03.01.01
->The User opens a friends' profile and then opens thier inventory
->The User can then browse the friends' cards
+//The User opens a friends' profile and then opens thier inventory
+//The User can then browse the friends' cards
 
 void testUS030101(){
 	User myuser = GetMockUser();
@@ -159,30 +159,32 @@ void testUS030101(){
 }
 
 US03.01.02
->The User has thier friends profile
->The User searches thier friends profile by category
+//The User has thier friends profile
+//The User searches thier friends profile by category
 
 void testUS030102(){
 	User friend = GetMockFriend();
 	Inventory friendInventory = friend.getInventory();
-	String searchCategory = "MTG";
+	String searchCategory = "Magic The Gathering";
 	List<Card> results = friendInventory.searchByCategory(searchCategory);
+	//serach results shownn to user
 }
 
 US03.01.03
->The User has thier friends profile
->The User searches thier friends profile by category
+//The User has thier friends profile
+//The User searches thier friends profile by text
 
 void testUS030102(){
 	User friend = GetMockFriend();
 	Inventory friendInventory = friend.getInventory();
 	String searchQuery = "Black Lotus";
 	List<Card> results = friendInventory.searchByText(searchQuery);
+	//serach results shownn to user
 }
 
 US03.02.01
->The Owner Has Publicly Available Items
->The Owner's Friends Can Browse Those Items
+//The Owner Has Publicly Available Items
+//The Owner's Friends Can Browse Those Items
 
 void testUS030201(){
 	User owner = GetMockUser();
@@ -207,7 +209,7 @@ Photographs of Items
 
 
 US06.01.01
->Claimant attaches photograph to an item
+//Claimant attaches photograph to an item
 
 void testUS030201(){
 	String name = "Charizard";
@@ -218,6 +220,9 @@ void testUS030201(){
 	boolean tradable = true;
 	String comments = "Gently bent edge, 100HP";
 	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+	//user navigates in the create a card GUI to the "Add images"
+	// section and can add images from camera or take a new one
 	Image firstImage = new Image("myImageUrl");
 	Image secondImage = new Image("myImageUrl");
 	card.addImage(firstImage);
@@ -228,8 +233,8 @@ void testUS030201(){
 }
 
 US06.02.01
->Owner has an Item
->Owner gets photos attached to items
+//Owner has an Item
+//Owner gets photos attached to items
 
 void testUS060201(){
 	String name = "Charizard";
@@ -240,6 +245,10 @@ void testUS060201(){
 	boolean tradable = true;
 	String comments = "Gently bent edge, 100HP";
 	Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+
+
+	//user navigates in the create a card GUI to the "Add images"
+	// section and can add images from camera or take a new one
 	Image firstImage = new Image("myImageUrl");
 	Image secondImage = new Image("myImageUrl");
 	card.addImage(firstImage);
@@ -250,8 +259,8 @@ void testUS060201(){
 }
 
 US06.03.01
->User has an Item
->User deletes image from item
+//User has an Item
+//User deletes image from item
 
 void testUS060301(){
 	String name = "Charizard";
@@ -266,9 +275,13 @@ void testUS060301(){
 	Image secondImage = new Image("myImageUrl");
 	card.addImage(firstImage);
 	card.addImage(secondImage);
+
 	List<Image> cardImages = card.getImages();
 	assertTrue(cardImages.contains(firstImage));
 	assertTrue(cardImages.contains(secondImage));
+
+	//user from the edit inventory item GUI navigates to the 
+	//images view and can remove, add or rearrange images
 	card.deleteImage(firstImage);
 	List<Image> cardImages = card.getImages();
 	assertTrue(!cardImages.contains(firstImage));
@@ -276,8 +289,8 @@ void testUS060301(){
 }
 
 US06.04.01
->User adds an Image larger than 65536 bytes
->Card notifies that it cannot add a image file of that size
+//User adds an Image larger than 65536 bytes
+//Card notifies that it cannot add a image file of that size
 
 void testUS060401{
 	Boolean exceptionThrown = false;
@@ -290,16 +303,23 @@ void testUS060401{
 		String series = "series";
 		boolean tradable = true;
 		String comments = "Gently bent edge, 100HP";
+
 		Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
 		card.addImage(image); //this should throw IOexption
+		
 	} catch (IOexception ex) {
 		exceptionThrown = true;
 	}
 	assertTrue(exceptionThrown);
 }
 
-US06.05.01
-See: US10.01.01
+//US06.05.01
+//See: US10.01.01
+
+
+
+
+
 
 //************************** OFFLINE BEHAVIOURS **************************
 //User Case US09.01.01
@@ -311,7 +331,7 @@ public void testUS09.01.01{
 	Boolean connection_established = Boolean.FALSE;
 
 	//User creates new item as per User case US01.01.01/US01.05.01
-	User user1 = new MockUser();
+	User user1 = new User();
 	user1.getInventory().add(new Card());
 	Profile profile = user1.getProfile();
 
@@ -336,8 +356,8 @@ public void testUS09.02.01{
 	Boolean connection_established = Boolean.FALSE;
 
 	//User proposes trade while offline
-	User user1 = new MockUser();
-	User user2 = new MockUser();
+	User user1 = new User();
+	User user2 = new User();
 	Profile profile = user1.getProfile();
 	Trade trade = new Trade(user1,user2);
 	Boolean trade_success = trade.send();
@@ -364,8 +384,8 @@ public void testUS09.03.01{
 //User opens up friends inventories that has been previously opened while offline
 	
 	//User browses friends inventory as per User Case US03.01.01
-	User user1 = new MockUser();
-	User user2 = new MockUser();
+	User user1 = new User();
+	User user2 = new User();
 	Inventory friends_inventory = user2.getInventory();
 	
 	//System saves copy of inventory locally
