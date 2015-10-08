@@ -323,7 +323,7 @@ void testUS060401{
 
 //************************** OFFLINE BEHAVIOURS **************************
 //User Case US09.01.01
-public void testUS09.01.01{
+public void testUS090101{
 //User wants to make changes to inventory while offline and have changes
 //save to server automatically when connection is restored
 
@@ -349,7 +349,7 @@ public void testUS09.01.01{
 }
 
 //User Case US09.02.01
-public void testUS09.02.01{
+public void testUS090201{
 //User wants to propose trades offline, once connectivity reseumes the trades will be established
 
 	//System cannot contact server
@@ -380,7 +380,7 @@ public void testUS09.02.01{
 }
 
 //User Case US09.03.01
-public void testUS09.03.01{
+public void testUS090301{
 //User opens up friends inventories that has been previously opened while offline
 	
 	//User browses friends inventory as per User Case US03.01.01
