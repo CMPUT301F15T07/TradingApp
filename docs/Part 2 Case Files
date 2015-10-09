@@ -211,7 +211,7 @@ US03.01.01
 
 void testUS030101(){
 	User myuser = GetMockUser();
-	const myTestFriendName = "Harry Potter";
+	String myTestFriendName = "Harry Potter";
 	User myTestFriend = GetMockFriend();
 	myuser.friends.add(myTestFriend);
 	User friend = myuser.friends.getFriend(myTestFriendName);
@@ -373,8 +373,18 @@ void testUS060401{
 	assertTrue(exceptionThrown);
 }
 
-//US06.05.01
-//See: US10.01.01
+US06.05.01
+//Borrower has photo downloads disabled
+//Borrower manually downloads item images
+
+void testUS600501{
+	User user = GetMockUser();
+	Inventory inventory = owner.getInventory();
+	Card card = inventory.searchByText("Black Lotus");
+	List<Image> images = card.getImages();
+	//saveLocalResource(int ownerHashCode, string key, object value);
+	saveLocalResource(card.hashCode, "images", images); 
+}
 
 
 
