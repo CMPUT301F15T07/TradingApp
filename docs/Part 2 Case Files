@@ -110,10 +110,70 @@ public void testUS010601(){
 
 -----------
 
+Friends
 
+//Search User through the search tab by Username
+//it will then show a list of usernames that may match the pattern
+//or it will show nothing if there is no username
+void testUS02.01.01() {
+	userList users = loadFromStorage();
+	users.add(user1);
+	users.add(user2);
+	users.add(johnCena);
+	assertEquals(johnCena,users.search("johnCena");
+	assertEquals([user1,user2],users.search("user"));
+}
 
+//User needs to add other user into friends list
+//Can be done by searching a username
+void testUS02.02.01() {
+	user johnCena = new user();
+	user user1 = new user();
+	johnCena.addFriend(user1);
+	assertEquals(user1,johnCena.getFriend("user1"));
+}
 
+//User needs to remove another user from his friends list
+//Can be done by searching user in friend list and then pressing
+//remove button
+void testUS02.03.01() {
+	user user1 = new user();
+	user johnCena = new user();
+	user user2 = new user();
+	user1.addFriend(johnCena);
+	user1.addFriend(user2);
 
+	user1.remove(johnCena);
+	assertEquals(NULL, user1.friends.getFriend("johnCena");
+}
+
+//User will  have contact information (Name) and his city
+//Will be displayed in profile
+//There should be option to update contact information and city
+void testUS02.04.01() {
+	user johnCena = new user("The Heavyweight Champion","WWE RAW");
+	assertEquals("The Heavyweight Champion",johnCena.getName());
+	assertEquals("WWE RAW", johnCena.getCity());
+	johnCena.setName("John Felix Anthony Cena");
+	johnCena.setCity("Tampa, Florida, U.S.")
+	assertEquals("John Felix Anthony Cena",johnCena.getName());
+	assertEquals("Tampa, Florida, U.S.", johnCena.getCity());
+}
+
+//User will get friends contact information and the city
+//This will be displayed on firends profile page
+void testUS2.05.01() {
+	user user1 = new user();
+	user johnCena = new user("The Heavyweight Champion","WWE RAW");
+	user user2 = new user();
+	user1.addFriend(johnCena);
+	user1.addFriend(user2);
+
+	assertEquals("The Heavyweight Champion",user1.getFriend("johnCena").getName);
+	assertEquals("WWE RAW", user1.getFriend("johnCena").getCity);
+}
+
+-----------
 
 Browse Search Inventories of Friends
 
@@ -152,7 +212,7 @@ US03.01.01
 
 void testUS030101(){
 	User myuser = GetMockUser();
-	const myTestFriendName = "Harry Potter";
+	String myTestFriendName = "Harry Potter";
 	User myTestFriend = GetMockFriend();
 	myuser.friends.add(myTestFriend);
 	User friend = myuser.friends.getFriend(myTestFriendName);
@@ -588,8 +648,18 @@ void testUS060401{
 	assertTrue(exceptionThrown);
 }
 
-//US06.05.01
-//See: US10.01.01
+US06.05.01
+//Borrower has photo downloads disabled
+//Borrower manually downloads item images
+
+void testUS600501{
+	User user = GetMockUser();
+	Inventory inventory = owner.getInventory();
+	Card card = inventory.searchByText("Black Lotus");
+	List<Image> images = card.getImages();
+	//saveLocalResource(int ownerHashCode, string key, object value);
+	saveLocalResource(card.hashCode, "images", images); 
+}
 
 
 
@@ -674,3 +744,40 @@ public void testUS090301{
 
 	assertEquals(friends_inventory, friends_cached_inventory);
 }
+
+
+
+//User case	US10.01.01
+public void testUS010101(){
+	
+	//Default config downloadsimages
+	Config config = new Config();
+
+	assertTrue(config.imagesDowloadable());
+
+	//User with a swipe switch decides not 
+	//to download images
+
+	config.setImagesDownlaodable(FALSE);
+
+	assertFalse(config.imagesDowloadable());
+
+}
+
+//User case	US10.02.01
+public void testUS010101(){
+	//User creates their profile on prompt
+	User user = new User("Snape", "Hogwartz");
+	
+	assertEquals("Snape", user.getName);
+	assertEquals("Hogwartz", user.getLocation);
+
+	//The they realize they forgot their name and where they were
+	user.setName("Ruby Rose");
+	user.setLocation("beacon");
+
+	assertEquals("Ruby Rose", user.getName);
+	assertEquals("beacon", user.getLocation);
+
+}
+
