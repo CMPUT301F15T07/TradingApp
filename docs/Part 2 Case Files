@@ -1,10 +1,11 @@
-Project Actors:
+IProject Actors:
 	Cards
 	Inventory
-	Users -> User, Friends
+	Users -> User, Friends, Borrower, Owner
 	Profile
 	Photograph
 	System
+	Email
 
 Inventory
 
@@ -204,6 +205,280 @@ void testUS030201(){
 
 -----
 
+Trade With Friends:
+
+// US04.01.01
+// Borrower wants to trade a card with the owner.
+// Send a trade request to an owner of a card and check if the owner has that request.
+
+void testUS04.01.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade = new Trade(borrower, owner);
+	trade.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade.list2.add(owner.getInventory().getCard(“Mewtwo”);
+	
+	// Send trade offer button clicked.
+	trade.sendTrade(owner);
+	trade.setNotification(owner);
+	assertTrue(owner.getTrades().hasTrade(trade));
+}
+
+// US04.02.01
+// Test to see if the owner has a trade notification.
+
+void testUS04.02.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade = new Trade(borrower, owner);
+	trade.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade.list2.add(owner.getInventory().getCard(“Mewtwo”);
+	
+	// Send trade offer button clicked.
+	trade.sendTrade(owner);
+	trade.setNotification(owner);
+	
+	assertTrue(owner.getNotifications().contains(trade.setNotification(owner)));
+}
+
+// US04.03.01
+// Owner can accept of decline notification.
+
+void testUS04.03.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade1 = new Trade(borrower, owner);
+	trade1.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade1.list2.add(owner.getInventory().getCard(“Mewtwo”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade2 = new Trade(borrower, owner);
+	trade2.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade2.list2.add(owner.getInventory().getCard(“Mewtwo”);
+	
+	// Send trade offer button clicked.
+	trade1.sendTrade(owner);
+	trade1.setNotification(owner);
+	trade2.sendTrade(owner);
+	trade2.setNotification(owner);
+
+	//Owner clicks the accept button
+	assertTrue(trade.1status() == “ACCEPTED”);	
+
+	//Owner clicks the decline button
+	assertFalse(trade2.status() == “DECLINED”);
+}
+
+// US04.04.01
+// Owner can set a counter offer if the owner declines a trade
+
+void testUS04.04.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade = new Trade(borrower, owner);
+	trade.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade.list2.add(owner.getInventory().getCard(“Mewtwo”);
+	
+	// Send trade offer button clicked.
+	trade.sendTrade(owner);
+	trade.setNotification(owner);
+
+	// Owner declines the trade.
+	// Owner makes a new trade offer when the counter offer button is clicked.
+	if(trade.status() == “DECLINED”) {
+		Trade trade2 = newTrade(owner, borrower);
+		trade2.list1.add(owner.getInventory().getCard(“Mewtwo”);
+		trade2.list2.add(borrower.getInventory().getCard(“Mew”);
+
+		trade2.sendTrade(owner);
+		trade2.setNotification(borrower);
+	}
+
+	assertTrue(borrower.getNotifications().contains(trade2.setNotification(borrower)));
+}
+
+// US04.05.01
+// The user or borrower can edit the trade or counter-trade.
+
+void testUS04.05.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds and removes cards with the plus and minus button.
+	Trade trade = new Trade(borrower, owner);
+	trade.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade.list1.add(borrower.getInventory().getCard(“Mew”);
+	trade.list2.add(owner.getInventory().getCard(“Mewtwo”);
+	trade.list2.remove(1);	
+
+	assertTrue(trade.list1.contains(“Darkrai”));
+	assertTrue(trade.list2.contains(“Mewtwo”));
+	assertFalse(trade.list1.contains(“Mew”));
+
+	// Send trade offer button clicked.
+	trade.sendTrade(owner);
+	trade.setNotification(owner);
+
+	// Owner declines the trade.
+	// Owner makes a new trade offer when the counter offer button is clicked.
+	if(trade.status() == “DECLINED”) {
+		// Owner adds and removes cards with the plus and minus button.
+		Trade trade2 = newTrade(owner, borrower);
+		trade2.list1.add(owner.getInventory().getCard(“Deoxys”);
+		trade2.list1.add(owner.getInventory().getCard(“Register”);
+		trade2.list1.remove(1);
+		trade2.list2.add(borrower.getInventory().getCard(“Mew”);
+
+		assertTrue(trade.list1.contains(“Deoxys”));
+		assertTrue(trade.list2.contains(“Mew”));
+		assertFalse(trade.list1.contains(“Register”));
+
+		trade2.sendTrade(owner);
+		trade2.setNotification(borrower);
+	}
+}
+
+// US04.06.01
+// The borrower can delete the trade or counter-trade.
+
+void testUS04.06.01() {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds and removes cards with the plus and minus button.
+	Trade trade = new Trade(borrower, owner);
+	trade.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade.list2.add(owner.getInventory().getCard(“Mewtwo”);
+
+	// Send trade offer button clicked.
+	trade.sendTrade(owner);
+	trade.setNotification(owner);
+
+	// Owner declines the trade.
+	// Owner makes a new trade offer when the counter offer button is clicked.
+	if(trade.status() == “DECLINED”) {
+		// Owner adds and removes cards with the plus and minus button.
+		Trade trade2 = newTrade(owner, borrower);
+		trade2.list1.add(owner.getInventory().getCard(“Deoxys”);
+		trade2.list2.add(borrower.getInventory().getCard(“Mew”);
+
+		// User clicks the delete trade button or back 
+		// button to stop the trade they are making.
+		trade.destructor();
+	}
+
+	assertNull(trade);
+
+	User borrower2 = new User(currentUser.Name, “Canada”);
+	User owner2 = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds and removes cards with the plus and minus button.
+	Trade trade2 = new Trade(borrower2, owner2);
+	trade2.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade2.list2.add(owner.getInventory().getCard(“Mewtwo”);
+	
+	// User clicks the delete trade button or back 
+	// button to stop the trade they are making.
+	trade2.destructor();
+
+	assertNull(trade2);
+}
+
+// US04.07.01
+// If the owner of a trade accepts, both parties are email relevant trace information,
+// as well as the owner will supply comments for how to continue with the trade.
+
+void testUS04.07.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade = new Trade(borrower, owner);
+	trade.list1.add(borrower.getInventory().getCard(“Darkrai”);
+	trade.list2.add(owner.getInventory().getCard(“Mewtwo”);
+
+	// Send trade offer button clicked.
+	trade.sendTrade(owner);
+	trade.setNotification(owner);
+
+	// Owner clicks the accept button. An input box
+	// will be displayed for extra comments.
+	String extraComments = inputTextView.text;
+	Email emailBorrower = new Email(borrower, extraComments);
+	Email emailOwner = new Email(owner, “”);
+
+	emailBorrower.send();
+	emailOwner.send();
+
+	assertNotNull(extraComments);
+	assertEquals(emailOwner.status() ,“SENT”);
+	assertEquals(emailBorrower.status(), “SENT”);
+}
+
+// US04.08.01
+// Owners and Borrowers can view all past trades with themselves.
+
+void testUS04.08.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade1 = new Trade(borrower, owner);
+	Trade trade2 = new Trade(borrower, owner);
+
+	// Send trade offer button clicked.	
+	trade1.sendTrade(owner);
+	trade2.sendTrade(owner);
+
+	// Owner accepts trade1 and leaves trade2 alone
+	// User exits and checks there trades
+	List<Trade> ownerTrades = owner.getTrades()
+	List<Trade> borrowerTrades = owner.getTrades()
+
+	assertTrue(ownerTrades.contains(trade1));
+	assertTrue(ownerTrades.contains(trade2));
+	assertTrue(borrowerTrades.contains(trade1));
+	assertTrue(borrowerTrades.contains(trade2));
+}
+
+// US04.09.01
+// Owners and Borrowers can view all past trades with themselves as
+// either a borrower or an owner.
+
+void testUS04.09.01 () {
+	User borrower = new User(currentUser.Name, “Canada”);
+	User owner = new User(“Mr. Bean”, “Canada”);
+
+	// Borrower adds cards with the “plus” button.
+	Trade trade1 = new Trade(borrower, owner);
+	Trade trade2 = new Trade(borrower, owner);
+
+	// Send trade offer button clicked.	
+	trade1.sendTrade(owner);
+	trade2.sendTrade(owner);
+
+	// Owner accepts trade1 and leaves trade2 alone
+	// User exits and checks there trades
+	List<Trade> ownerTrades = owner.getTrades()
+	List<Trade> borrowerTrades = owner.getTrades()
+
+	assertTrue(ownerTrades.get(0).isOwner());
+	assertTrue(ownerTrades.get(1).isOwner());
+	assertTrue(borrowerTrades.get(0).isOwner());
+	assertTrue(borrowerTrades.get(1).isOwner());
+
+	//Viewing trades and separating them will be done in UI.
+}
+
+————-
 
 Photographs of Items
 
