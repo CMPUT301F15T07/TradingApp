@@ -514,26 +514,29 @@ void testUS04.08.01 () {
 // either a borrower or an owner.
 
 void testUS04.09.01 () {
-	User borrower = new User(currentUser.Name, “Canada”);
-	User owner = new User(“Mr. Bean”, “Canada”);
+	User user1 = new User(currentUser.Name, “Canada”);
+	User user2 = new User(“Mr. Bean”, “Canada”);
 
 	// Borrower adds cards with the “plus” button.
-	Trade trade1 = new Trade(borrower, owner);
-	Trade trade2 = new Trade(borrower, owner);
+	Trade trade1 = new Trade(user1, user2); //user 1 sends a trade to user 2 
+	Trade trade2 = new Trade(user2, user1); //user 2 sends a trade to user 1
 
 	// Send trade offer button clicked.	
-	trade1.sendTrade(owner);
-	trade2.sendTrade(owner);
+	trade1.sendTrade(user1); //is the user parameter necessary? we already specified in "new Trade(...,...)"
+	trade2.sendTrade(user2);
 
 	// Owner accepts trade1 and leaves trade2 alone
 	// User exits and checks there trades
-	List<Trade> ownerTrades = owner.getTrades()
-	List<Trade> borrowerTrades = owner.getTrades()
+	List<Trade> user1Trades = user1.getTrades()
+	List<Trade> user2Trades = user2.getTrades()
 
-	assertTrue(ownerTrades.get(0).isOwner());
-	assertTrue(ownerTrades.get(1).isOwner());
-	assertTrue(borrowerTrades.get(0).isOwner());
-	assertTrue(borrowerTrades.get(1).isOwner());
+	assertTrue(user1Trades.get(trade1).isOwner()); //make sure user 1 owns trade 1
+	assertTrue(user2Trades.get(trade1).isBorrower()); //make sure user 2 is borrowing trade 1
+	assertTrue(user1Trades.get(trade2).isBorrower()); //make sure user 1 is borrowing trade 1
+	assertTrue(user2Trades.get(trade2).isOwner()); //make sure user 2 owns trade 1
+	
+	assertTrue(!user1Trades.get(trade2).isOwner()); //make sure user 1 doesnt own trade 2
+	assertTrue(!user2Trades.get(trade2).isBorrower()); //make sure user 2 doesnt borrow trade 2
 
 	//Viewing trades and separating them will be done in UI.
 }
