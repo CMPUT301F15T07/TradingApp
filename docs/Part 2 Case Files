@@ -6,6 +6,7 @@ IProject Actors:
 	Photograph
 	System
 	Email
+	Config
 
 Inventory
 
@@ -854,8 +855,28 @@ public void testUS090301{
 
 
 
-//User case	US10.01.01
+
 public void testUS010101(){
+
+	//User case	US10.01.01
+	// User configs the app not to download photos of cards 
+
+		/*
+	Actors: User, , Config
+	Goal: User wants to save phone space by not downloading photos
+	Trigger:  User navitgates to config and toggles the proper toggle
+	Precondition:  User wants to save space on phone
+	Postcondition:  App doesnt download photos for viewing
+
+	Basic Flow:
+		
+		1) User navigates to config/settings tabs
+		2) System shows changable settings
+		3) User toggles "download Photos" toggle to off
+		4) Theapp no longer downloads photos for viewing
+	
+	*/
+
 	
 	//Default config downloadsimages
 	Config config = new Config();
@@ -871,8 +892,28 @@ public void testUS010101(){
 
 }
 
-//User case	US10.02.01
+
 public void testUS010101(){
+
+	//User case	US10.02.01
+	//User configs thier profile settings
+
+	/*
+	Actors: User, System, Config
+	Goal: User wants to change profile settings
+	Trigger:  User navitgates to config and selects ed profile settings
+	Precondition:  User wants to change profile info
+	Postcondition:  App shows new changed profile settings
+
+	Basic Flow:
+		
+		1) User navigates to config/settings tabs
+		2) System shows changable settings
+		3) User selects profile settings
+		4) The app changes profile settings and its viewable  
+	
+	*/
+
 	//User creates their profile on prompt
 	User user = new User("Snape", "Hogwartz");
 	
