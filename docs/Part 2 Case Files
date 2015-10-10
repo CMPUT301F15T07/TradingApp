@@ -9,9 +9,38 @@ IProject Actors:
 
 Inventory
 
-//User case	US01.01.01/US01.05.01
+
+
+
 public void testUS010101(){
 	Inventory inventory = new Inventory();
+
+	//User case	US01.01.01
+	//User adds card to their inventory
+
+	/*
+	Actors: User, Cards, Inventory, System
+	Goal: Add Cards to user inventory
+	Trigger:  User clicks the add button from
+		the inventory view screen
+	Precondition:  User has a card they want to add
+	Postcondition:  New card is viewable by the user
+		and their friends
+
+	Basic Flow:
+		
+		1) User clicks add button from inventory view
+		2) View appears with empty fields to enter info about the card
+		3) User enters the info they have about the card (and possibly multiple photos)
+		4) User reviews info and clicks "accept"
+		5) The system creates a new card with the info provided
+		6) The system adds the new card to thge Inventory associated
+			with the user
+		7) The card is viewable to the user from the inventory view
+			now and is also viewable (if the user made it viewable)
+			friends.
+	*/
+
 
 	//User decides to create a new card from their
 	//inventory view.  He is prompted on the UI for
@@ -40,7 +69,28 @@ public void testUS010101(){
 	Inventory inventory = new Inventory(card);
 	assertEquals(inventory.size(), 1);
 
-	//They can remove the card from their inventory
+	//US01.05.01
+	//User wants to delete a card from inventory
+
+	/*
+	Actors: User, Cards, Inventory, System
+	Goal: Removes Cards from user inventory
+	Trigger:  User clicks the card to view it,
+		clicks edit and then remove card
+	Precondition:  User has a card they want to remove
+	Postcondition:  New card is no longer viewable by the user
+		and their friends
+
+	Basic Flow:
+		
+		1) User clicks the card to view it, clicks edit and then remove card
+		2) The system confims revoval of card with a prompt
+		3) The user confirms
+		7) The card is no long viewable to the user from the inventory view
+			now and is no longer viewable to friends
+	*/
+
+	
 	inventory.removeCard("Charizard");
 	assertEquals(inventory.size(),0);
 
