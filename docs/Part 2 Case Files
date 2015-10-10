@@ -34,7 +34,7 @@ public void testUS010101(){
 		3) User enters the info they have about the card (and possibly multiple photos)
 		4) User reviews info and clicks "accept"
 		5) The system creates a new card with the info provided
-		6) The system adds the new card to thge Inventory associated
+		6) The system adds the new card to the Inventory associated
 			with the user
 		7) The card is viewable to the user from the inventory view
 			now and is also viewable (if the user made it viewable)
@@ -96,9 +96,34 @@ public void testUS010101(){
 
 }
 
-
-//User case US01.04.01
 public void testUS010401{
+
+	//User case	US01.04.01
+	//User edits card info
+
+	/*
+	Actors: User, Cards, Inventory, System
+	Goal: Edit the info on a users card
+	Trigger:  User clicks the add button from
+		the inventory view screen
+	Precondition:  User has a card they want to add
+	Postcondition:  New card is viewable by the user
+		and their friends
+
+	Basic Flow:
+		
+		1) User clicks the card to view it, clicks edit
+		1.1) The system retrieves the card info
+		2) The view of the card is now editable with editable text fields and a viewable toggle
+		3) User changes the info they have about the card (and possibly multiple photos)
+		4) User reviews info and clicks "accept"
+		5) The system edits the info of the card the user selected
+		6) The system replaces the edited card to the Inventory associated
+			with the user
+		7) The edited card is viewable to the user from the inventory view
+			now and is also viewable (if the user made it viewable)
+			friends.
+	*/
 
 	//The user creates a card
 	String name = "Charizard";
@@ -147,8 +172,37 @@ public void testUS010401{
 }
 
 
-//user case US01.06.01
+
 public void testUS010601(){
+
+	//user case US01.06.01
+	//The user has the ability to choose from
+		//preset catagories of cards upon creation and editing
+
+	/*
+	Actors: User, Cards, Inventory, System
+	Goal: Upon creation, there are preset catagories to choose from
+	Trigger:  User clicks the add button from
+		the inventory view screen/or edit button from card view
+	Precondition:  User has a card they want to add/edit
+	Postcondition:  New card is viewable by the user
+		and their friends
+
+	Basic Flow:
+		
+		1) User clicks the card to view it, clicks edit/or add card from inventory view
+		1.1) The system retrieves the card info/prompts for new card info
+		2) The view of the card is now editable/the user can enter info for a new card
+		3) User changes catagory/enters catagory with a pre-determined drop down menue of 
+			specific card catagories
+		4) User reviews info and clicks "accept"
+		5) The system edits the info of the card the user selected/creates new card with entered info
+		6) The system replaces the edited card to the Inventory associated
+			with the user/adds card to the inventory
+		7) The edited/new card is viewable to the user from the inventory view
+			now and is also viewable (if the user made it viewable)
+			friends.
+	*/
 
 	Card card = new Card();
 
