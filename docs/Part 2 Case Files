@@ -366,7 +366,23 @@ void testUS2.05.01() {
 
 -----------
 
-Browse Search Inventories of Friends
+//Use Case Name :Browse and Search Inventories of Friends
+//Participating Actors: Main User, User's Friends
+//Goal: Main User can get thier friends' inventory and then search by text or category
+//Trigger: Main User browses friends' inventory
+//Precondition: Main User knows which friend to search and the name or category of card they want to find
+//Postcondition: On success, user can view cards in a friends' inventory and then make a trade.
+//See US04.xx.xx for trading use cases
+//Related User Stories: US03.01.01 - US03.02.01
+
+//Basic Flow
+// 1.) User can browse through a list of friends
+// 2.) User can select a friend and the friends' inventory is displayed
+// 3.) User can inititate a search function either by category or text
+// 4.) Cards that match search criteria are displayed to user
+// 5.) User can select card from search results to display it
+
+
 
 Helper Functions:
 
@@ -732,9 +748,31 @@ void testUS04.09.01 () {
 	//Viewing trades and separating them will be done in UI.
 }
 
-————-
 
-Photographs of Items
+//Use Case Name: User uploads and deletes photos of their cards
+//Participating Actors: Owner, Other Users
+//Goal: User can upload and delete pictures of cards they can own.
+//Trigger: User selects edit photos on a card in thier inventory
+//Precondition: if a user want to upload a card image they have it available.
+//Postcondition: On success, pitures are uploaded for owner and other users to see on upload. On delete, owner and other users cannot see deleted picture
+//Related User Stories: US06.01.01 - US06.04.01
+
+//Basic Flow
+// 1.) Owner selects a card from thier inventory to add an image
+// 2.) Owner initiates add dialog and a picture browsing routine is brought up
+// 3.) Owner selects image(s) to be uploaded to card display
+// 4.) Owner and Other Users can now see uploaded images of card
+// 5.) Owner selects a card from thier inventory to delete an image from it
+// 6.) Owner selects image(s) from dialog to remove from card
+// 7.) Image(s) removed can no longer be seen by Owner or Other Users
+
+//Exceptions
+// 3.) If image is over 65536 bytes
+// 3.1.) System displays an error describing limitation
+// 3.2.) System returns to step 3
+// 7.) Other Users have deleted image downloaded locally (See US06.05.01, US09.03.01, and US10.01.01)
+// 7.1) Locally downloaded copies of an image on Other User's devices are deleted once they reconnect to the service if they were offline.
+ 
 
 
 US06.01.01
@@ -841,6 +879,22 @@ void testUS060401{
 	}
 	assertTrue(exceptionThrown);
 }
+
+
+//Use Case Name: Downloading Specific Images
+//Participating Actors: Borrower, Owner
+//Goal: Borrower can select specific images to download even if they have downloads disabled
+//Trigger: Borrower is browsing through a photo album of a Owner's card
+//Precondition: Borrower must select image to be downloaded
+//Postcondition: On success, pictures that were selected to be downloaded will be available offline
+//Related User Stories: US06.05.01
+
+//Basic Flow
+// 1.) Borrower is browsing through images of one of Owner's cards, but has local downloads turned off (See US10.01.01)
+// 2.) Borrower select an image in the album
+// 3.) On first time image selection, system prompts message about being able to download images
+// 4.) Image is highlighted or watermarked to notify that image is locally cached
+// 5.) Borrower can disconnect from internet and still browse specific images that they downloaded
 
 US06.05.01
 //Borrower has photo downloads disabled
