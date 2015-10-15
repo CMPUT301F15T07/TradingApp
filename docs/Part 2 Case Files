@@ -398,7 +398,6 @@ void testUS2.05.01() {
 // 5.) User can select card from search results to display it
 
 
-
 Helper Functions:
 
 User GetMockUser(){
@@ -782,11 +781,11 @@ void testUS04.09.01 () {
 // 7.) Image(s) removed can no longer be seen by Owner or Other Users
 
 //Exceptions
-// 3.) If image is over 65536 bytes
-// 3.1.) System displays an error describing limitation
-// 3.2.) System returns to step 3
-// 7.) Other Users have deleted image downloaded locally (See US06.05.01, US09.03.01, and US10.01.01)
-// 7.1) Locally downloaded copies of an image on Other User's devices are deleted once they reconnect to the service if they were offline.
+// 3.1.) If image is over 65536 bytes
+// 3.2.) System displays an error describing limitation
+// 3.3.) System returns to step 3
+// 7.1.) Other Users have deleted image downloaded locally (See US06.05.01, US09.03.01, and US10.01.01)
+// 7.2.) Locally downloaded copies of an image on Other User's devices are deleted once they reconnect to the service if they were offline.
  
 
 
