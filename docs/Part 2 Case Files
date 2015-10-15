@@ -88,8 +88,13 @@ public void testUS010101(){
 		1) User clicks the card to view it, clicks edit and then remove card
 		2) The system confims revoval of card with a prompt
 		3) The user confirms
-		7) The card is no long viewable to the user from the inventory view
+		4) The card is no long viewable to the user from the inventory view
 			now and is no longer viewable to friends
+
+	Exceptions:
+
+		4.1) Other users have downloaded cards offline 
+		4.2) Those cards are removed as soon as the other user is online
 	*/
 
 	
@@ -125,6 +130,11 @@ public void testUS010401{
 		7) The edited card is viewable to the user from the inventory view
 			now and is also viewable (if the user made it viewable)
 			friends.
+
+		Exceptions:
+
+		7.1) Other users have downloaded cards offline 
+		7.2) Card info is updated as soon as teh other users are online
 	*/
 
 	//The user creates a card
@@ -204,6 +214,11 @@ public void testUS010601(){
 		7) The edited/new card is viewable to the user from the inventory view
 			now and is also viewable (if the user made it viewable)
 			friends.
+
+		Exceptions:
+
+		7.1) Other users have downloaded cards offline 
+		7.2) Card info is updated as soon as teh other users are online
 	*/
 
 	Card card = new Card();
@@ -382,7 +397,6 @@ void testUS2.05.01() {
 // 3.) User can inititate a search function either by category or text
 // 4.) Cards that match search criteria are displayed to user
 // 5.) User can select card from search results to display it
-
 
 
 Helper Functions:
@@ -829,11 +843,11 @@ void testUS040901 () {
 // 7.) Image(s) removed can no longer be seen by Owner or Other Users
 
 //Exceptions
-// 3.) If image is over 65536 bytes
-// 3.1.) System displays an error describing limitation
-// 3.2.) System returns to step 3
-// 7.) Other Users have deleted image downloaded locally (See US06.05.01, US09.03.01, and US10.01.01)
-// 7.1) Locally downloaded copies of an image on Other User's devices are deleted once they reconnect to the service if they were offline.
+// 3.1.) If image is over 65536 bytes
+// 3.2.) System displays an error describing limitation
+// 3.3.) System returns to step 3
+// 7.1.) Other Users have deleted image downloaded locally (See US06.05.01, US09.03.01, and US10.01.01)
+// 7.2.) Locally downloaded copies of an image on Other User's devices are deleted once they reconnect to the service if they were offline.
  
 
 
@@ -1134,7 +1148,8 @@ public void testUS010101(){
 		1) User navigates to config/settings tabs
 		2) System shows changable settings
 		3) User toggles "download Photos" toggle to off
-		4) Theapp no longer downloads photos for viewing
+		4) The app no longer downloads photos for viewing
+		5) The app deletes all offline images
 	
 	*/
 
@@ -1171,7 +1186,12 @@ public void testUS010101(){
 		1) User navigates to config/settings tabs
 		2) System shows changable settings
 		3) User selects profile settings
-		4) The app changes profile settings and its viewable  
+		4) The app changes profile settings and its viewable
+
+	Exceptions:
+
+		4.1) Other users have downloaded friends profiles for off line viewing
+		4.1) The system updates offline info as soon as the other users are online.
 	
 	*/
 
