@@ -1,4 +1,4 @@
-package com.sherpasteven.recarded;
+package com.sherpasteven.sscte;
 
 /**
  * Created by Joshua on 2015-10-12.
@@ -12,12 +12,12 @@ public class Card {
     private String series;
     private Boolean tradable;
     private String comments;
-    private ArrayList<images> images;
+    //private ArrayList<images> images;
     private User owner;
 
 
     public Card(String name, int quantity, Quality quality, String catagory,
-               String series, Boolean tradable, String comments, ArrayList<images> images, User owner){
+               String series, Boolean tradable, String comments,/* ArrayList<images> images ,*/ User owner){
 
         this.name = name;
         this.quantity = quantity;
@@ -26,7 +26,7 @@ public class Card {
         this.series = series;
         this.tradable = tradable;
         this.comments = comments;
-        this.images = images;
+        //this.images = images;
         this.owner = owner;
 
 
@@ -88,13 +88,13 @@ public class Card {
         this.comments = comments;
     }
 
-    public ArrayList<images> getImages() {
+  /*  public ArrayList<images> getImages() {
         return images;
     }
 
     public void setImages(ArrayList<images> images) {
         this.images = images;
-    }
+    } */
 
     public User getOwner() {
         return owner;

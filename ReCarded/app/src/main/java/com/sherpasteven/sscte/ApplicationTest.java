@@ -1,4 +1,4 @@
-package com.sherpasteven.recarded;
+package com.sherpasteven.sscte;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ReCarded.iml" filepath="$PROJECT_DIR$/ReCarded.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sscte.iml" filepath="$PROJECT_DIR$/sscte.iml" />
     </modules>
   </component>
 </project>
