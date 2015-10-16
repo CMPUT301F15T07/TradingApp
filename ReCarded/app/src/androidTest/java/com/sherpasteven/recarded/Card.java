@@ -13,10 +13,11 @@ public class Card {
     private Boolean tradable;
     private String comments;
     private List<images> images;
+    private User owner;
 
 
     public Card(String name, int quantity, Quality quality, String catagory,
-               String series, Boolean tradable, String comments, List<images> images){
+               String series, Boolean tradable, String comments, List<images> images, User owner){
 
         this.name = name;
         this.quantity = quantity;
@@ -26,6 +27,7 @@ public class Card {
         this.tradable = tradable;
         this.comments = comments;
         this.images = images;
+        this.owner = owner;
 
 
     }
