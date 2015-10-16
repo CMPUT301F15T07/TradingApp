@@ -12,12 +12,12 @@ public class Card {
     private String series;
     private Boolean tradable;
     private String comments;
-    private List<images> images;
+    private ArrayList<images> images;
     private User owner;
 
 
     public Card(String name, int quantity, Quality quality, String catagory,
-               String series, Boolean tradable, String comments, List<images> images, User owner){
+               String series, Boolean tradable, String comments, ArrayList<images> images, User owner){
 
         this.name = name;
         this.quantity = quantity;
@@ -88,11 +88,19 @@ public class Card {
         this.comments = comments;
     }
 
-    public List<images> getImages() {
+    public ArrayList<images> getImages() {
         return images;
     }
 
-    public void setImages(List<images> images) {
+    public void setImages(ArrayList<images> images) {
         this.images = images;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
