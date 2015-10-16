@@ -1,3 +1,42 @@
+October 16, 2015
+Anson, Jake, Salim, Elias
+
+Discussion of login screen:
+	-we dont need server user authentication
+	-user only needs to register on first login
+
+First goal process flow
+	-Check if there is a user associated with phone
+	-Register user if they dont exist
+	-App navigates to inventory
+	-User Can add and delete cards
+		-Card adding dialog
+		-Card deletion dialog
+		-Card editing dialog
+	-User Can Switch to profile screen
+		-User can edit profile information
+			-User's can change their name
+			-User's can change their location
+			-User's can change their email
+
+"Screens" to implement for first goal
+	-Splash screen
+	-Register screen
+	-Inventory screen
+	-Add card screen
+	-Edit card screen
+	-Profile screen
+
+Request by Anson
+	-go to Atomic.io and check UI and storyboard for the use cases you did
+	-If storyboard doesn't meet requirements notify Anson		
+
+
+How to store images?
+	-how to save locally on phone?
+	-how to save on server? elastisearch?
+	
+
 October 5, 2015
 Anson, Jake, Josh, Elias, Salim, Aaron
 
