@@ -9,12 +9,11 @@ public class Profile {
 
     private User user;
     private Config config;
-    private ArrayList<User> friends;
 
-    Profile(User user){
+
+    Profile(User user) {
         this.user = user;
         this.config = new Config();
-        this.friends = new ArrayList<User>();
     }
 
     public User getUser() {
@@ -33,11 +32,6 @@ public class Profile {
         this.config = config;
     }
 
-    public ArrayList<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(ArrayList<User> friends) {
-        this.friends = friends;
-    }
 }
+
+
