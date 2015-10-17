@@ -22,7 +22,7 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
         //inventory view.  He is prompted on the UI for
         // the following data
         String name = "Charizard";
-        Integer quantity = 2;
+        int quantity = 2;
         Quality quality = new Quality(73);
         String catagory = "Pokemon";
         String series = "Basic XY Red";
@@ -34,11 +34,11 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
         Card card = new Card(name, quantity, quality, catagory, series, tradable, comments, user);
         user.addInventoryItem(card);
 
-        assertTrue(user.hasIventoryItem(card));
+        assertTrue(user.hasInventoryItem(card));
 
         assertEquals(name, user.getInventoryItem(0).getName());
         assertTrue(quantity == user.getInventoryItem(0).getQuantity());
-        assertEquals(quality,  user.getInventoryItem(0).getQuality());
+        assertEquals(quality, user.getInventoryItem(0).getQuality());
         assertEquals(catagory,  user.getInventoryItem(0).getCatagory());
         assertTrue(user.getInventoryItem(0).isTradable());
         assertEquals(comments,  user.getInventoryItem(0).getComments());
@@ -76,11 +76,12 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
         user.removeInventoryItem(card, 1);
         assertEquals(user.returnInventoryItem(card).getQuantity(), 1);
         user.removeInventoryItem(card, 1);
-        assertEquals(user.returnInventoryItem(card).getQuantity(), 0);
+        assertFalse(user.hasInventoryItem(card));
 
+        card.setQuantity(2);
         user.addInventoryItem(card);
         user.removeInventoryItem(card, 2);
-        assertEquals(user.returnInventoryItem(card).getQuantity(), 0);
+        assertFalse(user.hasInventoryItem(card));
 
         try {
             user.addInventoryItem(card);
@@ -130,51 +131,67 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
 		7.2) Card info is updated as soon as teh other users are online
 	*/
 
-    /*
+
 
         //The user creates a card
+        User user = new User("Joshua", "Edmonton");
+
+
+        //User case	US01.01.01
+        //User adds card to their inventory
+
+        //User decides to create a new card from their
+        //inventory view.  He is prompted on the UI for
+        // the following data
         String name = "Charizard";
-        Integer quantity = 2;
+        int quantity = 2;
         Quality quality = new Quality(73);
         String catagory = "Pokemon";
-        String series = "series";
+        String series = "Basic XY Red";
         boolean tradable = true;
         String comments = "Gently bent edge, 100HP";
 
-        Card card = new Card(name, quantity, quality, catagory, series, tradable, comments);
+        //The card is created after the user approves the data
+        //they have entered
+        Card card = new Card(name, quantity, quality, catagory, series, tradable, comments, user);
+        user.addInventoryItem(card);
 
-        assertEquals(name, card.getName());
-        assertEquals(quantity, card.getQuantity());
-        assertEquals(quality, card.getQuality());
-        assertEquals(catagorty, card.getCatagory());
-        assertEquals(tradable, card.isTradable());
-        assertEquals(comments, card.getComments());
+        assertTrue(user.hasInventoryItem(card));
+
+        assertEquals(name, user.getInventoryItem(0).getName());
+        assertTrue(quantity == user.getInventoryItem(0).getQuantity());
+        assertEquals(quality, user.getInventoryItem(0).getQuality());
+        assertEquals(catagory,  user.getInventoryItem(0).getCatagory());
+        assertTrue(user.getInventoryItem(0).isTradable());
+        assertEquals(comments,  user.getInventoryItem(0).getComments());
+        assertEquals(user.getInventoryItem(0).getOwner(), user);
 
         //Then realized that they got all the info wrong
         //From the item view UI, they can enter the edit mode and
         //Change the card info.
         String newname = "Blue Eyes White Dragon";
-        Integer newquantity = 9;
+        int newquantity = 9;
         Quality newquality = new Quality(3);
         String newcatagory = "YuGiOh";
         String newseries = "stupid series";
         boolean newtradable = false;
         String newcomments = "Dime a dozen";
 
-        card.setName(newname);
-        card.setQuantity(newquanitity);
-        card.setQuality(newquality);
-        card.setCatagory(newcatagory);
-        card.setSeries(newseries);
-        card.setTradable(newtradable);
-        card.setComments(newcomments);
+        user.returnInventoryItem(card).setName(newname);
+        user.returnInventoryItem(card).setQuantity(newquantity);
+        user.returnInventoryItem(card).setQuality(newquality);
+        user.returnInventoryItem(card).setCatagory(newcatagory);
+        user.returnInventoryItem(card).setSeries(newseries);
+        user.returnInventoryItem(card).setTradable(newtradable);
+        user.returnInventoryItem(card).setComments(newcomments);
 
-        assertEquals(newname, card.getName());
-        assertEquals(newquantity, card.getQuantity());
-        assertEquals(newquality, card.getQuality());
-        assertEquals(newcatagorty, card.getCatagory());
-        assertEquals(newtradable, card.isTradable());
-        assertEquals(newcomments, card.getComments()); */
+        assertEquals(newname, user.getInventoryItem(0).getName());
+        assertTrue(newquantity == user.getInventoryItem(0).getQuantity());
+        assertEquals(newquality, user.getInventoryItem(0).getQuality());
+        assertEquals(newcatagory, user.getInventoryItem(0).getCatagory());
+        assertTrue(newtradable == user.getInventoryItem(0).isTradable());
+        assertEquals(newcomments, user.getInventoryItem(0).getComments());
+
 
     }
 

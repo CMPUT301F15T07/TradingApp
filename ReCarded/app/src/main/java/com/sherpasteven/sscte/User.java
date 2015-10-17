@@ -55,7 +55,7 @@ public class User {
         getInventory().addCard(card);
     }
 
-    public Boolean hasIventoryItem(Card card){
+    public Boolean hasInventoryItem(Card card){
         return getInventory().containsCard(card);
     }
 

@@ -33,8 +33,10 @@ public class Inventory {
         else {getCards().add(card);}
     }
 
-    Boolean containsCard(Card card){
+    public Boolean containsCard(Card card) {
+
         return getCards().contains(card);
+
     }
 
     Card getCard(int index){
