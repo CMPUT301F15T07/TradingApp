@@ -1,4 +1,20 @@
 October 16, 2015
+Anson, Jake, Salim, Elias, Steven
+
+Since Last Time and Planning
+-Salim, update use cases. Hoping to get deliverables done
+-Jake, fixed use cases. Reviewed Anson's UI changes. Wanted to help with UI and mvc development
+-Anson, Updated UI storboards and coordinated with Use Case team for feedback. Need to clarify process flow.
+-Joshua, Fixed use cases. Started UML that matches the model. Working on model and test cases.
+-Aaron, Updated use cases. Worked with Anson to verify that UI and process flow follows trading scheme.
+-Elias, fixed use cases, fixed git merge problems. Started work on generic MVC classes. Wanted to start on code base for first release.
+
+TLDR: put all trade dialogue in email
+TLDR: do not have to do authentication
+
+
+
+October 16, 2015
 Anson, Jake, Salim, Elias
 
 Discussion of login screen:
