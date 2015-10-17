@@ -11,7 +11,7 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
         super(applicationClass);
     }
 
-    //Search User through the search tab by Username
+//Search User through the search tab by Username
 //it will then show a list of usernames that may match the pattern
 //or it will show nothing if there is no username
 
@@ -33,13 +33,13 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		   there are no similar names will show blank list
 	*/
 
-    void testUS02.01.01() {
+    void testUS020101() {
         userList users = loadFromStorage();
         users.add(user1);
         users.add(user2);
         users.add(johnCena);
-        assertEquals(johnCena,users.search("johnCena");
-        assertEquals([user1,user2],users.search("user"));
+        assertEquals(johnCena.users.search("johnCena");
+        assertEquals(user1.user2,users.search("user"));
     }
 
 //User needs to add other user into friends list
@@ -64,7 +64,7 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		   list
 	*/
 
-    void testUS02.02.01() {
+    void testUS020201() {
         user johnCena = new user();
         user user1 = new user();
         johnCena.addFriend(user1);
@@ -89,7 +89,7 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		3) user will then click friend that will be removed
 */
 
-    void testUS02.03.01() {
+    void testUS020301() {
         user user1 = new user();
         user johnCena = new user();
         user user2 = new user();
@@ -97,7 +97,7 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
         user1.addFriend(user2);
 
         user1.remove(johnCena);
-        assertEquals(NULL, user1.friends.getFriend("johnCena");
+        assertEquals(NULL, user1.friends.getFriend("johnCena"));
     }
 
 //User will  have contact information (Name) and his city
@@ -119,12 +119,12 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		4) Will go to friends profile
 	*/
 
-    void testUS02.04.01() {
+    void testUS020401() {
         user johnCena = new user("The Heavyweight Champion","WWE RAW");
         assertEquals("The Heavyweight Champion",johnCena.getName());
         assertEquals("WWE RAW", johnCena.getCity());
         johnCena.setName("John Felix Anthony Cena");
-        johnCena.setCity("Tampa, Florida, U.S.")
+        johnCena.setCity("Tampa, Florida, U.S.");
         assertEquals("John Felix Anthony Cena",johnCena.getName());
         assertEquals("Tampa, Florida, U.S.", johnCena.getCity());
     }
@@ -147,7 +147,7 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		4) Profile we'll be updated with changes
 	*/
 
-    void testUS2.05.01() {
+    void testUS20501() {
         user user1 = new user();
         user johnCena = new user("The Heavyweight Champion","WWE RAW");
         user user2 = new user();

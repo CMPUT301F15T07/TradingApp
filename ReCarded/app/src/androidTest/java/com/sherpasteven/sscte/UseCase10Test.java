@@ -13,10 +13,10 @@ public class UseCase10Test extends ApplicationTestCase<Application> {
 
     public void testUS010101(){
 
-        //User case	US10.01.01
-        // User configs the app not to download photos of cards
+    //User case	US10.01.01
+    // User configs the app not to download photos of cards
 
-		/*
+	/*
 	Actors: User, , Config
 	Goal: User wants to save phone space by not downloading photos
 	Trigger:  User navitgates to config and toggles the proper toggle
@@ -51,8 +51,8 @@ public class UseCase10Test extends ApplicationTestCase<Application> {
 
     public void testUS010101(){
 
-        //User case	US10.02.01
-        //User configs thier profile settings
+    //User case	US10.02.01
+    //User configs thier profile settings
 
 	/*
 	Actors: User, System, Config

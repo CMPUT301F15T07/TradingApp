@@ -11,7 +11,7 @@ public class UseCase6Test extends ApplicationTestCase<Application> {
         super(applicationClass);
     }
 
-    //Use Case Name: User uploads and deletes photos of their cards
+//Use Case Name: User uploads and deletes photos of their cards
 //Participating Actors: Owner, Other Users
 //Goal: User can upload and delete pictures of cards they can own.
 //Trigger: User selects edit photos on a card in thier inventory
@@ -37,9 +37,7 @@ public class UseCase6Test extends ApplicationTestCase<Application> {
 
 
 
-    US06.01.01
 //Claimant attaches photograph to an item
-
     void testUS030201(){
         String name = "Charizard";
         Integer quantity = 2;
@@ -61,10 +59,9 @@ public class UseCase6Test extends ApplicationTestCase<Application> {
         assertTrue(cardImages.contains(secondImage));
     }
 
-    US06.02.01
+
 //Owner has an Item
 //Owner gets photos attached to items
-
     void testUS060201(){
         String name = "Charizard";
         Integer quantity = 2;
@@ -87,10 +84,9 @@ public class UseCase6Test extends ApplicationTestCase<Application> {
         assertTrue(cardImages.contains(secondImage));
     }
 
-    US06.03.01
+
 //User has an Item
 //User deletes image from item
-
     void testUS060301(){
         String name = "Charizard";
         Integer quantity = 2;
@@ -117,10 +113,9 @@ public class UseCase6Test extends ApplicationTestCase<Application> {
         assertTrue(cardImages.contains(secondImage));
     }
 
-    US06.04.01
+
 //User adds an Image larger than 65536 bytes
 //Card notifies that it cannot add a image file of that size
-
     void testUS060401{
         Boolean exceptionThrown = false;
         Image image = new Image("largeImageUrl");
@@ -158,10 +153,9 @@ public class UseCase6Test extends ApplicationTestCase<Application> {
 // 4.) Image is highlighted or watermarked to notify that image is locally cached
 // 5.) Borrower can disconnect from internet and still browse specific images that they downloaded
 
-    US06.05.01
+
 //Borrower has photo downloads disabled
 //Borrower manually downloads item images
-
     void testUS600501{
         User user = GetMockUser();
         Inventory inventory = owner.getInventory();
