@@ -72,7 +72,7 @@ public class Card {
         this.series = series;
     }
 
-    public Boolean getTradable() {
+    public Boolean isTradable() {
         return tradable;
     }
 

@@ -50,4 +50,25 @@ public class User {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
+    public void addInventoryItem(Card card){
+        getInventory().addCard(card);
+    }
+
+    public Boolean hasIventoryItem(Card card){
+        return getInventory().containsCard(card);
+    }
+
+    public Card returnInventoryItem(Card card){
+        return getInventory().returnCard(card);
+    }
+
+    public Card getInventoryItem(int index){
+        return getInventory().getCard(index);
+    }
+
+    public void removeInventoryItem(Card card, int amount){
+        getInventory().removeCard(card, amount);
+    }
+
 }
