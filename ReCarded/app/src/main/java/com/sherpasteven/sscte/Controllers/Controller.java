@@ -1,4 +1,7 @@
-package com.sherpasteven.sscte;
+package com.sherpasteven.sscte.Controllers;
+
+import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Views.IView;
 
 /**
  * Created by elias on 16/10/15.

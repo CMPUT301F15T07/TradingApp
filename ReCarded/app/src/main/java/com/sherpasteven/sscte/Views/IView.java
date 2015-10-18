@@ -1,4 +1,5 @@
-package com.sherpasteven.sscte;
+package com.sherpasteven.sscte.Views;
+
 
 /**
  * Created by elias on 16/10/15.

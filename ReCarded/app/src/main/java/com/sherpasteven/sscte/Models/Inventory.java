@@ -1,11 +1,11 @@
-package com.sherpasteven.sscte;
+package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
 
 /**
  * Created by Joshua on 2015-10-12.
  */
-public class Inventory {
+public class Inventory extends Model {
 
     private ArrayList<Card> cards;
 

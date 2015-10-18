@@ -1,9 +1,9 @@
-package com.sherpasteven.sscte;
+package com.sherpasteven.sscte.Models;
 
 /**
  * Created by Joshua on 2015-10-12.
  */
-public class Profile {
+public class Profile extends Model {
 
     private User user;
     private Config config;

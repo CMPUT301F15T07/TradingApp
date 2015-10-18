@@ -3,6 +3,11 @@ package com.sherpasteven.sscte;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Quality;
+import com.sherpasteven.sscte.Models.User;
+
 /**
  * Created by elias on 17/10/15.
  */
