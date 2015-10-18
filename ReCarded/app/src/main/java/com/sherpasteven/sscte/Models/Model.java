@@ -1,8 +1,10 @@
-package com.sherpasteven.sscte;
+package com.sherpasteven.sscte.Models;
 
 /**
  * Created by elias on 16/10/15.
  */
+
+import com.sherpasteven.sscte.Views.IView;
 
 import java.util.*;
 

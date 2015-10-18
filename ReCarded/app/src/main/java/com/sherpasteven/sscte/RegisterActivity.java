@@ -4,13 +4,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.sherpasteven.sscte.Controllers.Controller;
+import com.sherpasteven.sscte.Controllers.RegisterController;
+import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.Registration;
+import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Views.RegisterView;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private Registration newRegistration;
+    private RegisterController registerController;
+    private RegisterView registerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        registerView = new RegisterView();
+        newRegistration = new Registration();
+        registerController = new RegisterController(registerView, newRegistration);
+
     }
 
     @Override

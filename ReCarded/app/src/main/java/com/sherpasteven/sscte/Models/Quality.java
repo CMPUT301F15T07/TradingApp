@@ -1,9 +1,9 @@
-package com.sherpasteven.sscte;
+package com.sherpasteven.sscte.Models;
 
 /**
  * Created by Joshua on 2015-10-12.
  */
-public class Quality {
+public class Quality extends Model {
 
     private Integer quality;
 
