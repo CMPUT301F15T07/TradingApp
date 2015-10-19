@@ -1,4 +1,4 @@
-package com.sherpasteven.recarded;
+package com.sherpasteven.sscte;
 
 import android.annotation.SuppressLint;
 import android.support.v7.app.ActionBar;
@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+
+import com.sherpasteven.sscte.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
