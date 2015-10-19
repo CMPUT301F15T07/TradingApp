@@ -1,0 +1,180 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#FFFFFF"
+    tools:context="com.sherpasteven.recarded.SplashPage">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#ffffff"
+        android:textStyle="normal" android:textSize="50sp" android:gravity="center"/>
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay" android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+        </LinearLayout>
+
+        <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="@string/dummy_button"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageView"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_page"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Welcome to Sherpa Steven&apos;s Card Trading Experience."
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal|top"
+            android:fontFamily="sans-serif-light"
+            android:typeface="monospace"
+            android:focusable="false"
+            android:textColor="#FFFFFF"
+            android:height="220dp"
+            android:allowUndo="true"
+            android:phoneNumber="false"
+            android:gravity="bottom"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Enter your credentials to begin:"
+            android:id="@+id/textView2"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="37dp"
+            android:paddingEnd="50dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="45dp" />
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:id="@+id/imageView2"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/logo"
+            android:nestedScrollingEnabled="false"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp" />
+
+        <EditText
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/nameText"
+            android:background="@drawable/input_rect"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="290dp"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="20dp"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true" />
+
+        <EditText
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/cityText"
+            android:background="@drawable/input_rect"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="350dp"
+            android:paddingStart="20dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true" />
+
+        <EditText
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/editText3"
+            android:background="@drawable/input_rect"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="410dp"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="20dp"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Name:"
+            android:id="@+id/NameTxt"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="-20dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="City:"
+            android:id="@+id/textView3"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="-20dp"
+            android:textSize="12dp"
+            android:layout_marginTop="60dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Email:"
+            android:id="@+id/textView4"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="-20dp"
+            android:textSize="12dp" />
+
+        <Button
+            android:layout_width="94dp"
+            android:layout_height="34dp"
+            android:text="ENTER"
+            android:id="@+id/btnEnter"
+            android:background="@drawable/input_rect"
+            android:layout_gravity="right|bottom"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="24dp" />
+
+    </FrameLayout>
+
+</FrameLayout>
