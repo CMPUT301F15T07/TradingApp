@@ -22,32 +22,24 @@ import javax.mail.internet.InternetAddress;
  * Created by elias on 17/10/15.
  */
 public class Registration extends Model {
-    private String fileName;
-    private Context context;
+    private String userEmail;
+    private String userName;
+    private String location;
+    private ArrayList<String> userInfo = new ArrayList<>();
 
-    // Will contain [userName, userCity, userEmail]
-    private ArrayList<String> userInformation;
-
-    public Registration(String fileName, Context context) {
-        this.fileName = fileName;
-        this.context = context;
-        userInformation = new ArrayList<>();
-        loadFromFile();
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    // Get the user information from the Register UI.
-    private void getUserInfo() {
-        // Add getters once the UI is built.
-        // userInformation.add(0, userName);
-        // userInformation.add(0, userCity);
-        // userInformation.add(0, userEmail);
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     // Check to see if the user has entered a valid email address.
     private Boolean validEmailChecker() {
         boolean result = true;
         try {
-            InternetAddress emailAddr = new InternetAddress(userInformation.get(2));
+            InternetAddress emailAddr = new InternetAddress(userEmail);
             emailAddr.validate();
         } catch (AddressException ex) {
             result = false;
@@ -57,12 +49,17 @@ public class Registration extends Model {
 
     // The following save and load are public domain written by Dr. Abram Hindle
     //Save the users information into app data.
-    public void saveToFile() {
+    public void saveToFile(String fileName, Context context) {
         try {
+            userInfo.clear();
+            userInfo.add(0, userName);
+            userInfo.add(1, location);
+            userInfo.add(2, userEmail);
+
             FileOutputStream fos = context.openFileOutput(fileName, 0);
             OutputStreamWriter writer = new OutputStreamWriter(fos);
             Gson gson = new Gson();
-            gson.toJson(userInformation, writer);
+            gson.toJson(userInfo, writer);
             writer.flush();
             fos.close();
         } catch (FileNotFoundException e) {
@@ -75,7 +72,7 @@ public class Registration extends Model {
     }
 
     //Get users information from app data.
-    public void loadFromFile() {
+    public void loadFromFile(String fileName, Context context) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
@@ -83,11 +80,11 @@ public class Registration extends Model {
 
             // Following line based on https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html
             Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-            userInformation = gson.fromJson(in, listType);
+            userInfo = gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            userInformation = new ArrayList<>();
+            userInfo = new ArrayList<>();
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
