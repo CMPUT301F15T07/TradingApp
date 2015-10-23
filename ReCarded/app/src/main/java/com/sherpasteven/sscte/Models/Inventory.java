@@ -30,12 +30,21 @@ public class Inventory extends Model {
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
-        else {getCards().add(card);}
+        else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
+                card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
     }
 
     public Boolean containsCard(Card card) {
+        int size = getCards().size();
 
-        return getCards().contains(card);
+        for(int i = 0; i < size; i++){
+
+            if(getCards().get(i).equals(card)){
+                return Boolean.TRUE;
+            }
+        }
+
+        return Boolean.FALSE;
 
     }
 
@@ -43,21 +52,42 @@ public class Inventory extends Model {
         return this.cards.get(index);
     }
 
-    Card returnCard(Card card){
-        if(containsCard(card)) {
-            return getCard(getCards().indexOf(card));
+    void removeFromInventory(Card card){
+
+        int size = getCards().size();
+
+        for(int i = 0; i < size; i++){
+
+            if(getCard(i).equals(card)){
+                getCards().remove(i);
+            }
         }
 
-        else{return null;}
     }
+
+
+    Card returnCard(Card card){
+
+        int size = getCards().size();
+
+        for(int i = 0; i < size; i++){
+
+            if(getCard(i).equals(card)){
+                return getCard(i);
+            }
+        }
+
+        return null;
+    }
+
 
     void removeCard(Card card, int amount) {
         try {
             if (amount < returnCard(card).getQuantity()) {
-                incrementCard(card, amount - returnCard(card).getQuantity());
+                incrementCard(card, 0-amount);
             }
             else if (amount == returnCard(card).getQuantity()) {
-                getCards().remove(card);
+                removeFromInventory(card);
             }
             else {throw new IllegalArgumentException("You tried removing more of card than the user had");
             }
