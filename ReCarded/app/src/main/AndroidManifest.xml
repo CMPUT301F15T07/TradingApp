@@ -34,7 +34,8 @@
         <activity
             android:name=".InventoryActivity"
             android:label="@string/title_activity_inventory"
-            android:parentActivityName=".HomeActivity" >
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sherpasteven.sscte.HomeActivity" />

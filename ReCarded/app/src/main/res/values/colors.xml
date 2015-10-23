@@ -6,4 +6,5 @@
     <color name="green_main">#00D55B</color>
     <color name="yellow_main">#E1DD8F</color>
     <color name="brown_dark">#500E06</color>
+    <color name="colorPrimaryDark">#500E06</color>
 </resources>

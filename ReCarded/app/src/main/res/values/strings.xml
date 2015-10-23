@@ -3,12 +3,15 @@
     <string name="title_activity_splash">Welcome to SSCTE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_register">RegisterActivity</string>
-    <string name="title_activity_inventory">InventoryActivity</string>
-    <string name="title_activity_add_card">AddCardActivity</string>
-    <string name="title_activity_edit_card">EditCardActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_splash_page">SplashPage</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_inventory">Inventory</string>
+    <string name="title_activity_add_card">Add a card</string>
+    <string name="title_activity_edit_card">Edit a card</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_splash_page">Register</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="trades">Trades</string>
+    <string name="friends">Friends</string>
+    <string name="action_profile">Change Profile</string>
 </resources>

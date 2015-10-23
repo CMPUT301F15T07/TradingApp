@@ -87,6 +87,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     public SlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
+
+
         super(context, attrs, defStyle);
 
         // Disable the Scroll Bar
@@ -279,7 +281,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     private void populateTabStrip() {
         final PagerAdapter adapter = mViewPager.getAdapter();
-        final View.OnClickListener tabClickListener = new TabClickListener();
+        final OnClickListener tabClickListener = new TabClickListener();
 
         for (int i = 0; i < adapter.getCount(); i++) {
             View tabView = null;
@@ -318,6 +320,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 tabView.setSelected(true);
             }
 
+            //tabTitleView.setTextColor(getResources().getColorStateList());
             tabTitleView.setTextColor(getResources().getColorStateList(R.color.selectors));
             tabTitleView.setTextSize(14);
         }

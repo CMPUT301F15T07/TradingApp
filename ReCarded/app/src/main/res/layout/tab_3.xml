@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/trades"
+        android:text="@string/friends"
         android:id="@+id/textView"
         android:textColor="@color/orange_main"
         android:layout_centerVertical="true"

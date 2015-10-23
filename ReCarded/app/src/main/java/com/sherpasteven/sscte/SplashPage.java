@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 
 import com.sherpasteven.sscte.R;
 
@@ -50,6 +52,12 @@ public class SplashPage extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        Button enterButton = (Button)findViewById(R.id.btnEnter);
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(SplashPage.this, InventoryActivity.class));
+            }
+        });
         // Set up the user interaction to manually show or hide the system UI.
         /*
         mContentView.setOnClickListener(new View.OnClickListener() {
