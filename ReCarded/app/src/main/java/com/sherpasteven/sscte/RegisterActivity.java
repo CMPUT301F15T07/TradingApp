@@ -22,10 +22,10 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        registerView = new RegisterView();
-        newRegistration = new Registration();
-        registerController = new RegisterController(registerView, newRegistration);
+        //setContentView(R.layout.activity_register);
+        //registerView = new RegisterView();
+        //newRegistration = new Registration();
+        //registerController = new RegisterController(registerView, newRegistration);
     }
 
     @Override

@@ -2,23 +2,17 @@ package com.sherpasteven.sscte;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import com.sherpasteven.sscte.Models.Inventory;
-import com.sherpasteven.sscte.Views.SlidingTabLayout;
-import com.sherpasteven.sscte.Views.ViewPagerAdapter;
-
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.sherpasteven.sscte.Views.SlidingTabLayout;
+import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
 public class InventoryActivity extends ActionBarActivity {
 

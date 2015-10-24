@@ -11,13 +11,20 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.sherpasteven.sscte.Controllers.RegisterController;
+import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.ProfileSerializer;
+import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.Views.IView;
+import com.sherpasteven.sscte.Views.SubmitButtonView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SplashPage extends AppCompatActivity {
+public class SplashPage extends AppCompatActivity implements IView<Registration> {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -39,6 +46,7 @@ public class SplashPage extends AppCompatActivity {
     private View mContentView;
     private View mControlsView;
     private boolean mVisible;
+    private ISerializer<Profile> profileSerializer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,52 +61,12 @@ public class SplashPage extends AppCompatActivity {
         actionBar.hide();
 
         Button enterButton = (Button)findViewById(R.id.btnEnter);
-        enterButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                startActivity(new Intent(SplashPage.this, InventoryActivity.class));
-            }
-        });
-        // Set up the user interaction to manually show or hide the system UI.
-        /*
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });*/
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        enterButton.setEnabled(false);
+        Registration registration = new Registration();
+        registration.addView(this);
+        RegisterController controller = new RegisterController(this, registration);
     }
 
-    /*
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(100);
-    }
-
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    /*
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
-    };*/
 
     private void toggle() {
         if (mVisible) {
@@ -180,5 +148,22 @@ public class SplashPage extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    public void Update(Registration registration) {
+        Button submitButton = (Button) findViewById(R.id.btnEnter);
+        submitButton.setEnabled(canSubmit(registration));
+    }
+
+    public boolean canSubmit(Registration registration){
+        boolean a =!registration.getLocation().isEmpty();
+        boolean b =!registration.getUserName().isEmpty();
+        boolean c =!registration.getUserEmail().isEmpty();
+
+
+        return !registration.getLocation().isEmpty() &&
+                !registration.getUserName().isEmpty() &&
+                !registration.getUserEmail().isEmpty() &&
+                 registration.isValidEmail();
     }
 }

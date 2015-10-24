@@ -1,20 +1,5 @@
 package com.sherpasteven.sscte.Models;
 
-import android.content.Context;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -22,21 +7,49 @@ import javax.mail.internet.InternetAddress;
  * Created by elias on 17/10/15.
  */
 public class Registration extends Model {
+
     private String userEmail;
     private String userName;
     private String location;
-    private ArrayList<String> userInfo = new ArrayList<>();
 
+    public Registration(){
+        userEmail = new String();
+        userName = new String();
+        location = new String();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
     public String getUserEmail() {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserName(String userName) {
+        this.userName = userName;
+        notifyViews();
     }
 
+    public void setLocation(String location) {
+        this.location = location;
+        notifyViews();
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+        notifyViews();
+    }
+
+
+
+
+
     // Check to see if the user has entered a valid email address.
-    private Boolean validEmailChecker() {
+    public Boolean isValidEmail() {
         boolean result = true;
         try {
             InternetAddress emailAddr = new InternetAddress(userEmail);
@@ -47,8 +60,12 @@ public class Registration extends Model {
         return result;
     }
 
+
+
+
     // The following save and load are public domain written by Dr. Abram Hindle
     //Save the users information into app data.
+    /*
     public void saveToFile(String fileName, Context context) {
         try {
             userInfo.clear();
@@ -90,5 +107,5 @@ public class Registration extends Model {
             // TODO Auto-generated catch block
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
