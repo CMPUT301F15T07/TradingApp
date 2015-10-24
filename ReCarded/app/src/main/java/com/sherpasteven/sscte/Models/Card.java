@@ -103,4 +103,24 @@ public class Card extends Model {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+
+    public Boolean equals(Card card){
+        return this.getName().equals(card.getName()) &&
+                this.getQuality().equals(card.getQuality()) &&
+                this.getCatagory().equals(card.getCatagory()) &&
+                this.getSeries().equals(card.getSeries()) &&
+                this.isTradable().equals(card.isTradable()) &&
+                this.getComments().equals(card.getComments()) &&
+                this.getOwner().equals(card.getOwner());
+
+    }
+
+    public static String[] getRelevantCatagories(){
+
+
+        String relevantcatagories[] = {"Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
+                "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};
+        return relevantcatagories;
+    }
 }

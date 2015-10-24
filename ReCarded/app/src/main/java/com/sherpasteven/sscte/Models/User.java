@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Joshua on 2015-10-12.
@@ -39,8 +40,24 @@ public class User extends Model {
         return friends;
     }
 
+    public void addFriend(User user){ friends.add(user);}
+
+    public void removeFriend(User user){
+        friends.remove(user);
+    }
+
     public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
+    }
+
+    public User getFriend(String userName){
+        for(Iterator i = friends.iterator(); i.hasNext();){
+            User currentFriend = (User) i.next();
+            if(currentFriend.getName().equals(userName)){
+                return currentFriend;
+            }
+        }
+        return null;
     }
 
     public Inventory getInventory() {

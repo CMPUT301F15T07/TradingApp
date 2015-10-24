@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         registerView = new RegisterView();
-        newRegistration = new Registration("userInfo.sav", this);
+        newRegistration = new Registration();
         registerController = new RegisterController(registerView, newRegistration);
     }
 
