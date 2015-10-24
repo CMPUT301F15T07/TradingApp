@@ -7,6 +7,8 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 
+import java.util.ArrayList;
+
 /**
  * Created by Joshua on 2015-10-16.
  */
@@ -244,16 +246,26 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
 		7.2) Card info is updated as soon as teh other users are online
 	*/
 
-        /*
-
-        Card card = new Card();
 
         //When the user creates a card, they can choose a default catagory from the drop down menu
-        ArrayList<String> releventcatagories = new ArrayList<String>("Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
-                "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC");
-        assertEquals(releventcatagories, card.getRelevantCatagories());
+        String theserelevantcatagories[] = {"Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
+                "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};
 
-        */
+        String relevantcatagories[] = Card.getRelevantCatagories();
+
+        assertEquals(theserelevantcatagories[0], relevantcatagories[0]);
+        assertEquals(theserelevantcatagories[1], relevantcatagories[1]);
+        assertEquals(theserelevantcatagories[2], relevantcatagories[2]);
+        assertEquals(theserelevantcatagories[3], relevantcatagories[3]);
+        assertEquals(theserelevantcatagories[4], relevantcatagories[4]);
+        assertEquals(theserelevantcatagories[5], relevantcatagories[5]);
+        assertEquals(theserelevantcatagories[6], relevantcatagories[6]);
+        assertEquals(theserelevantcatagories[7], relevantcatagories[7]);
+        assertEquals(theserelevantcatagories[8], relevantcatagories[8]);
+        assertEquals(theserelevantcatagories[9], relevantcatagories[9]);
+
+
+
     }
 
 

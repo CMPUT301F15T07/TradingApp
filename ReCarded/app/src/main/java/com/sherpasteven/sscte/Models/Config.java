@@ -13,7 +13,7 @@ public class Config extends Model {
 
     }
 
-    public Boolean getImagesdownloadable() {
+    public Boolean isImagesdownloadable() {
         return imagesdownloadable;
     }
 

@@ -115,4 +115,12 @@ public class Card extends Model {
                 this.getOwner().equals(card.getOwner());
 
     }
+
+    public static String[] getRelevantCatagories(){
+
+
+        String relevantcatagories[] = {"Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
+                "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};
+        return relevantcatagories;
+    }
 }

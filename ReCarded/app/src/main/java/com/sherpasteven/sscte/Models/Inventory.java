@@ -34,7 +34,7 @@ public class Inventory extends Model {
                 card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
     }
 
-    public Boolean containsCard(Card card) {
+    Boolean containsCard(Card card) {
         int size = getCards().size();
 
         for(int i = 0; i < size; i++){
@@ -48,7 +48,7 @@ public class Inventory extends Model {
 
     }
 
-    Card getCard(int index){
+    public Card getCard(int index){
         return this.cards.get(index);
     }
 
