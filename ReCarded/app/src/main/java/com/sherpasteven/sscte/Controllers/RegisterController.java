@@ -36,6 +36,7 @@ public class RegisterController extends Controller<SplashPage, Registration> {
             @Override
             public void onClick(View v) {
                 //saving shit here
+                model.generateProfile(view);
                 view.startActivity(new Intent(view, InventoryActivity.class));
             }
         });
