@@ -3,6 +3,8 @@ package com.sherpasteven.sscte;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.sherpasteven.sscte.Models.User;
+
 /**
  * Created by elias on 17/10/15.
  */
@@ -33,14 +35,20 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		   there are no similar names will show blank list
 	*/
 
+	//No such thing as collections of all users yet so i commented this section out
+	/*
     void testUS020101() {
         userList users = loadFromStorage();
-        users.add(user1);
-        users.add(user2);
+		User johnCena = new User("WWE", "Salt lake city");
+		User user1 = new User("user1","city1");
+		User user2 = new User("user2","city2");
+        users.add(new User("user1","city1"));
+        users.add(new User("user2","city2"));
         users.add(johnCena);
-        assertEquals(johnCena.users.search("johnCena");
-        assertEquals(user1.user2,users.search("user"));
+        assertEquals(johnCena,users.search("johnCena"));
+        assertEquals([user1,user2],users.search("user"));
     }
+    */
 
 //User needs to add other user into friends list
 //Can be done by searching a username
@@ -65,8 +73,8 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 	*/
 
     void testUS020201() {
-        user johnCena = new user();
-        user user1 = new user();
+        User johnCena = new User("WWE","Salt lake City");
+        User user1 = new User("User1", "City1");
         johnCena.addFriend(user1);
         assertEquals(user1,johnCena.getFriend("user1"));
     }
@@ -90,14 +98,14 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 */
 
     void testUS020301() {
-        user user1 = new user();
-        user johnCena = new user();
-        user user2 = new user();
+        User user1 = new User("user1","city1");
+        User johnCena = new User("johnCena","WWE");
+        User user2 = new User("user2","city2");
         user1.addFriend(johnCena);
         user1.addFriend(user2);
 
-        user1.remove(johnCena);
-        assertEquals(NULL, user1.friends.getFriend("johnCena"));
+        user1.removeFriend(johnCena);
+        assertEquals(null, user1.getFriend("johnCena"));
     }
 
 //User will  have contact information (Name) and his city
@@ -120,13 +128,13 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 	*/
 
     void testUS020401() {
-        user johnCena = new user("The Heavyweight Champion","WWE RAW");
+        User johnCena = new User("The Heavyweight Champion","WWE RAW");
         assertEquals("The Heavyweight Champion",johnCena.getName());
-        assertEquals("WWE RAW", johnCena.getCity());
+        assertEquals("WWE RAW", johnCena.getLocation());
         johnCena.setName("John Felix Anthony Cena");
-        johnCena.setCity("Tampa, Florida, U.S.");
+        johnCena.setLocation("Tampa, Florida, U.S.");
         assertEquals("John Felix Anthony Cena",johnCena.getName());
-        assertEquals("Tampa, Florida, U.S.", johnCena.getCity());
+        assertEquals("Tampa, Florida, U.S.", johnCena.getLocation());
     }
 
 //User will get friends contact information and the city
@@ -148,14 +156,14 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 	*/
 
     void testUS20501() {
-        user user1 = new user();
-        user johnCena = new user("The Heavyweight Champion","WWE RAW");
-        user user2 = new user();
+        User user1 = new User("user1","city1");
+        User johnCena = new User("The Heavyweight Champion","WWE RAW");
+        User user2 = new User("user2","city2");
         user1.addFriend(johnCena);
         user1.addFriend(user2);
 
-        assertEquals("The Heavyweight Champion",user1.getFriend("johnCena").getName);
-        assertEquals("WWE RAW", user1.getFriend("johnCena").getCity);
+        assertTrue(user1.getFriend("johnCena").getName().equals("The Heavyweight Champion"));
+        assertTrue(user1.getFriend("johnCena").getLocation().equals("WWE RAW"));
     }
 
 
