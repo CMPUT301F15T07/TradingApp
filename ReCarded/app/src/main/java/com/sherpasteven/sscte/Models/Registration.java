@@ -1,5 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
+import android.content.Context;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -11,11 +13,13 @@ public class Registration extends Model {
     private String userEmail;
     private String userName;
     private String location;
+    private ISerializer<Profile> serializer;
 
     public Registration(){
         userEmail = new String();
         userName = new String();
         location = new String();
+        serializer = new LocalProfileSerializer();
     }
 
     public String getUserName() {
@@ -44,10 +48,6 @@ public class Registration extends Model {
         notifyViews();
     }
 
-
-
-
-
     // Check to see if the user has entered a valid email address.
     public Boolean isValidEmail() {
         boolean result = true;
@@ -58,6 +58,12 @@ public class Registration extends Model {
             result = false;
         }
         return result;
+    }
+
+    public void generateProfile(Context context){
+        User user = new User(getUserName(), getLocation(), getLocation());
+        Profile profile = new Profile(user);
+        serializer.Serialize(profile, context);
     }
 
 

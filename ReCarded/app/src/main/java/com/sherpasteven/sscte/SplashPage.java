@@ -9,20 +9,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Controllers.RegisterController;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Profile;
-import com.sherpasteven.sscte.Models.ProfileSerializer;
 import com.sherpasteven.sscte.Models.Registration;
-import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.IView;
-import com.sherpasteven.sscte.Views.SubmitButtonView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -50,6 +45,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private View mContentView;
     private View mControlsView;
     private boolean mVisible;
+    private RegisterController registerController;
     private ISerializer<Profile> profileSerializer;
 
     @Override
@@ -68,7 +64,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         enterButton.setEnabled(false);
         Registration registration = new Registration();
         registration.addView(this);
-        RegisterController controller = new RegisterController(this, registration);
+        registerController = new RegisterController(this, registration);
     }
 
 

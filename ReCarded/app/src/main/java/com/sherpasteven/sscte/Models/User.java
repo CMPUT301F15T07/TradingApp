@@ -10,13 +10,24 @@ public class User extends Model {
 
     private String name;
     private String location;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
     private ArrayList<User> friends;
     private Inventory inventory;
 
-    public User(String name, String location){
+    public User(String name, String location, String email){
 
         this.name = name;
-        this.location = name;
+        this.location = location;
+        this.email = email;
         this.inventory = new Inventory();
     }
 
