@@ -7,4 +7,6 @@
     <color name="yellow_main">#E1DD8F</color>
     <color name="brown_dark">#500E06</color>
     <color name="colorPrimaryDark">#500E06</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
 </resources>

@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#FFFFFF"
     tools:context="com.sherpasteven.sscte.SplashPage">
@@ -12,17 +12,14 @@
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
+        <!--<LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
-
-        </LinearLayout>
-
+            tools:ignore="UselessParent" >-->
 
         <ImageView
             android:layout_width="fill_parent"
@@ -32,37 +29,6 @@
             android:src="@drawable/splash_page"
             android:layout_gravity="center" />
 
-        <TextView
-            android:layout_width="328dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Welcome to Sherpa Steven&apos;s Card Trading Experience."
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal|top"
-            android:fontFamily="sans-serif-light"
-            android:typeface="monospace"
-            android:focusable="false"
-            android:textColor="#FFFFFF"
-            android:height="220dp"
-            android:allowUndo="true"
-            android:phoneNumber="false"
-            android:gravity="bottom"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Enter your credentials to begin:"
-            android:id="@+id/textView2"
-            android:layout_gravity="left|center_vertical"
-            android:paddingStart="37dp"
-            android:paddingEnd="50dp"
-            android:fontFamily="sans-serif"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="45dp" />
-
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
@@ -71,46 +37,88 @@
             android:src="@drawable/logo"
             android:nestedScrollingEnabled="false"
             android:paddingBottom="15dp"
-            android:paddingTop="15dp" />
+            android:paddingTop="15dp"
+            android:paddingRight="0dp"
+            android:layout_marginLeft="100dp" />
+
+        <TextView
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView2"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Welcome to Sherpa Steven&apos;s Card Trading Experience."
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal|top"
+            android:fontFamily="sans-serif-light"
+            android:typeface="monospace"
+            android:focusable="false"
+            android:textColor="#FFFFFF"
+            android:allowUndo="true"
+            android:phoneNumber="false"
+            android:gravity="bottom"
+            android:paddingEnd="0dp"
+            android:paddingStart="37dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Enter your credentials to begin:"
+            android:id="@+id/textView2"
+            android:layout_gravity="left|center_vertical"
+            android:paddingTop="5px"
+            android:paddingStart="37dp"
+            android:paddingEnd="50dp"
+            android:fontFamily="sans-serif"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="45dp" />
 
         <EditText
-            android:layout_width="316dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/textView2"
             android:singleLine="true"
             android:id="@+id/nameText"
             android:background="@drawable/input_rect"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="290dp"
             android:fontFamily="sans-serif-light"
-            android:paddingStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:textColor="#444444"
             android:maxLines="1"
-            android:nestedScrollingEnabled="true" />
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp" />
 
         <EditText
-            android:layout_width="316dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/nameText"
             android:singleLine="true"
             android:id="@+id/cityText"
-            android:background="@drawable/input_rect"
+            android:background="@drawable/input_rect2"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="350dp"
-            android:paddingStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
             android:maxLines="1"
-            android:nestedScrollingEnabled="true" />
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp" />
 
         <EditText
-            android:layout_width="316dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/cityText"
             android:singleLine="true"
             android:id="@+id/emailText"
-            android:background="@drawable/input_rect"
+            android:background="@drawable/input_rect3"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="410dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:fontFamily="sans-serif-light"
-            android:paddingStart="20dp"
+            android:paddingStart="10dp"
             android:textColor="#444444"
             android:maxLines="1"
             android:nestedScrollingEnabled="true" />
@@ -118,39 +126,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/nameText"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Name:"
-            android:id="@+id/NameTxt"
+            android:id="@+id/lblText"
             android:layout_gravity="left|center_vertical"
-            android:paddingStart="50dp"
-            android:paddingEnd="50dp"
+            android:paddingStart="30dp"
             android:fontFamily="sans-serif"
             android:textColor="#FFFFFF"
-            android:layout_marginLeft="-20dp"
             android:textSize="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/cityText"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="City:"
-            android:id="@+id/textView3"
+            android:id="@+id/lblCity"
             android:layout_gravity="left|center_vertical"
-            android:paddingStart="50dp"
-            android:paddingEnd="50dp"
+            android:paddingStart="30dp"
             android:fontFamily="sans-serif"
             android:textColor="#FFFFFF"
-            android:layout_marginLeft="-20dp"
             android:textSize="12dp"
-            android:layout_marginTop="60dp" />
+            android:layout_marginBottom="-20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/emailText"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Email:"
-            android:id="@+id/textView4"
+            android:id="@+id/lblEmail"
             android:layout_gravity="left|center_vertical"
+            android:layout_marginBottom="-20dp"
             android:paddingStart="50dp"
             android:paddingEnd="50dp"
             android:fontFamily="sans-serif"
@@ -162,15 +170,20 @@
         <Button
             android:layout_width="94dp"
             android:layout_height="34dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:text="ENTER"
             android:id="@+id/btnEnter"
-            android:background="@drawable/input_rect"
-            android:layout_gravity="right|bottom"
+            android:background="@drawable/input_rect4"
+            android:layout_gravity="end|bottom"
             android:fontFamily="sans-serif-light"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="24dp" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="24dp" />
 
-    </FrameLayout>
+        <!--</LinearLayout>-->
 
-</FrameLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
+
