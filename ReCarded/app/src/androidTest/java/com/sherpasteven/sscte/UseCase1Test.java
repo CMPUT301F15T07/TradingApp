@@ -7,8 +7,6 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 
-import java.util.ArrayList;
-
 /**
  * Created by Joshua on 2015-10-16.
  */

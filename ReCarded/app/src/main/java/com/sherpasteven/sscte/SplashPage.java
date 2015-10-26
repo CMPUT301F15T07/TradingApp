@@ -5,16 +5,18 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Controllers.RegisterController;
+import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.Views.IView;
@@ -51,6 +53,11 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //if a profile already exists, there is no need to register
+        Profile localProfile = getLocalProfile();
+        if (localProfile != null) navigateToInventory();
+
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_page);
         mVisible = true;
@@ -65,6 +72,15 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         Registration registration = new Registration();
         registration.addView(this);
         registerController = new RegisterController(this, registration);
+    }
+
+    public void navigateToInventory(){
+        startActivity(new Intent(this, InventoryActivity.class));
+    }
+
+    private Profile getLocalProfile() {
+        IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
+        return deSerializer.Deserialize(null, this);
     }
 
 

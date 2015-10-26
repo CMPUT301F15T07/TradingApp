@@ -1,18 +1,14 @@
 package com.sherpasteven.sscte.Controllers;
 
-import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sherpasteven.sscte.InventoryActivity;
 import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SplashPage;
-import com.sherpasteven.sscte.Views.RegisterView;
-import com.sherpasteven.sscte.Views.SubmitButtonView;
 
 /**
  * Created by elias on 17/10/15.
@@ -37,7 +33,7 @@ public class RegisterController extends Controller<SplashPage, Registration> {
             public void onClick(View v) {
                 //saving shit here
                 model.generateProfile(view);
-                view.startActivity(new Intent(view, InventoryActivity.class));
+                view.navigateToInventory();
             }
         });
 

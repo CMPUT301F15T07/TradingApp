@@ -6,7 +6,8 @@ package com.sherpasteven.sscte.Models;
 
 import com.sherpasteven.sscte.Views.IView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Model<V extends IView> {
     private List<V> views;

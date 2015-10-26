@@ -24,7 +24,7 @@ public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializ
     private String profileLocation = "userProfile.sav";
 
     @Override
-    public Profile Deserialize(int id, Context context) {
+    public Profile Deserialize(ProfileId id, Context context) {
         Profile profile;
         try {
             FileInputStream fis = context.openFileInput(profileLocation);
