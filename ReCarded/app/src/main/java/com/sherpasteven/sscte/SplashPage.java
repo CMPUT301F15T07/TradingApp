@@ -77,13 +77,13 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     @Override
     protected void onPause(){
         super.onPause();
-        registerController.saveRegistration(this);
+        //registerController.saveRegistration(this);
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        registerController.loadRegistration(this);
+        //registerController.loadRegistration(this);
     }
 
     public void navigateToInventory(){
