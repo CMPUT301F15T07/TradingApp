@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte.Controllers;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -21,6 +22,14 @@ public class RegisterController extends Controller<SplashPage, Registration> {
         super(view, model);
         this.view = view;
         this.model = model;
+    }
+
+    public void saveRegistration(Context context){
+        model.saveRegistration(context);
+    }
+
+    public void loadRegistration(Context context){
+        model.loadRegistration(context);
     }
 
 

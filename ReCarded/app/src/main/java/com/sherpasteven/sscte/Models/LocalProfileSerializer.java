@@ -24,7 +24,7 @@ public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializ
     private String profileLocation = "userProfile.sav";
 
     @Override
-    public Profile Deserialize(ProfileId id, Context context) {
+    public Profile Deserialize(Object id, Context context) {
         Profile profile;
         try {
             FileInputStream fis = context.openFileInput(profileLocation);
@@ -35,9 +35,9 @@ public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializ
             profile = gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            return null;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return null;
         }
         return profile;
     }

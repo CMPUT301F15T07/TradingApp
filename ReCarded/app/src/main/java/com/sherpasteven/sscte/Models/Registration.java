@@ -2,6 +2,8 @@ package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
 
+import com.sherpasteven.sscte.Controllers.Controller;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -13,13 +15,15 @@ public class Registration extends Model {
     private String userEmail;
     private String userName;
     private String location;
-    private ISerializer<Profile> serializer;
+    private transient ISerializer<Profile> profileSerializer;
+    private transient RegistrationSerializer registrationSerializer;
 
     public Registration(){
         userEmail = new String();
         userName = new String();
         location = new String();
-        serializer = new LocalProfileSerializer();
+        profileSerializer = new LocalProfileSerializer();
+        registrationSerializer = new RegistrationSerializer();
     }
 
     public String getUserName() {
@@ -63,6 +67,23 @@ public class Registration extends Model {
     public void generateProfile(Context context){
         User user = new User(getUserName(), getLocation(), getLocation());
         Profile profile = new Profile(user);
-        serializer.Serialize(profile, context);
+        profileSerializer.Serialize(profile, context);
+    }
+
+    public void saveRegistration(Context context){
+        registrationSerializer.Serialize(this, context);
+    }
+
+    public void loadRegistration(Context context){
+        Registration loaded = registrationSerializer.Deserialize(null, context);
+        if (loaded != null){
+            copy(loaded);
+        }
+    }
+
+    private void copy(Registration registration){
+        setUserEmail(registration.getUserEmail());
+        setUserName(registration.getUserName());
+        setLocation(registration.getLocation());
     }
 }

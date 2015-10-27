@@ -74,6 +74,18 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         registerController = new RegisterController(this, registration);
     }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        registerController.saveRegistration(this);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        registerController.loadRegistration(this);
+    }
+
     public void navigateToInventory(){
         startActivity(new Intent(this, InventoryActivity.class));
     }

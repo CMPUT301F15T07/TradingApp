@@ -1,3 +1,14 @@
+October 24, 2015
+Salim, Jake, Anson, Joshua, Steven, Aaron, Elias
+
+Since Last Time
+-Anson, UI for registration completed. Action Bar Completed. For next week want to get grid list view adapter done. edit profile and item work.
+-Jake, working on registration model and MVC. Want to work on trades.
+-Salim, worked on the model (friends portion). Worked on the UML.
+-Elias, worked on MVC and hooked up Registration View to Registration Model. Working on grid view adapter for next time.
+-Aaron, worked on Views and integration of registration model. Wanted to work on grid view.
+-Joshua, worked on model and test cases. Want to work with Salim to flesh out trade model.
+
 October 16, 2015
 Anson, Jake, Salim, Elias, Steven
 
