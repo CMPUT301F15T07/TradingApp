@@ -16,14 +16,14 @@ public class Registration extends Model {
     private String userName;
     private String location;
     private transient ISerializer<Profile> profileSerializer;
-    private transient RegistrationSerializer registrationSerializer;
+    //private transient RegistrationSerializer registrationSerializer;
 
     public Registration(){
         userEmail = new String();
         userName = new String();
         location = new String();
         profileSerializer = new LocalProfileSerializer();
-        registrationSerializer = new RegistrationSerializer();
+        //registrationSerializer = new RegistrationSerializer();
     }
 
     public String getUserName() {
@@ -71,14 +71,14 @@ public class Registration extends Model {
     }
 
     public void saveRegistration(Context context){
-        registrationSerializer.Serialize(this, context);
+        //registrationSerializer.Serialize(this, context);
     }
 
     public void loadRegistration(Context context){
-        Registration loaded = registrationSerializer.Deserialize(null, context);
-        if (loaded != null){
-            copy(loaded);
-        }
+        //Registration loaded = registrationSerializer.Deserialize(null, context);
+        //if (loaded != null){
+        //    copy(loaded);
+        //}
     }
 
     private void copy(Registration registration){

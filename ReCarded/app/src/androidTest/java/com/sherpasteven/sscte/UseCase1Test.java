@@ -16,7 +16,7 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
     }
 
     public void testUS010101(){
-        User user = new User("Joshua", "Edmonton");
+        User user = new User("Joshua", "Edmonton", "DummyEmail@ualberta.ca");
 
 
         //User case	US01.01.01
@@ -145,7 +145,7 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
 
 
         //The user creates a card
-        User user = new User("Joshua", "Edmonton");
+        User user = new User("Joshua", "Edmonton", "DummyEmail@ualberta.ca");
 
 
         //User case	US01.01.01
