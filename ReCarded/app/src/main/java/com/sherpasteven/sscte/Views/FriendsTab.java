@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 
 import com.sherpasteven.sscte.R;
 
-public class Tab3 extends Fragment {
+public class FriendsTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab_3,container,false);
+        View v =inflater.inflate(R.layout.friends_tab,container,false);
         return v;
     }
 }

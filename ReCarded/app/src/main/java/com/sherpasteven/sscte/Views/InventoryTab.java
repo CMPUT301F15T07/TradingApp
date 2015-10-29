@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 
 import com.sherpasteven.sscte.R;
 
-public class Tab1 extends Fragment {
+public class InventoryTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab_1,container,false);
+        View v =inflater.inflate(R.layout.inventory_tab,container,false);
         return v;
     }
 }
