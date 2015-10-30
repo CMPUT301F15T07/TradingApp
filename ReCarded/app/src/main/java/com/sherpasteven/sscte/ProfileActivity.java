@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ProfileActivity extends AppCompatActivity {
+import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Views.IView;
+
+public class ProfileActivity extends AppCompatActivity implements IView<Profile>{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +36,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void Update(Profile profile) {
+        
     }
 }
