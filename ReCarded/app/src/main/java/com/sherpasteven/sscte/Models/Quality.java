@@ -1,7 +1,8 @@
 package com.sherpasteven.sscte.Models;
 
 /**
- * Created by Joshua on 2015-10-12.
+ * This class represents a card's physical quality. There are different
+ * ranking systems (0-10) or (poor-very good) so we abstract out the implementation of quality.
  */
 public class Quality extends Model {
 

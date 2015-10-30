@@ -1,7 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
 /**
- * Created by Joshua on 2015-10-12.
+ * User config to store settings and preferances
  */
 public class Config extends Model {
 

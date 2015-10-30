@@ -1,14 +1,14 @@
 package com.sherpasteven.sscte.Models;
 
-/**
- * Created by elias on 16/10/15.
- */
-
 import com.sherpasteven.sscte.Views.IView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is a generic Model class using active model MVC
+ * @param <V> The View class to associate with this model
+ */
 public class Model<V extends IView> {
     private List<V> views;
 

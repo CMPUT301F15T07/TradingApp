@@ -12,7 +12,10 @@ import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SplashPage;
 
 /**
- * Created by elias on 17/10/15.
+ * This controller controls a registration model via the splash page.
+ * The majority of the work that is done is taking in text input for registering the user
+ * and then updating the model to match. The controller also prompts the registration to save
+ * once the user has provided all relevant information and submits.
  */
 public class RegisterController extends Controller<SplashPage, Registration> {
     private final SplashPage view;
@@ -24,16 +27,28 @@ public class RegisterController extends Controller<SplashPage, Registration> {
         this.model = model;
     }
 
+    /**
+     * save registration using user provided information
+     * @param context app context
+     */
     public void saveRegistration(Context context){
         model.saveRegistration(context);
     }
 
+    /**
+     * load registration if it already exists from previous program executions
+     * @param context app context
+     */
     public void loadRegistration(Context context){
         model.loadRegistration(context);
     }
 
 
-
+    /**
+     * set all the listeners on the spash page that correspond to user input.
+     * This lets the controller update the model when the user inputs information
+     * @param view splash page to set listeners on
+     */
     @Override
     protected void setListeners(final SplashPage view) {
         Button submitButton = (Button)view.findViewById(R.id.btnEnter);

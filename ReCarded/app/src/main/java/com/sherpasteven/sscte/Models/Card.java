@@ -1,7 +1,10 @@
 package com.sherpasteven.sscte.Models;
 
 /**
- * Created by Joshua on 2015-10-12.
+ * This class represents a trading card and all of the data associated with it.
+ * These cards will be the basis of the app since they are the objects that users will trade.
+ *
+ * Issues: the ability for cards to have images needs to be added.
  */
 public class Card extends Model {
 
@@ -116,6 +119,10 @@ public class Card extends Model {
 
     }
 
+    /**
+     * get the different cards categories that can be traded
+     * @return names of different card types that can be traded
+     */
     public static String[] getRelevantCatagories(){
 
 
