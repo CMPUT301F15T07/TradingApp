@@ -1,7 +1,10 @@
 package com.sherpasteven.sscte.Models;
 
 /**
- * Created by Joshua on 2015-10-12.
+ * This class represents all of the data and configuration settings for a certain User.
+ * The User class represents the data associated with the user such as trades and cards.
+ * The Config class represents the configuration associated with the user such as if
+ * images should be downloaded.
  */
 public class Profile extends Model {
 

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Created by Joshua on 2015-10-12.
+ * The user represents all data associated with the user such as trades, cards in inventory,
+ * and friends.
  */
 public class User extends Model {
 
@@ -53,6 +54,7 @@ public class User extends Model {
 
     public void addFriend(User user){ friends.add(user);}
 
+
     public void removeFriend(User user){
         friends.remove(user);
     }
@@ -61,6 +63,11 @@ public class User extends Model {
         this.friends = friends;
     }
 
+    /**
+     * get a friend by username from the friends list
+     * @param userName user name to search for
+     * @return friend if found, otherwise null
+     */
     public User getFriend(String userName){
         for(Iterator i = friends.iterator(); i.hasNext();){
             User currentFriend = (User) i.next();

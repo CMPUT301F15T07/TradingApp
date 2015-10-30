@@ -3,7 +3,8 @@ package com.sherpasteven.sscte.Models;
 import java.util.ArrayList;
 
 /**
- * Created by Joshua on 2015-10-12.
+ * The inventory represents the collection of cards that a User has.
+ * When a user gets a new card or trades one of their cards the work will be done in inventory.
  */
 public class Inventory extends Model {
 
@@ -24,6 +25,7 @@ public class Inventory extends Model {
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
     }
+
 
     void addCard(Card card){
 
@@ -66,6 +68,11 @@ public class Inventory extends Model {
     }
 
 
+    /**
+     * what does this do?
+     * @param card
+     * @return
+     */
     Card returnCard(Card card){
 
         int size = getCards().size();

@@ -14,15 +14,23 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 
-/**
- * Created by elias on 17/10/15.
- */
+
 //Code base off of:
 //https://github.com/joshua2ua/lonelyTwitter/blob/f15monday/app/src/main/java/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java
+
+/**
+ * This class is used to serialze and deserialize Profile objects using GSON.
+ */
 public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializer<Profile> {
 
     private String profileLocation = "userProfile.sav";
 
+    /**
+     * Deserialize an object from file
+     * @param id unique id of the file
+     * @param context app context
+     * @return deserialized Profile
+     */
     @Override
     public Profile Deserialize(Object id, Context context) {
         Profile profile;
@@ -42,6 +50,11 @@ public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializ
         return profile;
     }
 
+    /**
+     * Serialize an object to file
+     * @param item object to serialize to file
+     * @param context app context
+     */
     @Override
     public void Serialize(Profile item, Context context) {
         try {

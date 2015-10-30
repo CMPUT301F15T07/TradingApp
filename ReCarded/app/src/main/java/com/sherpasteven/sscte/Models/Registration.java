@@ -8,7 +8,14 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 /**
- * Created by elias on 17/10/15.
+ * This class is the main model object that represents
+ * registering a new user into the app. This class takes
+ * in the arguments needed to generate a new user and then
+ * can generate the user once all required fields are filled;
+ *
+ * Issues:
+ * There is an issue serializing the Registration object using GSON
+ * Getting a security exception when serializing the object to file.
  */
 public class Registration extends Model {
 
@@ -19,9 +26,9 @@ public class Registration extends Model {
     //private transient RegistrationSerializer registrationSerializer;
 
     public Registration(){
-        userEmail = new String();
-        userName = new String();
-        location = new String();
+        userEmail = "";
+        userName = "";
+        location = "";
         profileSerializer = new LocalProfileSerializer();
         //registrationSerializer = new RegistrationSerializer();
     }
@@ -52,11 +59,16 @@ public class Registration extends Model {
         notifyViews();
     }
 
-    // Check to see if the user has entered a valid email address.
+
+    /**
+     * Checks if an email is in the correct format.
+     * Does not check if the email actually exists.
+     * @return is email valid
+     */
     public Boolean isValidEmail() {
         boolean result = true;
         try {
-            InternetAddress emailAddr = new InternetAddress(userEmail);
+            InternetAddress emailAddr = new InternetAddress(getUserEmail());
             emailAddr.validate();
         } catch (AddressException ex) {
             result = false;
@@ -64,16 +76,30 @@ public class Registration extends Model {
         return result;
     }
 
+    /**
+     * Generates a new user profile and saves it.
+     * @param context context of app
+     */
     public void generateProfile(Context context){
-        User user = new User(getUserName(), getLocation(), getLocation());
+        User user = new User(getUserName(), getLocation(), getUserEmail());
         Profile profile = new Profile(user);
         profileSerializer.Serialize(profile, context);
     }
 
+    /**
+     * save this registration object so that it can
+     * be reloaded at a later time
+     * @param context context of app
+     */
     public void saveRegistration(Context context){
         //registrationSerializer.Serialize(this, context);
     }
 
+    /**
+     * load a registration object from file and copy it into
+     * this registration
+     * @param context context of app
+     */
     public void loadRegistration(Context context){
         //Registration loaded = registrationSerializer.Deserialize(null, context);
         //if (loaded != null){
@@ -81,6 +107,10 @@ public class Registration extends Model {
         //}
     }
 
+    /**
+     * copy a registration object into this registration object
+     * @param registration object to copy from (source)
+     */
     private void copy(Registration registration){
         setUserEmail(registration.getUserEmail());
         setUserName(registration.getUserName());
