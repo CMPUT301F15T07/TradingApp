@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AddCardActivity extends AppCompatActivity {
+import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Views.IView;
+
+public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +36,10 @@ public class AddCardActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void Update(Inventory inventory) {
+
     }
 }

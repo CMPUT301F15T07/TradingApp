@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
-public class InventoryActivity extends ActionBarActivity {
+public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
 
     // Declaring Your View and Variables
 
@@ -116,5 +118,10 @@ public class InventoryActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void Update(Inventory inventory) {
+
     }
 }
