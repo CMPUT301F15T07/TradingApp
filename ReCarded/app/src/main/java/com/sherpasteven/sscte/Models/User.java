@@ -30,6 +30,7 @@ public class User extends Model {
         this.location = location;
         this.email = email;
         this.inventory = new Inventory();
+        this.trades = new TradeLog();
     }
 
     public String getName() {
@@ -78,6 +79,15 @@ public class User extends Model {
 
     public void setTrades(TradeLog trades) {
         this.trades = trades;
+    }
+
+    public void addPendingTrade(Trade trade){
+        getTrades().addTrade(trade);
+    }
+
+
+    public void finalizeTrade(Trade trade){
+        getTrades().tradeFinalized(trade);
     }
 
     public Inventory getInventory() {
