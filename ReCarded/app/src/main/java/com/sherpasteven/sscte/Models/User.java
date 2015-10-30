@@ -22,6 +22,7 @@ public class User extends Model {
     private String email;
     private ArrayList<User> friends;
     private Inventory inventory;
+    public TradeLog trades;
 
     public User(String name, String location, String email){
 
@@ -69,6 +70,14 @@ public class User extends Model {
             }
         }
         return null;
+    }
+
+    public TradeLog getTrades() {
+        return trades;
+    }
+
+    public void setTrades(TradeLog trades) {
+        this.trades = trades;
     }
 
     public Inventory getInventory() {
