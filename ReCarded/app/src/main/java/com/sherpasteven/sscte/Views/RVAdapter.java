@@ -20,7 +20,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.CardViewHolder> {
 
     List<Card> cardlist;
 
-    RVAdapter(List<Card> cards){
+    public RVAdapter(List<Card> cards){
         this.cardlist = cards;
     }
 

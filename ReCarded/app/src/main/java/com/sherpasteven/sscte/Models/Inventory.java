@@ -31,7 +31,7 @@ public class Inventory extends Model {
             incrementCard(card, card.getQuantity());
         }
         else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
-                card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
+                card.getSeries(), card.isTradable(), card.getComments(), card.returnImage(), card.getOwner()));}
     }
 
     Boolean containsCard(Card card) {

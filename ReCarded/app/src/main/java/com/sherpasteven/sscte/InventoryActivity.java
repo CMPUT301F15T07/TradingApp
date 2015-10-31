@@ -14,6 +14,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.Quality;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.RVAdapter;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
@@ -31,6 +33,10 @@ public class InventoryActivity extends ActionBarActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Inventory","Trades","Friends"};
     int Numboftabs = 3;
+
+    // SAMPLE DATA TO TEST CARDVIEW
+    private List<Card> cardstemp;
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +92,13 @@ public class InventoryActivity extends ActionBarActivity {
         tabs.setViewPager(pager);
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+        rv.setHasFixedSize(true);
 
-        RVAdapter adapter = new RVAdapter(cardlist);
-        rv.setAdapter(adapter);
+        initializeData();
+        initializeAdapter();
 
     }
 
@@ -130,5 +136,22 @@ public class InventoryActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // This method creates an ArrayList that has three Person objects
+    // Checkout the project associated with this tutorial on Github if
+    // you want to use the same images.
+    private void initializeData(){
+        cardstemp = new ArrayList<>();
+        Quality QualVar = new Quality(1);
+        User user = new User("Bob", "Alaska", "333@hotmail.com");
+        cardstemp.add(new Card("temp2", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
+        cardstemp.add(new Card("temp3", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
+        cardstemp.add(new Card("temp4", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
+    }
+
+    private void initializeAdapter(){
+        RVAdapter adapter = new RVAdapter(cardstemp);
+        rv.setAdapter(adapter);
     }
 }

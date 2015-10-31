@@ -132,21 +132,6 @@ public class Card extends Model {
                 "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};
         return relevantcatagories;
     }
-
-    // SAMPLE DATA TO TEST CARDVIEW
-    private List<Card> cardstemp;
-
-    // This method creates an ArrayList that has three Person objects
-    // Checkout the project associated with this tutorial on Github if
-    // you want to use the same images.
-    private void initializeData(){
-        cardstemp = new ArrayList<>();
-        Quality QualVar = new Quality(1);
-        User user = new User("Bob", "Alaska", "333@hotmail.com");
-        cardstemp.add(new Card("temp1", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
-        cardstemp.add(new Card("temp1", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
-        cardstemp.add(new Card("temp1", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
-    }
 }
 
 
