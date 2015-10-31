@@ -16,4 +16,6 @@
     <string name="action_profile">Change Profile</string>
     <string name="title_activity_settings">Settings</string>
     <string name="add_friend_activity">Add Friend</string>
+    <string name="title_activity_add_trade">New Trade</string>
+    <string name="title_activity_edit_trade">Edit a Trade</string>
 </resources>
