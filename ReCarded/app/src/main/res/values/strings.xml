@@ -18,4 +18,5 @@
     <string name="add_friend_activity">Add Friend</string>
     <string name="title_activity_add_trade">New Trade</string>
     <string name="title_activity_edit_trade">Edit a Trade</string>
+    <string name="card_text">card</string>
 </resources>
