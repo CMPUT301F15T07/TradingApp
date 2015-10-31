@@ -53,7 +53,15 @@ public class TradeLog extends Model {
 
     public Boolean removeFinalizedTrade(Trade trade){
 
-        return getPastTrades().remove(trade);
+        if(trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")){
+            return getPastTrades().remove(trade);
+        }
+        else {return Boolean.FALSE;}
 
     }
+
+    public Boolean containsPastTrade(Trade trade){
+        return getPastTrades().contains(trade);
+    }
+
 }

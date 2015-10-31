@@ -125,4 +125,9 @@ public class User extends Model {
         getInventory().removeCard(card, amount);
     }
 
+    public void deletePastTrade(Trade trade){
+        getTrades().removeFinalizedTrade(trade);
+
+    }
+
 }

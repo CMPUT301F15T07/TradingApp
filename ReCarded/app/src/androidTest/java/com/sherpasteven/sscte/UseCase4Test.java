@@ -112,7 +112,7 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
 // US04.02.01
 // Test to see if the owner has a trade notification.
 
-   /* void testUS040201 () {
+   /* public void testUS040201 () {
         User borrower = new User(currentUser.Name, "Canada");
         User owner = new User("Mr. Bean", "Canada");
 
@@ -283,7 +283,7 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
 
     /*
 
-    void testUS040501 () {
+    public void testUS040501 () {
         String name = "Charizard";
         int quantity = 2;
         Quality quality = new Quality(73);
@@ -361,59 +361,95 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
             trade2.sendTrade(owner);
             trade2.setNotification(borrower);
         }
-    }
+    } */
 
 // US04.06.01
 // The borrower can delete the trade or counter-trade.
 
-    void testUS040601() {
-        User borrower = new User(currentUser.Name, "Canada");
-        User owner = new User("Mr. Bean", "Canada");
+    public void testUS040601() {
 
-        // Borrower adds and removes cards with the plus and minus button.
-        Trade trade = new Trade(borrower, owner);
-        trade.list1.add(borrower.getInventory().getCard("Darkrai"));
-        trade.list2.add(owner.getInventory().getCard("Mewtwo"));
+        String name = "Charizard";
+        int quantity = 2;
+        Quality quality = new Quality(73);
+        String catagory = "Pokemon";
+        String series = "Basic XY Red";
+        boolean tradable = true;
+        String comments = "Gently bent edge, 100HP";
+
+        String newname = "Blue Eyes White Dragon";
+        int newquantity = 9;
+        Quality newquality = new Quality(3);
+        String newcatagory = "YuGiOh";
+        String newseries = "stupid series";
+        boolean newtradable = true;
+        String newcomments = "Dime a dozen";
+
+        String name3 = "Gingy";
+        int quantity3 = 6;
+        Quality quality3 = new Quality(100);
+        String catagory3 = "Shrek";
+        String series3 = "Super rare";
+        boolean tradable3 = true;
+        String comments3 = "This is worth a million dollars";
+
+        String name4 = "K.K. Slider";
+        int quantity4 = 1;
+        Quality quality4 = new Quality(10);
+        String catagory4 = "Amiibo";
+        String series4 = "Nintendo";
+        boolean tradable4 = true;
+        String comments4 = "Got dorito finger prints, sorry";
+
+
+
+
+        User Joshua = new User("Joshua", "Canada", "jjwhite@ualberta.ca");
+        User Salim = new User("Salim", "Canada", "salim@ualberta.ca");
+
+        Card Charizard = new Card(name, quantity, quality, catagory, series, tradable, comments, Joshua);
+        Card BEWD = new Card(newname, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
+        Card Gingy = new Card(name3, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
+        Card KKSlider = new Card(name4, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
+
+        Joshua.addInventoryItem(Charizard);
+        Salim.addInventoryItem(BEWD);
+        Joshua.addInventoryItem(Gingy);
+        Salim.addInventoryItem(KKSlider);
+
+        Trade trade1 = new Trade(Joshua, Salim);
+
+        trade1.addBorrowList(Joshua.returnInventoryItem(Charizard));
+        trade1.addOwnerList(Salim.returnInventoryItem(BEWD));
 
         // Send trade offer button clicked.
-        trade.sendTrade(owner);
-        trade.setNotification(owner);
+        trade1.sendTrade();
 
-        // Owner declines the trade.
-        // Owner makes a new trade offer when the counter offer button is clicked.
-        if(trade.status() == "DECLINED") {
-            // Owner adds and removes cards with the plus and minus button.
-            Trade trade2 = newTrade(owner, borrower);
-            trade2.list1.add(owner.getInventory().getCard("Deoxys"));
-            trade2.list2.add(borrower.getInventory().getCard("Mew"));
+        //Salim says "No way I am wasting time with this and declines the trade"
+        trade1.setStatus("DECLINED");
 
-            // User clicks the delete trade button or back
-            // button to stop the trade they are making.
-            trade.destructor();
-        }
+        //The trade gets finalized
+        Salim.finalizeTrade(trade1);
+        Joshua.finalizeTrade(trade1);
 
-        assertNull(trade);
+        //Salim decides to remove the trade from his past trades because it is
+        // so rediculous he is insulted by even seeing the trade was offered
+        Salim.deletePastTrade(trade1);
 
-        User borrower2 = new User(currentUser.Name, "Canada");
-        User owner2 = new User("Mr. Bean", "Canada");
 
-        // Borrower adds and removes cards with the plus and minus button.
-        Trade trade2 = new Trade(borrower2, owner2);
-        trade2.list1.add(borrower.getInventory().getCard("Darkrai"));
-        trade2.list2.add(owner.getInventory().getCard("Mewtwo"));
+        //Joshua can view the old trade but Salim does not
+        assertFalse(Salim.getTrades().containsPastTrade(trade1));
+        assertTrue(Joshua.getTrades().containsPastTrade(trade1));
 
-        // User clicks the delete trade button or back
-        // button to stop the trade they are making.
-        trade2.destructor();
-
-        assertNull(trade2);
     }
+
+
 
 // US04.07.01
 // If the owner of a trade accepts, both parties are email relevant trace information,
 // as well as the owner will supply comments for how to continue with the trade.
 
-    void testUS040701 () {
+    /*
+    public void testUS040701 () {
         User borrower = new User(currentUser.Name, "Canada");
         User owner = new User("Mr. Bean", "Canada");
 
@@ -466,7 +502,7 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
 // US04.08.01
 // Owners and Borrowers can view all past trades with themselves.
 
-    void testUS040801 () {
+    public void testUS040801 () {
         User borrower = new User(currentUser.Name, "Canada");
         User owner = new User("Mr. Bean", "Canada");
 
@@ -493,7 +529,7 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
 // Owners and Borrowers can view all past trades with themselves as
 // either a borrower or an owner.
 
-    void testUS040901 () {
+    public void testUS040901 () {
         User user1 = new User(currentUser.Name, "Canada");
         User user2 = new User("Mr. Bean", "Canada");
 
