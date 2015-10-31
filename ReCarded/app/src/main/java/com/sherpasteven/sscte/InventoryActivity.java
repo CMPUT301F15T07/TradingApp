@@ -5,14 +5,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Views.RVAdapter;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryActivity extends ActionBarActivity {
 
@@ -78,7 +85,14 @@ public class InventoryActivity extends ActionBarActivity {
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
+        RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
 
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+
+        RVAdapter adapter = new RVAdapter(cardlist);
+        rv.setAdapter(adapter);
 
     }
 

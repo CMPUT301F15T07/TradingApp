@@ -1,5 +1,10 @@
 package com.sherpasteven.sscte.Models;
 
+import com.sherpasteven.sscte.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Joshua on 2015-10-12.
  */
@@ -14,10 +19,11 @@ public class Card extends Model {
     private String comments;
     //private ArrayList<images> images;
     private User owner;
+    private int image; // temp code for testing cardviews
 
 
     public Card(String name, int quantity, Quality quality, String catagory,
-               String series, Boolean tradable, String comments,/* ArrayList<images> images ,*/ User owner){
+               String series, Boolean tradable, String comments, int image,/* ArrayList<images> images ,*/ User owner){
 
         this.name = name;
         this.quantity = quantity;
@@ -26,11 +32,14 @@ public class Card extends Model {
         this.series = series;
         this.tradable = tradable;
         this.comments = comments;
+        this.image = image;
         //this.images = images;
         this.owner = owner;
 
 
     }
+
+    public int returnImage() { return image; }
 
     public String getName() {
         return name;
@@ -123,4 +132,21 @@ public class Card extends Model {
                 "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};
         return relevantcatagories;
     }
+
+    // SAMPLE DATA TO TEST CARDVIEW
+    private List<Card> cardstemp;
+
+    // This method creates an ArrayList that has three Person objects
+    // Checkout the project associated with this tutorial on Github if
+    // you want to use the same images.
+    private void initializeData(){
+        cardstemp = new ArrayList<>();
+        Quality QualVar = new Quality(1);
+        User user = new User("Bob", "Alaska", "333@hotmail.com");
+        cardstemp.add(new Card("temp1", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
+        cardstemp.add(new Card("temp1", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
+        cardstemp.add(new Card("temp1", 1, QualVar, "MISC", "Classic", true, "1", R.drawable.logo, user));
+    }
 }
+
+
