@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,8 @@ import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
+
+import java.util.Set;
 
 public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
 
@@ -81,7 +84,6 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         tabs.setViewPager(pager);
 
 
-
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -114,7 +116,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
+        } else if (id == R.id.action_profile) {
+            Intent intent2 = new Intent(this, ProfileActivity.class);
+            this.startActivity(intent2);
         }
 
         return super.onOptionsItemSelected(item);
@@ -124,4 +130,6 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     public void Update(Inventory inventory) {
 
     }
+
+    public void NavigateToFriendsActivity() {}
 }
