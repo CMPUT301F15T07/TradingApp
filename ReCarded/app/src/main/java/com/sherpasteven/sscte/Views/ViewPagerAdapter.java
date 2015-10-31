@@ -4,18 +4,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.User;
+
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-
+    User user; //pass the current user model to the specified views
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb) {
+    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, User user) {
         super(fm);
 
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
+        this.user = user;
 
     }
 
@@ -37,7 +41,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }
         else
         {
-            FriendsTab friendsTab = new FriendsTab();
+            FriendsTab friendsTab = new FriendsTab(user);
             return friendsTab;
         }
     }

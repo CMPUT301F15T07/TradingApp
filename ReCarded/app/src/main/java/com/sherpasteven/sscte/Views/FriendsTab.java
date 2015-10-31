@@ -11,23 +11,43 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.AddFriendActivity;
+import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 
-public class FriendsTab extends Fragment {
+public class FriendsTab extends Fragment implements IView<User> {
 
+    private FriendsTabController friendstabcontroller;
+    private View inflate_view;
+    private User currentUser;
+
+
+    public FriendsTab(User currentUser){
+        super();
+        this.currentUser = currentUser;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.friends_tab,container,false);
+        inflate_view=v;
 
-        Button addFriend = (Button) v.findViewById(R.id.btnAddFriend);
-        addFriend.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), AddFriendActivity.class);
-                getActivity().startActivity(myIntent);
-            }
-        });
 
+        currentUser.addView(this);
+        friendstabcontroller = new FriendsTabController(this, currentUser);
         return v;
+    }
+    public void navigateToFriend(){
+        Intent myIntent = new Intent(getActivity(), AddFriendActivity.class);
+        getActivity().startActivity(myIntent);
+    }
+    public View getView(){
+        return inflate_view;
+    }
+
+    @Override
+    public void Update(User user) {
+
     }
 }

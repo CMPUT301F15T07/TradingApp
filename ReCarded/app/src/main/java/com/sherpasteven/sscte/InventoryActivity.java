@@ -12,7 +12,11 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
@@ -29,18 +33,21 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Inventory","Trades","Friends"};
     int Numboftabs = 3;
+    private Profile currentprofile;
+    private User currentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
-        
+        currentprofile = CurrentProfile.GetCurrentProfile(this);
+        currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         changeToolbarColor();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -62,7 +69,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         tabs.setViewPager(pager);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
