@@ -17,10 +17,10 @@
             android:scrollIndicators="top">
 
             <ImageView
-                android:layout_height="100dp"
-                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_width="60dp"
                 android:scaleType="centerInside"
-                android:id="@+id/card_photo"
+                android:id="@+id/trade_photo"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/logo"
                 android:layout_alignParentTop="true"
@@ -29,21 +29,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/card_name"
-                android:layout_below="@+id/card_photo"
+                android:id="@+id/trade_name"
+                android:layout_toRightOf="@+id/trade_photo"
                 android:fontFamily="sans-serif-light"
                 android:text="Sample Name"
                 android:textSize="8pt"
-                android:paddingTop="5px" />
+                android:paddingTop="25px"
+                android:paddingLeft="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/card_text"
-                android:layout_below="@+id/card_name"
+                android:id="@+id/trade_text"
+                android:layout_toRightOf="@+id/trade_photo"
+                android:layout_below="@+id/trade_name"
                 android:fontFamily="sans-serif-light"
                 android:textSize="6pt"
-                android:text="Sample Text" />
+                android:text="Sample Text"
+                android:paddingLeft="10dp" />
 
         </RelativeLayout>
 

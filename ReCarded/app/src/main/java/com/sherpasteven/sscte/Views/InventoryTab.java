@@ -2,7 +2,6 @@ package com.sherpasteven.sscte.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +17,14 @@ import com.sherpasteven.sscte.Controllers.InventoryTabController;
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.InventoryActivity;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.Quality;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.Views.RecyclerView.CustomAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
@@ -43,6 +48,7 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
     public void Update(Inventory inventory) {
 
     }
+    private List<Card> cardlist;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -55,7 +61,7 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
     protected RadioButton mGridLayoutRadioButton;
 
     protected RecyclerView mRecyclerView;
-    protected CustomAdapter mAdapter;
+    protected CardAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
 
@@ -65,7 +71,7 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initDataset();
+        initializeData();
     }
 
     @Override
@@ -95,8 +101,8 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CustomAdapter(mDataset);
-        // Set CustomAdapter as the adapter for RecyclerView.
+        mAdapter = new CardAdapter(cardlist);
+        // Set CardAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
@@ -113,7 +119,7 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
         mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
         mRecyclerView.setLayoutManager(mLayoutManager);
-        
+
     }
 
     @Override
@@ -123,16 +129,37 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    /**
-     * Generates Strings for RecyclerView's adapter. This data would usually come
-     * from a local content provider or remote server.
-     */
-    private void initDataset() {
-        mDataset = new String[DATASET_COUNT];
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset[i] = "This is element #" + i;
-        }
+    // This method creates an ArrayList that has three Person objects
+    // Checkout the project associated with this tutorial on Github if
+    // you want to use the same images.
+    private void initializeData() {
+        cardlist = new ArrayList<>();
+        cardlist.add(new Card("Item 0", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 1", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 2", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 3", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 4", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 5", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 6", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 7", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 8", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 9", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 10", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 11", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 12", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 13", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 14", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 15", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 16", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 17", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 18", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 19", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 20", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 21", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 22", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        cardlist.add(new Card("Item 23", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
     }
+
     public void navigateToAddCardActivity(){
         Intent myIntent = new Intent(getActivity(), AddCardActivity.class);
         getActivity().startActivity(myIntent);
