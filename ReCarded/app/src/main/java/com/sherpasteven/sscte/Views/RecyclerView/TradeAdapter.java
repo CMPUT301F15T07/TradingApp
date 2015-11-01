@@ -25,8 +25,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sherpasteven.sscte.InventoryActivity;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.R;
 
 import java.util.List;
@@ -34,11 +34,11 @@ import java.util.List;
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
-    private static final String TAG = "CustomAdapter";
+public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> {
+    private static final String TAG = "TradeAdapter";
 
     private String[] mDataSet;
-    List<Card> cards;
+    List<Trade> trades;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -46,9 +46,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        TextView cardName;
-        TextView cardDescription;
-        ImageView cardPhoto;
+        TextView tradeName;
+        TextView tradeDescription;
+        ImageView tradePhoto;
 
         public ViewHolder(View v) {
             super(v);
@@ -68,18 +68,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                     alertDialog.show();                }
             });
             cv = (CardView) v.findViewById(R.id.cv);
-            cardName = (TextView) v.findViewById(R.id.card_name);
-            cardDescription = (TextView) v.findViewById(R.id.card_text);
-            cardPhoto = (ImageView)itemView.findViewById(R.id.card_photo);
+            tradeName = (TextView) v.findViewById(R.id.trade_name);
+            tradeDescription = (TextView) v.findViewById(R.id.trade_text);
+            tradePhoto = (ImageView)itemView.findViewById(R.id.trade_photo);
 
         }
 
-        public TextView getCardName() {
-            return cardName;
-        }
-        public TextView getCardDescription() {
-            return cardDescription;
-        }
     }
     // END_INCLUDE(recyclerViewSampleViewHolder)
 
@@ -89,8 +83,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
      * @param //dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
 
-    public CustomAdapter(List<Card> card){
-        this.cards = card;
+    public TradeAdapter(List<Trade> trades){
+        this.trades = trades;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -112,16 +106,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.cardName.setText(cards.get(position).getName());
-        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
-        viewHolder.cardPhoto.setImageResource(cards.get(position).getImageID());
-
+        viewHolder.tradeName.setText(trades.get(position).getBorrower().getName());
+        viewHolder.tradeDescription.setText(trades.get(position).getStatus());
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return cards.size();
+        return trades.size();
     }
 }

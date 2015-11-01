@@ -2,7 +2,6 @@ package com.sherpasteven.sscte.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +18,7 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.Views.RecyclerView.CustomAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class InventoryTab extends Fragment {
     protected RadioButton mGridLayoutRadioButton;
 
     protected RecyclerView mRecyclerView;
-    protected CustomAdapter mAdapter;
+    protected CardAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
 
@@ -100,8 +99,8 @@ public class InventoryTab extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CustomAdapter(cardlist);
-        // Set CustomAdapter as the adapter for RecyclerView.
+        mAdapter = new CardAdapter(cardlist);
+        // Set CardAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
