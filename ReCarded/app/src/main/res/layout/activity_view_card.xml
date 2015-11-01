@@ -1,18 +1,153 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.sherpasteven.sscte.ViewCardActivity">
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="View Card.... TBD"
-        android:id="@+id/textView6"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"-->
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.sherpasteven.sscte.ViewCardActivity"
+        android:scrollIndicators="right"
+        android:nestedScrollingEnabled="true">
+
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="215dp"
+            android:id="@+id/greyRect"
+            android:src="@drawable/mask_image"
+            android:layout_marginTop="83dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:paddingEnd="-100dp"
+            android:paddingStart="-100dp"
+            android:background="#d8d8d8"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgNoImage"
+            android:src="@drawable/grey_rectangle"
+            android:layout_marginTop="75dp"
+            android:layout_below="@+id/imageSwitcher"
+            android:layout_centerHorizontal="true" />
+
+        <ImageSwitcher
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageSwitcher"
+            android:layout_alignTop="@+id/greyRect"
+            android:layout_toStartOf="@+id/imgNoImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Category - Series - Tradable?"
+            android:id="@+id/txtStatus"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="italic"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/brown_main"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Card Name"
+            android:id="@+id/txtName"
+            android:fontFamily="sans-serif"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/txtStatus"
+            android:layout_alignStart="@+id/txtStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Quality:"
+            android:id="@+id/txtQuality"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/greyRect"
+            android:layout_alignStart="@+id/txtStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Mint - Digital"
+            android:id="@+id/qualityInfo"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/txtQuality"
+            android:layout_alignStart="@+id/txtStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Quantity:"
+            android:id="@+id/txtQuantity"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/qualityInfo"
+            android:layout_alignStart="@+id/txtStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="1"
+            android:id="@+id/quantityInfo"
+            android:fontFamily="sans-serif"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/txtQuantity"
+            android:layout_alignStart="@+id/txtStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Comments:"
+            android:id="@+id/txtComments"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/quantityInfo"
+            android:layout_alignStart="@+id/txtStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/sample_text"
+            android:id="@+id/commentsInfo"
+            android:fontFamily="sans-serif"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/txtComments"
+            android:paddingEnd="20dp"
+            android:layout_alignStart="@+id/txtStatus" />
+    </RelativeLayout>
+</ScrollView>

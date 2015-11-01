@@ -19,4 +19,5 @@
     <string name="title_activity_add_trade">New Trade</string>
     <string name="title_activity_edit_trade">Edit a Trade</string>
     <string name="card_text">card</string>
+    <string name="sample_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non tortor tortor. Mauris ex urna, pharetra in nisi nec, fringilla congue urna. Ut faucibus mi neque, sit amet varius risus porta malesuada. Nulla et fringilla arcu. Cras faucibus, erat id mattis faucibus, lectus ipsum faucibus tellus, id efficitur erat elit sit amet ipsum. Pellentesque id nibh bibendum, facilisis massa id, condimentum diam. Mauris eget est nec felis vestibulum aliquam</string>
 </resources>
