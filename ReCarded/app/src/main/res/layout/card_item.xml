@@ -24,10 +24,10 @@
             <ImageView
                 android:layout_height="100dp"
                 android:layout_width="wrap_content"
-                android:scaleType="centerInside"
+                android:scaleType="center"
                 android:id="@+id/card_photo"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/logo"
+                android:src="@drawable/splash_page"
                 android:layout_alignParentTop="true"
                 android:cropToPadding="false" />
 

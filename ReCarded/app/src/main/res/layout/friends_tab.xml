@@ -19,4 +19,15 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Friend"
+        android:id="@+id/btnViewFriend"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="5dp"
+        android:layout_above="@+id/btnAddFriend"
+        android:layout_alignEnd="@+id/btnAddFriend"
+        android:layout_marginBottom="-3dp" />
+
 </RelativeLayout>

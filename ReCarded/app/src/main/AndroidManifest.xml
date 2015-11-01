@@ -61,6 +61,10 @@
             android:label="@string/title_activity_edit_trade"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".ViewFriendActivity" >
+        </activity>
+        <activity android:name=".ViewCardActivity" >
+        </activity>
     </application>
 
 </manifest>

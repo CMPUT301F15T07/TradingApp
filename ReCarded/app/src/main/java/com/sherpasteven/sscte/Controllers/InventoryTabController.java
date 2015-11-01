@@ -42,5 +42,14 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
             }
         });
 
+        Button viewItem = (Button) view.getView().findViewById(R.id.btnViewItem);
+        viewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.navigateToViewCardActivity();
+            }
+        });
+
+
     }
 }

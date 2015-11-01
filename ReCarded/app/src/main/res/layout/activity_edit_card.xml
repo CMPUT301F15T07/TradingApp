@@ -1,12 +1,320 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.sherpasteven.sscte.EditCardActivity">
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.sherpasteven.sscte.EditCardActivity"
+        android:scrollIndicators="right"
+        android:nestedScrollingEnabled="true">
 
-</RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/greyRect"
+            android:src="@drawable/mask_image"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgNoImage"
+            android:layout_alignTop="@+id/greyRect"
+            android:src="@drawable/grey_rectangle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="113dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgLine"
+            android:src="@drawable/input_line"
+            android:layout_alignBottom="@+id/greyRect"
+            android:layout_alignEnd="@+id/greyRect"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgPen"
+            android:src="@drawable/input_pencil"
+            android:layout_alignTop="@+id/imgLine"
+            android:layout_marginRight="20dp"
+            android:layout_alignBottom="@+id/imgLine"
+            android:layout_alignEnd="@+id/greyRect" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/mediaText"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Media:"
+            android:id="@+id/lblMedia"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_marginBottom="-35dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/mediaText"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:layout_below="@+id/greyRect"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:paddingEnd="50dp" />
+
+        <ImageSwitcher
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageSwitcher"
+            android:layout_alignTop="@+id/greyRect"
+            android:layout_toStartOf="@+id/imgNoImage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Name:"
+            android:id="@+id/txtName"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/nameText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/nameText"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/mediaText"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Category:"
+            android:id="@+id/txtCategory"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/categoryText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/categoryText"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/nameText"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Series:"
+            android:id="@+id/txtSeries"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/seriesText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/seriesText"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/categoryText"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Quality:"
+            android:id="@+id/txtQuality"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/qualityText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/qualityText"
+            android:inputType="number"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/seriesText"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Quantity:"
+            android:id="@+id/txtQuantity"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/quantityText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/quantityText"
+            android:inputType="number"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/qualityText"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Comments:"
+            android:id="@+id/txtComments"
+            android:layout_gravity="left|center_vertical"
+            android:paddingStart="5dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/commentsText"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-25dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/commentsText"
+            android:background="@drawable/read_line"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444444"
+            android:maxLines="1"
+            android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/quantityText"
+            android:layout_alignParentLeft="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tradable?"
+            android:id="@+id/checkBox"
+            android:checked="false"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:fontFamily="sans-serif"
+            android:textSize="12dp"
+            android:layout_below="@+id/commentsText"
+            android:textColor="@color/material_grey_600"
+            android:nestedScrollingEnabled="true" />
+
+        <Button
+            android:layout_width="94dp"
+            android:layout_height="34dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="SUBMIT"
+            android:id="@+id/btnEnter"
+            android:background="@drawable/curved_rect"
+            android:layout_gravity="end|bottom"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/material_grey_900"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/checkBox"
+            android:layout_marginEnd="0dp"
+            android:nestedScrollingEnabled="true" />
+
+    </RelativeLayout>
+</ScrollView>
