@@ -11,17 +11,8 @@ public class User extends Model {
 
     private String name;
     private String location;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     private String email;
-    private ArrayList<User> friends;
+    private ArrayList<User> friends = new ArrayList<User>();
     private Inventory inventory;
     public TradeLog trades;
 
@@ -32,6 +23,15 @@ public class User extends Model {
         this.email = email;
         this.inventory = new Inventory();
         this.trades = new TradeLog();
+        setFriends(new ArrayList<User>());
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -51,14 +51,13 @@ public class User extends Model {
     }
 
     public ArrayList<User> getFriends() {
-        return friends;
+        return this.friends;
     }
 
-    public void addFriend(User user){ friends.add(user);}
-
+    public void addFriend(User user){ this.friends.add(user);}
 
     public void removeFriend(User user){
-        friends.remove(user);
+        this.friends.remove(user);
     }
 
     public void setFriends(ArrayList<User> friends) {
@@ -91,7 +90,6 @@ public class User extends Model {
     public void addPendingTrade(Trade trade){
         getTrades().addTrade(trade);
     }
-
 
     public void finalizeTrade(Trade trade){
         getTrades().tradeFinalized(trade);
