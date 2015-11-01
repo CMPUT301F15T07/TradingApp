@@ -31,12 +31,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if(position == 0) // if the position is 0 we are returning the First tab
         {
-            InventoryTab inventoryTab = new InventoryTab();
+            InventoryTab inventoryTab = new InventoryTab(user.getInventory());
             return inventoryTab;
         }
         else if(position == 1)            // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
-            TradesTab tradesTab = new TradesTab();
+            TradesTab tradesTab = new TradesTab(user.getTrades());
             return tradesTab;
         }
         else
