@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -11,10 +12,16 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
+
+import java.util.Set;
 
 public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
 
@@ -26,18 +33,21 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Inventory","Trades","Friends"};
     int Numboftabs = 3;
+    private Profile currentprofile;
+    private User currentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
-        
+        currentprofile = CurrentProfile.GetCurrentProfile(this);
+        currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         changeToolbarColor();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -59,7 +69,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         tabs.setViewPager(pager);
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -79,7 +89,6 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
 
 
     }
@@ -114,7 +123,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
+        } else if (id == R.id.action_profile) {
+            Intent intent2 = new Intent(this, ProfileActivity.class);
+            this.startActivity(intent2);
         }
 
         return super.onOptionsItemSelected(item);
@@ -124,4 +137,6 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     public void Update(Inventory inventory) {
 
     }
+
+    public void NavigateToFriendsActivity() {}
 }

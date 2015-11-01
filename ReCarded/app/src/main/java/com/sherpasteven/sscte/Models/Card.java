@@ -9,6 +9,7 @@ package com.sherpasteven.sscte.Models;
 public class Card extends Model {
 
     private String name;
+    private int imageID;
     private int quantity;
     private Quality quality;
     private String catagory;
@@ -19,10 +20,11 @@ public class Card extends Model {
     private User owner;
 
 
-    public Card(String name, int quantity, Quality quality, String catagory,
+    public Card(String name, int imageID, int quantity, Quality quality, String catagory,
                String series, Boolean tradable, String comments,/* ArrayList<images> images ,*/ User owner){
 
         this.name = name;
+        this.imageID = imageID;
         this.quantity = quantity;
         this.quality = quality;
         this.catagory = catagory;
@@ -34,6 +36,10 @@ public class Card extends Model {
 
 
     }
+
+    public int getImageID() { return imageID; }
+
+    public void setImageID(int imageID) { this.imageID = imageID; }
 
     public String getName() {
         return name;

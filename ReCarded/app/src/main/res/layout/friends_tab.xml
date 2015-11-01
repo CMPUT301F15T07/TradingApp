@@ -14,4 +14,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Friends"
+        android:id="@+id/btnAddFriend"
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
 </RelativeLayout>
