@@ -180,7 +180,8 @@
             android:fontFamily="sans-serif-light"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="24dp" />
+            android:layout_marginEnd="24dp"
+            android:paddingBottom="2dp" />
 
         <!--</LinearLayout>-->
 
