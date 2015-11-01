@@ -1,18 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.sherpasteven.sscte.ViewFriendActivity">
+    tools:context="com.sherpasteven.sscte.ViewFriendActivity"
+    android:scrollIndicators="right"
+    android:nestedScrollingEnabled="true">
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="215dp"
+        android:id="@+id/greyRect"
+        android:src="@drawable/mask_image"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:paddingEnd="-100dp"
+        android:paddingStart="-100dp"
+        android:background="#d8d8d8"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+         />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgNoImage"
+        android:src="@drawable/grey_rectangle"
+        android:layout_marginTop="75dp"
+        android:layout_below="@+id/imageSwitcher"
+        android:layout_centerHorizontal="true" />
+
+    <ImageSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageSwitcher"
+        android:layout_alignTop="@+id/greyRect"
+        android:layout_toStartOf="@+id/imgNoImage" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="View friend here..."
-        android:id="@+id/txtSample"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:text="Friend Name"
+        android:id="@+id/txtName"
+        android:fontFamily="sans-serif"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/greyRect"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="City:"
+        android:id="@+id/txtCity"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtName"
+        android:layout_alignStart="@+id/txtName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Sample city"
+        android:id="@+id/cityInfo"
+        android:fontFamily="sans-serif"
+        android:textSize="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/txtCity"
+        android:layout_alignStart="@+id/txtName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Email:"
+        android:id="@+id/txtEmail"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/cityInfo"
+        android:layout_alignStart="@+id/txtName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="email@sample.com"
+        android:id="@+id/quantityInfo"
+        android:fontFamily="sans-serif"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/txtEmail"
+        android:layout_alignStart="@+id/txtName" />
+
+
 </RelativeLayout>
