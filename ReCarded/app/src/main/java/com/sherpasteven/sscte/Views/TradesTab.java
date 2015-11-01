@@ -126,35 +126,20 @@ public class TradesTab extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    // This method creates an ArrayList that has three Person objects
-    // Checkout the project associated with this tutorial on Github if
-    // you want to use the same images.
     private void initializeData() {
-        cardlist = new ArrayList<>();
-        cardlist.add(new Card("Item 0", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 1", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 2", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 3", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 4", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 5", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 6", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 7", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 8", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 9", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 10", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 11", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 12", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 13", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 14", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 15", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 16", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 17", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 18", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 19", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 20", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 21", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 22", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-        cardlist.add(new Card("Item 23", R.drawable.logo, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        tradelist = new ArrayList<>();
+        tradelist.add(new Trade(new User("borrower1", "location", "email1"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower2", "location", "email2"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower3", "location", "email3"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower4", "location", "email4"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower5", "location", "email5"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower6", "location", "email6"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower7", "location", "email7"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower8", "location", "email8"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower9", "location", "email9"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower10", "location", "email10"), new User("owner1", "location", "email1")));
+        tradelist.add(new Trade(new User("borrower11", "location", "email11"), new User("owner1", "location", "email1")));
+
     }
 
 }

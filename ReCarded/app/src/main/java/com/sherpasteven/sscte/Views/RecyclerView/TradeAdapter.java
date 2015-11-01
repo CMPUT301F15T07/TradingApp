@@ -93,7 +93,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_item, viewGroup, false);
+                .inflate(R.layout.trade_item, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -107,7 +107,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.tradeName.setText(trades.get(position).getBorrower().getName());
-        viewHolder.tradeDescription.setText(trades.get(position).getStatus());
+        viewHolder.tradeDescription.setText(trades.get(position).getBorrower().getEmail());
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
