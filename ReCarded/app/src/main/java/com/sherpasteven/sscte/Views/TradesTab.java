@@ -31,6 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TradesTab extends Fragment implements IView<TradeLog> {
+    private static final String TAG = "RecyclerViewFragment";
+    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+    private static final int SPAN_COUNT = 2;
+    private static final int DATASET_COUNT = 60;
+    private List<Trade> tradelist;
 
     private TradeLog trades;
     private TradesTabController tradestabcontroller;
@@ -40,20 +45,6 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         super();
         this.trades = trades;
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.trades_tab,container,false);
-        inflate_view = v;
-        trades.addView(this);
-        tradestabcontroller = new TradesTabController(this, trades);
-
-public class TradesTab extends Fragment {
-    private static final String TAG = "RecyclerViewFragment";
-    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-    private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60;
-    private List<Trade> tradelist;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -80,8 +71,13 @@ public class TradesTab extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.trades_tab,container,false);
+
+        inflate_view = rootView;
+        trades.addView(this);
+
+        tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
 
         Button addItem = (Button) rootView.findViewById(R.id.btnAddTrade);
@@ -130,6 +126,7 @@ public class TradesTab extends Fragment {
     public void Update(TradeLog tradeLog) {
 
     }
+
     public void navigateToAddTradeActivity(){
         Intent myIntent = new Intent(getActivity(), AddTradeActivity.class);
         getActivity().startActivity(myIntent);
