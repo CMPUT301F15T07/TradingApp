@@ -17,14 +17,19 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sherpasteven.sscte.InventoryActivity;
+import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.R;
+
+import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -33,13 +38,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private static final String TAG = "CustomAdapter";
 
     private String[] mDataSet;
+    List<Card> cards;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        CardView cv;
+        TextView cardName;
+        TextView cardDescription;
+        ImageView cardPhoto;
 
         public ViewHolder(View v) {
             super(v);
@@ -49,7 +58,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 public void onClick(View v) {
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + "to be shown");
+                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -58,11 +67,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                             });
                     alertDialog.show();                }
             });
-            textView = (TextView) v.findViewById(R.id.textView);
+            cv = (CardView) v.findViewById(R.id.cv);
+            cardName = (TextView) v.findViewById(R.id.card_name);
+            cardDescription = (TextView) v.findViewById(R.id.card_text);
+            cardPhoto = (ImageView)itemView.findViewById(R.id.card_photo);
+
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getCardName() {
+            return cardName;
+        }
+        public TextView getCardDescription() {
+            return cardDescription;
         }
     }
     // END_INCLUDE(recyclerViewSampleViewHolder)
@@ -70,10 +86,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     /**
      * Initialize the dataset of the Adapter.
      *
-     * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
+     * @param //dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public CustomAdapter(String[] dataSet) {
-        mDataSet = dataSet;
+
+    public CustomAdapter(List<Card> card){
+        this.cards = card;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -95,13 +112,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTextView().setText(mDataSet[position]);
+        viewHolder.cardName.setText(cards.get(position).getName());
+        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
+        viewHolder.cardPhoto.setImageResource(cards.get(position).getImageID());
+
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return cards.size();
     }
 }

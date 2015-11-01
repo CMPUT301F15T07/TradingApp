@@ -32,7 +32,7 @@ public class Inventory extends Model {
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
-        else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
+        else {getCards().add( new Card(card.getName(), card.getImageID(), card.getQuantity(), card.getQuality(), card.getCatagory(),
                 card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
     }
 
