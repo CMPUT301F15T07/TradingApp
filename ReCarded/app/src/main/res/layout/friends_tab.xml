@@ -14,7 +14,9 @@
         android:text="Add New Friends"
         android:id="@+id/btnAddFriend"
         android:fontFamily="sans-serif-light"
-        android:layout_below="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp" />
 
 </RelativeLayout>

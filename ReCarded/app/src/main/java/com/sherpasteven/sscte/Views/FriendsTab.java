@@ -136,6 +136,14 @@ public class FriendsTab extends Fragment implements IView<User> {
         currentUser.addFriend(new User("test1", "location1", "email1"));
         currentUser.addFriend(new User("test2", "location2", "email2"));
         currentUser.addFriend(new User("test3", "location3", "email3"));
+        currentUser.addFriend(new User("test4", "location4", "email4"));
+        currentUser.addFriend(new User("test5", "location5", "email5"));
+        currentUser.addFriend(new User("test6", "location6", "email6"));
+        currentUser.addFriend(new User("test7", "location7", "email7"));
+        currentUser.addFriend(new User("test8", "location8", "email8"));
+        currentUser.addFriend(new User("test9", "location9", "email9"));
+        currentUser.addFriend(new User("test10", "location10", "email10"));
+        currentUser.addFriend(new User("test11", "location11", "email11"));
 
     }
 

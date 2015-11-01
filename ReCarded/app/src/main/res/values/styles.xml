@@ -5,6 +5,10 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/MainActionBarTheme</item>
+        <item name="colorPrimary">@color/brown_main</item>
+        <item name="colorAccent">@color/orange_main</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">
@@ -16,7 +20,7 @@
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">@color/brown_main</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -27,7 +31,9 @@
     <style name="MyTheme" parent="@android:style/Theme.Holo.Light">
     </style>
 
-
+    <style name="MainActionBarTheme">
+        <item name="android:background">@color/brown_main</item>
+    </style>
 
 
 </resources>

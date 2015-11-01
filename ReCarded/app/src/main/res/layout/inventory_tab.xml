@@ -6,22 +6,29 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/btnAddItem" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add a new item"
         android:id="@+id/btnAddItem"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/btnEditItem"
+        android:layout_alignStart="@+id/btnEditItem"
+        android:layout_marginBottom="-8dp"
+        android:layout_marginRight="2dp"
+        android:fontFamily="sans-serif-light" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit an item"
         android:id="@+id/btnEditItem"
-        android:layout_below="@+id/btnAddItem"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="2dp"
+        android:fontFamily="sans-serif-light" />
 
 </RelativeLayout>

@@ -3,18 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Settings Page"
-        android:id="@+id/txtSettings"
-        android:layout_gravity="center_horizontal" />
+        android:text="Enable image downloads"
+        android:id="@+id/checkBox"
+        android:checked="false"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/material_grey_600" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return to Inventory"
-        android:id="@+id/btnInventory"
-        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

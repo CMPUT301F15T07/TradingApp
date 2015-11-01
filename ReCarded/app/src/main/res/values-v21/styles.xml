@@ -5,4 +5,15 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/MainActionBarTheme</item>
+        <item name="colorPrimary">@color/brown_main</item>
+        <item name="colorAccent">@color/orange_main</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="android:navigationBarColor">@color/brown_dark</item>
+    </style>
 </resources>
