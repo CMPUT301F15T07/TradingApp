@@ -1,3 +1,21 @@
+November 2, 2015
+Jake, Joshua, Aaron, Stephen, Salim, Elias, Anson, Joshua
+
+Joshua lost his mailbox...
+
+Since Last Time
+
+-Salim, implemeted trades was working on UML. Anson was hampering his success.
+-Anson, contributed to UML, mostly did gui tests. Most of GUI is implemented. Want to make sure gui is consistent. Salim is blocking him, and time constraints.
+-Jake, implemented the controllers. Starting to work on 
+-Joshua, implemented the trades classes. Not entirely complete since we dont have a network implementation. For adding data to User use the User mehtods instead of the inventory methods. Time constraints are blocking.
+-Aaron, worked alot on the UML (MVC). Worked with Anson to finalize what controllers we need for the views. For next week, add skeletons of the UML classes we dont have implemented yet. 4 Other projects are blocking.
+-Elias, worked on UML and Javadoc. Want to work on JUnit tests for model for project part 4.
+-Stephen, did 5 person project by himself. Collected data a wrote bash scripts to process data. Data was erased before he could use scripts.
+
+How to save images?
+	Images can be serialized to JSON
+
 October 24, 2015
 Salim, Jake, Anson, Joshua, Steven, Aaron, Elias
 
