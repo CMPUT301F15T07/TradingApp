@@ -63,7 +63,6 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
 
             ImageView imageView = (ImageView) findViewById(R.id.profile_image);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
         }
 
 

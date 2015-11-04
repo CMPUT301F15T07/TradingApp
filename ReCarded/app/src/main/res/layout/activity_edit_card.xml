@@ -25,9 +25,11 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/greyRect"
+                android:id="@+id/imgCard"
                 android:src="@drawable/no_image"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:cropToPadding="false"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -47,15 +49,17 @@
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imgPen"
+            android:id="@+id/btnCardImage"
             android:src="@drawable/input_pencil"
             android:layout_alignTop="@+id/imgLine"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:layout_alignBottom="@+id/imgLine"
-            android:layout_alignEnd="@+id/card_image" />
+            android:layout_alignEnd="@+id/card_image"
+            android:background="#00000000"
+            android:layout_alignStart="@+id/imgLine" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,13 +90,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
             android:paddingEnd="50dp" />
-
-        <ImageSwitcher
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageSwitcher"
-            android:layout_alignTop="@+id/greyRect"
-            android:layout_toStartOf="@+id/imgNoImage" />
 
         <TextView
             android:layout_width="wrap_content"
