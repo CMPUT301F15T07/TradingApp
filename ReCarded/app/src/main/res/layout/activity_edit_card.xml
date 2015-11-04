@@ -15,31 +15,35 @@
         android:nestedScrollingEnabled="true">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/greyRect"
-            android:src="@drawable/mask_image"
-            android:layout_alignParentTop="true"
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="35dp"
+            android:id="@+id/card_image">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgNoImage"
-            android:layout_alignTop="@+id/greyRect"
-            android:src="@drawable/grey_rectangle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="113dp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/greyRect"
+                android:src="@drawable/no_image"
+                android:layout_gravity="center" />
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/greyRectMask"
+                android:src="@drawable/mask_thin_grey"
+                android:layout_gravity="left|center_vertical" />
+
+        </FrameLayout>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imgLine"
             android:src="@drawable/input_line"
-            android:layout_alignBottom="@+id/greyRect"
-            android:layout_alignEnd="@+id/greyRect"
+            android:layout_alignBottom="@+id/card_image"
+            android:layout_alignEnd="@+id/card_image"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp" />
 
@@ -51,7 +55,7 @@
             android:layout_alignTop="@+id/imgLine"
             android:layout_marginRight="20dp"
             android:layout_alignBottom="@+id/imgLine"
-            android:layout_alignEnd="@+id/greyRect" />
+            android:layout_alignEnd="@+id/card_image" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,7 +82,7 @@
             android:maxLines="1"
             android:nestedScrollingEnabled="true"
             android:paddingStart="10dp"
-            android:layout_below="@+id/greyRect"
+            android:layout_below="@+id/card_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="35dp"
             android:paddingEnd="50dp" />

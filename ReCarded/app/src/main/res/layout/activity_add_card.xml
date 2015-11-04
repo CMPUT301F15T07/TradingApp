@@ -25,7 +25,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/greyRect"
+                android:id="@+id/img_loc"
                 android:src="@drawable/no_image"
                 android:layout_gravity="center" />
 
