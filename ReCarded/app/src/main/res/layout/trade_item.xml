@@ -21,21 +21,38 @@
             android:padding="8dp"
             android:scrollIndicators="top">
 
-            <ImageView
-                android:layout_height="60dp"
+            <FrameLayout
+                android:id="@+id/img_frame"
                 android:layout_width="60dp"
-                android:scaleType="centerInside"
-                android:id="@+id/trade_photo"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/logo"
-                android:layout_alignParentTop="true"
-                android:cropToPadding="false" />
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitXY"
+                    android:id="@+id/trade_photo"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/splash_page"
+                    android:layout_alignParentTop="true"
+                    android:cropToPadding="false" />
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitXY"
+                    android:id="@+id/image_mask"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/mask_thin_grey"
+                    android:layout_alignParentTop="true"
+                    android:cropToPadding="false" />
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/trade_name"
-                android:layout_toRightOf="@+id/trade_photo"
+                android:layout_toRightOf="@+id/img_frame"
                 android:fontFamily="sans-serif-light"
                 android:text="Sample Name"
                 android:textSize="8pt"
@@ -46,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/trade_text"
-                android:layout_toRightOf="@+id/trade_photo"
+                android:layout_toRightOf="@+id/img_frame"
                 android:layout_below="@+id/trade_name"
                 android:fontFamily="sans-serif-light"
                 android:textSize="6pt"
