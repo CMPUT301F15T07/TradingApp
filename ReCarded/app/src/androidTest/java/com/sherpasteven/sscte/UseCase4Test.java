@@ -81,8 +81,8 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
         User Joshua = new User("Joshua", "Canada", "jjwhite@ualberta.ca");
         User Salim = new User("Salim", "Canada", "salim@ualberta.ca");
 
-        Card Charizard = new Card(name, quantity, quality, catagory, series, tradable, comments, Joshua);
-        Card BEWD = new Card(newname, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
+        Card Charizard = new Card(name, R.drawable.mask_image, quantity, quality, catagory, series, tradable, comments, Joshua);
+        Card BEWD = new Card(newname, R.drawable.mask_image, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
 
         Joshua.addInventoryItem(Charizard);
         Salim.addInventoryItem(BEWD);
@@ -170,10 +170,10 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
         User Joshua = new User("Joshua", "Canada", "jjwhite@ualberta.ca");
         User Salim = new User("Salim", "Canada", "salim@ualberta.ca");
 
-        Card Charizard = new Card(name, quantity, quality, catagory, series, tradable, comments, Joshua);
-        Card BEWD = new Card(newname, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
-        Card Gingy = new Card(name3, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
-        Card KKSlider = new Card(name4, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
+        Card Charizard = new Card(name, R.drawable.mask_image, quantity, quality, catagory, series, tradable, comments, Joshua);
+        Card BEWD = new Card(newname, R.drawable.mask_image, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
+        Card Gingy = new Card(name3, R.drawable.mask_image, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
+        Card KKSlider = new Card(name4, R.drawable.mask_image, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
 
         Joshua.addInventoryItem(Charizard);
         Salim.addInventoryItem(BEWD);
@@ -245,10 +245,10 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
         User Joshua = new User("Joshua", "Canada", "jjwhite@ualberta.ca");
         User Salim = new User("Salim", "Canada", "salim@ualberta.ca");
 
-        Card Charizard = new Card(name, quantity, quality, catagory, series, tradable, comments, Joshua);
-        Card BEWD = new Card(newname, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
-        Card Gingy = new Card(name3, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
-        Card KKSlider = new Card(name4, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
+        Card Charizard = new Card(name, R.drawable.mask_image, quantity, quality, catagory, series, tradable, comments, Joshua);
+        Card BEWD = new Card(newname, R.drawable.mask_image, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
+        Card Gingy = new Card(name3, R.drawable.mask_image, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
+        Card KKSlider = new Card(name4, R.drawable.mask_image, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
 
         Joshua.addInventoryItem(Charizard);
         Salim.addInventoryItem(BEWD);
@@ -406,10 +406,10 @@ public class UseCase4Test extends ApplicationTestCase<Application> {
         User Joshua = new User("Joshua", "Canada", "jjwhite@ualberta.ca");
         User Salim = new User("Salim", "Canada", "salim@ualberta.ca");
 
-        Card Charizard = new Card(name, quantity, quality, catagory, series, tradable, comments, Joshua);
-        Card BEWD = new Card(newname, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
-        Card Gingy = new Card(name3, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
-        Card KKSlider = new Card(name4, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
+        Card Charizard = new Card(name, R.drawable.mask_image, quantity, quality, catagory, series, tradable, comments, Joshua);
+        Card BEWD = new Card(newname, R.drawable.mask_image, newquantity, newquality, newcatagory, newseries, newtradable, newcomments, Salim);
+        Card Gingy = new Card(name3, R.drawable.mask_image, quantity3, quality3, catagory3, series3, tradable3, comments3, Joshua);
+        Card KKSlider = new Card(name4, R.drawable.mask_image, quantity4, quality4, catagory4, series4, tradable4, comments4, Joshua);
 
         Joshua.addInventoryItem(Charizard);
         Salim.addInventoryItem(BEWD);

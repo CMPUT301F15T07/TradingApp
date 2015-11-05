@@ -36,6 +36,10 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     private Profile currentprofile;
     private User currentuser;
 
+    /**
+     * Creates the ProfileActivity instance.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +97,10 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     }
 
+    /**
+     * Changes the toolbar color on the main page.
+     * @return
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public boolean changeToolbarColor() {
         // Creating The Toolbar and setting it as the Toolbar for the activity
@@ -107,6 +115,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         return true;
     }
 
+    /**
+     * Creates the hamburger menu on the main page.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -114,6 +127,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         return true;
     }
 
+    /**
+     * Sets onclick listeners on hamburger menu items.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

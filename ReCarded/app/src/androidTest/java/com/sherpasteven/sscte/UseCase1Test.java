@@ -35,7 +35,7 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
 
         //The card is created after the user approves the data
         //they have entered
-        Card card = new Card(name, quantity, quality, catagory, series, tradable, comments, user);
+        Card card = new Card(name, R.drawable.splash_page, quantity, quality, catagory, series, tradable, comments, user);
         user.addInventoryItem(card);
 
         assertTrue(user.hasInventoryItem(card));
@@ -49,7 +49,7 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
         assertEquals(user.getInventoryItem(0).getOwner(), user);
         assertTrue(user.getInventoryItem(0).equals(card));
 
-        Card newcard = new Card(name, 5, quality, catagory, series, tradable, comments, user);
+        Card newcard = new Card(name, R.drawable.splash_page, 5, quality, catagory, series, tradable, comments, user);
 
 
         assertTrue(card.equals(newcard));
@@ -164,7 +164,7 @@ public class UseCase1Test extends ApplicationTestCase<Application> {
 
         //The card is created after the user approves the data
         //they have entered
-        Card card = new Card(name, quantity, quality, catagory, series, tradable, comments, user);
+        Card card = new Card(name, R.drawable.splash_page, quantity, quality, catagory, series, tradable, comments, user);
         user.addInventoryItem(card);
 
         assertTrue(user.hasInventoryItem(card));
