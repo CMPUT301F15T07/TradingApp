@@ -9,9 +9,9 @@ import com.sherpasteven.sscte.Models.User;
  * Created by elias on 17/10/15.
  */
 public class UseCase2Test extends ApplicationTestCase<Application> {
-    public UseCase2Test(Class<Application> applicationClass) {
-        super(applicationClass);
-    }
+	public UseCase2Test() {
+		super(Application.class);
+	}
 
 //Search User through the search tab by Username
 //it will then show a list of usernames that may match the pattern
@@ -72,11 +72,11 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		   list
 	*/
 
-    void testUS020201() {
-        User johnCena = new User("WWE","Salt lake City");
-        User user1 = new User("User1", "City1");
+    public void testUS020201() {
+        User johnCena = new User("WWE","Salt lake City","theChampion@yahoo.com");
+        User user1 = new User("User1", "City1","email@myspace.gog");
         johnCena.addFriend(user1);
-        assertEquals(user1,johnCena.getFriend("user1"));
+        assertEquals(user1, johnCena.getFriend("User1"));
     }
 
 //User needs to remove another user from his friends list
@@ -97,10 +97,10 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		3) user will then click friend that will be removed
 */
 
-    void testUS020301() {
-        User user1 = new User("user1","city1");
-        User johnCena = new User("johnCena","WWE");
-        User user2 = new User("user2","city2");
+    public void testUS020301() {
+        User user1 = new User("user1","city1","email1@myspace.gog");
+        User johnCena = new User("johnCena","WWE","theChampion@yahoo.com");
+        User user2 = new User("user2","city2","email2@myspace.gog");
         user1.addFriend(johnCena);
         user1.addFriend(user2);
 
@@ -127,8 +127,8 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		4) Will go to friends profile
 	*/
 
-    void testUS020401() {
-        User johnCena = new User("The Heavyweight Champion","WWE RAW");
+    public void testUS020401() {
+        User johnCena = new User("The Heavyweight Champion","WWE RAW","theChampion@yahoo.com");
         assertEquals("The Heavyweight Champion",johnCena.getName());
         assertEquals("WWE RAW", johnCena.getLocation());
         johnCena.setName("John Felix Anthony Cena");
@@ -155,15 +155,15 @@ public class UseCase2Test extends ApplicationTestCase<Application> {
 		4) Profile we'll be updated with changes
 	*/
 
-    void testUS20501() {
-        User user1 = new User("user1","city1");
-        User johnCena = new User("The Heavyweight Champion","WWE RAW");
-        User user2 = new User("user2","city2");
+    public void testUS20501() {
+        User user1 = new User("user1","city1","email1@myspace.gog");
+        User johnCena = new User("The Heavyweight Champion","WWE RAW","theChampion@yahoo.com");
+        User user2 = new User("user2","city2","email2@myspace.gog");
         user1.addFriend(johnCena);
         user1.addFriend(user2);
 
-        assertTrue(user1.getFriend("johnCena").getName().equals("The Heavyweight Champion"));
-        assertTrue(user1.getFriend("johnCena").getLocation().equals("WWE RAW"));
+		assertEquals(johnCena, user1.getFriend("The Heavyweight Champion"));
+        assertTrue(user1.getFriend("The Heavyweight Champion").getLocation().equals("WWE RAW"));
     }
 
 
