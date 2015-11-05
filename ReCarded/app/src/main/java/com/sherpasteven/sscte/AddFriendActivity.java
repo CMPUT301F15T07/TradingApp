@@ -11,9 +11,8 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class AddFriendActivity extends AppCompatActivity implements IView<Profile>{
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,8 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
 
     /**
      * Generates hamburger menu options.
-     * @param menu
-     * @return
+     * @param menu Menu item to be created.
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,8 +34,8 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
 
     /**
      * OnSelect options for option selected from hamburger menu.
-     * @param item
-     * @return
+     * @param item Item selected by user.
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -56,7 +55,7 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
 
     /**
      * Updates the activity based on raised condition.
-     * @param profile
+     * @param profile Profile to reference friend list.
      */
     @Override
     public void Update(Profile profile) {

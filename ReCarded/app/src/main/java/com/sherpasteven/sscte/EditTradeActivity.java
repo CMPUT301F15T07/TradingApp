@@ -9,9 +9,9 @@ import android.view.View;
 
 public class EditTradeActivity extends AppCompatActivity {
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
+     * FIXME: add proper functionality for edit trades.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

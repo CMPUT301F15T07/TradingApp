@@ -11,9 +11,8 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class SettingsActivity extends AppCompatActivity implements IView<Profile>{
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class SettingsActivity extends AppCompatActivity implements IView<Profile
 
     /**
      * Updates the activity based on raised condition.
-     * @param profile
+     * @param profile Updates profile with settings with load.
      */
     @Override
     public void Update(Profile profile) {

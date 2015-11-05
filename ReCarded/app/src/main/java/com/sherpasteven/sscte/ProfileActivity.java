@@ -24,11 +24,9 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
 
     private static int RESULT_LOAD_IMAGE = 1;
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
      */
-    // code graciously provided at http://viralpatel.net/blogs/pick-image-from-galary-android-app/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +55,9 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
     /**
      * Response is generated once load image intent is completed.
      * Finds and decodes image based on path, connects image to activity.
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode Identifies intent of the process.
+     * @param resultCode Result of the previous image intent.
+     * @param data Resultant data set from intent.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -85,9 +83,9 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
     }
 
     /**
-     * Generates hamburger menu to select options.
-     * @param menu
-     * @return
+     * Generates hamburger menu options.
+     * @param menu Menu item to be created.
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -98,8 +96,8 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
 
     /**
      * OnSelect options for option selected from hamburger menu.
-     * @param item
-     * @return
+     * @param item Item selected by user.
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -118,7 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
 
     /**
      * Updates the activity based on raised condition.
-     * @param profile
+     * @param profile Profile to be updated on load.
      */
     @Override
     public void Update(Profile profile) {

@@ -31,14 +31,19 @@ public class Trade extends Model {
 
     }
 
+    /**
+     * Send over network to the owner.
+     */
     public void sendTrade(){
         getBorrower().addPendingTrade(this);
-        //Send over network to the owner
-
     }
 
+    /**
+     * Receives a trade.
+     * @param user
+     */
     public void recieveTrade(User user){
-        user.addPendingTrade(this); //The person recieving it
+        user.addPendingTrade(this);
 
     }
 
@@ -102,6 +107,11 @@ public class Trade extends Model {
         this.status = status;
     }
 
+    /**
+     * Initialises a counteroffer given an existing trade set.
+     * Does not reference previous trade.
+     * @return a counteroffer trade.
+     */
     public Trade counterOffer(){
         this.setStatus("DECLINED");
         Trade counter = new Trade(this.getOwner(), this.getBorrower());

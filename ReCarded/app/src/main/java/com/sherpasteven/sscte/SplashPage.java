@@ -50,9 +50,8 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private RegisterController registerController;
     private ISerializer<Profile> profileSerializer;
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +77,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         registerController = new RegisterController(this, registration);
     }
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onPause()
      */
     @Override
@@ -87,7 +86,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         //registerController.saveRegistration(this);
     }
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onResume()
      */
     @Override
@@ -106,7 +105,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
     /**
      * Serialises the profile (getter) for application registry.
-     * @return
+     * @return deserialized profile information.
      */
     private Profile getLocalProfile() {
         IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
@@ -134,7 +133,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
     /**
      * Updates the registration conditions depending on the accuracy of the application.
-     * @param registration
+     * @param registration Registration parameters for registering the user.
      */
     public void Update(Registration registration) {
         Button submitButton = (Button) findViewById(R.id.btnEnter);
@@ -201,8 +200,8 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
     /**
      * Determines the status of the registration page; if all entries are satisfactory.
-     * @param registration
-     * @return
+     * @param registration Registration parameters to be checked.
+     * @return boolean for correct identification value.
      */
     public boolean canSubmit(Registration registration){
         boolean a =!registration.getLocation().isEmpty();

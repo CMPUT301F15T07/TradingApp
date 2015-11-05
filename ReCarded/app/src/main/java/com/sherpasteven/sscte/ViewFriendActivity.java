@@ -5,9 +5,8 @@ import android.os.Bundle;
 
 public class ViewFriendActivity extends AppCompatActivity {
 
-    /**
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

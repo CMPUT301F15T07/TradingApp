@@ -36,11 +36,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     private Profile currentprofile;
     private User currentuser;
 
-    /**
-     * Creates the ProfileActivity instance.
-     * Generates tab layout on activity.
+    /** (not Javadoc)
      * @see android.app.Activity#onStart()
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +98,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     /**
      * Changes the toolbar color on the main page.
-     * @return
+     * @return true
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public boolean changeToolbarColor() {
@@ -118,9 +115,9 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     }
 
     /**
-     * Creates the hamburger menu on the main page.
-     * @param menu
-     * @return
+     * Generates hamburger menu options.
+     * @param menu Menu item to be created.
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,9 +127,9 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     }
 
     /**
-     * Sets onclick listeners on hamburger menu items.
-     * @param item
-     * @return
+     * OnSelect options for option selected from hamburger menu.
+     * @param item Item selected by user.
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -155,7 +152,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     /**
      * Updates the activity based on raised condition.
-     * @param inventory
+     * @param inventory Updates inventory based on model response.
      */
     @Override
     public void Update(Inventory inventory) {
