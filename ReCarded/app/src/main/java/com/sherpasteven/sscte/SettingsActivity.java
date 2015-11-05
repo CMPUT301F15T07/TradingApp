@@ -11,12 +11,20 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class SettingsActivity extends AppCompatActivity implements IView<Profile>{
 
+    /**
+     * @see android.app.Activity#onStart()
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param profile
+     */
     @Override
     public void Update(Profile profile) {
 

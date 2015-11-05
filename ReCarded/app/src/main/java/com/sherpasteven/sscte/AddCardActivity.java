@@ -19,6 +19,11 @@ import com.sherpasteven.sscte.Views.IView;
 public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
     private static int RESULT_LOAD_IMAGE = 1;
 
+    /**
+     * Create card addition instance.
+     * @see android.app.Activity#onStart()
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +32,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * OnClick to enable camera switch.
+             * @param arg0
+             */
             @Override
             public void onClick(View arg0) {
 
@@ -39,6 +48,14 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         });
     }
 
+
+    /**
+     * Response is generated once load image intent is completed.
+     * Finds and decodes image based on path, connects image to activity.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -62,6 +79,11 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
     }
 
+    /**
+     * Generates hamburger menu to select options.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,6 +91,11 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         return true;
     }
 
+    /**
+     * OnSelect options for option selected from hamburger menu.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -78,12 +105,17 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param inventory
+     */
     @Override
     public void Update(Inventory inventory) {
 

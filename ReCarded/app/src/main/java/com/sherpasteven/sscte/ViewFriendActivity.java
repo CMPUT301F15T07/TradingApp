@@ -5,6 +5,10 @@ import android.os.Bundle;
 
 public class ViewFriendActivity extends AppCompatActivity {
 
+    /**
+     * @see android.app.Activity#onStart()
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

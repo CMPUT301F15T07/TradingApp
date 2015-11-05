@@ -50,6 +50,10 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private RegisterController registerController;
     private ISerializer<Profile> profileSerializer;
 
+    /**
+     * @see android.app.Activity#onStart()
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,49 +78,41 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         registerController = new RegisterController(this, registration);
     }
 
+    /**
+     * @see android.app.Activity#onPause()
+     */
     @Override
     protected void onPause(){
         super.onPause();
         //registerController.saveRegistration(this);
     }
 
+    /**
+     * @see android.app.Activity#onResume()
+     */
     @Override
     protected void onResume(){
         super.onResume();
         //registerController.loadRegistration(this);
     }
 
+
+    /**
+     * Generates intent and moves application to inventory page.
+     */
     public void navigateToInventory(){
         startActivity(new Intent(this, InventoryActivity.class));
     }
 
+    /**
+     * Serialises the profile (getter) for application registry.
+     * @return
+     */
     private Profile getLocalProfile() {
         IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
         return deSerializer.Deserialize(null, this);
     }
 
-
-    private void toggle() {
-        if (mVisible) {
-            hide();
-        } else {
-            show();
-        }
-    }
-
-    private void hide() {
-        // Hide UI first
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-        //mControlsView.setVisibility(View.GONE);
-        mVisible = false;
-
-        // Schedule a runnable to remove the status and navigation bar after a delay
-        mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
-    }
 
     Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -136,48 +132,10 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         }
     };
 
-    @SuppressLint("InlinedApi")
-    private void show() {
-        // Show the system bar
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        mVisible = true;
-
-        // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
-        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
-
-    Runnable mShowPart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Delayed display of UI elements
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
-            getSupportActionBar().show();
-            //mControlsView.setVisibility(View.VISIBLE);
-        }
-    };
-
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
-
     /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
+     * Updates the registration conditions depending on the accuracy of the application.
+     * @param registration
      */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
-
     public void Update(Registration registration) {
         Button submitButton = (Button) findViewById(R.id.btnEnter);
 
@@ -241,6 +199,11 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
     }
 
+    /**
+     * Determines the status of the registration page; if all entries are satisfactory.
+     * @param registration
+     * @return
+     */
     public boolean canSubmit(Registration registration){
         boolean a =!registration.getLocation().isEmpty();
         boolean b =!registration.getUserName().isEmpty();

@@ -38,6 +38,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     /**
      * Creates the ProfileActivity instance.
+     * Generates tab layout on activity.
+     * @see android.app.Activity#onStart()
      * @param savedInstanceState
      */
     @Override
@@ -151,10 +153,18 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param inventory
+     */
     @Override
     public void Update(Inventory inventory) {
 
     }
 
+    /**
+     * Controller code to set intent switch.
+     * Currently unused.
+     */
     public void NavigateToFriendsActivity() {}
 }
