@@ -84,8 +84,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     /**
      * Initialize the dataset of the Adapter.
-     *
-     * @param //dataSet String[] containing the data to populate views to be used by RecyclerView.
+     * @param card Initialise list of cards for loading.
      */
 
     public CardAdapter(List<Card> card){
@@ -118,7 +117,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    // Return the size of your dataset (invoked by the layout manager)
+    /**
+     * @return the size of your dataset (invoked by the layout manager)
+     */
     @Override
     public int getItemCount() {
         return cards.size();

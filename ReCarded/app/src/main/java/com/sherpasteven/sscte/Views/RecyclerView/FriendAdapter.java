@@ -77,8 +77,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     /**
      * Initialize the dataset of the Adapter.
-     *
-     * @param //dataSet String[] containing the data to populate views to be used by RecyclerView.
+     * @param user User data loaded to identify friends used by adapter.
      */
 
     public FriendAdapter(User user){
@@ -109,8 +108,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
+    /** Gets item for dynamic loading.
+     * @return size of dataset (invoked by layout manager)
+     */    @Override
     public int getItemCount() {
         if (currentUser == null || currentUser.getFriends() == null) {
             return 0;

@@ -141,7 +141,6 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
     /**
      * Set RecyclerView's LayoutManager to the one given.
-     *
      * @param layoutManagerType Type of layout manager to switch to.
      */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
@@ -159,6 +158,11 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    /** Initialises data for trades tab given trade objects.
+     * Completed with respect to tradelist object.
+     * FIXME: Change system for dynamic trade list loading.
+     * FIXME: Implement tradelist as user-relevant trade list structure.
+     */
     private void initializeData() {
         tradelist = new ArrayList<>();
         tradelist.add(new Trade(new User("borrower1", "location", "email1"), new User("owner1", "location", "email1")));

@@ -136,6 +136,11 @@ public class FriendsTab extends Fragment implements IView<User> {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    /**
+     * Generates data for friends with respect to currentUser object.
+     * FIXME: Convert for dynamic friend data loading.
+     * FIXME: Adapt currentUser structure for user-hosted profile.
+     */
     private void initializeData() {
         currentUser = new User("","","");
         currentUser.addFriend(new User("test1", "location1", "email1"));
