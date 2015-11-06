@@ -2,14 +2,44 @@ package com.sherpasteven.sscte;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
+import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
+
+import java.util.ArrayList;
 
 public class AddFriendActivity extends AppCompatActivity implements IView<Profile>{
+
+    private FriendsTabController friendstabcontroller;
+    private ArrayList<User> friendslist = new ArrayList<>();
+    private static final String TAG = "RecyclerViewFragment";
+    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+
+    protected LayoutManagerType mCurrentLayoutManagerType;
+
+    protected RecyclerView mRecyclerView;
+    protected NewFriendAdapter mAdapter;
+    protected RecyclerView.LayoutManager mLayoutManager;
+
+    /*
+    public AddFriendActivity(ArrayList<User> friendslist){
+        super();
+        this.friendslist = friendslist;
+    }*/
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -18,6 +48,46 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_friend);
+
+        // BEGIN_INCLUDE(initializeRecyclerView)
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
+
+        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
+        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
+        // elements are laid out.
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+
+        if (savedInstanceState != null) {
+            // Restore saved layout manager type.
+            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
+                    .getSerializable(KEY_LAYOUT_MANAGER);
+        }
+        setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
+
+        mAdapter = new NewFriendAdapter(friendslist);
+        mRecyclerView.setAdapter(mAdapter);
+        // END_INCLUDE(initializeRecyclerView)
+
+        initializeData();
+    }
+
+    private enum LayoutManagerType {
+        LINEAR_LAYOUT_MANAGER
+    }
+
+    /**
+     * Set RecyclerView's LayoutManager to the one given.
+     *
+     * @param layoutManagerType Type of layout manager to switch to.
+     */
+    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
     }
 
     /**
@@ -61,4 +131,32 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
     public void Update(Profile profile) {
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save currently selected layout manager.
+        savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    /**
+     * Generates data for friends with respect to currentUser object.
+     * FIXME: Convert for dynamic friend data loading.
+     * FIXME: Adapt currentUser structure for user-hosted profile.
+     */
+    private void initializeData() {
+        friendslist.add(new User("test1", "location1", "email1"));
+        friendslist.add(new User("test2", "location2", "email2"));
+        friendslist.add(new User("test3", "location3", "email3"));
+        friendslist.add(new User("test4", "location4", "email4"));
+        friendslist.add(new User("test5", "location5", "email5"));
+        friendslist.add(new User("test6", "location6", "email6"));
+        friendslist.add(new User("test7", "location7", "email7"));
+        friendslist.add(new User("test8", "location8", "email8"));
+        friendslist.add(new User("test9", "location9", "email9"));
+        friendslist.add(new User("test10", "location10", "email10"));
+        friendslist.add(new User("test11", "location11", "email11"));
+    }
+
 }
+
