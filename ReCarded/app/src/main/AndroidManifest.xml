@@ -56,13 +56,11 @@
         </activity>
         <activity
             android:name=".AddTradeActivity"
-            android:label="@string/title_activity_add_trade"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:label="@string/title_activity_add_trade" >
         </activity>
         <activity
             android:name=".EditTradeActivity"
-            android:label="@string/title_activity_edit_trade"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:label="@string/title_activity_edit_trade" >
         </activity>
         <activity android:name=".ViewFriendActivity" >
         </activity>

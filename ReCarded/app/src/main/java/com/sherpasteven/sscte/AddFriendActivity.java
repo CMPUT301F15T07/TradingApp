@@ -35,12 +35,6 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
     protected NewFriendAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
-    /*
-    public AddFriendActivity(ArrayList<User> friendslist){
-        super();
-        this.friendslist = friendslist;
-    }*/
-
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
