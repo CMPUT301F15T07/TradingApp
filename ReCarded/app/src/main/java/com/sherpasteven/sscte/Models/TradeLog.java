@@ -3,7 +3,9 @@ package com.sherpasteven.sscte.Models;
 import java.util.ArrayList;
 
 /**
- * Created by salim_000 on 2015-10-30.
+ * Develops a tradelog, similar to an arraylist of trades.
+ * Stores data used for past and current trades.
+ * Used for tabbed trade activity.
  */
 public class TradeLog extends Model {
 

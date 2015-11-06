@@ -4,7 +4,7 @@ import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
 
 /**
- * Created by jake on 2015-10-30.
+ * Controller for EditCardActivity.
  */
 public class EditCardController extends Controller<EditCardActivity, Card> {
 

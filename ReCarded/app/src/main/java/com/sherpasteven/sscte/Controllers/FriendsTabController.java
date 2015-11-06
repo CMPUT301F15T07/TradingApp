@@ -10,7 +10,7 @@ import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.FriendsTab;
 
 /**
- * Created by jake on 2015-10-31.
+ * Controller for FriendsTab.
  */
 public class FriendsTabController extends Controller<FriendsTab, User> {
     private final FriendsTab view;

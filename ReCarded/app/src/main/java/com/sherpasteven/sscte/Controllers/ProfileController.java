@@ -4,7 +4,7 @@ import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.ProfileActivity;
 
 /**
- * Created by jake on 2015-10-30.
+ * Controller for ProfileActivity.
  */
 public class ProfileController extends Controller<ProfileActivity, Profile> {
     private final ProfileActivity view;

@@ -13,9 +13,8 @@ import javax.mail.internet.InternetAddress;
  * in the arguments needed to generate a new user and then
  * can generate the user once all required fields are filled;
  *
- * Issues:
- * There is an issue serializing the Registration object using GSON
- * Getting a security exception when serializing the object to file.
+ * FIXME: There is an issue serializing the Registration object using GSON
+ * FIXME: Getting a security exception when serializing the object to file.
  */
 public class Registration extends Model {
 

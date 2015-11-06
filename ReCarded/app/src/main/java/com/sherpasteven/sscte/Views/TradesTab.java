@@ -30,6 +30,9 @@ import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implements the TradesTab system using the TradeLog model.
+ */
 public class TradesTab extends Fragment implements IView<TradeLog> {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";

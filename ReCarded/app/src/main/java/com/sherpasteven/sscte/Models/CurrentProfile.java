@@ -2,8 +2,9 @@ package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
 
+
 /**
- * Created by jake on 2015-10-31.
+ * Determines the current profile of the user, used for application permanence.
  */
 public class CurrentProfile {
     public static Profile GetCurrentProfile(Context context){

@@ -4,7 +4,7 @@ import com.sherpasteven.sscte.InventoryActivity;
 import com.sherpasteven.sscte.Models.Inventory;
 
 /**
- * Created by jake on 2015-10-30.
+ * Controller for InventoryActivity.
  */
 public class InventoryController extends Controller<InventoryActivity, Inventory> {
     private final InventoryActivity view;

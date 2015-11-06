@@ -5,13 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by salim_000 on 2015-10-30.
+ * Initialises the trade model used for trading inventory systems.
  */
 public class Trade extends Model {
     private User borrower;
     private User owner;
 
-    //Making this public to make tests correct, don't like this being public so i might change the test. (Salim)
+    //FIXME: Making this public to make tests correct, return to private
     private ArrayList<Card> borrowlist;
     private ArrayList<Card> ownerlist;
     private Calendar created;
