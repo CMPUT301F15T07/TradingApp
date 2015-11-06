@@ -79,10 +79,13 @@ public class Registration extends Model {
      * Generates a new user profile and saves it.
      * @param context context of app
      */
-    public void generateProfile(Context context){
+    //changed from void to Profile for Gui testing of the Splash page
+    //Can be removed once serializtion becomes operational and tested
+    public Profile generateProfile(Context context){
         User user = new User(getUserName(), getLocation(), getUserEmail());
         Profile profile = new Profile(user);
         profileSerializer.Serialize(profile, context);
+        return profile;
     }
 
     /**

@@ -50,6 +50,22 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private RegisterController registerController;
     private ISerializer<Profile> profileSerializer;
 
+
+
+    /* this private profile is for the use of testing
+            Gui before the serialization to ES is complete.
+            It can be removed after serialization can be tested
+         */
+    private Profile profile;
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
@@ -70,7 +86,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        Button enterButton = (Button)findViewById(R.id.btnEnter);
+        Button enterButton = getEnterButton();
         enterButton.setEnabled(false);
         Registration registration = new Registration();
         registration.addView(this);
@@ -133,14 +149,32 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
     /**
      * Updates the registration conditions depending on the accuracy of the application.
-     * @param registration Registration parameters for registering the user.
+     * //@param registration Registration parameters for registering the user.
      */
-    public void Update(Registration registration) {
-        Button submitButton = (Button) findViewById(R.id.btnEnter);
 
-        EditText emailText = (EditText) findViewById(R.id.emailText);
-        EditText nameText = (EditText) findViewById(R.id.nameText);
-        EditText cityText = (EditText) findViewById(R.id.cityText);
+    public Button getEnterButton(){
+        return (Button) findViewById(R.id.btnEnter);
+    }
+
+    public EditText getEmailText(){
+        return (EditText) findViewById(R.id.emailText);
+    }
+
+    public EditText getNameText(){
+        return (EditText) findViewById(R.id.nameText);
+    }
+
+    public EditText getCityText(){
+        return (EditText) findViewById(R.id.cityText);
+    }
+
+
+    public void Update(Registration registration) {
+        Button submitButton = getEnterButton();
+
+        EditText emailText = getEmailText();
+        EditText nameText = getNameText();
+        EditText cityText = getCityText();
 
         Drawable nameBgd = getResources().getDrawable(R.drawable.input_rect);
         nameBgd.setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.MULTIPLY));
