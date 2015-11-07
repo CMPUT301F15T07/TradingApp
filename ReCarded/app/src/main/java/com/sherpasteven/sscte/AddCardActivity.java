@@ -10,14 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
     private static int RESULT_LOAD_IMAGE = 1;
+
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -87,6 +93,42 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_card, menu);
         return true;
+    }
+
+    public EditText getMediaText(){
+        return (EditText) findViewById(R.id.mediaText);
+    }
+
+    public EditText getNameText(){
+        return (EditText) findViewById(R.id.nameText);
+    }
+
+    public EditText getCatagoryText(){
+        return (EditText) findViewById(R.id.categoryText);
+    }
+
+    public EditText getSeriesText(){
+        return (EditText) findViewById(R.id.seriesText);
+    }
+
+    public EditText getQualityText(){
+        return (EditText) findViewById(R.id.qualityText);
+    }
+
+    public EditText getQuantityText(){
+        return (EditText) findViewById(R.id.quantityText);
+    }
+
+    public EditText getCommentsText(){
+        return (EditText) findViewById(R.id.commentsText);
+    }
+
+    public Button getEnterButton(){
+        return (Button) findViewById(R.id.btnEnter);
+    }
+
+    public CheckBox getCheckBox(){
+        return (CheckBox) findViewById(R.id.checkBox);
     }
 
     /**

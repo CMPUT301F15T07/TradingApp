@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
@@ -47,7 +48,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        changeToolbarColor();
+        //changeToolbarColor();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -94,6 +95,18 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         tabs.setViewPager(pager);
 
 
+    }
+
+    public Button getAddButton(){
+        return (Button) findViewById(R.id.btnAddItem);
+    }
+
+    public Button getViewButton(){
+        return (Button) findViewById(R.id.btnViewItem);
+    }
+
+    public Button getEditButton(){
+        return (Button) findViewById(R.id.btnEditItem);
     }
 
     /**

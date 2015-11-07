@@ -20,7 +20,7 @@ public class SplashPageTest extends ActivityInstrumentationTestCase2 {
         private EditText emailtext;
 
         public SplashPageTest() {
-            super(SplashPageTest.class);}
+            super(com.sherpasteven.sscte.SplashPage.class);}
 
         public void testStart() throws Exception{
 
@@ -87,14 +87,6 @@ public class SplashPageTest extends ActivityInstrumentationTestCase2 {
 
 
             getInstrumentation().waitForIdleSync();
-
-            //test that the tweet editor starts with the correct tweet
-
-            //test that we can edit tweets
-
-            //test taht we can push a save button for the edited tweet
-
-            //test that the modified tweet is in the tweet list
 
             receiverActivity.finish();
 }}
