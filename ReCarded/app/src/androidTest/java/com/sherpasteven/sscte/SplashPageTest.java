@@ -69,10 +69,6 @@ public class SplashPageTest extends ActivityInstrumentationTestCase2 {
             assertEquals(profile.getUser().getEmail(), email);
 
 
-
-
-
-
             InventoryActivity receiverActivity = (InventoryActivity)
                     receiverActivityMonitor.waitForActivityWithTimeout(1000);
             assertNotNull("ReceiverActivity is null", receiverActivity);
@@ -83,8 +79,6 @@ public class SplashPageTest extends ActivityInstrumentationTestCase2 {
 
             // Remove the ActivityMonitor
             getInstrumentation().removeMonitor(receiverActivityMonitor);
-
-
 
             getInstrumentation().waitForIdleSync();
 
