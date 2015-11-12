@@ -27,8 +27,6 @@ public class Trade extends Model {
         setBorrowList(new ArrayList<Card>());
         created = Calendar.getInstance();
         setStatus("PENDING");
-
-
     }
 
     /**
@@ -44,7 +42,6 @@ public class Trade extends Model {
      */
     public void recieveTrade(User user){
         user.addPendingTrade(this);
-
     }
 
     //public void setNotification(User user){}
@@ -84,7 +81,16 @@ public class Trade extends Model {
     public Boolean addBorrowList(Card card){
         if(card.isTradable()) {
             getBorrowList().add(card);
-        return Boolean.TRUE;
+            return Boolean.TRUE;
+        }
+
+        else{return Boolean.FALSE;}
+    }
+
+    public Boolean removeBorrowList(Card card){
+        if(getBorrowList().contains(card)) {
+            getBorrowList().remove(card);
+            return Boolean.TRUE;
         }
 
         else{return Boolean.FALSE;}
@@ -92,13 +98,22 @@ public class Trade extends Model {
 
     public Boolean addOwnerList(Card card){
         if(card.isTradable()){
-        getOwnerList().add(card);
-        return Boolean.TRUE;
-    }
-    else{return Boolean.FALSE;
+            getOwnerList().add(card);
+            return Boolean.TRUE;
+        }
+
+        else{return Boolean.FALSE;}
     }
 
-}
+    public Boolean removeOwnerList(Card card){
+        if(getOwnerList().contains(card)) {
+            getOwnerList().remove(card);
+            return Boolean.TRUE;
+        }
+
+        else{return Boolean.FALSE;}
+    }
+
     public String getStatus() {
         return status;
     }
