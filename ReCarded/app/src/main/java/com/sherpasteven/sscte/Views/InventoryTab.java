@@ -160,6 +160,7 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         cardlist.add(new Card("Item 21", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
         cardlist.add(new Card("Item 22", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
         cardlist.add(new Card("Item 23", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+
     }
 
     public void navigateToAddCardActivity(){

@@ -122,7 +122,7 @@ public class Card extends Model {
      */
     public Boolean equals(Card card){
         return this.getName().equals(card.getName()) &&
-                this.getQuality().equals(card.getQuality()) &&
+                this.getQuality().getQuality().equals(card.getQuality().getQuality()) &&
                 this.getCatagory().equals(card.getCatagory()) &&
                 this.getSeries().equals(card.getSeries()) &&
                 this.isTradable().equals(card.isTradable()) &&
