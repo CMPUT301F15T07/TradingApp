@@ -14,7 +14,6 @@ public class FriendsTest extends ApplicationTestCase<Application> {
 	}
 
 
-
     public void testAddFriend() {
         User johnCena = new User("WWE","Salt lake City","theChampion@yahoo.com");
         User user1 = new User("User1", "City1","email@myspace.gog");

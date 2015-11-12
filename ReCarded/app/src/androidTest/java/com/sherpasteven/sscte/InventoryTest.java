@@ -33,7 +33,7 @@ public class InventoryTest extends ApplicationTestCase<Application> {
 
     }
 
-    
+
     public void testAddRemove(){
 
         User user = inventorySetUp();

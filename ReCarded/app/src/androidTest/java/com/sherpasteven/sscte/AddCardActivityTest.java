@@ -115,8 +115,6 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-
-
         getInstrumentation().waitForIdleSync();
 
         receiverActivity.finish();
