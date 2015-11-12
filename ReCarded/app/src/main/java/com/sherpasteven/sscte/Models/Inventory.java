@@ -27,7 +27,7 @@ public class Inventory extends Model {
     }
 
 
-    void addCard(Card card){
+    public void addCard(Card card){
 
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
@@ -42,7 +42,7 @@ public class Inventory extends Model {
      * @param card
      * @return true if found, false if not found.
      */
-    Boolean containsCard(Card card) {
+    public Boolean containsCard(Card card) {
         int size = getCards().size();
 
         for(int i = 0; i < size; i++){
@@ -66,7 +66,7 @@ public class Inventory extends Model {
      * will be raised; however, no processing will be completed.
      * @param card
      */
-    void removeFromInventory(Card card){
+    public void removeFromInventory(Card card){
 
         int size = getCards().size();
 
@@ -87,7 +87,7 @@ public class Inventory extends Model {
      * @param card
      * @return specified card if found; null if not.
      */
-    Card returnCard(Card card){
+    public Card returnCard(Card card){
 
         int size = getCards().size();
 
@@ -108,7 +108,7 @@ public class Inventory extends Model {
      * @param card
      * @param amount
      */
-    void removeCard(Card card, int amount) {
+    public void removeCard(Card card, int amount) {
         try {
             if (amount < returnCard(card).getQuantity()) {
                 incrementCard(card, 0-amount);
@@ -132,7 +132,7 @@ public class Inventory extends Model {
      * @param card
      * @param amount
      */
-    void incrementCard(Card card, int amount){
+    public void incrementCard(Card card, int amount){
         returnCard(card).setQuantity(returnCard(card).getQuantity() + amount);
     }
 }
