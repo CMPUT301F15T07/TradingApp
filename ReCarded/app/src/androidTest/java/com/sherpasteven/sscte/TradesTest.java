@@ -30,6 +30,8 @@ public class TradesTest extends ApplicationTestCase<Application> {
             case 4:
                 return new Card("k.k slider", 1, new Quality(10), "Amiibo", "Nintendo", 
                 true, "Got dorito finger prints, sorry", user);
+            default:
+                return null;
         }
     }
 
@@ -45,7 +47,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
         User joshua = new User("joshua", "Canada", "jjwhite@ualberta.ca");;
         joshua.addInventoryItem(setupCards(1, joshua));
         joshua.addInventoryItem(setupCards(3, joshua));
-        return salim;
+        return joshua;
 
     }
 
@@ -189,7 +191,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
 
     public void testDeleteTrade() {
 
-        User joshua = setupJoshua
+        User joshua = setupJoshua();
         User salim = setupSalim();
 
         Card charizard = setupCards(1 , joshua);
@@ -250,7 +252,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
         assertNotNull(extraComments);
         assertEquals(emailOwner.status() ,"SENT");
         assertEquals(emailBorrower.status(), "SENT");
-    }
+    }*/
 
 
 }
