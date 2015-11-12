@@ -1,26 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.sherpasteven.sscte.EditTradeActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" android:theme="@style/AppTheme.AppBarOverlay"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/curved_rect_orange"
+        android:id="@+id/imgStatus"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
 
-    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Trade Status"
+        android:id="@+id/txtStatus"
+        android:layout_alignBottom="@+id/imgStatus"
+        android:layout_alignStart="@+id/imgStatus"
+        android:layout_marginStart="21dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/brown_dark" />
 
-    <include layout="@layout/content_edit_trade" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Last Updated 11:11 AM"
+        android:textSize="10sp"
+        android:id="@+id/txtUpdateDate"
+        android:layout_marginRight="20dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/brown_dark"
+        android:layout_alignBottom="@+id/imgStatus"
+        android:layout_alignEnd="@+id/imgStatus"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="italic" />
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_info" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/trade_tab"
+        android:id="@+id/imgUserTab"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/imgStatus"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/trade_tab"
+        android:id="@+id/imgFriendTab"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/imgUserTab"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Your Offer:"
+        android:textSize="14sp"
+        android:id="@+id/lblUserOffer"
+        android:fontFamily="sans-serif"
+        android:textColor="#fff"
+        android:layout_alignStart="@+id/imgUserTab"
+        android:layout_alignTop="@+id/imgUserTab"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Their Offer:"
+        android:textSize="14sp"
+        android:id="@+id/lblFriendOffer"
+        android:fontFamily="sans-serif"
+        android:textColor="#fff"
+        android:layout_alignStart="@+id/imgFriendTab"
+        android:layout_alignTop="@+id/imgFriendTab"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="20dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCounterOffer"
+        android:src="@drawable/trade_options_bot"
+        android:layout_below="@+id/btnDecline"
+        android:layout_alignStart="@+id/btnAccept"
+        android:background="@null"
+        android:layout_marginTop="-5dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDecline"
+        android:src="@drawable/trade_options_mid"
+        android:clickable="true"
+        android:background="@null"
+        android:layout_below="@+id/btnAccept"
+        android:layout_alignStart="@+id/btnAccept"
+        android:layout_marginTop="-5dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAccept"
+        android:layout_below="@+id/imgFriendTab"
+        android:src="@drawable/trade_options_top"
+        android:background="@null"
+        android:layout_alignStart="@+id/imgStatus"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Accept"
+        android:id="@+id/txtAccept"
+        android:layout_alignBottom="@+id/btnAccept"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#fff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Decline"
+        android:id="@+id/txtDecline"
+        android:layout_alignBottom="@+id/btnDecline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/brown_main" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Counteroffer"
+        android:id="@+id/txtCounterOffer"
+        android:layout_alignBottom="@+id/btnCounterOffer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/brown_main" />
+
+</RelativeLayout>

@@ -10,15 +10,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
     private static int RESULT_LOAD_IMAGE = 1;
 
+
+    /** (not Javadoc)
+     * @see android.app.Activity#onStart()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +36,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * OnClick to enable camera switch.
+             * @param arg0
+             */
             @Override
             public void onClick(View arg0) {
 
@@ -39,6 +52,14 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         });
     }
 
+
+    /**
+     * Response is generated once load image intent is completed.
+     * Finds and decodes image based on path, connects image to activity.
+     * @param requestCode Identifies intent of the process.
+     * @param resultCode Result of the previous image intent.
+     * @param data Resultant data set from intent.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -62,6 +83,11 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
     }
 
+    /**
+     * Generates hamburger menu options.
+     * @param menu Menu item to be created.
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -69,6 +95,47 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         return true;
     }
 
+    public EditText getMediaText(){
+        return (EditText) findViewById(R.id.mediaText);
+    }
+
+    public EditText getNameText(){
+        return (EditText) findViewById(R.id.nameText);
+    }
+
+    public EditText getCatagoryText(){
+        return (EditText) findViewById(R.id.categoryText);
+    }
+
+    public EditText getSeriesText(){
+        return (EditText) findViewById(R.id.seriesText);
+    }
+
+    public EditText getQualityText(){
+        return (EditText) findViewById(R.id.qualityText);
+    }
+
+    public EditText getQuantityText(){
+        return (EditText) findViewById(R.id.quantityText);
+    }
+
+    public EditText getCommentsText(){
+        return (EditText) findViewById(R.id.commentsText);
+    }
+
+    public Button getEnterButton(){
+        return (Button) findViewById(R.id.btnEnter);
+    }
+
+    public CheckBox getCheckBox(){
+        return (CheckBox) findViewById(R.id.checkBox);
+    }
+
+    /**
+     * OnSelect options for option selected from hamburger menu.
+     * @param item Item selected by user.
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -78,12 +145,17 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param inventory Inventory to update to be identified in view.
+     */
     @Override
     public void Update(Inventory inventory) {
 

@@ -20,11 +20,11 @@ public class Card extends Model {
     private User owner;
 
 
-    public Card(String name, int imageID, int quantity, Quality quality, String catagory,
+    public Card(String name /* int imageID */, int quantity, Quality quality, String catagory,
                String series, Boolean tradable, String comments,/* ArrayList<images> images ,*/ User owner){
 
         this.name = name;
-        this.imageID = imageID;
+        //this.imageID = imageID;
         this.quantity = quantity;
         this.quality = quality;
         this.catagory = catagory;
@@ -114,6 +114,12 @@ public class Card extends Model {
     }
 
 
+    /**
+     * Identify whether two cards match. Key - the cards must be identical
+     * in all values except for quantity.
+     * @param card
+     * @return true if all used values are equal, or returns false if not.
+     */
     public Boolean equals(Card card){
         return this.getName().equals(card.getName()) &&
                 this.getQuality().equals(card.getQuality()) &&
@@ -130,7 +136,6 @@ public class Card extends Model {
      * @return names of different card types that can be traded
      */
     public static String[] getRelevantCatagories(){
-
 
         String relevantcatagories[] = {"Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
                 "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};

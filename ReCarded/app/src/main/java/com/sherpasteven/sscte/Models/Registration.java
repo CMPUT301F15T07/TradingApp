@@ -13,9 +13,8 @@ import javax.mail.internet.InternetAddress;
  * in the arguments needed to generate a new user and then
  * can generate the user once all required fields are filled;
  *
- * Issues:
- * There is an issue serializing the Registration object using GSON
- * Getting a security exception when serializing the object to file.
+ * FIXME: There is an issue serializing the Registration object using GSON
+ * FIXME: Getting a security exception when serializing the object to file.
  */
 public class Registration extends Model {
 
@@ -80,10 +79,13 @@ public class Registration extends Model {
      * Generates a new user profile and saves it.
      * @param context context of app
      */
-    public void generateProfile(Context context){
+    //changed from void to Profile for Gui testing of the Splash page
+    //Can be removed once serializtion becomes operational and tested
+    public Profile generateProfile(Context context){
         User user = new User(getUserName(), getLocation(), getUserEmail());
         Profile profile = new Profile(user);
         profileSerializer.Serialize(profile, context);
+        return profile;
     }
 
     /**

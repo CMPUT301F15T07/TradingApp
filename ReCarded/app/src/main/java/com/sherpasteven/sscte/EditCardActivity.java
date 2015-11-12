@@ -20,6 +20,9 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
     private static int RESULT_LOAD_IMAGE = 1;
 
+    /** (not Javadoc)
+     * @see android.app.Activity#onStart()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * OnClick to enable camera switch.
+             * @param arg0
+             */
             @Override
             public void onClick(View arg0) {
 
@@ -41,6 +48,13 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
     }
 
 
+    /**
+     * Response is generated once load image intent is completed.
+     * Finds and decodes image based on path, connects image to activity.
+     * @param requestCode Identifies intent of the process.
+     * @param resultCode Result of the previous image intent.
+     * @param data Resultant data set from intent.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -60,10 +74,13 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
             ImageView imageView = (ImageView) findViewById(R.id.imgCard);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
-
-
     }
 
+    /**
+     * Generates hamburger menu options.
+     * @param menu Menu item to be created.
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -71,6 +88,11 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         return true;
     }
 
+    /**
+     * OnSelect options for option selected from hamburger menu.
+     * @param item Item selected by user.
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -80,12 +102,17 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param card Card to be shown as edited.
+     */
     @Override
     public void Update(Card card) {
 

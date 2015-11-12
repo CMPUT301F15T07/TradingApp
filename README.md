@@ -10,8 +10,5 @@ Joshua White,
 Mohamad Salim Ben Khaled
 
 ##TODO List:
-* Complete UI pages for:
-	* Create Trade
-	* Edit Trade
-* Add android art assets for every resolution
+See https://github.com/CMPUT301F15T07/TradingApp/wiki/Todo-Page-&-Scheduling for more information on tasks to be completed.
 

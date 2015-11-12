@@ -8,7 +8,7 @@ import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.TradesTab;
 
 /**
- * Created by jake on 2015-10-31.
+ * Controller for TradesTab.
  */
 public class TradesTabController extends Controller<TradesTab, TradeLog> {
     private final TradesTab view;

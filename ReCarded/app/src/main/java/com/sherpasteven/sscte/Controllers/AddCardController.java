@@ -4,7 +4,7 @@ import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.Models.Inventory;
 
 /**
- *
+ * Controller for AddCardActivity.
  */
 public class AddCardController extends Controller<AddCardActivity, Inventory> {
 

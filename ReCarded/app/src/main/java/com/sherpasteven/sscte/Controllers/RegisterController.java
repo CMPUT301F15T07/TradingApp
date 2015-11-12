@@ -55,8 +55,9 @@ public class RegisterController extends Controller<SplashPage, Registration> {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //saving shit here
-                model.generateProfile(view);
+                //set profile can be removed once serialization is operational
+                //used to be model.generateProfile(view);
+                view.setProfile(model.generateProfile(view));
                 view.navigateToInventory();
             }
         });

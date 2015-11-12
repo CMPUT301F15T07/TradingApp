@@ -32,10 +32,16 @@ public class Inventory extends Model {
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
-        else {getCards().add( new Card(card.getName(), card.getImageID(), card.getQuantity(), card.getQuality(), card.getCatagory(),
+        else {getCards().add( new Card(card.getName()/* card.getImageID() */, card.getQuantity(), card.getQuality(), card.getCatagory(),
                 card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
     }
 
+    /**
+     * Identifies whether or not an inventory contains a specific card.
+     * Queries the inventory, item by item, to find an equality match.
+     * @param card
+     * @return true if found, false if not found.
+     */
     Boolean containsCard(Card card) {
         int size = getCards().size();
 
@@ -54,6 +60,12 @@ public class Inventory extends Model {
         return this.cards.get(index);
     }
 
+    /**
+     * Removes a specified card in the inventory, given that
+     * the card exists. If the card doesn't exist, no errors
+     * will be raised; however, no processing will be completed.
+     * @param card
+     */
     void removeFromInventory(Card card){
 
         int size = getCards().size();
@@ -69,9 +81,11 @@ public class Inventory extends Model {
 
 
     /**
-     * what does this do?
+     * Returns a specified card in an inventory;
+     * used for trades where cards are isolated from
+     * the inventory, but still need to be backreferenced.
      * @param card
-     * @return
+     * @return specified card if found; null if not.
      */
     Card returnCard(Card card){
 
@@ -88,6 +102,12 @@ public class Inventory extends Model {
     }
 
 
+    /**
+     * Uses the removeFromInventory process to
+     * remove a card from the inventory.
+     * @param card
+     * @param amount
+     */
     void removeCard(Card card, int amount) {
         try {
             if (amount < returnCard(card).getQuantity()) {
@@ -105,6 +125,13 @@ public class Inventory extends Model {
         }
     }
 
+    /**
+     * Given equality, cards will not be added as new entities
+     * into the system; rather, they are treated as 'additional
+     * entities' and appended to a card set.
+     * @param card
+     * @param amount
+     */
     void incrementCard(Card card, int amount){
         returnCard(card).setQuantity(returnCard(card).getQuantity() + amount);
     }

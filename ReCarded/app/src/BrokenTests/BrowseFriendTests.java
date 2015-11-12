@@ -11,27 +11,10 @@ import com.sherpasteven.sscte.Models.User;
 /**
  * Created by elias on 17/10/15.
  */
-public class UseCase3Test extends ApplicationTestCase<Application> {
-public UseCase3Test(Class<Application> applicationClass) {
+public class BrowseFriendTest extends ApplicationTestCase<Application> {
+public BrowseFriendTest(Class<Application> applicationClass) {
         super(applicationClass);
         }
-
-//Use Case Name :Browse and Search Inventories of Friends
-//Participating Actors: Main User, User's Friends
-//Goal: Main User can get thier friends' inventory and then search by text or category
-//Trigger: Main User browses friends' inventory
-//Precondition: Main User knows which friend to search and the name or category of card they want to find
-//Postcondition: On success, user can view cards in a friends' inventory and then make a trade.
-//See US04.xx.xx for trading use cases
-//Related User Stories: US03.01.01 - US03.02.01
-
-//Basic Flow
-// 1.) User can browse through a list of friends
-// 2.) User can select a friend and the friends' inventory is displayed
-// 3.) User can inititate a search function either by category or text
-// 4.) Cards that match search criteria are displayed to user
-// 5.) User can select card from search results to display it
-
 
         //Helper Functions:
 
@@ -64,7 +47,7 @@ public UseCase3Test(Class<Application> applicationClass) {
 
 //The User opens a friends' profile and then opens thier inventory
 //The User can then browse the friends' cards
-        void testUS030101(){
+        void testBrowseFriendsCards(){
                 User myuser = GetMockUser();
                 String myTestFriendName = "Harry Potter";
                 User myTestFriend = GetMockFriend();
@@ -75,7 +58,7 @@ public UseCase3Test(Class<Application> applicationClass) {
 
 //The User has thier friends profile
 //The User searches thier friends profile by category
-        void testUS030102(){
+        void testSearchFriendsCardsCatagory(){
                 User friend = GetMockFriend();
                 Inventory friendInventory = friend.getInventory();
                 String searchCategory = "Magic The Gathering";
@@ -86,7 +69,7 @@ public UseCase3Test(Class<Application> applicationClass) {
 
 //The User has thier friends profile
 //The User searches thier friends profile by text
-        void testUS030102(){
+        void testSearchFriendsCardsText(){
                 User friend = GetMockFriend();
                 Inventory friendInventory = friend.getInventory();
                 String searchQuery = "Black Lotus";
@@ -97,7 +80,7 @@ public UseCase3Test(Class<Application> applicationClass) {
 
 //The Owner Has Publicly Available Items
 //The Owner's Friends Can Browse Those Items
-        void testUS030201(){
+        void testFriendsCanBrowse(){
                 User owner = GetMockUser();
                 Inventory inventory = owner.getInventory();
                 Card publicCard = inventory.searchByText("Black Lotus");

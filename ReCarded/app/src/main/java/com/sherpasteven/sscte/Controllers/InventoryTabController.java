@@ -13,7 +13,7 @@ import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.InventoryTab;
 
 /**
- * Created by jake on 2015-10-31.
+ * Controller for InventoryTab.
  */
 public class InventoryTabController extends Controller<InventoryTab,Inventory>{
     private final InventoryTab view;
@@ -24,6 +24,11 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
         this.view = view;
         this.model = model;
     }
+
+    /**
+     * Set listeners for buttons to change activities.
+     * @param view view to set listeners on.
+     */
     @Override
     protected void setListeners(final InventoryTab view) {
         Button addItem = (Button) view.getView().findViewById(R.id.btnAddItem);

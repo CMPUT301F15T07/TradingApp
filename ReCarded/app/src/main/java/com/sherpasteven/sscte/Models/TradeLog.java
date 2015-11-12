@@ -3,7 +3,9 @@ package com.sherpasteven.sscte.Models;
 import java.util.ArrayList;
 
 /**
- * Created by salim_000 on 2015-10-30.
+ * Develops a tradelog, similar to an arraylist of trades.
+ * Stores data used for past and current trades.
+ * Used for tabbed trade activity.
  */
 public class TradeLog extends Model {
 
@@ -23,8 +25,12 @@ public class TradeLog extends Model {
 
     }
 
+    /**
+     * Identifies the trade status as either in pending trades or completed trades.
+     * FIXME: Requires notification addition.
+     * @param trade Trade to be added to the trade log.
+     */
     public void tradeFinalized(Trade trade){
-        //might need to implement more stuff, like notifications i guess
         if(trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")){
         pastTrades.add(trade);
         pendingTrades.remove(trade);
@@ -51,6 +57,11 @@ public class TradeLog extends Model {
         this.pastTrades = pastTrades;
     }
 
+    /**
+     * Deletes a trade from the trade log.
+     * @param trade Trade to be deleted.
+     * @return status of deleted trade: true if deleted, false if error.
+     */
     public Boolean removeFinalizedTrade(Trade trade){
 
         if(trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")){
@@ -60,6 +71,12 @@ public class TradeLog extends Model {
 
     }
 
+    /**
+     * Identifies whether a trade is previously included
+     * in the trade log.
+     * @param trade Trade is recognised before query.
+     * @return true if contained; false if not contained.
+     */
     public Boolean containsPastTrade(Trade trade){
         return getPastTrades().contains(trade);
     }

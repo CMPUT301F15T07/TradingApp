@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
@@ -36,9 +37,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     private Profile currentprofile;
     private User currentuser;
 
-    /**
-     * Creates the ProfileActivity instance.
-     * @param savedInstanceState
+    /** (not Javadoc)
+     * @see android.app.Activity#onStart()
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        changeToolbarColor();
+        //changeToolbarColor();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -97,9 +97,21 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     }
 
+    public Button getAddButton(){
+        return (Button) findViewById(R.id.btnAddItem);
+    }
+
+    public Button getViewButton(){
+        return (Button) findViewById(R.id.btnViewItem);
+    }
+
+    public Button getEditButton(){
+        return (Button) findViewById(R.id.btnEditItem);
+    }
+
     /**
      * Changes the toolbar color on the main page.
-     * @return
+     * @return true
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public boolean changeToolbarColor() {
@@ -116,9 +128,9 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     }
 
     /**
-     * Creates the hamburger menu on the main page.
-     * @param menu
-     * @return
+     * Generates hamburger menu options.
+     * @param menu Menu item to be created.
+     * @return true
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,9 +140,9 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     }
 
     /**
-     * Sets onclick listeners on hamburger menu items.
-     * @param item
-     * @return
+     * OnSelect options for option selected from hamburger menu.
+     * @param item Item selected by user.
+     * @return true
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -151,10 +163,18 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param inventory Updates inventory based on model response.
+     */
     @Override
     public void Update(Inventory inventory) {
 
     }
 
+    /**
+     * Controller code to set intent switch.
+     * Currently unused.
+     */
     public void NavigateToFriendsActivity() {}
 }

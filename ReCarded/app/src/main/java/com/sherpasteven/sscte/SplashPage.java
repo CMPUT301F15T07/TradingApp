@@ -50,6 +50,25 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private RegisterController registerController;
     private ISerializer<Profile> profileSerializer;
 
+
+
+    /* this private profile is for the use of testing
+            Gui before the serialization to ES is complete.
+            It can be removed after serialization can be tested
+         */
+    private Profile profile;
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    /** (not Javadoc)
+     * @see android.app.Activity#onStart()
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,56 +86,48 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        Button enterButton = (Button)findViewById(R.id.btnEnter);
+        Button enterButton = getEnterButton();
         enterButton.setEnabled(false);
         Registration registration = new Registration();
         registration.addView(this);
         registerController = new RegisterController(this, registration);
     }
 
+    /** (not Javadoc)
+     * @see android.app.Activity#onPause()
+     */
     @Override
     protected void onPause(){
         super.onPause();
         //registerController.saveRegistration(this);
     }
 
+    /** (not Javadoc)
+     * @see android.app.Activity#onResume()
+     */
     @Override
     protected void onResume(){
         super.onResume();
         //registerController.loadRegistration(this);
     }
 
+
+    /**
+     * Generates intent and moves application to inventory page.
+     */
     public void navigateToInventory(){
         startActivity(new Intent(this, InventoryActivity.class));
     }
 
+    /**
+     * Serialises the profile (getter) for application registry.
+     * @return deserialized profile information.
+     */
     private Profile getLocalProfile() {
         IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
         return deSerializer.Deserialize(null, this);
     }
 
-
-    private void toggle() {
-        if (mVisible) {
-            hide();
-        } else {
-            show();
-        }
-    }
-
-    private void hide() {
-        // Hide UI first
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-        //mControlsView.setVisibility(View.GONE);
-        mVisible = false;
-
-        // Schedule a runnable to remove the status and navigation bar after a delay
-        mHideHandler.removeCallbacks(mShowPart2Runnable);
-        mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
-    }
 
     Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -136,54 +147,34 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         }
     };
 
-    @SuppressLint("InlinedApi")
-    private void show() {
-        // Show the system bar
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        mVisible = true;
-
-        // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
-        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
-
-    Runnable mShowPart2Runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Delayed display of UI elements
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-            }
-            getSupportActionBar().show();
-            //mControlsView.setVisibility(View.VISIBLE);
-        }
-    };
-
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
-
     /**
-     * Schedules a call to hide() in [delay] milliseconds, canceling any
-     * previously scheduled calls.
+     * Updates the registration conditions depending on the accuracy of the application.
+     * //@param registration Registration parameters for registering the user.
      */
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
+
+    public Button getEnterButton(){
+        return (Button) findViewById(R.id.btnEnter);
     }
+
+    public EditText getEmailText(){
+        return (EditText) findViewById(R.id.emailText);
+    }
+
+    public EditText getNameText(){
+        return (EditText) findViewById(R.id.nameText);
+    }
+
+    public EditText getCityText(){
+        return (EditText) findViewById(R.id.cityText);
+    }
+
 
     public void Update(Registration registration) {
-        Button submitButton = (Button) findViewById(R.id.btnEnter);
+        Button submitButton = getEnterButton();
 
-        EditText emailText = (EditText) findViewById(R.id.emailText);
-        EditText nameText = (EditText) findViewById(R.id.nameText);
-        EditText cityText = (EditText) findViewById(R.id.cityText);
+        EditText emailText = getEmailText();
+        EditText nameText = getNameText();
+        EditText cityText = getCityText();
 
         Drawable nameBgd = getResources().getDrawable(R.drawable.input_rect);
         nameBgd.setColorFilter(new PorterDuffColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.MULTIPLY));
@@ -241,6 +232,11 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
     }
 
+    /**
+     * Determines the status of the registration page; if all entries are satisfactory.
+     * @param registration Registration parameters to be checked.
+     * @return boolean for correct identification value.
+     */
     public boolean canSubmit(Registration registration){
         boolean a =!registration.getLocation().isEmpty();
         boolean b =!registration.getUserName().isEmpty();

@@ -112,7 +112,6 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
 
     /**
      * Set RecyclerView's LayoutManager to the one given.
-     *
      * @param layoutManagerType Type of layout manager to switch to.
      */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
@@ -130,9 +129,11 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    // This method creates an ArrayList that has three Person objects
-    // Checkout the project associated with this tutorial on Github if
-    // you want to use the same images.
+    /** Initialises data for inventory tab given card objects.
+     * Completed with respect to cardlist object.
+     * FIXME: Change system for dynamic card list loading.
+     * FIXME: Adapt cardlist as user-loaded card list.
+     */
     private void initializeData() {
         cardlist = new ArrayList<>();
         cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));

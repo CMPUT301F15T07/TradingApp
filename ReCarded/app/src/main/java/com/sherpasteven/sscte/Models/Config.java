@@ -13,11 +13,11 @@ public class Config extends Model {
 
     }
 
-    public Boolean isImagesdownloadable() {
+    public Boolean getImagesDownloadable() {
         return imagesdownloadable;
     }
 
-    public void setImagesdownloadable(Boolean imagesdownloadable) {
+    public void setImagesDownloadable(Boolean imagesdownloadable) {
         this.imagesdownloadable = imagesdownloadable;
     }
 }
