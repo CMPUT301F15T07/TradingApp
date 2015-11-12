@@ -72,7 +72,7 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initializeData();
+        //initializeData();
     }
 
     @Override
@@ -129,38 +129,34 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    /** Initialises data for inventory tab given card objects.
-     * Completed with respect to cardlist object.
-     * FIXME: Change system for dynamic card list loading.
-     * FIXME: Adapt cardlist as user-loaded card list.
-     */
     private void initializeData() {
         cardlist = new ArrayList<>();
         //cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 1", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 2", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 3", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 4", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 5", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 6", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 7", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 8", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 9", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 10", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 11", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 12", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 13", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 14", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 15", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 16", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 17", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 18", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 19", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 20", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 21", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 22", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-//        cardlist.add(new Card("Item 23", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 1", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 2", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 3", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 4", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 5", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 6", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 7", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 8", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 9", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 10", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 11", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 12", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 13", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 14", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 15", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 16", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 17", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 18", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 19", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 20", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 21", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 22", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
+        //cardlist.add(new Card("Item 23", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
     }
+
 
     public void navigateToAddCardActivity(){
         Intent myIntent = new Intent(getActivity(), AddCardActivity.class);

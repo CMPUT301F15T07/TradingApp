@@ -4,6 +4,7 @@ import android.app.Application;
 import android.test.ApplicationTestCase;
 
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.Email;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.User;
@@ -52,8 +53,6 @@ public class TradesTest extends ApplicationTestCase<Application> {
     }
 
     public void testCreateTrade() {
-
-
         User joshua = setupJoshua();
         User salim = setupSalim();
 
@@ -80,8 +79,6 @@ public class TradesTest extends ApplicationTestCase<Application> {
     }
 
     public void testAcceptDeline() {
-
-
         User joshua = setupJoshua();
         User salim = setupSalim();
 
@@ -114,9 +111,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
     }
 
     public void testCounterOffer() {
-        
-
-       User joshua = setupJoshua();
+        User joshua = setupJoshua();
         User salim = setupSalim();
 
         Card charizard = setupCards(1 , joshua);
@@ -132,7 +127,6 @@ public class TradesTest extends ApplicationTestCase<Application> {
         // Send trade offer button clicked.
         trade1.sendTrade();
 
-
         //salim is all like "HECK NO, not even" But I
         //Will trade bEWD for charizard and Gigny
         Trade trade2 = trade1.counterOffer();
@@ -146,7 +140,6 @@ public class TradesTest extends ApplicationTestCase<Application> {
         assertNotSame(trade1.getBorrowList(), trade2.getOwnerList());
         assertEquals(trade2.getOwnerList().size(), 2);
     }
-/*
 
     public void testEditTrade() {
         User joshua = setupJoshua();
@@ -165,32 +158,29 @@ public class TradesTest extends ApplicationTestCase<Application> {
         // Send trade offer button clicked.
         trade1.sendTrade();
 
-
         //salim is all like "HECK NO, not even"
         trade1.counterOffer();
 
         // Owner declines the trade.
         // Owner makes a new trade offer when the counter offer button is clicked.
-        if(trade.status() == "DECLINED") {
+        if(trade1.getStatus() == "DECLINED") {
             // Owner adds and removes cards with the plus and minus button.
-            Trade trade2 = newTrade(owner, borrower);
-            trade2.list1.add(owner.getInventory().getCard("Deoxys"));
-            trade2.list1.add(owner.getInventory().getCard("Register"));
-            trade2.list1.remove(1);
-            trade2.list2.add(borrower.getInventory().getCard("Mew");
+            Trade trade2 = new Trade(salim, joshua);
+            trade1.addOwnerList(joshua.returnInventoryItem(charizard));
+            trade1.addBorrowList(salim.returnInventoryItem(bEWD));
+            trade2.removeBorrowList(bEWD);
+            trade2.addBorrowList(salim.returnInventoryItem(kkslider));
 
-            assertTrue(trade.list1.contains("Deoxys"));
-            assertTrue(trade.list2.contains("Mew"));
-            assertFalse(trade.list1.contains("Register"));
+            assertTrue(trade2.getBorrowList().contains(kkslider));
+            assertTrue(trade2.getOwnerList().contains(charizard));
+            assertFalse(trade2.getBorrowList().contains(bEWD));
 
-            trade2.sendTrade(owner);
+            trade2.sendTrade();
             //trade2.setNotification(borrower);
         }
-    } 
-        */
+    }
 
     public void testDeleteTrade() {
-
         User joshua = setupJoshua();
         User salim = setupSalim();
 
@@ -225,34 +215,36 @@ public class TradesTest extends ApplicationTestCase<Application> {
 
     }
 
+    public void testConfirmTrade() {
+        User joshua = setupJoshua();
+        User salim = setupSalim();
 
-    /*
-    public void testConfirmtrTrade() {
-        User borrower = new User(currentUser.Name, "Canada");
-        User owner = new User("Mr. Bean", "Canada");
+        Card charizard = setupCards(1 , joshua);
+        Card bEWD = setupCards(2 , salim);
+        Card gingy = setupCards(3 , joshua);
+        Card kkslider = setupCards(4 , salim);
 
-        // Borrower adds cards with the "plus" button.
-        Trade trade = new Trade(borrower, owner);
-        trade.list1.add(borrower.getInventory().getCard("Darkrai"));
-        trade.list2.add(owner.getInventory().getCard("Mewtwo"));
-
-        // Send trade offer button clicked.
-        trade.sendTrade(owner);
-        trade.setNotification(owner);
+        Trade trade1 = new Trade(joshua, salim);
 
         // Owner clicks the accept button. An input box
         // will be displayed for extra comments.
-        String extraComments = inputTextView.text;
-        Email emailBorrower = new Email(borrower, extraComments);
-        Email emailOwner = new Email(owner, "");
+        String extraComments = "Meet me in the bask alley behind McDonalds and I will give you the stuff."; //inputTextView.text;
+        Email emailBorrower = new Email(joshua, extraComments);
+        Email emailOwner = new Email(salim, "");
 
-        emailBorrower.send();
-        emailOwner.send();
+        emailBorrower.sendEmail();
+        emailOwner.sendEmail();
 
         assertNotNull(extraComments);
+<<<<<<< HEAD
         assertEquals(emailOwner.status() ,"SENT");
         assertEquals(emailBorrower.status(), "SENT");
     }*/
+=======
+        assertEquals(emailOwner.getStatus() ,"SENT");
+        assertEquals(emailBorrower.getStatus(), "SENT");
+    }
+>>>>>>> fcfad6acecaaea2343fcd0ce5454e93a161c0b59
 
 
 }
