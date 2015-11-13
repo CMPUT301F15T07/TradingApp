@@ -236,15 +236,8 @@ public class TradesTest extends ApplicationTestCase<Application> {
         emailOwner.sendEmail();
 
         assertNotNull(extraComments);
-<<<<<<< HEAD
-        assertEquals(emailOwner.status() ,"SENT");
-        assertEquals(emailBorrower.status(), "SENT");
-    }*/
-=======
         assertEquals(emailOwner.getStatus() ,"SENT");
         assertEquals(emailBorrower.getStatus(), "SENT");
     }
->>>>>>> fcfad6acecaaea2343fcd0ce5454e93a161c0b59
-
 
 }
