@@ -100,10 +100,6 @@
     <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
-<<<<<<< HEAD
-=======
-    <orderEntry type="library" exported="" name="gson-2.4" level="project" />
->>>>>>> 041fbd376b18e586ddd983892e0dab50f974068b
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.4" level="project" />
   </component>
