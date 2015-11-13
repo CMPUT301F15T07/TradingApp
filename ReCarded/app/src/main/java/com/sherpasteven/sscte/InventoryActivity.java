@@ -44,11 +44,14 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
+
         currentprofile = CurrentProfile.GetCurrentProfile(this);
         currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        //changeToolbarColor();
+        if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
+            changeToolbarColor();
+        }
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -71,6 +74,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+
     }
 
     public Button getAddButton(){

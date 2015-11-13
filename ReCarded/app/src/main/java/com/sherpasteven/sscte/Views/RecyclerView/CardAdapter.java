@@ -122,6 +122,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return cards.size();
+        if (cards != null) {
+            return cards.size();
+        } return 0;
     }
 }
