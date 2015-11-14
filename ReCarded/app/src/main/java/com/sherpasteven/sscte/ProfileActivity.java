@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        Profile localProfile = getLocalProfile();
+        final Profile localProfile = getLocalProfile();
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnProfileImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +78,10 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
         submitButton.setOnClickListener( new View.OnClickListener() {
 
             public void onClick(View v) {
-                profile.getUser().setName(nameText.getText().toString());
-                profile.getUser().setLocation(cityText.getText().toString());
-                profile.getUser().setEmail(emailText.getText().toString());
-                setLocalProfile(profile);
+                localProfile.getUser().setName(nameText.getText().toString());
+                localProfile.getUser().setLocation(cityText.getText().toString());
+                localProfile.getUser().setEmail(emailText.getText().toString());
+                setLocalProfile(localProfile);
                 Intent myIntent = new Intent(ProfileActivity.this, InventoryActivity.class);
                 startActivity(myIntent);
             }

@@ -69,16 +69,16 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
             Intent myIntent = new Intent(this, SplashPage.class);
             startActivity(myIntent);
             finish();
+        } else {
+            currentuser = currentprofile.getUser();
         }
-        currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
-        }
-        */
+        }*/
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
