@@ -107,12 +107,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.cardName.setText(cards.get(position).getName());
         viewHolder.cardDescription.setText(cards.get(position).getCatagory());
-        viewHolder.cardPhoto.setImageResource(cards.get(position).getImageID());
+        viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
 
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
