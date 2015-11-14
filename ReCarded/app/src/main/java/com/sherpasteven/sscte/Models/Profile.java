@@ -18,7 +18,11 @@ public class Profile extends Model {
     }
 
     public User getUser() {
-        return user;
+        if (user != null) {
+            return user;
+        } else {
+            return null;
+        }
     }
 
     public void setUser(User user) {

@@ -12,8 +12,11 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.IDeSerializer;
+import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
@@ -34,8 +37,22 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Inventory","Trades","Friends"};
     int Numboftabs = 3;
+
     private Profile currentprofile;
     private User currentuser;
+    private ISerializer<Profile> profileISerializer;
+    private IDeSerializer<Profile> profileIDeSerializer;
+
+
+    public Profile getProfile() {
+        currentprofile = profileIDeSerializer.Deserialize(currentprofile, this);
+        return currentprofile;
+    }
+
+    private void setLocalProfile(Profile profile) {
+        ISerializer<Profile> serializer = new LocalProfileSerializer();
+        serializer.Serialize(profile, this);
+    }
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -46,13 +63,22 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         setContentView(R.layout.activity_inventory);
 
         currentprofile = CurrentProfile.GetCurrentProfile(this);
+        if (currentprofile == null) {
+            Toast.makeText(getApplicationContext(), "No profile loaded, returning to main page",
+                    Toast.LENGTH_LONG).show();
+            Intent myIntent = new Intent(this, SplashPage.class);
+            startActivity(myIntent);
+            finish();
+        }
         currentuser = currentprofile.getUser();
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
         /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
-        }*/
+        }
+        */
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);

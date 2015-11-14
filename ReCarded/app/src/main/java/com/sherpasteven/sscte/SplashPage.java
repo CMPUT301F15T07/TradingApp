@@ -49,6 +49,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private boolean mVisible;
     private RegisterController registerController;
     private ISerializer<Profile> profileSerializer;
+    private IDeSerializer<Profile> profileIDeSerializer;
 
 
 
@@ -59,6 +60,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private Profile profile;
 
     public Profile getProfile() {
+        profile = profileIDeSerializer.Deserialize(profile, this);
         return profile;
     }
 
@@ -116,7 +118,13 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
      * Generates intent and moves application to inventory page.
      */
     public void navigateToInventory(){
+        setLocalProfile(profile);
         startActivity(new Intent(this, InventoryActivity.class));
+    }
+
+    private void setLocalProfile(Profile profile) {
+        ISerializer<Profile> serializer = new LocalProfileSerializer();
+        serializer.Serialize(profile, this);
     }
 
     /**

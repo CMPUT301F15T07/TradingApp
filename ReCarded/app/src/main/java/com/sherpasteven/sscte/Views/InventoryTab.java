@@ -58,6 +58,9 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         LINEAR_LAYOUT_MANAGER
     }
 
+    public void Fragment() {
+    }
+
     protected LayoutManagerType mCurrentLayoutManagerType;
 
     protected RadioButton mLinearLayoutRadioButton;
