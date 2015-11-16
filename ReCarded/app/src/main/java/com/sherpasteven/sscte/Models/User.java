@@ -1,5 +1,11 @@
 package com.sherpasteven.sscte.Models;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.sherpasteven.sscte.R;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,11 +18,12 @@ public class User extends Model {
     private String name;
     private String location;
     private String email;
+    private Image profilepic;
     private ArrayList<User> friends = new ArrayList<User>();
     private Inventory inventory;
     public TradeLog trades;
 
-    public User(String name, String location, String email){
+    public User(String name, String location, String email, Context context){
 
         this.name = name;
         this.location = location;
@@ -24,6 +31,7 @@ public class User extends Model {
         this.inventory = new Inventory();
         this.trades = new TradeLog();
         setFriends(new ArrayList<User>());
+        setProfilePic(new Image(BitmapFactory.decodeResource(context.getResources(), R.drawable.grey_rectangle)));
     }
 
     public String getEmail() {
@@ -126,6 +134,18 @@ public class User extends Model {
     public void deletePastTrade(Trade trade){
         getTrades().removeFinalizedTrade(trade);
 
+    }
+
+    public Image getProfilePic() {
+        return profilepic;
+    }
+
+    public void setProfilePic(Image profilepic) {
+        this.profilepic = profilepic;
+    }
+
+    public Bitmap  constructProfilePic(){
+        return getProfilePic().constructImage();
     }
 
 }

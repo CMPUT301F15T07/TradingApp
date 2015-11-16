@@ -63,7 +63,7 @@ public class Image extends Model {
     }
 
     private Bitmap scaleQuality(Bitmap image){
-        int scale = 100;
+        int scale = 0;
         //Bitmap newimage;
         //Bitmap retainimage = image;
 

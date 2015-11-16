@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
@@ -69,10 +71,12 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
         final EditText nameText = (EditText) findViewById(R.id.nameText);
         final EditText cityText = (EditText) findViewById(R.id.cityText);
         final EditText emailText = (EditText) findViewById(R.id.emailText);
+        final ImageView imageView = (ImageView) findViewById(R.id.profile_image);
 
         nameText.setText(localProfile.getUser().getName());
         cityText.setText(localProfile.getUser().getLocation());
         emailText.setText(localProfile.getUser().getEmail());
+        imageView.setImageBitmap(localProfile.getUser().constructProfilePic());
 
         Button submitButton = (Button) findViewById(R.id.btnEnter);
         submitButton.setOnClickListener( new View.OnClickListener() {
@@ -81,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
                 localProfile.getUser().setName(nameText.getText().toString());
                 localProfile.getUser().setLocation(cityText.getText().toString());
                 localProfile.getUser().setEmail(emailText.getText().toString());
+                localProfile.getUser().setProfilePic(new Image(((BitmapDrawable) imageView.getDrawable()).getBitmap()));
                 setLocalProfile(localProfile);
                 Intent myIntent = new Intent(ProfileActivity.this, InventoryActivity.class);
                 startActivity(myIntent);

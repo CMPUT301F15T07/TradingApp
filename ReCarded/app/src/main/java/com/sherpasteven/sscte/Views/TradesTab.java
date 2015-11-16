@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte.Views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -168,17 +169,18 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
      */
     private void initializeData() {
         tradelist = new ArrayList<>();
-        tradelist.add(new Trade(new User("borrower1", "location", "email1"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower2", "location", "email2"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower3", "location", "email3"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower4", "location", "email4"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower5", "location", "email5"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower6", "location", "email6"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower7", "location", "email7"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower8", "location", "email8"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower9", "location", "email9"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower10", "location", "email10"), new User("owner1", "location", "email1")));
-        tradelist.add(new Trade(new User("borrower11", "location", "email11"), new User("owner1", "location", "email1")));
+        Context context = this.getContext();
+        tradelist.add(new Trade(new User("borrower1", "location", "email1", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower2", "location", "email2", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower3", "location", "email3", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower4", "location", "email4", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower5", "location", "email5", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower6", "location", "email6", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower7", "location", "email7", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower8", "location", "email8", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower9", "location", "email9", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower10", "location", "email10", context), new User("owner1", "location", "email1", context)));
+        tradelist.add(new Trade(new User("borrower11", "location", "email11", context), new User("owner1", "location", "email1", context)));
 
     }
 
