@@ -51,8 +51,6 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private ISerializer<Profile> profileSerializer;
     private IDeSerializer<Profile> profileIDeSerializer;
 
-
-
     /* this private profile is for the use of testing
             Gui before the serialization to ES is complete.
             It can be removed after serialization can be tested
