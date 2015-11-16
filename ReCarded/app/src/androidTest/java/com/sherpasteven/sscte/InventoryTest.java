@@ -13,6 +13,17 @@ public class InventoryTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    String name = "Charizard";
+    int quantity;
+    Quality quality;
+    String catagory;
+    String series;
+    boolean tradable;
+    String comments;
+
+
+    Card card;
+
     public User inventorySetUp(){
 
         User user = new User("Joshua", "Edmonton", "DummyEmail@ualberta.ca");
@@ -69,8 +80,11 @@ public class InventoryTest extends ApplicationTestCase<Application> {
             user.addInventoryItem(card);
             user.removeInventoryItem(card, 3);
         }
-        catch(IllegalArgumentException e)
-        {assertEquals("You tried removing more of card than the user had" , e.getMessage());}
+        catch(IllegalArgumentException e){
+            assertEquals("You tried removing more of card than the user had" , e.getMessage());
+        }
+    }
+
 
 
 

@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,9 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.sherpasteven.sscte.Models.IDeSerializer;
+import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
@@ -22,15 +27,26 @@ import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity implements IView<Profile>{
 
+    private Profile profile;
     private static int RESULT_LOAD_IMAGE = 1;
+    private IDeSerializer<Profile> profileIDeSerializer;
+    private ISerializer<Profile> profileISerializer;
+
+
+    public Profile getProfile() {
+        profile = profileIDeSerializer.Deserialize(profile, this);
+        return profile;
+    }
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
+     * FIXME: Implement a working serialiser - the button submit path is broken.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        final Profile localProfile = getLocalProfile();
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnProfileImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +66,43 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
             }
         });
 
+        final EditText nameText = (EditText) findViewById(R.id.nameText);
+        final EditText cityText = (EditText) findViewById(R.id.cityText);
+        final EditText emailText = (EditText) findViewById(R.id.emailText);
+
+        nameText.setText(localProfile.getUser().getName());
+        cityText.setText(localProfile.getUser().getLocation());
+        emailText.setText(localProfile.getUser().getEmail());
+
+        Button submitButton = (Button) findViewById(R.id.btnEnter);
+        submitButton.setOnClickListener( new View.OnClickListener() {
+
+            public void onClick(View v) {
+                localProfile.getUser().setName(nameText.getText().toString());
+                localProfile.getUser().setLocation(cityText.getText().toString());
+                localProfile.getUser().setEmail(emailText.getText().toString());
+                setLocalProfile(localProfile);
+                Intent myIntent = new Intent(ProfileActivity.this, InventoryActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
     }
+
+    private void setLocalProfile(Profile profile) {
+        ISerializer<Profile> serializer = new LocalProfileSerializer();
+        serializer.Serialize(profile, this);
+    }
+
+    /**
+     * Serialises the profile (getter) for application registry.
+     * @return deserialized profile information.
+     */
+    private Profile getLocalProfile() {
+        IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
+        return deSerializer.Deserialize(null, this);
+    }
+
 
     /**
      * Response is generated once load image intent is completed.
@@ -78,6 +130,8 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
             ImageView imageView = (ImageView) findViewById(R.id.profile_image);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
+
+
 
 
     }
@@ -108,7 +162,8 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
         }
 
         return super.onOptionsItemSelected(item);
