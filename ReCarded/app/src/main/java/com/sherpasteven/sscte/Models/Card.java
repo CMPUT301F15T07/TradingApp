@@ -128,7 +128,6 @@ public class Card extends Model {
                 this.isTradable().equals(card.isTradable()) &&
                 this.getComments().equals(card.getComments()) &&
                 this.getOwner().equals(card.getOwner());
-
     }
 
     /**
