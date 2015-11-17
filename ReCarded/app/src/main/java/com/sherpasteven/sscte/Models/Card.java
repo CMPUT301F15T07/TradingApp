@@ -74,7 +74,7 @@ public class Card extends Model {
         this.comments = comments;
         this.images = new ArrayList<Image>();
         this.owner = owner;
-        addImage(BitmapFactory.decodeResource(context.getResources(), imageID));
+        addImage(new Image(imageID, context));
 
 
     }

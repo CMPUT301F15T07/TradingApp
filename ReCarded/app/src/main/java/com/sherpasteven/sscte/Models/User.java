@@ -31,7 +31,8 @@ public class User extends Model {
         this.inventory = new Inventory();
         this.trades = new TradeLog();
         setFriends(new ArrayList<User>());
-        setProfilePic(new Image(BitmapFactory.decodeResource(context.getResources(), R.drawable.grey_rectangle)));
+        //setProfilePic(new Image(BitmapFactory.decodeResource(context.getResources(), R.drawable.grey_rectangle)));
+        setProfilePic(new Image(R.drawable.grey_rectangle, context));
     }
 
     public String getEmail() {

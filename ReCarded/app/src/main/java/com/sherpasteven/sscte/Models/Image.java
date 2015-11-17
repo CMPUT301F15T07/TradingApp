@@ -1,7 +1,11 @@
 package com.sherpasteven.sscte.Models;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+
+import com.sherpasteven.sscte.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,6 +25,8 @@ public class Image extends Model {
     private String configname;
     private int height;
     private int width;
+    private int rowbytes;
+
 
     public Image(Bitmap image){
 
@@ -29,6 +35,21 @@ public class Image extends Model {
         setWidth(image.getWidth());
         setConfigname(image.getConfig().name());
         setImageserial(convertBitmap(image));
+        image.recycle();
+        image = null;
+
+    }
+
+    public Image(int imageID, Context context){
+
+        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageID);
+        bmp = formatBitmap(bmp);
+        setHeight(bmp.getHeight());
+        setWidth(bmp.getWidth());
+        setConfigname(bmp.getConfig().name());
+        setImageserial(convertBitmap(bmp));
+        bmp.recycle();
+        bmp = null;
 
     }
 
@@ -57,44 +78,36 @@ public class Image extends Model {
     }
 
 
+
     private Bitmap formatBitmap(Bitmap image){
 
         return scaleQuality(resizeBitmap(image));
     }
 
+
+
+
     private Bitmap scaleQuality(Bitmap image){
         int scale = 0;
         //Bitmap newimage;
         //Bitmap retainimage = image;
-
         ByteArrayOutputStream outstream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, scale, outstream);
+        image.recycle();
+        image = null;
         Bitmap newimage = BitmapFactory.decodeStream(new ByteArrayInputStream(outstream.toByteArray()));
+        setHeight(newimage.getHeight());
+        setWidth(newimage.getWidth());
+        setRowbytes(newimage.getRowBytes());
 
-        //while(true){
-        //while(scale >= 0){
-
-            //ByteArrayOutputStream outstream = new ByteArrayOutputStream();
-            //newimage.compress(Bitmap.CompressFormat.JPEG, scale, outstream);
-            //newimage = BitmapFactory.decodeStream(new ByteArrayInputStream(outstream.toByteArray()));
-
-            //if((newimage.getByteCount()/1024) <  64){
                 return newimage;
-           // }
-
-            //image = retainimage;
-            //scale -= 10;
-        //}
-
-        //return null;
     }
+
 
     private Bitmap resizeBitmap(Bitmap image){
         Double width = (double) image.getWidth();
         Double height = (double) image.getHeight();
         Double max = 20.0;
-
-
 
         if(width > height){
            height = max * (height/width);
@@ -104,20 +117,25 @@ public class Image extends Model {
            height = max;
         }
 
-        return  Bitmap.createScaledBitmap(image, width.intValue(), height.intValue(), Boolean.FALSE);
+        Bitmap bmp = Bitmap.createScaledBitmap(image, width.intValue(), height.intValue(), Boolean.FALSE);
+        image.recycle();
+        image = null;
+
+        return  bmp;
 
 
     }
 
     //taken from http://stackoverflow.com/questions/10191871/converting-bitmap-to-bytearray-android
+
     private byte[] convertBitmap(Bitmap image) {
 
-        //int bytes = image.getByteCount();
         int bytes = image.getHeight() * image.getRowBytes();
         ByteBuffer buffer = ByteBuffer.allocate(bytes);
         image.copyPixelsToBuffer(buffer);
         return buffer.array();
     }
+
 
     public byte[] getImageserial() {
         return imageserial;
@@ -140,6 +158,14 @@ public class Image extends Model {
 
 
         return construct;
+    }
+
+    public int getRowbytes() {
+        return rowbytes;
+    }
+
+    public void setRowbytes(int rowbytes) {
+        this.rowbytes = rowbytes;
     }
 
 }
