@@ -40,7 +40,7 @@ public class ElasticSearch {
         });
     }
 
-    
+
 
     LastModified GetLastModified(ProfileId profileId){
         return null;
