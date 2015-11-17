@@ -111,7 +111,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         // with that element
         viewHolder.cardName.setText(cards.get(position).getName());
         viewHolder.cardDescription.setText(cards.get(position).getCatagory());
-        viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
+        if (cards.get(position).getImagebyIndex(0) != null) {
+            viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
+        }
 
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)

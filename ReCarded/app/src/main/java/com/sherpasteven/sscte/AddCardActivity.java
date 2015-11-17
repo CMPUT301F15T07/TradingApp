@@ -16,14 +16,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.sherpasteven.sscte.Controllers.AddCardController;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
     private static int RESULT_LOAD_IMAGE = 1;
-
+    private AddCardController addcardcontroller;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -50,6 +52,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+
+        addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
     }
 
 
@@ -159,5 +163,9 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     @Override
     public void Update(Inventory inventory) {
 
+    }
+
+    public void navigateToInventory(){
+        startActivity(new Intent(this, InventoryActivity.class));
     }
 }
