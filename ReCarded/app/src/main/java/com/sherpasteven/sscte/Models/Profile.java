@@ -10,6 +10,11 @@ public class Profile extends Model {
 
     private User user;
     private Config config;
+
+    public ProfileId getProfileId() {
+        return profileId;
+    }
+
     private ProfileId profileId;
 
 

@@ -1,6 +1,8 @@
 package com.sherpasteven.sscte.Models;
 
 
+import android.os.AsyncTask;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -10,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -23,20 +24,23 @@ import org.apache.http.impl.client.DefaultHttpClient;
  */
 public class ElasticSearch {
 
-    public static String SearchUrl = "http://cmput301.softwareprocess.es:8080/cmput301f15t07";
+    public static String SearchUrl = "http://cmput301.softwareprocess.es:8080/cmput301f15t07/profile/_search";
 
     private Gson gson;
     private Profiles profiles;
 
     public ElasticSearch(){
         gson = new Gson();
-        //this should get all profiles
-        searchProfiles("*", null);
+        //this should get all profiles. Do this on background thread
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                searchProfiles("*", null);
+            }
+        });
     }
 
-    Profile GetProfile(ProfileId profileId){
-        return null;
-    }
+    
 
     LastModified GetLastModified(ProfileId profileId){
         return null;

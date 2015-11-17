@@ -21,4 +21,11 @@ public class ProfileId {
     public String GetId(){
         return id;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof ProfileId)) return false;
+        ProfileId otherProfileId = (ProfileId) other;
+        return this.GetId().equals(otherProfileId.GetId());
+    }
 }

@@ -16,4 +16,12 @@ public class Profiles extends Model{
         profiles.add(profile);
         notifyViews();
     }
+
+    public Profile get(ProfileId profileId){
+        for (Profile profile : profiles){
+            if (profileId.equals(profile.getProfileId())){
+                return profile;
+            }
+        }
+    }
 }

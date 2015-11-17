@@ -82,7 +82,7 @@ public class Registration extends Model {
     //changed from void to Profile for Gui testing of the Splash page
     //Can be removed once serializtion becomes operational and tested
     public Profile generateProfile(Context context){
-        User user = new User(getUserName(), getLocation(), getUserEmail());
+        User user = new User(getUserName(), getLocation(), getUserEmail(), context);
         ProfileId profileId = new ProfileId(context);
         Profile profile = new Profile(user, profileId);
         profileSerializer.Serialize(profile, context);

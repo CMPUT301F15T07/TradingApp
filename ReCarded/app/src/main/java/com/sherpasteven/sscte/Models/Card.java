@@ -74,14 +74,16 @@ public class Card extends Model {
         this.comments = comments;
         this.images = new ArrayList<Image>();
         this.owner = owner;
-        addImage(BitmapFactory.decodeResource(context.getResources(), imageID));
+        addImage(new Image(imageID, context));
 
 
     }
 
     public Image getImagebyIndex(int index){
-        return getImages().get(index);
-
+        if (index < getImages().size()) {
+            return getImages().get(index);
+        }
+        return null;
     }
 
     public void addImage(Image image){
@@ -106,7 +108,6 @@ public class Card extends Model {
 
     public Bitmap constructImage(int index){
         return getImages().get(index).constructImage();
-
     }
 
 
