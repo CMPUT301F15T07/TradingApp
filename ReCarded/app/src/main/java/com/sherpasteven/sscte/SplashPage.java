@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Controllers.RegisterController;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
@@ -62,7 +63,8 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         super.onCreate(savedInstanceState);
 
         //if a profile already exists, there is no need to register
-        Profile localProfile = getLocalProfile();
+        //Profile localProfile = getLocalProfile();
+        Profile localProfile = CurrentProfile.GetCurrentProfile(this);
         if (localProfile != null) navigateToInventory();
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
