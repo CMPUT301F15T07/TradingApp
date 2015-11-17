@@ -10,11 +10,13 @@ public class Profile extends Model {
 
     private User user;
     private Config config;
+    private ProfileId profileId;
 
 
-    Profile(User user) {
+    Profile(User user, ProfileId profileId) {
         this.user = user;
         this.config = new Config();
+        this.profileId = profileId;
     }
 
     public User getUser() {

@@ -83,7 +83,8 @@ public class Registration extends Model {
     //Can be removed once serializtion becomes operational and tested
     public Profile generateProfile(Context context){
         User user = new User(getUserName(), getLocation(), getUserEmail());
-        Profile profile = new Profile(user);
+        ProfileId profileId = new ProfileId(context);
+        Profile profile = new Profile(user, profileId);
         profileSerializer.Serialize(profile, context);
         return profile;
     }
