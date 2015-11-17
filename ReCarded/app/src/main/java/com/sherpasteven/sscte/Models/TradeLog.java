@@ -8,21 +8,17 @@ import java.util.ArrayList;
  * Used for tabbed trade activity.
  */
 public class TradeLog extends Model {
-
     private ArrayList<Trade> pendingTrades;
     private ArrayList<Trade> pastTrades;
 
     public TradeLog(ArrayList<Trade> pendingTrades, ArrayList<Trade> pastTrades) {
-
         this.pendingTrades = pendingTrades;
         this.pastTrades = pastTrades;
     }
 
     public TradeLog(){
-
         this.pendingTrades = new ArrayList<Trade>();
         this.pastTrades = new ArrayList<Trade>();
-
     }
 
     /**
@@ -32,8 +28,8 @@ public class TradeLog extends Model {
      */
     public void tradeFinalized(Trade trade){
         if(trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")){
-        pastTrades.add(trade);
-        pendingTrades.remove(trade);
+            pastTrades.add(trade);
+            pendingTrades.remove(trade);
         }
     }
 
