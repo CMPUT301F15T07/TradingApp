@@ -48,23 +48,11 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private View mControlsView;
     private boolean mVisible;
     private RegisterController registerController;
-    private ISerializer<Profile> profileSerializer;
-    private IDeSerializer<Profile> profileIDeSerializer;
 
     /* this private profile is for the use of testing
             Gui before the serialization to ES is complete.
             It can be removed after serialization can be tested
          */
-    private Profile profile;
-
-    public Profile getProfile() {
-        profile = profileIDeSerializer.Deserialize(profile, this);
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -111,16 +99,14 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         //registerController.loadRegistration(this);
     }
 
-
     /**
      * Generates intent and moves application to inventory page.
      */
     public void navigateToInventory(){
-        setLocalProfile(profile);
         startActivity(new Intent(this, InventoryActivity.class));
     }
 
-    private void setLocalProfile(Profile profile) {
+    public void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, this);
     }

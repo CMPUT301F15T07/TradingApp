@@ -57,7 +57,7 @@ public class RegisterController extends Controller<SplashPage, Registration> {
             public void onClick(View v) {
                 //set profile can be removed once serialization is operational
                 //used to be model.generateProfile(view);
-                view.setProfile(model.generateProfile(view));
+                view.setLocalProfile(model.generateProfile(view));
                 view.navigateToInventory();
             }
         });
