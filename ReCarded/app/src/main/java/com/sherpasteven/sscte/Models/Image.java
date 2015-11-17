@@ -92,14 +92,16 @@ public class Image extends Model {
     private Bitmap resizeBitmap(Bitmap image){
         Double width = (double) image.getWidth();
         Double height = (double) image.getHeight();
+        Double max = 20.0;
+
 
 
         if(width > height){
-           height = 300 * (height/width);
-           width = 300.0; }
+           height = max * (height/width);
+           width = max; }
         else {
-           width = 300 * (width/height);
-           height = 300.0;
+           width = max * (width/height);
+           height = max;
         }
 
         return  Bitmap.createScaledBitmap(image, width.intValue(), height.intValue(), Boolean.FALSE);
