@@ -109,5 +109,24 @@
         android:layout_marginEnd="18dp" />
 
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddUser"
+        android:background="@drawable/ic_plus_2_copy"
+        android:fontFamily="sans-serif-light"
+        android:layout_alignTop="@+id/lblUserOffer"
+        android:layout_alignEnd="@+id/textClock" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddOther"
+        android:background="@drawable/ic_plus_2_copy"
+        android:fontFamily="sans-serif-light"
+        android:layout_alignTop="@+id/lblFriendOffer"
+        android:layout_alignStart="@+id/btnAddUser" />
+
+
 </RelativeLayout>
 </ScrollView>
