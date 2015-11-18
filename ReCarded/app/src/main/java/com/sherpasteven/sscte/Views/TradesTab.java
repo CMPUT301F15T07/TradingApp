@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 
 import com.sherpasteven.sscte.AddCardActivity;
@@ -84,7 +85,7 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
 
-        Button addItem = (Button) rootView.findViewById(R.id.btnAddTrade);
+        ImageButton addItem = (ImageButton) rootView.findViewById(R.id.btnAddTrade);
         addItem.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {

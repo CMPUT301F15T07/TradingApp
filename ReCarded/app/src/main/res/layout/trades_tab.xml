@@ -8,16 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add a new trade"
         android:id="@+id/btnAddTrade"
-        android:layout_above="@+id/btnEditTrade"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="2dp"
-        android:layout_marginBottom="-7dp"
-        android:fontFamily="sans-serif-light" />
+        android:src="@drawable/ic_plus_lg"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:layout_alignEnd="@+id/btnEditTrade" />
 
     <Button
         android:layout_width="wrap_content"
@@ -25,8 +23,8 @@
         android:text="Edit a Trade"
         android:id="@+id/btnEditTrade"
         android:layout_marginRight="2dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:fontFamily="sans-serif-light" />
+        android:fontFamily="sans-serif-light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

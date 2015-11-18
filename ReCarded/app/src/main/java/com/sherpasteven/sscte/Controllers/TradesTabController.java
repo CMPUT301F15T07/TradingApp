@@ -2,6 +2,7 @@ package com.sherpasteven.sscte.Controllers;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.R;
@@ -21,7 +22,7 @@ public class TradesTabController extends Controller<TradesTab, TradeLog> {
     }
     @Override
     protected void setListeners(final TradesTab view) {
-        Button addItem = (Button) view.getView().findViewById(R.id.btnAddTrade);
+        ImageButton addItem = (ImageButton) view.getView().findViewById(R.id.btnAddTrade);
         addItem.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {

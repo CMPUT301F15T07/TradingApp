@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 
 import com.sherpasteven.sscte.AddFriendActivity;
@@ -83,7 +84,7 @@ public class FriendsTab extends Fragment implements IView<User> {
 
         rootView.setTag(TAG);
 
-        Button addItem = (Button) rootView.findViewById(R.id.btnAddFriend);
+        ImageButton addItem = (ImageButton) rootView.findViewById(R.id.btnAddFriend);
         addItem.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
