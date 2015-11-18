@@ -56,7 +56,7 @@ public class AddCardController extends Controller<AddCardActivity, Profile> {
                 String name = view.getNameText().getText().toString();
                 int quantity = Integer.parseInt(view.getQuantityText().getText().toString());
                 Quality quality = new Quality(Integer.parseInt(view.getQualityText().getText().toString()));
-                String catagory = view.getCatagoryText().getText().toString();
+                String catagory = view.getCatagoryText().getSelectedItem().toString();
                 String series = view.getSeriesText().getText().toString();
                 Boolean tradable = view.getCheckBox().isChecked();
                 String comments = view.getCommentsText().getText().toString();

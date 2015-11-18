@@ -10,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
 import com.sherpasteven.sscte.Models.Card;
@@ -52,6 +54,15 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+
+        Spinner spinner = (Spinner) findViewById(R.id.categoryText);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
         addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
     }
@@ -107,8 +118,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         return (EditText) findViewById(R.id.nameText);
     }
 
-    public EditText getCatagoryText(){
-        return (EditText) findViewById(R.id.categoryText);
+    public Spinner getCatagoryText(){
+        return (Spinner) findViewById(R.id.categoryText);
     }
 
     public EditText getSeriesText(){
