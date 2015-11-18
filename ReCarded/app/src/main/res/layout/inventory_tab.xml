@@ -10,26 +10,24 @@
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/btnAddItem" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add a new item"
         android:id="@+id/btnAddItem"
-        android:layout_above="@+id/btnEditItem"
-        android:layout_alignStart="@+id/btnEditItem"
-        android:layout_marginBottom="-8dp"
-        android:layout_marginRight="2dp"
-        android:fontFamily="sans-serif-light" />
+        android:src="@drawable/ic_plus_lg"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:layout_alignEnd="@+id/btnEditItem" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit an item"
         android:id="@+id/btnEditItem"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="2dp"
-        android:fontFamily="sans-serif-light" />
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@+id/btnViewItem"
+        android:layout_alignEnd="@+id/btnViewItem" />
 
     <Button
         android:layout_width="wrap_content"
@@ -37,10 +35,8 @@
         android:text="View an item"
         android:id="@+id/btnViewItem"
         android:layout_marginRight="2dp"
-        android:layout_marginBottom="-8dp"
         android:fontFamily="sans-serif-light"
-        android:layout_above="@+id/btnAddItem"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="149dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
