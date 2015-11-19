@@ -1,10 +1,8 @@
 package com.sherpasteven.sscte.Controllers;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
-import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.FriendsTab;

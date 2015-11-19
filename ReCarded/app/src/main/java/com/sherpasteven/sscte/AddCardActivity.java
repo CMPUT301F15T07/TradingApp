@@ -17,10 +17,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
-import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{

@@ -25,8 +25,6 @@ import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
-import java.util.Set;
-
 public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
 
     // Declaring Your View and Variables

@@ -1,9 +1,7 @@
 package com.sherpasteven.sscte;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -24,8 +22,6 @@ import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
-
-import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity implements IView<Profile>{
 

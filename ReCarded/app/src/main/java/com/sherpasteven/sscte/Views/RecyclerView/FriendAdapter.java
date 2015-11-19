@@ -24,10 +24,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
-
-import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.

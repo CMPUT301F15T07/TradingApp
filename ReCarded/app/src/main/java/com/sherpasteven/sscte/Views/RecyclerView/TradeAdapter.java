@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.R;
 

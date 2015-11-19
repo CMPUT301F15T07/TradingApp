@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,18 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 
-import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.Controllers.TradesTabController;
-import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.EditTradeActivity;
-import com.sherpasteven.sscte.Models.TradeLog;
-import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.Trade;
+import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 
 import java.util.ArrayList;

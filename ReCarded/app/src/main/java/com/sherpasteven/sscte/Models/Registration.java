@@ -2,8 +2,6 @@ package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
 
-import com.sherpasteven.sscte.Controllers.Controller;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 

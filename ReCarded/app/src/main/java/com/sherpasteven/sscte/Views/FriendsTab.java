@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
 
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
@@ -20,9 +18,6 @@ import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewFriendActivity;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FriendsTab extends Fragment implements IView<User> {
 
