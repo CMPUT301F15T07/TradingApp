@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.sherpasteven.sscte"
@@ -46,5 +45,4 @@ dependencies {
         androidTestCompile 'com.android.support.test:rules:0.4'
         androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
         */
-    compile 'org.apache:apache:17'
 }

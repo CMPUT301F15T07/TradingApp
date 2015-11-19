@@ -23,5 +23,6 @@ public class Profiles extends Model{
                 return profile;
             }
         }
+        return null;
     }
 }

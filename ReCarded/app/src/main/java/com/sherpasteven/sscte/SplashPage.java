@@ -14,12 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Controllers.RegisterController;
+import com.sherpasteven.sscte.Models.ElasticSearch;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.Views.IView;
+
+import java.io.IOException;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -48,23 +51,13 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private View mControlsView;
     private boolean mVisible;
     private RegisterController registerController;
-    private ISerializer<Profile> profileSerializer;
-    private IDeSerializer<Profile> profileIDeSerializer;
+    private ElasticSearch elasticSearch;
 
     /* this private profile is for the use of testing
             Gui before the serialization to ES is complete.
             It can be removed after serialization can be tested
          */
-    private Profile profile;
 
-    public Profile getProfile() {
-        profile = profileIDeSerializer.Deserialize(profile, this);
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -76,7 +69,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         //if a profile already exists, there is no need to register
         Profile localProfile = getLocalProfile();
         if (localProfile != null) navigateToInventory();
-
+        elasticSearch = new ElasticSearch();
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_page);
         mVisible = true;
@@ -116,13 +109,16 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
      * Generates intent and moves application to inventory page.
      */
     public void navigateToInventory(){
-        setLocalProfile(profile);
         startActivity(new Intent(this, InventoryActivity.class));
     }
 
-    private void setLocalProfile(Profile profile) {
+    public void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, this);
+    }
+
+    public void setCloudProfile(Profile profile) {
+        elasticSearch.InsertProfile(profile);
     }
 
     /**

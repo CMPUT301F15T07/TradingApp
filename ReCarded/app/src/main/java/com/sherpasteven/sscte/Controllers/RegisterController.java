@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SplashPage;
@@ -57,7 +58,9 @@ public class RegisterController extends Controller<SplashPage, Registration> {
             public void onClick(View v) {
                 //set profile can be removed once serialization is operational
                 //used to be model.generateProfile(view);
-                view.setProfile(model.generateProfile(view));
+                Profile newProfile = model.generateProfile(view);
+                view.setLocalProfile(newProfile);
+                view.setCloudProfile(newProfile);
                 view.navigateToInventory();
             }
         });
