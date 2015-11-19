@@ -132,10 +132,10 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
     /** Initialises data for inventory tab given card objects.
      * Completed with respect to cardlist object.
      * FIXME: Change system for dynamic card list loading.
-     * FIXME: Adapt cardlist as user-loaded card list.
+     * FIXME: Adapt cardlist as user-loaded card list. */
 
     private void initializeData() {
-        cardlist = new ArrayList<>();
+        cardlist = new ArrayList<>();/*
         cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
         cardlist.add(new Card("Item 1", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
         cardlist.add(new Card("Item 2", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
@@ -160,13 +160,8 @@ public class InventoryTab extends Fragment implements IView<Inventory>{
         cardlist.add(new Card("Item 21", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
         cardlist.add(new Card("Item 22", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
         cardlist.add(new Card("Item 23", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", new User("Test", "Test", "Test")));
-<<<<<<< HEAD
-
+        */
     }
-=======
-    }*/
->>>>>>> fcfad6acecaaea2343fcd0ce5454e93a161c0b59
-
     public void navigateToAddCardActivity(){
         Intent myIntent = new Intent(getActivity(), AddCardActivity.class);
         getActivity().startActivity(myIntent);
