@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:id="@+id/mediaText"
-            android:background="@drawable/read_line"
+            android:background="@drawable/add_media_bar"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
@@ -140,17 +140,29 @@
             android:layout_marginTop="17dp"
             android:layout_marginBottom="-25dp"/>
 
-        <EditText
+        <!--<EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:id="@+id/categoryText"
-            android:background="@drawable/read_line"
+            android:background="@drawable/drop_down_list_bar"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-light"
             android:textColor="#444444"
             android:maxLines="1"
             android:nestedScrollingEnabled="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="50dp"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/nameText"
+            android:layout_alignParentLeft="true" />-->
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:background="@drawable/drop_down_list_bar"
+            android:layout_height="wrap_content"
+            android:id="@+id/categoryText"
+            android:fontFamily="sans-serif-light"
             android:paddingStart="10dp"
             android:paddingEnd="50dp"
             android:layout_marginTop="24dp"

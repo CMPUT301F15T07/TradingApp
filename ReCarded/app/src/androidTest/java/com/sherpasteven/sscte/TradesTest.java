@@ -240,5 +240,4 @@ public class TradesTest extends ApplicationTestCase<Application> {
         assertEquals(emailBorrower.getStatus(), "SENT");
     }
 
-
 }

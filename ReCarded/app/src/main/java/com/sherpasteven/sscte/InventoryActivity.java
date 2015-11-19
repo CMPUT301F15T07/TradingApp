@@ -12,8 +12,11 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.IDeSerializer;
+import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
@@ -34,8 +37,22 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     SlidingTabLayout tabs;
     CharSequence Titles[]={"Inventory","Trades","Friends"};
     int Numboftabs = 3;
+
     private Profile currentprofile;
     private User currentuser;
+    private ISerializer<Profile> profileISerializer;
+    private IDeSerializer<Profile> profileIDeSerializer;
+
+
+    public Profile getProfile() {
+        currentprofile = profileIDeSerializer.Deserialize(currentprofile, this);
+        return currentprofile;
+    }
+
+    private void setLocalProfile(Profile profile) {
+        ISerializer<Profile> serializer = new LocalProfileSerializer();
+        serializer.Serialize(profile, this);
+    }
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -44,11 +61,24 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
+
         currentprofile = CurrentProfile.GetCurrentProfile(this);
-        currentuser = currentprofile.getUser();
+        if (currentprofile == null) {
+            Toast.makeText(getApplicationContext(), "No profile loaded, returning to main page",
+                    Toast.LENGTH_LONG).show();
+            Intent myIntent = new Intent(this, SplashPage.class);
+            startActivity(myIntent);
+            finish();
+        } else {
+            currentuser = currentprofile.getUser();
+        }
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        //changeToolbarColor();
+
+        /*
+        if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
+            changeToolbarColor();
+        }*/
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -71,29 +101,6 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
-
-        // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
-
-        // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.orange_main);
-            }
-        });
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
-
 
     }
 

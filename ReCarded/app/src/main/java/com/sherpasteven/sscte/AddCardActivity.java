@@ -10,20 +10,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
+import com.sherpasteven.sscte.Controllers.AddCardController;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
     private static int RESULT_LOAD_IMAGE = 1;
-
+    private AddCardController addcardcontroller;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -50,6 +54,17 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+
+        Spinner spinner = (Spinner) findViewById(R.id.categoryText);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+    // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
     }
 
 
@@ -103,8 +118,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         return (EditText) findViewById(R.id.nameText);
     }
 
-    public EditText getCatagoryText(){
-        return (EditText) findViewById(R.id.categoryText);
+    public Spinner getCatagoryText(){
+        return (Spinner) findViewById(R.id.categoryText);
     }
 
     public EditText getSeriesText(){
@@ -159,5 +174,9 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     @Override
     public void Update(Inventory inventory) {
 
+    }
+
+    public void navigateToInventory(){
+        startActivity(new Intent(this, InventoryActivity.class));
     }
 }

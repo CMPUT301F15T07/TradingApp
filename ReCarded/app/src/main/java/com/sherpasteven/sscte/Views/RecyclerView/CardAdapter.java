@@ -16,6 +16,8 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 */
 
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     private String[] mDataSet;
     List<Card> cards;
+    static View view;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -48,6 +51,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         TextView cardName;
         TextView cardDescription;
         ImageView cardPhoto;
+        ImageView cardStatus;
 
         public ViewHolder(View v) {
             super(v);
@@ -70,6 +74,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             cardName = (TextView) v.findViewById(R.id.card_name);
             cardDescription = (TextView) v.findViewById(R.id.card_text);
             cardPhoto = (ImageView)itemView.findViewById(R.id.card_photo);
+            cardStatus = (ImageView)itemView.findViewById(R.id.imgStatus);
+            view = v;
 
         }
 
@@ -107,12 +113,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.cardName.setText(cards.get(position).getName());
         viewHolder.cardDescription.setText(cards.get(position).getCatagory());
-        viewHolder.cardPhoto.setImageResource(cards.get(position).getImageID());
+        if (cards.get(position).getImagebyIndex(0) != null) {
+            viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
+        }
+        if (cards.get(position).isTradable() == true) {
+            viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_available));
+        } else if (cards.get(position).isTradable() == false) {
+            viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
+        }
 
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
@@ -122,6 +134,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return cards.size();
+        if (cards != null) {
+            return cards.size();
+        } return 0;
     }
 }

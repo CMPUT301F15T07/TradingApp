@@ -1,5 +1,12 @@
 package com.sherpasteven.sscte.Models;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.util.ArrayList;
+
 /**
  * This class represents a trading card and all of the data associated with it.
  * These cards will be the basis of the app since they are the objects that users will trade.
@@ -9,37 +16,113 @@ package com.sherpasteven.sscte.Models;
 public class Card extends Model {
 
     private String name;
-    private int imageID;
     private int quantity;
     private Quality quality;
     private String catagory;
     private String series;
     private Boolean tradable;
     private String comments;
-    //private ArrayList<images> images;
+    private ArrayList<Image> images;
     private User owner;
 
 
-    public Card(String name /* int imageID */, int quantity, Quality quality, String catagory,
-               String series, Boolean tradable, String comments,/* ArrayList<images> images ,*/ User owner){
+    public Card(String name, int quantity, Quality quality, String catagory,
+               String series, Boolean tradable, String comments, ArrayList<Image> images , User owner){
 
         this.name = name;
-        //this.imageID = imageID;
         this.quantity = quantity;
         this.quality = quality;
         this.catagory = catagory;
         this.series = series;
         this.tradable = tradable;
         this.comments = comments;
-        //this.images = images;
+        this.images = images;
         this.owner = owner;
 
 
     }
 
-    public int getImageID() { return imageID; }
 
-    public void setImageID(int imageID) { this.imageID = imageID; }
+
+    public Card(String name, int quantity, Quality quality, String catagory,
+                String series, Boolean tradable, String comments , User owner){
+
+        this.name = name;
+        this.quantity = quantity;
+        this.quality = quality;
+        this.catagory = catagory;
+        this.series = series;
+        this.tradable = tradable;
+        this.comments = comments;
+        this.images = new ArrayList<Image>();
+        this.owner = owner;
+
+
+    }
+
+    public Card(String name, int imageID, int quantity, Quality quality, String catagory,
+                String series, Boolean tradable, String comments , User owner, Context context){
+
+        BitmapFactory bmf = new BitmapFactory();
+
+        this.name = name;
+        this.quantity = quantity;
+        this.quality = quality;
+        this.catagory = catagory;
+        this.series = series;
+        this.tradable = tradable;
+        this.comments = comments;
+        this.images = new ArrayList<Image>();
+        this.owner = owner;
+        addImage(new Image(imageID, context));
+
+
+    }
+
+    public Image getImagebyIndex(int index){
+        if (index < getImages().size()) {
+            return getImages().get(index);
+        }
+        return null;
+    }
+
+    public void addImage(Image image){
+
+        getImages().add(image);
+    }
+
+    public void addImage(Bitmap image){
+
+        getImages().add(new Image(image));
+    }
+
+    public void removeImage(int i){
+        getImages().remove(i);
+
+    }
+
+    public void removeImage(Image image){
+        getImages().remove(image);
+
+    }
+
+    public Bitmap constructImage(int index){
+        return getImages().get(index).constructImage();
+    }
+
+
+    public ArrayList<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<Image> images) {
+        this.images = images;
+    }
+
+
+    //public int getImageID() { return imageID; }
+
+    //public void setImageID(int imageID) { this.imageID = imageID; }
 
     public String getName() {
         return name;
@@ -128,7 +211,6 @@ public class Card extends Model {
                 this.isTradable().equals(card.isTradable()) &&
                 this.getComments().equals(card.getComments()) &&
                 this.getOwner().equals(card.getOwner());
-
     }
 
     /**
