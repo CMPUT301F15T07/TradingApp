@@ -74,6 +74,7 @@ public class Inventory extends Model {
 
             if(getCard(i).equals(card)){
                 getCards().remove(i);
+                return;
             }
         }
 

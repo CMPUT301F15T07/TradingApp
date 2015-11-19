@@ -40,6 +40,7 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
             }
         });
 
+        /*
         Button editItem = (Button) view.getView().findViewById(R.id.btnEditItem);
         editItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +56,7 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
                 view.navigateToViewCardActivity();
             }
         });
-
+        */
 
     }
 }

@@ -78,7 +78,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
-        }*/
+        }
+        */
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -103,7 +104,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         tabs.setViewPager(pager);
 
     }
-
+    /*
     public Button getAddButton(){
         return (Button) findViewById(R.id.btnAddItem);
     }
@@ -115,6 +116,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     public Button getEditButton(){
         return (Button) findViewById(R.id.btnEditItem);
     }
+    */
 
     /**
      * Changes the toolbar color on the main page.

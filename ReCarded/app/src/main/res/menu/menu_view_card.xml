@@ -8,6 +8,11 @@
         android:title="Edit Card"
         app:showAsAction="ifRoom"
         android:orderInCategory="1"/>
+    <item android:id="@+id/delete_card"
+        android:icon="@drawable/ic_delete"
+        android:title="Edit Card"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"/>
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="200" app:showAsAction="never" />
 </menu>
