@@ -74,7 +74,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.imgCard);
+            ImageView imageView = getImageViewCard();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
 
@@ -92,6 +92,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         getMenuInflater().inflate(R.menu.menu_add_card, menu);
         return true;
     }
+
+    public ImageView getImageViewCard(){return (ImageView) findViewById(R.id.imgCard);}
 
     public EditText getMediaText(){
         return (EditText) findViewById(R.id.mediaText);

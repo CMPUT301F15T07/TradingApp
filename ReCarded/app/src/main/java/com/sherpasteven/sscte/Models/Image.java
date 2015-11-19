@@ -88,7 +88,7 @@ public class Image extends Model {
 
 
     private Bitmap scaleQuality(Bitmap image){
-        int scale = 0;
+        int scale = 50;
         //Bitmap newimage;
         //Bitmap retainimage = image;
         ByteArrayOutputStream outstream = new ByteArrayOutputStream();
@@ -107,7 +107,7 @@ public class Image extends Model {
     private Bitmap resizeBitmap(Bitmap image){
         Double width = (double) image.getWidth();
         Double height = (double) image.getHeight();
-        Double max = 20.0;
+        Double max = 100.0;
 
         if(width > height){
            height = max * (height/width);

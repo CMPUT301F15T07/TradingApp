@@ -75,8 +75,23 @@ public class Card extends Model {
         this.images = new ArrayList<Image>();
         this.owner = owner;
         addImage(new Image(imageID, context));
+    }
 
+    public Card(String name, Image image, int quantity, Quality quality, String catagory,
+                String series, Boolean tradable, String comments , User owner){
 
+        BitmapFactory bmf = new BitmapFactory();
+
+        this.name = name;
+        this.quantity = quantity;
+        this.quality = quality;
+        this.catagory = catagory;
+        this.series = series;
+        this.tradable = tradable;
+        this.comments = comments;
+        this.images = new ArrayList<Image>();
+        this.owner = owner;
+        addImage(image);
     }
 
     public Image getImagebyIndex(int index){

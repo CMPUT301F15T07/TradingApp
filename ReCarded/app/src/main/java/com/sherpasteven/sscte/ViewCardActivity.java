@@ -107,6 +107,10 @@ public class ViewCardActivity extends AppCompatActivity {
         //set comments
         TextView cardcomments = (TextView) findViewById(R.id.commentsInfo);
         cardcomments.setText(card.getComments());
+
+        if(!card.getImages().isEmpty()){
+        ImageView viewcard = (ImageView) findViewById(R.id.greyRect);
+        viewcard.setImageBitmap(card.constructImage(0));}
     }
 
     private AlertDialog ConfirmDelete()

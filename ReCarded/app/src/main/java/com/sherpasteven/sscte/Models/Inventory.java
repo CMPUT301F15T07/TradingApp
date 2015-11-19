@@ -32,8 +32,8 @@ public class Inventory extends Model {
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
-        else {getCards().add( new Card(card.getName()/* card.getImageID() */, card.getQuantity(), card.getQuality(), card.getCatagory(),
-                card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
+        else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
+                card.getSeries(), card.isTradable(), card.getComments(), card.getImages(), card.getOwner()));}
     }
 
     /**
@@ -122,7 +122,7 @@ public class Inventory extends Model {
         }
 
         catch(IllegalArgumentException e){
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -137,4 +137,3 @@ public class Inventory extends Model {
         returnCard(card).setQuantity(returnCard(card).getQuantity() + amount);
     }
 }
-

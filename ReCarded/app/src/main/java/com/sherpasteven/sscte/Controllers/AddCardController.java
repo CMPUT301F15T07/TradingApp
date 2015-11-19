@@ -2,6 +2,8 @@ package com.sherpasteven.sscte.Controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
@@ -24,7 +27,7 @@ import com.sherpasteven.sscte.R;
 /**
  * Controller for AddCardActivity.
  */
-public class AddCardController extends Controller<AddCardActivity, Profile> {
+public class AddCardController extends Controller<AddCardActivity, Profile>{
 
     private final AddCardActivity view;
     private final Profile model;
@@ -56,11 +59,15 @@ public class AddCardController extends Controller<AddCardActivity, Profile> {
                 Boolean tradable = view.getCheckBox().isChecked();
                 String comments = view.getCommentsText().getText().toString();
                 User owner = CurrentProfile.GetCurrentProfile(view).getUser();
-
+                Bitmap cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
 
                 Toast.makeText(view, "Submitted a card...",
                         Toast.LENGTH_SHORT).show();
-                model.getUser().getInventory().addCard(new Card(name, quantity, quality, catagory, series, tradable, comments, owner));
+                Card card = new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner);
+                model.getUser().getInventory().addCard(card);
+                //model.getUser().getInventory().addCard(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
+                cardimage.recycle();
+                cardimage = null;
                 profileSerializer.Serialize(model, view);
                 view.navigateToInventory();
             }
@@ -77,5 +84,6 @@ public class AddCardController extends Controller<AddCardActivity, Profile> {
         });
 
     }
+
 
 }
