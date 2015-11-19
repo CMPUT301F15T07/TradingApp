@@ -1,10 +1,12 @@
 package com.sherpasteven.sscte.Controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,15 +46,8 @@ public class AddCardController extends Controller<AddCardActivity, Profile> {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //set profile can be removed once serialization is operational
-                //used to be model.generateProfile(view);
 
-                /*
-                 public Card(String name, int quantity, Quality quality, String catagory,
-                String series, Boolean tradable, String comments , User owner){
-                 */
-
-
+                //retrieve items required for a new card
                 String name = view.getNameText().getText().toString();
                 int quantity = Integer.parseInt(view.getQuantityText().getText().toString());
                 Quality quality = new Quality(Integer.parseInt(view.getQualityText().getText().toString()));
@@ -61,11 +56,23 @@ public class AddCardController extends Controller<AddCardActivity, Profile> {
                 Boolean tradable = view.getCheckBox().isChecked();
                 String comments = view.getCommentsText().getText().toString();
                 User owner = CurrentProfile.GetCurrentProfile(view).getUser();
+
+
                 Toast.makeText(view, "Submitted a card...",
                         Toast.LENGTH_SHORT).show();
                 model.getUser().getInventory().addCard(new Card(name, quantity, quality, catagory, series, tradable, comments, owner));
                 profileSerializer.Serialize(model, view);
                 view.navigateToInventory();
+            }
+        });
+
+        ImageButton buttonLoadImage = (ImageButton) view.findViewById(R.id.btnCardImage);
+        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                view.loadImage();
+
             }
         });
 

@@ -1,10 +1,17 @@
 package com.sherpasteven.sscte;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Inventory;
 
 public class ViewCardActivity extends AppCompatActivity {
 
@@ -15,6 +22,11 @@ public class ViewCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0);
+        Inventory inventory = CurrentProfile.GetCurrentProfile(this).getUser().getInventory();
+        Card card = inventory.getCard(position);
+        retrieveCardInfo(card);
     }
 
     /**
@@ -51,5 +63,38 @@ public class ViewCardActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void retrieveCardInfo(Card card){
+
+        //set header
+        String tradable;
+        if (card.isTradable()){
+            tradable = "Tradable";
+        } else {
+            tradable = "Not Tradable";
+        }
+        String headertext = card.getCatagory()+ " - " + card.getSeries()+ " - " + tradable;
+        TextView header = (TextView) findViewById(R.id.txtStatus);
+        header.setText(headertext);
+
+        //set name
+        TextView cardname = (TextView) findViewById(R.id.txtName);
+        cardname.setText(card.getName());
+
+        //set quality
+        TextView cardquality = (TextView) findViewById(R.id.qualityInfo);
+        cardquality.setText(String.valueOf(card.getQuality().getQuality()));
+
+        //set quantity
+        TextView cardquantity = (TextView) findViewById(R.id.quantityInfo);
+        cardquantity.setText(String.valueOf(card.getQuantity()));
+
+        //set comments
+        TextView cardcomments = (TextView) findViewById(R.id.commentsInfo);
+        cardcomments.setText(card.getComments());
+
+
+
+
     }
 }

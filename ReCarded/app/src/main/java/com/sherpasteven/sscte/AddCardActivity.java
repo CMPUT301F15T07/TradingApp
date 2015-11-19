@@ -36,24 +36,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
-
-        ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
-
-            /**
-             * OnClick to enable camera switch.
-             * @param arg0
-             */
-            @Override
-            public void onClick(View arg0) {
-
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-            }
-        });
+        addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
 
         Spinner spinner = (Spinner) findViewById(R.id.categoryText);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -64,7 +47,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
+
     }
 
 
@@ -178,5 +161,12 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
     public void navigateToInventory(){
         startActivity(new Intent(this, InventoryActivity.class));
+    }
+    public void loadImage(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 }

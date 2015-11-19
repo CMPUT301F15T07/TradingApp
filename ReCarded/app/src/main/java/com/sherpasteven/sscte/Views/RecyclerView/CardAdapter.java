@@ -16,6 +16,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 */
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewCardActivity;
 
 import java.util.List;
 
@@ -59,6 +61,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Element " + getPosition() + " to be shown");
@@ -68,7 +71,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                                     dialog.dismiss();
                                 }
                             });
-                    alertDialog.show();                }
+                    alertDialog.show(); */
+                    Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
+                    myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
+                    view.getContext().startActivity(myIntent);
+                }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             cardName = (TextView) v.findViewById(R.id.card_name);

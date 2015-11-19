@@ -43,18 +43,6 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     private Inventory inventory;
     private InventoryTabController inventorytabcontroller;
     private View inflate_view;
-
-    @SuppressLint("ValidFragment")
-    public InventoryTab(Inventory inventory) {
-        super();
-        this.inventory = inventory;
-    }
-
-    @Override
-    public void Update(Inventory inventory) {
-
-    }
-
     private List<Card> cardlist;
 
     private enum LayoutManagerType {
@@ -68,6 +56,19 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     protected CardAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
+
+    @SuppressLint("ValidFragment")
+    public InventoryTab(Inventory inventory) {
+        super();
+        this.inventory = inventory;
+    }
+
+    @Override
+    public void Update(Inventory inventory) {
+
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
