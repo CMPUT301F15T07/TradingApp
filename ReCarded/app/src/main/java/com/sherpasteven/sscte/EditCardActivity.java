@@ -11,16 +11,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.sherpasteven.sscte.Controllers.AddCardController;
+import com.sherpasteven.sscte.Controllers.EditCardController;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Views.IView;
 
 public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
     private static int RESULT_LOAD_IMAGE = 1;
+    private EditCardController editcardcontroller;
+    Inventory inventory;
+    Card card;
+    Integer value;
+    View v;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -29,6 +41,8 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card);
+        editcardcontroller = new EditCardController(this, CurrentProfile.GetCurrentProfile(this));
+
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +62,7 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
             }
         });
 
+        value = getIntent().getExtras().getInt("pointer");
 
         Spinner spinner = (Spinner) findViewById(R.id.categoryText);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -57,8 +72,81 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        // setup the card details
+        /**
+         * FIXME: Import this information to controller
+         */
+        inventory = CurrentProfile.GetCurrentProfile(this).getUser().getInventory();
+        card = inventory.getCard(value);
+
+        EditText nameText = (EditText) findViewById(R.id.nameText);
+        EditText seriesText = (EditText) findViewById(R.id.seriesText);
+        EditText qualityText = (EditText) findViewById(R.id.qualityText);
+        EditText quantityText = (EditText) findViewById(R.id.quantityText);
+        EditText commentsText = (EditText) findViewById(R.id.commentsText);
+
+        nameText.setText(card.getName());
+        int spinnerPosition = adapter.getPosition(card.getCatagory());
+        spinner.setSelection(spinnerPosition);
+        seriesText.setText(card.getSeries());
+        qualityText.setText(Integer.toString(card.getQuality().getQuality()));
+        quantityText.setText(Integer.toString(card.getQuantity()));
+        commentsText.setText(card.getComments());
+        getCheckBox().setChecked(card.isTradable());
     }
 
+
+    public ImageView getImageViewCard(){return (ImageView) findViewById(R.id.imgCard);}
+
+    public EditText getMediaText(){
+        return (EditText) findViewById(R.id.mediaText);
+    }
+
+    public EditText getNameText(){
+        return (EditText) findViewById(R.id.nameText);
+    }
+
+    public Spinner getCatagoryText(){
+        return (Spinner) findViewById(R.id.categoryText);
+    }
+
+    public EditText getSeriesText(){
+        return (EditText) findViewById(R.id.seriesText);
+    }
+
+    public EditText getQualityText(){
+        return (EditText) findViewById(R.id.qualityText);
+    }
+
+    public EditText getQuantityText(){
+        return (EditText) findViewById(R.id.quantityText);
+    }
+
+    public EditText getCommentsText(){
+        return (EditText) findViewById(R.id.commentsText);
+    }
+
+    public Button getEnterButton(){
+        return (Button) findViewById(R.id.btnEnter);
+    }
+
+    public CheckBox getCheckBox(){
+        return (CheckBox) findViewById(R.id.checkBox);
+    }
+
+    public int getPosition() { return value; }
+
+    public void navigateToInventory(){
+        startActivity(new Intent(this, InventoryActivity.class));
+    }
+    public void loadImage(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
 
     /**
      * Response is generated once load image intent is completed.
@@ -73,7 +161,7 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
@@ -83,8 +171,9 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.imgCard);
+            ImageView imageView = getImageViewCard();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            imageView.setTag("Changed");
         }
     }
 

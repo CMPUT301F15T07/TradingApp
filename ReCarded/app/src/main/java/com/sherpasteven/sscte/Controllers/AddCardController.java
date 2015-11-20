@@ -58,7 +58,7 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 try{
                     quantity = Integer.parseInt(view.getQuantityText().getText().toString());
                 }catch(NumberFormatException e) {
-                    quantity = 0;
+                    quantity = 1;
                 }
                 Quality quality = new Quality(0);
                 try {
@@ -68,8 +68,14 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 }
                 String catagory = view.getCatagoryText().getSelectedItem().toString();
                 String series = view.getSeriesText().getText().toString();
+                if (series.equals("")) {
+                    series = "Unknown";
+                }
                 Boolean tradable = view.getCheckBox().isChecked();
                 String comments = view.getCommentsText().getText().toString();
+                if (comments.equals("")) {
+                    comments = "No comments entered for this card...";
+                }
                 User owner = CurrentProfile.GetCurrentProfile(view).getUser();
                 Bitmap cardimage = null;
                 if(view.getImageViewCard().getTag().equals("Changed")) {

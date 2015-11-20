@@ -25,6 +25,7 @@ public class ViewCardActivity extends AppCompatActivity {
     Inventory inventory;
     Card card;
     View v;
+    Integer p;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -37,6 +38,7 @@ public class ViewCardActivity extends AppCompatActivity {
         int position = intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0);
         inventory = CurrentProfile.GetCurrentProfile(this).getUser().getInventory();
         card = inventory.getCard(position);
+        p = position;
         retrieveCardInfo(card);
         v = this.findViewById(android.R.id.content);
     }
@@ -71,6 +73,7 @@ public class ViewCardActivity extends AppCompatActivity {
             this.startActivity(intent1);
         } else if (id == R.id.edit_card) {
             Intent intent2 = new Intent(this, EditCardActivity.class);
+            intent2.putExtra("pointer", p);
             this.startActivity(intent2);
         } else if (id == R.id.delete_card) {
             AlertDialog confirmDel = ConfirmDelete();
