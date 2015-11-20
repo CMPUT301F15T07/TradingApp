@@ -54,8 +54,18 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
 
                 //retrieve items required for a new card
                 String name = view.getNameText().getText().toString();
-                int quantity = Integer.parseInt(view.getQuantityText().getText().toString());
-                Quality quality = new Quality(Integer.parseInt(view.getQualityText().getText().toString()));
+                int quantity = 0;
+                try{
+                    quantity = Integer.parseInt(view.getQuantityText().getText().toString());
+                }catch(NumberFormatException e) {
+                    quantity = 0;
+                }
+                Quality quality = new Quality(0);
+                try {
+                    quality.setQuality(Integer.parseInt(view.getQualityText().getText().toString()));
+                } catch(NumberFormatException e){
+                    quality.setQuality(0);
+                }
                 String catagory = view.getCatagoryText().getSelectedItem().toString();
                 String series = view.getSeriesText().getText().toString();
                 Boolean tradable = view.getCheckBox().isChecked();
