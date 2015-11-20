@@ -46,6 +46,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
     // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        ImageView imageView = getImageViewCard();
+        imageView.setTag("Default");
 
 
     }
@@ -76,6 +78,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
             ImageView imageView = getImageViewCard();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            imageView.setTag("Changed");
         }
 
 
