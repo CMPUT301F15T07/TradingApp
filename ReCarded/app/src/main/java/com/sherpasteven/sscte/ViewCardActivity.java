@@ -3,6 +3,7 @@ package com.sherpasteven.sscte;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -113,7 +114,7 @@ public class ViewCardActivity extends AppCompatActivity {
 
         if(!card.getImages().isEmpty()){
         ImageView viewcard = (ImageView) findViewById(R.id.greyRect);
-        viewcard.setImageBitmap(card.constructImage(0));}
+        viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));}
     }
 
     private AlertDialog ConfirmDelete()
