@@ -145,7 +145,7 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
         cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
         cardlist.add(new Card("Item 1", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
-        cardlist.add(new Card("Item 2", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
+        cardlist.add(new Card("Item 2", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", user, this.getContext()));
 
     }
     public void navigateToAddCardActivity(){
@@ -156,10 +156,27 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         Intent myIntent = new Intent(getActivity(), EditCardActivity.class);
         getActivity().startActivity(myIntent);
     }
+
+    @Override
+    public void onStop() {
+        getActivity().finish();
+    }
+
     public void navigateToViewCardActivity(){
         Intent myIntent = new Intent(getActivity(), ViewCardActivity.class);
         getActivity().startActivity(myIntent);
     }
+
+    public void recareateActivity(){
+        Intent recreate = new Intent(getActivity(), InventoryActivity.class);
+        getActivity().startActivity(recreate);
+    }
+    /*
+    @Override
+    public void onResume() {
+        recareateActivity();
+        super.onResume();
+    } */
 
     public View getView(){
         return inflate_view;
