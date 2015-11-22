@@ -155,10 +155,6 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         getActivity().startActivity(myIntent);
     }
 
-    @Override
-    public void onStop() {
-        getActivity().finish();
-    }
 
     public void navigateToViewCardActivity(){
         Intent myIntent = new Intent(getActivity(), ViewCardActivity.class);
@@ -169,12 +165,6 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         Intent recreate = new Intent(getActivity(), InventoryActivity.class);
         getActivity().startActivity(recreate);
     }
-    /*
-    @Override
-    public void onResume() {
-        recareateActivity();
-        super.onResume();
-    } */
 
     public View getView(){
         return inflate_view;
