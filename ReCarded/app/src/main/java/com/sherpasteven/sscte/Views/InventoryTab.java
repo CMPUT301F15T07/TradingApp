@@ -68,8 +68,6 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
 
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
