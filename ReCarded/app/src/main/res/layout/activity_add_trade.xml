@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <ScrollView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,56 +32,72 @@
         android:fontFamily="sans-serif"
         android:textColor="@color/brown_dark" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/trade_tab"
-        android:id="@+id/imgUserTab"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imgStatus"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/trade_tab"
-        android:id="@+id/imgFriendTab"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imgUserTab"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp" />
-
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Offer:"
         android:textSize="14sp"
         android:id="@+id/lblUserOffer"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:layout_alignStart="@+id/imgUserTab"
-        android:layout_alignTop="@+id/imgUserTab"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="11dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/imgStatus"
+        android:background="@color/brown_main"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/lblUserGrid"
+        android:layout_below="@+id/lblUserOffer"
+        >
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/YourOfferCards"
+            android:columnWidth="85dp"
+            android:numColumns="3"
+            ></GridView>
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Their Offer:"
         android:textSize="14sp"
         android:id="@+id/lblFriendOffer"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:layout_alignStart="@+id/imgFriendTab"
-        android:layout_alignTop="@+id/imgFriendTab"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="11dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/lblUserGrid"
+        android:background="@color/brown_main"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/lblFriendGrid"
+        android:layout_below="@+id/lblFriendOffer"
+        >
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/thierOfferCards"
+            android:columnWidth="85dp"
+            android:numColumns="3"
+            ></GridView>
+
+
+    </LinearLayout>
 
     <Button
         android:layout_width="94dp"
@@ -91,10 +109,10 @@
         android:layout_gravity="end|bottom"
         android:fontFamily="sans-serif-light"
         android:textColor="@color/material_grey_900"
-        android:layout_below="@+id/imgFriendTab"
         android:layout_marginEnd="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/lblFriendGrid" />
 
     <TextClock
         android:layout_width="wrap_content"
@@ -127,6 +145,5 @@
         android:layout_alignTop="@+id/lblFriendOffer"
         android:layout_alignStart="@+id/btnAddUser" />
 
-
 </RelativeLayout>
-</ScrollView>
+<!--</ScrollView>-->
