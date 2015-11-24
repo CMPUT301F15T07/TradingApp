@@ -64,7 +64,7 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
 
         //if a profile already exists, there is no need to register
         //Profile localProfile = getLocalProfile();
-        Profile localProfile = CurrentProfile.GetCurrentProfile(this);
+        Profile localProfile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (localProfile != null) navigateToInventory();
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);

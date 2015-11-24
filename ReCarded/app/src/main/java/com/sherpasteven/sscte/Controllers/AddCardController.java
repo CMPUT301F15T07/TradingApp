@@ -84,7 +84,9 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 else{ cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);}
                     Toast.makeText(view, "Submitted a card...",
                         Toast.LENGTH_SHORT).show();
-                model.getUser().addInventoryItem(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
+                Card card = new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner);
+                model.getUser().addInventoryItem(card);
+                //model.getUser().addInventoryItem(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
                     cardimage.recycle();
                     cardimage = null;
 
