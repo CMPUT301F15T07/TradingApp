@@ -54,11 +54,11 @@ public class CardTradeActivity extends AppCompatActivity {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CardTradeAdapter(cardlist);
+        //mAdapter = new CardTradeAdapter(cardlist);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
-        initializeData();
+        //initializeData();
     }
 
     private enum LayoutManagerType {
@@ -110,15 +110,12 @@ public class CardTradeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * Updates the activity based on raised condition.
-     * @param profile Profile to reference friend list.
-     */
+    
+    /*
     @Override
     public void Update(Profile profile) {
 
-    }
+    }*/
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -127,11 +124,13 @@ public class CardTradeActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+
     /**
      * Generates data for friends with respect to currentUser object.
      * FIXME: Convert for dynamic friend data loading.
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
+    /*
     private void initializeData() {
         friendslist.add(new User("test1", "location1", "email1", this.getApplicationContext()));
         friendslist.add(new User("test2", "location2", "email2", this.getApplicationContext()));
@@ -144,5 +143,5 @@ public class CardTradeActivity extends AppCompatActivity {
         friendslist.add(new User("test9", "location9", "email9", this.getApplicationContext()));
         friendslist.add(new User("test10", "location10", "email10", this.getApplicationContext()));
         friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
-    }
+    }*/
 }

@@ -26,6 +26,8 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
     private String[] mDataSet;
     ArrayList<Card> cardList;
+    static View view;
+
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -60,7 +62,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             cardDescription = (TextView) v.findViewById(R.id.card_text);
             //cardPhoto = getCardImage();
             cardStatus = (ImageView)itemView.findViewById(R.id.imgStatus);
-            //view = v;
+            view = v;
 
         }
 
@@ -95,14 +97,14 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.cardName.setText(cards.get(position).getName());
-        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
-        if (cards.get(position).getImagebyIndex(0) != null) {
-            viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
+        viewHolder.cardName.setText(cardList.get(position).getName());
+        viewHolder.cardDescription.setText(cardList.get(position).getCatagory());
+        if (cardList.get(position).getImagebyIndex(0) != null) {
+            viewHolder.cardPhoto.setImageBitmap(cardList.get(position).constructImage(0));
         }
-        if (cards.get(position).isTradable() == true) {
+        if (cardList.get(position).isTradable() == true) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_available));
-        } else if (cards.get(position).isTradable() == false) {
+        } else if (cardList.get(position).isTradable() == false) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
     }
