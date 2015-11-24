@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.sherpasteven.sscte.Controllers.ProfileController;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Image;
@@ -35,10 +37,8 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
     private ISerializer<Profile> profileISerializer;
 
 
-    public Profile getProfile() {
-        profile = profileIDeSerializer.Deserialize(profile, this);
-        return profile;
-    }
+    private ProfileController controller;
+
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -48,7 +48,10 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        final Profile localProfile = getLocalProfile();
+        setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
+
+        setController(new ProfileController(this, getProfile()));
+        getProfile().getUser().addView(this);
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnProfileImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -68,45 +71,39 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
             }
         });
 
-        final EditText nameText = (EditText) findViewById(R.id.nameText);
-        final EditText cityText = (EditText) findViewById(R.id.cityText);
-        final EditText emailText = (EditText) findViewById(R.id.emailText);
-        final ImageView imageView = (ImageView) findViewById(R.id.profile_image);
-
-        nameText.setText(localProfile.getUser().getName());
-        cityText.setText(localProfile.getUser().getLocation());
-        emailText.setText(localProfile.getUser().getEmail());
-        imageView.setImageBitmap(localProfile.getUser().constructProfilePic());
+        controller.setFields();
 
         Button submitButton = (Button) findViewById(R.id.btnEnter);
         submitButton.setOnClickListener( new View.OnClickListener() {
 
             public void onClick(View v) {
-                localProfile.getUser().setName(nameText.getText().toString());
-                localProfile.getUser().setLocation(cityText.getText().toString());
-                localProfile.getUser().setEmail(emailText.getText().toString());
-                localProfile.getUser().setProfilePic(new Image(((BitmapDrawable) imageView.getDrawable()).getBitmap()));
-                setLocalProfile(localProfile);
-                Intent myIntent = new Intent(ProfileActivity.this, InventoryActivity.class);
-                startActivity(myIntent);
+                controller.submit();
             }
         });
 
     }
 
-    private void setLocalProfile(Profile profile) {
-        ISerializer<Profile> serializer = new LocalProfileSerializer();
-        serializer.Serialize(profile, this);
+    public EditText getNameText(){
+        return (EditText) findViewById(R.id.nameText);
     }
+
+    public EditText getCityText(){
+        return (EditText) findViewById(R.id.cityText);
+    }
+
+    public EditText geEmailText(){
+        return (EditText) findViewById(R.id.emailText);
+    }
+
+    public ImageView getImageProfile(){
+        return (ImageView) findViewById(R.id.profile_image);
+    }
+
 
     /**
      * Serialises the profile (getter) for application registry.
      * @return deserialized profile information.
      */
-    private Profile getLocalProfile() {
-        IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
-        return deSerializer.Deserialize(null, this);
-    }
 
 
     /**
@@ -132,8 +129,9 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.profile_image);
+            ImageView imageView = getImageProfile();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            imageView.setTag("Changed");
         }
 
 
@@ -182,6 +180,23 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
     public void Update(Profile profile) {
         
     }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public ProfileController getController() {
+        return controller;
+    }
+
+    public void setController(ProfileController controller) {
+        this.controller = controller;
+    }
+
 
 
 }
