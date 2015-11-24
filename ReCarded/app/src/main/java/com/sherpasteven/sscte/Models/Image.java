@@ -43,7 +43,7 @@ public class Image extends Model {
     private Bitmap resizeBitmap(Bitmap image) {
         Double width = (double) image.getWidth();
         Double height = (double) image.getHeight();
-        Double max = 25.0;
+        Double max = 500.0;
 
         if (width > height) {
             height = max * (height / width);
@@ -89,7 +89,7 @@ public class Image extends Model {
         bitmap = resizeBitmap(bitmap);
 
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte [] b = baos.toByteArray();
         String temp=Base64.encodeToString(b, Base64.DEFAULT);
 

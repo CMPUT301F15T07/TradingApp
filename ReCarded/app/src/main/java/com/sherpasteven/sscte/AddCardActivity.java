@@ -165,8 +165,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     }
 
     public void navigateToInventory(){
-        startActivity(new Intent(this, InventoryActivity.class));
+        finish();
     }
+
+
     public void loadImage(){
         Intent i = new Intent(
                 Intent.ACTION_PICK,

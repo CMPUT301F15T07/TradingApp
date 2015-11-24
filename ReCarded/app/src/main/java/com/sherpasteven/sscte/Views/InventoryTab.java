@@ -65,7 +65,7 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
 
     @Override
     public void Update(Inventory inventory) {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -125,6 +125,12 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        inventory.deleteView(this);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save currently selected layout manager.
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
@@ -132,7 +138,7 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     }
 
     private void dynamicLoad() {
-        Inventory currentList = CurrentProfile.GetCurrentProfile(this.getContext()).getUser().getInventory();
+        Inventory currentList = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getInventory();
         cardlist = currentList.getCards();
     }
 

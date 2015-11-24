@@ -34,6 +34,8 @@ public class Inventory extends Model {
         }
         else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
                 card.getSeries(), card.isTradable(), card.getComments(), card.getImages(), card.getOwner()));}
+
+        notifyViews();
     }
 
     /**
