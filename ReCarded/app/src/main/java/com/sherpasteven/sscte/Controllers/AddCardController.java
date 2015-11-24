@@ -76,7 +76,7 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 if (comments.equals("")) {
                     comments = "No comments entered for this card...";
                 }
-                User owner = CurrentProfile.GetCurrentProfile(view).getUser();
+                User owner = model.getUser();
                 Bitmap cardimage = null;
                 if(view.getImageViewCard().getTag().equals("Changed")) {
                     cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
@@ -84,7 +84,7 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 else{ cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);}
                     Toast.makeText(view, "Submitted a card...",
                         Toast.LENGTH_SHORT).show();
-                model.getUser().getInventory().addCard(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
+                model.getUser().addInventoryItem(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
                     cardimage.recycle();
                     cardimage = null;
 

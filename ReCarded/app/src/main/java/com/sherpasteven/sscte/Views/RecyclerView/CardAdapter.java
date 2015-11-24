@@ -92,12 +92,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             return (ImageView)itemView.findViewById(R.id.card_photo);
         }
 
-        public TextView getCardName() {
-            return cardName;
-        }
-        public TextView getCardDescription() {
-            return cardDescription;
-        }
     }
     // END_INCLUDE(recyclerViewSampleViewHolder)
 

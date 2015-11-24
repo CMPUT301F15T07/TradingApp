@@ -40,10 +40,9 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60;
-    private Inventory inventory;
     private InventoryTabController inventorytabcontroller;
     private View inflate_view;
-    private List<Card> cardlist;
+    private User user;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -60,7 +59,6 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     @SuppressLint("ValidFragment")
     public InventoryTab(Inventory inventory) {
         super();
-        this.inventory = inventory;
     }
 
     @Override
@@ -71,29 +69,29 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        dynamicLoad();
+        setUser(CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser());
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        // initializeData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.inventory_tab, container, false);
         inflate_view = rootView;
         rootView.setTag(TAG);
+
+        Inventory inventory = getUser().getInventory();
         inventory.addView(this);
+
         inventorytabcontroller = new InventoryTabController(this, inventory);
 
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
-
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
@@ -103,7 +101,7 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CardAdapter(cardlist);
+        mAdapter = new CardAdapter(inventory.getCards());
         // Set CardAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
@@ -125,33 +123,13 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        inventory.deleteView(this);
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save currently selected layout manager.
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    private void dynamicLoad() {
-        Inventory currentList = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getInventory();
-        cardlist = currentList.getCards();
-    }
 
-    private void initializeData() {
-        cardlist = new ArrayList<>();
-
-        User user = new User("Test", "Test", "Test", this.getContext());
-        cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
-        cardlist.add(new Card("Item 0", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
-        cardlist.add(new Card("Item 1", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test",user, this.getContext()));
-        cardlist.add(new Card("Item 2", R.drawable.splash_page, 4, new Quality(1), "Test", "Test", true, "Test", user, this.getContext()));
-
-    }
     public void navigateToAddCardActivity(){
         Intent myIntent = new Intent(getActivity(), AddCardActivity.class);
         getActivity().startActivity(myIntent);
@@ -167,12 +145,17 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         getActivity().startActivity(myIntent);
     }
 
-    public void recareateActivity(){
-        Intent recreate = new Intent(getActivity(), InventoryActivity.class);
-        getActivity().startActivity(recreate);
-    }
 
     public View getView(){
         return inflate_view;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

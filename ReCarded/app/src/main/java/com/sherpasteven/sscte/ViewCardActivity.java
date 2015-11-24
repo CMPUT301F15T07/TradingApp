@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Controllers.Controller;
+import com.sherpasteven.sscte.Controllers.ViewCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.IDeSerializer;
@@ -20,13 +22,16 @@ import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Views.IView;
 
-public class ViewCardActivity extends AppCompatActivity {
+public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
-    Inventory inventory;
     Card card;
     View v;
+    private ViewCardController c;
     Integer p;
+    private Profile profile;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -35,10 +40,13 @@ public class ViewCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
+
+        //c = new ViewCardController(this, CurrentProfile.getCurrentProfile().getProfile(this));
+
         Intent intent = getIntent();
         int position = intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0);
-        inventory = CurrentProfile.GetCurrentProfile(this).getUser().getInventory();
-        card = inventory.getCard(position);
+        setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
+        card = getProfile().getUser().getInventoryItem(position);
         p = position;
         retrieveCardInfo(card);
         v = this.findViewById(android.R.id.content);
@@ -126,13 +134,10 @@ public class ViewCardActivity extends AppCompatActivity {
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        inventory.removeCard(card, card.getQuantity());
-                        Profile profile = getLocalProfile();
-                        profile.getUser().setInventory(inventory);
+                        getProfile().getUser().removeInventoryItem(card, card.getQuantity());
                         setLocalProfile(profile);
-                        Intent intent = new Intent(v.getContext(), InventoryActivity.class);
-                        v.getContext().startActivity(intent);
-                        dialog.dismiss();
+
+                        finish();
                     }
 
                 })
@@ -159,5 +164,20 @@ public class ViewCardActivity extends AppCompatActivity {
     private Profile getLocalProfile() {
         IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
         return deSerializer.Deserialize(null, this);
+    }
+
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+
+    @Override
+    public void Update(Card card) {
+
     }
 }

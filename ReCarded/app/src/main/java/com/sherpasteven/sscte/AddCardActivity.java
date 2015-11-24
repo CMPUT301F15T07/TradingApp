@@ -36,7 +36,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
-        addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
+        addcardcontroller = new AddCardController(this, CurrentProfile.getCurrentProfile().getProfile(this));
 
         Spinner spinner = (Spinner) findViewById(R.id.categoryText);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -166,8 +166,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
     public void navigateToInventory(){
         finish();
-    }
 
+    }
 
     public void loadImage(){
         Intent i = new Intent(
