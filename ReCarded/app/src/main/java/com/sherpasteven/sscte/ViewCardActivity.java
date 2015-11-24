@@ -27,10 +27,15 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
-    Card card;
+
+
+    private Card card;
     View v;
     private ViewCardController c;
-    Integer p;
+    private Integer position;
+
+
+
     private Profile profile;
 
     /** (not Javadoc)
@@ -41,14 +46,17 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
 
-        //c = new ViewCardController(this, CurrentProfile.getCurrentProfile().getProfile(this));
-
         Intent intent = getIntent();
-        int position = intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0);
         setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
-        card = getProfile().getUser().getInventoryItem(position);
-        p = position;
-        retrieveCardInfo(card);
+        setPosition(intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0));
+
+        setCard(getProfile().getUser().getInventoryItem(getPosition()));
+
+        getCard().addView(this);
+        getProfile().getUser().addView(this);
+
+        c = new ViewCardController(this, getCard());
+        retrieveCardInfo(getCard());
         v = this.findViewById(android.R.id.content);
     }
 
@@ -75,19 +83,8 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        c.menuOptions(id);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent1 = new Intent(this, SettingsActivity.class);
-            this.startActivity(intent1);
-        } else if (id == R.id.edit_card) {
-            Intent intent2 = new Intent(this, EditCardActivity.class);
-            intent2.putExtra("pointer", p);
-            this.startActivity(intent2);
-        } else if (id == R.id.delete_card) {
-            AlertDialog confirmDel = ConfirmDelete();
-            confirmDel.show();
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -121,40 +118,8 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         cardcomments.setText(card.getComments());
 
         if(!card.getImages().isEmpty()){
-        ImageView viewcard = (ImageView) findViewById(R.id.greyRect);
+        ImageView viewcard = getImageCard();
         viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));}
-    }
-
-    private AlertDialog ConfirmDelete()
-    {
-        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
-                //set message, title, and icon
-                .setTitle("Delete")
-                .setMessage("Are you sure you want to delete all copies of this card?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        getProfile().getUser().removeInventoryItem(card, card.getQuantity());
-                        setLocalProfile(profile);
-
-                        finish();
-                    }
-
-                })
-
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create();
-        return myQuittingDialogBox;
-
-    }
-
-    private void setLocalProfile(Profile profile) {
-        ISerializer<Profile> serializer = new LocalProfileSerializer();
-        serializer.Serialize(profile, this);
     }
 
     /**
@@ -166,6 +131,10 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         return deSerializer.Deserialize(null, this);
     }
 
+    public ImageView getImageCard(){
+        return (ImageView) findViewById(R.id.greyRect);
+    }
+
 
     public Profile getProfile() {
         return profile;
@@ -175,9 +144,24 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         this.profile = profile;
     }
 
-
     @Override
     public void Update(Card card) {
+        retrieveCardInfo(getCard());
+    }
 
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 }

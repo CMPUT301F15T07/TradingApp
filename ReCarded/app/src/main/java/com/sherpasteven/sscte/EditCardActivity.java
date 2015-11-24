@@ -2,6 +2,7 @@ package com.sherpasteven.sscte;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,15 +24,16 @@ import com.sherpasteven.sscte.Controllers.EditCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
     private static int RESULT_LOAD_IMAGE = 1;
     private EditCardController editcardcontroller;
-    Inventory inventory;
-    Card card;
-    Integer value;
+    private Profile profile;
+    private Card card;
+    Integer position;
     View v;
 
     /** (not Javadoc)
@@ -41,7 +43,11 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card);
-        editcardcontroller = new EditCardController(this, CurrentProfile.GetCurrentProfile(this));
+
+        setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
+        editcardcontroller = new EditCardController(this, getProfile());
+
+        getProfile().getUser().addView(this);
 
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
@@ -62,7 +68,7 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
             }
         });
 
-        value = getIntent().getExtras().getInt("pointer");
+        position = getIntent().getExtras().getInt("pointer");
 
         Spinner spinner = (Spinner) findViewById(R.id.categoryText);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -77,14 +83,18 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         /**
          * FIXME: Import this information to controller
          */
-        inventory = CurrentProfile.GetCurrentProfile(this).getUser().getInventory();
-        card = inventory.getCard(value);
+        card = getProfile().getUser().getInventoryItem(position);
+        card.addView(this);
 
         EditText nameText = (EditText) findViewById(R.id.nameText);
         EditText seriesText = (EditText) findViewById(R.id.seriesText);
         EditText qualityText = (EditText) findViewById(R.id.qualityText);
         EditText quantityText = (EditText) findViewById(R.id.quantityText);
         EditText commentsText = (EditText) findViewById(R.id.commentsText);
+
+        ImageView cardimage = getImageCard();
+        cardimage.setTag("Default");
+        cardimage.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
 
         nameText.setText(card.getName());
         int spinnerPosition = adapter.getPosition(card.getCatagory());
@@ -94,6 +104,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         quantityText.setText(Integer.toString(card.getQuantity()));
         commentsText.setText(card.getComments());
         getCheckBox().setChecked(card.isTradable());
+    }
+
+    public ImageView getImageCard(){
+        return (ImageView) findViewById(R.id.greyRectMask);
     }
 
 
@@ -135,11 +149,12 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         return (CheckBox) findViewById(R.id.checkBox);
     }
 
-    public int getPosition() { return value; }
+    public int getPosition() { return position; }
 
     public void navigateToInventory(){
-        startActivity(new Intent(this, InventoryActivity.class));
+        finish();
     }
+
     public void loadImage(){
         Intent i = new Intent(
                 Intent.ACTION_PICK,
@@ -217,5 +232,21 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
     @Override
     public void Update(Card card) {
 
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 }

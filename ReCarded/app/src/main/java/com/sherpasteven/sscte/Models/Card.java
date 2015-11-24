@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 
 import java.util.ArrayList;
 
@@ -145,6 +146,7 @@ public class Card extends Model {
 
     public void setName(String name) {
         this.name = name;
+        notifyViews();
     }
 
     public int getQuantity() {
@@ -153,6 +155,7 @@ public class Card extends Model {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+        notifyViews();
     }
 
     public Quality getQuality() {
@@ -161,6 +164,7 @@ public class Card extends Model {
 
     public void setQuality(Quality quality) {
         this.quality = quality;
+        notifyViews();
     }
 
     public String getCatagory() {
@@ -169,6 +173,7 @@ public class Card extends Model {
 
     public void setCatagory(String catagory) {
         this.catagory = catagory;
+        notifyViews();
     }
 
     public String getSeries() {
@@ -177,6 +182,7 @@ public class Card extends Model {
 
     public void setSeries(String series) {
         this.series = series;
+        notifyViews();
     }
 
     public Boolean isTradable() {
@@ -185,6 +191,7 @@ public class Card extends Model {
 
     public void setTradable(Boolean tradable) {
         this.tradable = tradable;
+        notifyViews();
     }
 
     public String getComments() {
@@ -193,15 +200,14 @@ public class Card extends Model {
 
     public void setComments(String comments) {
         this.comments = comments;
+        notifyViews();
     }
 
-  /*  public ArrayList<images> getImages() {
-        return images;
+    public void setImageByPosition(Image image, int position){
+        getImages().set(position, image);
+        notifyViews();
     }
 
-    public void setImages(ArrayList<images> images) {
-        this.images = images;
-    } */
 
     public User getOwner() {
         return owner;

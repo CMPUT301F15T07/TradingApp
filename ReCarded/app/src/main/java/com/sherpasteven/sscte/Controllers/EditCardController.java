@@ -70,28 +70,23 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 if (comments.equals("")) {
                     comments = "No comments entered for this card...";
                 }
-                User owner = CurrentProfile.GetCurrentProfile(view).getUser();
-                Bitmap cardimage = null;
                 if (view.getImageViewCard().getTag().equals("Changed")) {
-                    cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
-                } else {
-                    cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);
+                    Bitmap cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
+                    model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage),0);
+                    cardimage.recycle();
+                    cardimage = null;
                 }
                 Toast.makeText(view, "Updated a card...",
                         Toast.LENGTH_SHORT).show();
 
                 //model.getUser().getInventory().addCard(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
-                model.getUser().getInventory().getCard(view.getPosition()).setName(name);
-                model.getUser().getInventory().getCard(view.getPosition()).addImage(new Image(cardimage));
-                model.getUser().getInventory().getCard(view.getPosition()).setQuantity(quantity);
-                model.getUser().getInventory().getCard(view.getPosition()).setQuality(quality);
-                model.getUser().getInventory().getCard(view.getPosition()).setCatagory(catagory);
-                model.getUser().getInventory().getCard(view.getPosition()).setSeries(series);
-                model.getUser().getInventory().getCard(view.getPosition()).setTradable(tradable);
-                model.getUser().getInventory().getCard(view.getPosition()).setComments(comments);
-
-                cardimage.recycle();
-                cardimage = null;
+                model.getUser().getInventoryItem(view.getPosition()).setName(name);
+                model.getUser().getInventoryItem(view.getPosition()).setQuantity(quantity);
+                model.getUser().getInventoryItem(view.getPosition()).setQuality(quality);
+                model.getUser().getInventoryItem(view.getPosition()).setCatagory(catagory);
+                model.getUser().getInventoryItem(view.getPosition()).setSeries(series);
+                model.getUser().getInventoryItem(view.getPosition()).setTradable(tradable);
+                model.getUser().getInventoryItem(view.getPosition()).setComments(comments);
 
                 profileSerializer.Serialize(model, view);
                 view.navigateToInventory();

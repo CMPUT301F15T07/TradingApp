@@ -121,6 +121,8 @@ public class Inventory extends Model {
             }
             else {throw new IllegalArgumentException("You tried removing more of card than the user had");
             }
+
+            notifyViews();
         }
 
         catch(IllegalArgumentException e){
