@@ -24,11 +24,27 @@ public class Card extends Model {
     private Boolean tradable;
     private String comments;
     private ArrayList<Image> images;
-    private User owner;
+    private String owner;
 
 
     public Card(String name, int quantity, Quality quality, String catagory,
                String series, Boolean tradable, String comments, ArrayList<Image> images , User owner){
+
+        this.name = name;
+        this.quantity = quantity;
+        this.quality = quality;
+        this.catagory = catagory;
+        this.series = series;
+        this.tradable = tradable;
+        this.comments = comments;
+        this.images = images;
+        setOwner(owner);;
+
+
+    }
+
+    public Card(String name, int quantity, Quality quality, String catagory,
+                String series, Boolean tradable, String comments, ArrayList<Image> images , String owner){
 
         this.name = name;
         this.quantity = quantity;
@@ -56,7 +72,7 @@ public class Card extends Model {
         this.tradable = tradable;
         this.comments = comments;
         this.images = new ArrayList<Image>();
-        this.owner = owner;
+        setOwner(owner);
 
 
     }
@@ -74,7 +90,7 @@ public class Card extends Model {
         this.tradable = tradable;
         this.comments = comments;
         this.images = new ArrayList<Image>();
-        this.owner = owner;
+        setOwner(owner);
         addImage(new Image(imageID, context));
     }
 
@@ -91,7 +107,7 @@ public class Card extends Model {
         this.tradable = tradable;
         this.comments = comments;
         this.images = new ArrayList<Image>();
-        this.owner = owner;
+        setOwner(owner);
         addImage(image);
     }
 
@@ -209,12 +225,12 @@ public class Card extends Model {
     }
 
 
-    public User getOwner() {
+    public String getOwner() {
         return owner;
     }
 
     public void setOwner(User owner) {
-        this.owner = owner;
+        this.owner = owner.getEmail() + "," + owner.getName() + "," + owner.getLocation();
     }
 
 

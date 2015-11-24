@@ -1,9 +1,15 @@
 package com.sherpasteven.sscte.Models;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sherpasteven.sscte.Views.IView;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
