@@ -35,10 +35,10 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="25dp"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Offer:"
-        android:textSize="12dp"
+        android:textSize="18sp"
         android:id="@+id/lblUserOffer"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
@@ -46,7 +46,7 @@
         android:layout_below="@+id/imgStatus"
         android:background="@drawable/trade_header"
         android:paddingLeft="15dp"
-        android:paddingTop="5dp"
+        android:paddingTop="13dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
 
@@ -58,7 +58,8 @@
         android:layout_below="@+id/lblUserOffer"
         android:background="@drawable/trade_bg"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-10dp">
 
         <GridView
             android:layout_width="match_parent"
@@ -73,18 +74,17 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="25dp"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Their Offer:"
-        android:textSize="12dp"
+        android:textSize="18sp"
         android:id="@+id/lblFriendOffer"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:layout_marginTop="11dp"
         android:layout_below="@+id/lblUserGrid"
         android:background="@drawable/trade_header"
         android:paddingLeft="15dp"
-        android:paddingTop="5dp"
+        android:paddingTop="13dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
 
@@ -96,7 +96,8 @@
         android:layout_below="@+id/lblFriendOffer"
         android:background="@drawable/trade_bg"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-10dp">
 
         <GridView
             android:layout_width="match_parent"
@@ -106,6 +107,13 @@
             android:columnWidth="85dp"
             android:numColumns="3"
             android:paddingBottom="10dp"></GridView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_gravity="right" />
 
 
     </LinearLayout>
@@ -121,9 +129,9 @@
         android:fontFamily="sans-serif-light"
         android:textColor="@color/material_grey_900"
         android:layout_marginEnd="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/lblFriendGrid" />
+        android:layout_marginRight="12dp"
+        android:layout_below="@+id/lblFriendGrid"
+        android:layout_marginTop="4dp" />
 
     <TextClock
         android:layout_width="wrap_content"
@@ -146,7 +154,8 @@
         android:fontFamily="sans-serif-light"
         android:layout_alignTop="@+id/lblUserOffer"
         android:layout_alignEnd="@+id/textClock"
-        android:layout_marginRight="-10dp" />
+        android:layout_marginRight="-10dp"
+        android:layout_marginTop="15dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -155,7 +164,8 @@
         android:background="@drawable/ic_plus_2_copy"
         android:fontFamily="sans-serif-light"
         android:layout_alignTop="@+id/lblFriendOffer"
-        android:layout_alignStart="@+id/btnAddUser" />
+        android:layout_alignStart="@+id/btnAddUser"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>
 <!--</ScrollView>-->
