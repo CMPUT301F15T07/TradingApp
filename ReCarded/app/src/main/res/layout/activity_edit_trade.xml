@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,7 +11,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/curved_rect_orange"
+        android:src="@drawable/curved_rect_green"
         android:id="@+id/imgStatus"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
@@ -17,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Trade Status"
+        android:text="Trade Updated at 11:38 AM"
         android:id="@+id/txtStatus"
         android:layout_alignBottom="@+id/imgStatus"
         android:layout_alignStart="@+id/imgStatus"
@@ -27,72 +31,84 @@
         android:fontFamily="sans-serif"
         android:textColor="@color/brown_dark" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Last Updated 11:11 AM"
-        android:textSize="10sp"
-        android:id="@+id/txtUpdateDate"
-        android:layout_marginRight="20dp"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/brown_dark"
-        android:layout_alignBottom="@+id/imgStatus"
-        android:layout_alignEnd="@+id/imgStatus"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="10dp"
-        android:textStyle="italic" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/trade_tab"
-        android:id="@+id/imgUserTab"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imgStatus"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/trade_tab"
-        android:id="@+id/imgFriendTab"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imgUserTab"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp" />
-
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Offer:"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:id="@+id/lblUserOffer"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:layout_alignStart="@+id/imgUserTab"
-        android:layout_alignTop="@+id/imgUserTab"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="11dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_below="@+id/imgStatus"
+        android:background="@drawable/trade_header"
+        android:paddingLeft="15dp"
+        android:paddingTop="13dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/lblUserGrid"
+        android:layout_below="@+id/lblUserOffer"
+        android:background="@drawable/trade_bg"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-10dp">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/YourOfferCards"
+            android:columnWidth="85dp"
+            android:clipToPadding="true"
+            android:numColumns="3"
+            android:paddingBottom="10dp"></GridView>
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Their Offer:"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:id="@+id/lblFriendOffer"
         android:fontFamily="sans-serif"
         android:textColor="#fff"
-        android:layout_alignStart="@+id/imgFriendTab"
-        android:layout_alignTop="@+id/imgFriendTab"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/lblUserGrid"
+        android:background="@drawable/trade_header"
+        android:paddingLeft="15dp"
+        android:paddingTop="13dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/lblFriendGrid"
+        android:layout_below="@+id/lblFriendOffer"
+        android:background="@drawable/trade_bg"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-10dp">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/theirOfferCards"
+            android:clipToPadding="true"
+            android:columnWidth="85dp"
+            android:numColumns="3"
+            android:paddingBottom="10dp"></GridView>
+
+
+    </LinearLayout>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -119,7 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnAccept"
-        android:layout_below="@+id/imgFriendTab"
+        android:layout_below="@+id/lblFriendGrid"
         android:src="@drawable/trade_options_top"
         android:background="@null"
         android:layout_alignStart="@+id/imgStatus"
@@ -167,4 +183,26 @@
         android:fontFamily="sans-serif-light"
         android:textColor="@color/brown_main" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddUser"
+        android:background="@drawable/ic_plus_2_copy"
+        android:fontFamily="sans-serif-light"
+        android:layout_alignTop="@+id/lblUserOffer"
+        android:layout_alignEnd="@+id/imgStatus"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddOther"
+        android:background="@drawable/ic_plus_2_copy"
+        android:fontFamily="sans-serif-light"
+        android:layout_alignTop="@+id/lblFriendOffer"
+        android:layout_alignStart="@+id/btnAddUser"
+        android:layout_marginTop="15dp" />
+
 </RelativeLayout>
+</ScrollView>
