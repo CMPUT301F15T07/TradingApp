@@ -16,6 +16,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 */
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewFriendActivity;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     private String[] mDataSet;
     User currentUser;
+    static View view;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -54,7 +57,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                    /*AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Element " + getPosition() + " to be shown");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -63,13 +66,18 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                                     dialog.dismiss();
                                 }
                             });
-                    alertDialog.show();                }
+                    alertDialog.show();
+                    */
+                    Intent myIntent = new Intent(view.getContext(), ViewFriendActivity.class);
+                    myIntent.putExtra("com.sherpasteven.sscte.viewfriend", getPosition());
+                    view.getContext().startActivity(myIntent);
+                }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
             userPhoto = (ImageView)itemView.findViewById(R.id.friend_photo);
-
+            view = v;
         }
 
     }

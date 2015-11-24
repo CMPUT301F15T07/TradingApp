@@ -60,7 +60,7 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new NewFriendAdapter(friendslist);
+        mAdapter = new NewFriendAdapter(friendslist, this);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
@@ -139,6 +139,7 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
     private void initializeData() {
+
         friendslist.add(new User("test1", "location1", "email1", this.getApplicationContext()));
         friendslist.add(new User("test2", "location2", "email2", this.getApplicationContext()));
         friendslist.add(new User("test3", "location3", "email3", this.getApplicationContext()));
@@ -150,6 +151,10 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
         friendslist.add(new User("test9", "location9", "email9", this.getApplicationContext()));
         friendslist.add(new User("test10", "location10", "email10", this.getApplicationContext()));
         friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
+
+    }
+    public void returnFromActivity(){
+        finish();
     }
 
 }
