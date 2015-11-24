@@ -20,6 +20,8 @@ import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
@@ -50,6 +52,13 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, this);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.InsertProfile(currentprofile);
     }
 
     /** (not Javadoc)

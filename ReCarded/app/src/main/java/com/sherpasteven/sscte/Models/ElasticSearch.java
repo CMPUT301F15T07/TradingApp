@@ -44,10 +44,8 @@ public class ElasticSearch {
         });
     }
 
-
-
-    LastModified GetLastModified(ProfileId profileId){
-        return null;
+    public Profiles getProfiles(){
+        return profiles;
     }
 
     public void InsertProfile(final Profile profile) {

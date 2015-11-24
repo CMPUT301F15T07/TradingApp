@@ -13,12 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Controllers.RegisterController;
-import com.sherpasteven.sscte.Models.ElasticSearch;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Registration;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Views.IView;
 
 /**
@@ -48,7 +49,6 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     private View mControlsView;
     private boolean mVisible;
     private RegisterController registerController;
-    private ElasticSearch elasticSearch;
 
     /* this private profile is for the use of testing
             Gui before the serialization to ES is complete.
@@ -66,7 +66,6 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         //if a profile already exists, there is no need to register
         Profile localProfile = getLocalProfile();
         if (localProfile != null) navigateToInventory();
-        elasticSearch = new ElasticSearch();
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_page);
         mVisible = true;
@@ -115,7 +114,8 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
     }
 
     public void setCloudProfile(Profile profile) {
-        elasticSearch.InsertProfile(profile);
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.InsertProfile(profile);
     }
 
     /**
