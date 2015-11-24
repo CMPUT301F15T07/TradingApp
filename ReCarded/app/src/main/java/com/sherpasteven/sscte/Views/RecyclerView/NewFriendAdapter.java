@@ -67,7 +67,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
                 @Override
                 public void onClick(View v) {
 
-                    Profile profile = CurrentProfile.GetCurrentProfile(view.getContext());
+                    Profile profile = CurrentProfile.getCurrentProfile().getProfile(view.getContext());
                     User user = profile.getUser();
                     if(!user.getFriends().contains(friendsList.get(getPosition()))) {
                         user.addFriend(friendsList.get(getPosition()));

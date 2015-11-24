@@ -16,8 +16,8 @@ public class CardTest  extends ApplicationTestCase<Application> {
     }
 
     public void testEquals() {
-        User testuser = new User("John", "city1", "email1@gmail.com");
-        User testuser2 = new User("Jack", "city2", "email2@gmail.com");
+        User testuser = new User("John", "city1", "email1@gmail.com",null);
+        User testuser2 = new User("Jack", "city2", "email2@gmail.com",null);
         Card card1 = new Card("dummycard", 1, new Quality(20), "category1", "series1", true, "dummy card", testuser);
         Card card2 = new Card(card1.getName(), card1.getQuantity(), card1.getQuality(), card1.getCatagory(), card1.getSeries(), card1.isTradable(), card1.getComments(), card1.getOwner());
         assertTrue(card1.equals(card2));

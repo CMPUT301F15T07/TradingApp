@@ -98,7 +98,7 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         getInstrumentation().waitForIdleSync();
 
         //get the local user and see if that new card was added to inventory
-        User user = new User("joshua","edmonton", "jjwhite@ualberta.ca"); //-> replace with method to obtain local user
+        User user = new User("joshua","edmonton", "jjwhite@ualberta.ca",null); //-> replace with method to obtain local user
         Inventory inventory = user.getInventory();
         Card card = new Card(name, Integer.parseInt(quantity), new Quality(Integer.parseInt(quality)), catagory, series,
                 Boolean.TRUE, comments, user);

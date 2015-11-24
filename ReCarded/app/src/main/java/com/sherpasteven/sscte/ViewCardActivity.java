@@ -3,6 +3,8 @@ package com.sherpasteven.sscte;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Controllers.Controller;
+import com.sherpasteven.sscte.Controllers.ViewCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.IDeSerializer;
@@ -18,12 +22,21 @@ import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Views.IView;
 
-public class ViewCardActivity extends AppCompatActivity {
+public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
-    Inventory inventory;
-    Card card;
+
+
+    private Card card;
     View v;
+    private ViewCardController c;
+    private Integer position;
+
+
+
+    private Profile profile;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -32,11 +45,18 @@ public class ViewCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
+
         Intent intent = getIntent();
-        int position = intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0);
-        inventory = CurrentProfile.GetCurrentProfile(this).getUser().getInventory();
-        card = inventory.getCard(position);
-        retrieveCardInfo(card);
+        setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
+        setPosition(intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0));
+
+        setCard(getProfile().getUser().getInventoryItem(getPosition()));
+
+        getCard().addView(this);
+        getProfile().getUser().addView(this);
+
+        c = new ViewCardController(this, getCard());
+        retrieveCardInfo(getCard());
         v = this.findViewById(android.R.id.content);
     }
 
@@ -63,18 +83,8 @@ public class ViewCardActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        c.menuOptions(id);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent1 = new Intent(this, SettingsActivity.class);
-            this.startActivity(intent1);
-        } else if (id == R.id.edit_card) {
-            Intent intent2 = new Intent(this, EditCardActivity.class);
-            this.startActivity(intent2);
-        } else if (id == R.id.delete_card) {
-            AlertDialog confirmDel = ConfirmDelete();
-            confirmDel.show();
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,43 +118,8 @@ public class ViewCardActivity extends AppCompatActivity {
         cardcomments.setText(card.getComments());
 
         if(!card.getImages().isEmpty()){
-        ImageView viewcard = (ImageView) findViewById(R.id.greyRect);
-        viewcard.setImageBitmap(card.constructImage(0));}
-    }
-
-    private AlertDialog ConfirmDelete()
-    {
-        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
-                //set message, title, and icon
-                .setTitle("Delete")
-                .setMessage("Are you sure you want to delete all copies of this card?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        inventory.removeCard(card, card.getQuantity());
-                        Profile profile = getLocalProfile();
-                        profile.getUser().setInventory(inventory);
-                        setLocalProfile(profile);
-                        Intent intent = new Intent(v.getContext(), InventoryActivity.class);
-                        v.getContext().startActivity(intent);
-                        dialog.dismiss();
-                    }
-
-                })
-
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create();
-        return myQuittingDialogBox;
-
-    }
-
-    private void setLocalProfile(Profile profile) {
-        ISerializer<Profile> serializer = new LocalProfileSerializer();
-        serializer.Serialize(profile, this);
+        ImageView viewcard = getImageCard();
+        viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));}
     }
 
     /**
@@ -154,5 +129,39 @@ public class ViewCardActivity extends AppCompatActivity {
     private Profile getLocalProfile() {
         IDeSerializer<Profile> deSerializer = new LocalProfileSerializer();
         return deSerializer.Deserialize(null, this);
+    }
+
+    public ImageView getImageCard(){
+        return (ImageView) findViewById(R.id.greyRect);
+    }
+
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    @Override
+    public void Update(Card card) {
+        retrieveCardInfo(getCard());
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 }

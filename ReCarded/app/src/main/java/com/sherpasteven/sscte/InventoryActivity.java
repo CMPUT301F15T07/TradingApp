@@ -62,7 +62,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        currentprofile = CurrentProfile.GetCurrentProfile(this);
+        currentprofile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (currentprofile == null) {
             Toast.makeText(getApplicationContext(), "No profile loaded, returning to main page",
                     Toast.LENGTH_LONG).show();

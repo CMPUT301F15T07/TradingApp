@@ -26,7 +26,7 @@ public class ViewFriendActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
-        listOfFriends = CurrentProfile.GetCurrentProfile(this).getUser().getFriends();
+        listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
         friend = listOfFriends.get(position);
         retrieveUserInfo(friend);
     }

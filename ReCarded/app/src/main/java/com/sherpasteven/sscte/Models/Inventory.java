@@ -34,6 +34,8 @@ public class Inventory extends Model {
         }
         else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
                 card.getSeries(), card.isTradable(), card.getComments(), card.getImages(), card.getOwner()));}
+
+        notifyViews();
     }
 
     /**
@@ -119,6 +121,8 @@ public class Inventory extends Model {
             }
             else {throw new IllegalArgumentException("You tried removing more of card than the user had");
             }
+
+            notifyViews();
         }
 
         catch(IllegalArgumentException e){

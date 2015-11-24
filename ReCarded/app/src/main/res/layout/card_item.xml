@@ -64,7 +64,7 @@
                 android:id="@+id/imgStatus"
                 android:src="@drawable/ic_trade_unavailable"
                 android:layout_alignBottom="@+id/card_text"
-                android:layout_alignEnd="@+id/card_photo" />
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
