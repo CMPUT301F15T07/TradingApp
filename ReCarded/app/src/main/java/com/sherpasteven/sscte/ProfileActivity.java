@@ -51,7 +51,6 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
         setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
 
         setController(new ProfileController(this, getProfile()));
-        getProfile().getUser().addView(this);
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnProfileImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {

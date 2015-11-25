@@ -49,7 +49,6 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         setCard(getProfile().getUser().getInventoryItem(getPosition()));
 
         getCard().addView(this);
-        getProfile().getUser().addView(this);
 
         c = new ViewCardController(this, getCard());
         retrieveCardInfo(getCard());
@@ -167,4 +166,5 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
     public void setCard(Card card) {
         this.card = card;
     }
+
 }

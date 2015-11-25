@@ -65,10 +65,14 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        view.getProfile().getUser().removeInventoryItem(view.getCard(), view.getCard().getQuantity());
-                        setLocalProfile(view.getProfile());
-
+                        Card card = view.getCard();
+                        int quan = view.getCard().getQuantity();
+                        Profile profile = view.getProfile();
                         view.finish();
+                        profile.getUser().removeInventoryItem(card, quan);
+                        setLocalProfile(profile);
+
+
                     }
 
                 })
