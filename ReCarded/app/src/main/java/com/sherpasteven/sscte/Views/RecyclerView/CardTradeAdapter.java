@@ -60,7 +60,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             cv = (CardView) v.findViewById(R.id.cv);
             cardName = (TextView) v.findViewById(R.id.card_name);
             cardDescription = (TextView) v.findViewById(R.id.card_text);
-            //cardPhoto = getCardImage();
+            cardPhoto =  (ImageView) v.findViewById(R.id.card_photo);
             cardStatus = (ImageView)itemView.findViewById(R.id.imgStatus);
             view = v;
 
