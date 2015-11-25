@@ -55,6 +55,12 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         v = this.findViewById(android.R.id.content);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        getProfile().getUser().deleteView(this);
+    }
+
     /**
      * Generates hamburger menu options.
      * @param menu Menu item to be created.
@@ -146,7 +152,12 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
     }
 
     @Override
-    public void Update(Card card) {
+    public void Update(Card card) { //model is user, not card...
+        retrieveCardInfo(getCard());
+    }
+
+    // development for AddCardActivity update card
+    public void Update(User user) {
         retrieveCardInfo(getCard());
     }
 
