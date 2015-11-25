@@ -10,8 +10,10 @@ import android.view.MenuItem;
 
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.RecyclerView.CardTradeAdapter;
@@ -25,11 +27,14 @@ public class CardTradeActivity extends AppCompatActivity {
     private ArrayList<Card> cardlist = new ArrayList<>();
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-
+    private boolean isUserList = false;
     protected LayoutManagerType mCurrentLayoutManagerType;
+    private ArrayList<Card> cardslist;
+    // demo code before get friends inventory
+    private ArrayList<Card> friendslist;
 
     protected RecyclerView mRecyclerView;
-    protected NewFriendAdapter mAdapter;
+    protected CardTradeAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -54,7 +59,19 @@ public class CardTradeActivity extends AppCompatActivity {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        //mAdapter = new CardTradeAdapter(cardlist);
+        Intent intent = getIntent();
+        isUserList = intent.getBooleanExtra("com.sherpasteve.sscte.user", false);
+        //setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
+        //setPosition(intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0));
+
+        if (isUserList) {
+            cardslist = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getInventory().getCards();
+            mAdapter = new CardTradeAdapter(cardslist);
+        } else {
+            mAdapter = new CardTradeAdapter(cardlist);
+        }
+
+        //
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
@@ -130,18 +147,9 @@ public class CardTradeActivity extends AppCompatActivity {
      * FIXME: Convert for dynamic friend data loading.
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
-    /*
+
     private void initializeData() {
-        friendslist.add(new User("test1", "location1", "email1", this.getApplicationContext()));
-        friendslist.add(new User("test2", "location2", "email2", this.getApplicationContext()));
-        friendslist.add(new User("test3", "location3", "email3", this.getApplicationContext()));
-        friendslist.add(new User("test4", "location4", "email4", this.getApplicationContext()));
-        friendslist.add(new User("test5", "location5", "email5", this.getApplicationContext()));
-        friendslist.add(new User("test6", "location6", "email6", this.getApplicationContext()));
-        friendslist.add(new User("test7", "location7", "email7", this.getApplicationContext()));
-        friendslist.add(new User("test8", "location8", "email8", this.getApplicationContext()));
-        friendslist.add(new User("test9", "location9", "email9", this.getApplicationContext()));
-        friendslist.add(new User("test10", "location10", "email10", this.getApplicationContext()));
-        friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
-    }*/
+        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", 4);
+        friendslist.add(new Card());
+    }
 }
