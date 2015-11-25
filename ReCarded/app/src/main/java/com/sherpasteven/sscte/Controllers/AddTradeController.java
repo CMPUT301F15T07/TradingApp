@@ -46,7 +46,7 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
             public void onClick(View v) {
                 // send to activity with the trade in hand.
                 Intent myIntent = new Intent(v.getContext(), CardTradeActivity.class);
-                myIntent.putExtra("com.sherpasteven.sscte.trade", (Parcelable)model);
+                // myIntent.putExtra("com.sherpasteven.sscte.trade", (Parcelable)model);
                 // pass this to the inventory activity // i made a temp one to hold 'inventory cards'
                 // no longer a fragment
                 // inventory activity selects a card
