@@ -23,6 +23,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
                     myIntent.putExtra("com.sherpasteven.sscte.bitmap", ((BitmapDrawable)getCardImage().getDrawable()).getBitmap());
                     view.getContext().startActivity(myIntent);
+
                 }
             });
             cv = (CardView) v.findViewById(R.id.cv);

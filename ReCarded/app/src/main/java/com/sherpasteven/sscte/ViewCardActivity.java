@@ -27,8 +27,6 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
-
-
     private Card card;
     View v;
     private ViewCardController c;
@@ -119,7 +117,8 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
         if(!card.getImages().isEmpty()){
         ImageView viewcard = getImageCard();
-        viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));}
+        viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
+        }
     }
 
     /**

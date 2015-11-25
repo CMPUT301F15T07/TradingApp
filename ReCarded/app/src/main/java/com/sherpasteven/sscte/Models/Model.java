@@ -17,7 +17,12 @@ public class Model<V extends IView> {
     }
 
     public void addView(V view){
-        if (!views.contains(view)) views.add(view);
+        if (views != null) {
+            if (!views.contains(view)) views.add(view);
+        } else {
+            views = new ArrayList<V>();
+            views.add(view);
+        }
     }
 
     public void deleteView(V view){

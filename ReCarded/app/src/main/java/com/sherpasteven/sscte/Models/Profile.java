@@ -11,7 +11,6 @@ public class Profile extends Model {
     private User user;
     private Config config;
 
-
     Profile(User user) {
         this.user = user;
         this.config = new Config();
