@@ -78,10 +78,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     alertDialog.show(); */
                     Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
-                    Bitmap b = ((BitmapDrawable) getCardImage().getDrawable()).getBitmap();
-                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                    b.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                    myIntent.putExtra("com.sherpasteven.sscte.bitmap", bs.toByteArray());
                     view.getContext().startActivity(myIntent);
 
                 }

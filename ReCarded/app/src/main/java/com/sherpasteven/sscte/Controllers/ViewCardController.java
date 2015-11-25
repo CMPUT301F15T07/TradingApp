@@ -47,10 +47,6 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
         } else if (id == R.id.edit_card) {
             Intent intent2 = new Intent(view, EditCardActivity.class);
             intent2.putExtra("pointer", view.getPosition());
-            Bitmap b = ((BitmapDrawable)view.getImageCard().getDrawable()).getBitmap();
-            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            b.compress(Bitmap.CompressFormat.PNG, 50, bs);
-            intent2.putExtra("com.sherpasteven.sscte.bitmap", bs.toByteArray());
             view.startActivity(intent2);
         } else if (id == R.id.delete_card) {
             AlertDialog confirmDel = ConfirmDelete();

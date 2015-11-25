@@ -145,6 +145,7 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         getActivity().startActivity(myIntent);
     }
 
+
     /*
     @Override
     public void onDestroyView() {
