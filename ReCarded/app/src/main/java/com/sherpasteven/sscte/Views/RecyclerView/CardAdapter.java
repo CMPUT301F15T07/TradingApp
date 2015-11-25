@@ -18,6 +18,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +35,7 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewCardActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /**
@@ -76,7 +78,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     alertDialog.show(); */
                     Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
-                    myIntent.putExtra("com.sherpasteven.sscte.bitmap", ((BitmapDrawable)getCardImage().getDrawable()).getBitmap());
+                    Bitmap b = ((BitmapDrawable) getCardImage().getDrawable()).getBitmap();
+                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                    b.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                    myIntent.putExtra("com.sherpasteven.sscte.bitmap", bs.toByteArray());
                     view.getContext().startActivity(myIntent);
 
                 }

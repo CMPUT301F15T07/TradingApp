@@ -31,9 +31,6 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
     View v;
     private ViewCardController c;
     private Integer position;
-
-
-
     private Profile profile;
 
     /** (not Javadoc)
@@ -117,7 +114,12 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
         if(!card.getImages().isEmpty()){
         ImageView viewcard = getImageCard();
-        viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
+        //viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
+        if(getIntent().hasExtra("com.sherpasteven.sscte.bitmap")) {
+            Bitmap b = BitmapFactory.decodeByteArray(
+                    getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap"),0,getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap").length);
+            viewcard.setImageBitmap(b);
+            }
         }
     }
 
