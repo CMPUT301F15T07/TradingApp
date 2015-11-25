@@ -68,7 +68,9 @@ public class CardTradeActivity extends AppCompatActivity {
             cardslist = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getInventory().getCards();
             mAdapter = new CardTradeAdapter(cardslist);
         } else {
-            mAdapter = new CardTradeAdapter(cardlist);
+            initializeData(); // build sample data for friends, then show the friendslist
+                              // we don't have friends setup yet, so this is sample data to test...
+            mAdapter = new CardTradeAdapter(friendslist);
         }
 
         //
@@ -149,7 +151,7 @@ public class CardTradeActivity extends AppCompatActivity {
      */
 
     private void initializeData() {
-        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", 4);
-        friendslist.add(new Card());
+        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", new User("test", "test", "test", this));
+        friendslist.add(card);
     }
 }
