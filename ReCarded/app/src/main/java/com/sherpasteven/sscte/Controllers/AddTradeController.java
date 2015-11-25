@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte.Controllers;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageButton;
 import com.sherpasteven.sscte.AddTradeActivity;
@@ -45,13 +46,24 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
             public void onClick(View v) {
                 // send to activity with the trade in hand.
                 Intent myIntent = new Intent(v.getContext(), CardTradeActivity.class);
-                myIntent.putExtra("com.sherpasteven.sscte.trade", (Serializable)model);
+                myIntent.putExtra("com.sherpasteven.sscte.trade", (Parcelable)model);
+                // pass this to the inventory activity // i made a temp one to hold 'inventory cards'
+                // no longer a fragment
+                // inventory activity selects a card
+                // 'sends' back
+                myIntent.putExtra("com.sherpasteven.sscte.user", true);
+                myIntent.putExtra("com.sherpasteven.sscte.friend", false);
                 v.getContext().startActivity(myIntent);
+
             }
         });
         addOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), CardTradeActivity.class);
+                myIntent.putExtra("com.sherpasteven.sscte.user", false);
+                myIntent.putExtra("com.sherpasteven.sscte.friend", true);
+                v.getContext().startActivity(myIntent);
 
             }
         });
