@@ -1,10 +1,22 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
+/*
+* Copyright (C) 2014 The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,32 +24,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sherpasteven.sscte.AddTradeActivity;
-import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.TradeComposer;
-import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.SettingsActivity;
+import com.sherpasteven.sscte.ViewCardActivity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by ansonli on 2015-11-23.
+ * Provide views to RecyclerView with data from mDataSet.
  */
-public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.ViewHolder>{
-
-    private static final String TAG = "FriendAdapter";
+public class TradeListAdapter extends RecyclerView.Adapter<TradeListAdapter.ViewHolder> {
+    private static final String TAG = "CardAdapter";
 
     private String[] mDataSet;
-    ArrayList<Card> cardList;
+    List<Card> cards;
     static View view;
-    static Activity cta;
-    static Boolean userState;
-
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -49,32 +51,13 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
         TextView cardDescription;
         ImageView cardPhoto;
         ImageView cardStatus;
+
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (userState) {
-                        Card tradeCard = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getInventoryItem(getPosition());
-                        if (tradeCard != null) {
-                            TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
-                            Toast.makeText(v.getContext(), "Card added to your trade list.", Toast.LENGTH_SHORT).show();
-                            cta.finish();
-                        } else {
-                            Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
-                        }
-                    } else { // FIXME: Demo until friend's cards can be pulled
-                        Card tradeCard = TradeComposer.getTradeComposer().getComponents().getOwnerList().get(getPosition());
-                        if (tradeCard != null) {
-                            TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
-                            Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
-                            cta.finish();
-                        } else {
-                            Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
                     /*
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
@@ -85,17 +68,24 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                                     dialog.dismiss();
                                 }
                             });
-                    alertDialog.show();
-                    */
+                    alertDialog.show(); */
+                    Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
+                    myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
+                    view.getContext().startActivity(myIntent);
+
                 }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             cardName = (TextView) v.findViewById(R.id.card_name);
             cardDescription = (TextView) v.findViewById(R.id.card_text);
-            cardPhoto =  (ImageView) v.findViewById(R.id.card_photo);
+            cardPhoto = getCardImage();
             cardStatus = (ImageView)itemView.findViewById(R.id.imgStatus);
             view = v;
 
+        }
+
+        public ImageView getCardImage(){
+            return (ImageView)itemView.findViewById(R.id.card_photo);
         }
 
     }
@@ -103,13 +93,11 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
     /**
      * Initialize the dataset of the Adapter.
-     * @param cardList User data loaded to identify friends used by adapter.
+     * @param card Initialise list of cards for loading.
      */
 
-    public CardTradeAdapter(ArrayList<Card> cardList, Boolean state, CardTradeActivity cta){
-        this.cardList = cardList;
-        this.userState = state;
-        this.cta = cta;
+    public TradeListAdapter(List<Card> card){
+        this.cards = card;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -128,27 +116,29 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.cardName.setText(cardList.get(position).getName());
-        viewHolder.cardDescription.setText(cardList.get(position).getCatagory());
-        if (cardList.get(position).getImagebyIndex(0) != null) {
-            viewHolder.cardPhoto.setImageBitmap(cardList.get(position).constructImage(0));
+        viewHolder.cardName.setText(cards.get(position).getName());
+        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
+        if (cards.get(position).getImagebyIndex(0) != null) {
+            viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
         }
-        if (cardList.get(position).isTradable() == true) {
+        if (cards.get(position).isTradable() == true) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_available));
-        } else if (cardList.get(position).isTradable() == false) {
+        } else if (cards.get(position).isTradable() == false) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
+
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    /** Gets item for dynamic loading.
-     * @return size of dataset (invoked by layout manager)
-     */    @Override
+    /**
+     * @return the size of your dataset (invoked by the layout manager)
+     */
+    @Override
     public int getItemCount() {
-        return cardList.size();
+        if (cards != null) {
+            return cards.size();
+        } return 0;
     }
-
 }

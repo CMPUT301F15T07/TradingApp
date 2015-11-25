@@ -79,7 +79,7 @@ public class Trade extends Model {
     }
 
     public Boolean addBorrowList(Card card){
-        if(card.isTradable()) {
+        if(card != null && card.isTradable()) {
             getBorrowList().add(card);
             return Boolean.TRUE;
         }

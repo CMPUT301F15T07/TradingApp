@@ -17,15 +17,19 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
+import com.sherpasteven.sscte.Models.Trade;
+import com.sherpasteven.sscte.Models.TradeComponents;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.CardTradeAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
 import java.util.ArrayList;
 
-public class CardTradeActivity extends AppCompatActivity {
+public class CardTradeActivity extends AppCompatActivity implements IView<Trade> {
 
     private FriendsTabController friendstabcontroller;
     private ArrayList<Card> cardlist = new ArrayList<>();
@@ -41,6 +45,7 @@ public class CardTradeActivity extends AppCompatActivity {
     private View inflate_view;
 
     private User user;
+    private User owner;
 
     protected RecyclerView mRecyclerView;
     protected CardTradeAdapter mAdapter;
@@ -77,19 +82,25 @@ public class CardTradeActivity extends AppCompatActivity {
         if (isUserList) {
             setTitle("Your Inventory");
             cardslist = getUser().getInventory().getCards();
-            mAdapter = new CardTradeAdapter(cardslist);
+            mAdapter = new CardTradeAdapter(cardslist, true, this);
         } else {
             setTitle("Friend's Inventory");
             initializeData(); // build sample data for friends, then show the friendslist
                               // we don't have friends setup yet, so this is sample data to test...
-            mAdapter = new CardTradeAdapter(friendslist);
+            mAdapter = new CardTradeAdapter(friendslist, false, this);
         }
+        setupDemo(); // setup structure for sample structure until friends comes up...
 
         //
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
         //initializeData();
+    }
+
+    @Override
+    public void Update(Trade trade) {
+        
     }
 
     private enum LayoutManagerType {
@@ -141,12 +152,6 @@ public class CardTradeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    
-    /*
-    @Override
-    public void Update(Profile profile) {
-
-    }*/
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -161,12 +166,13 @@ public class CardTradeActivity extends AppCompatActivity {
      * FIXME: Convert for dynamic friend data loading.
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
-
     private void initializeData() {
-        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", new User("test", "test", "test", this));
-        Card card2 = new Card("Test2", null, 4, new Quality(4), "Test", "Test", true, "Test", new User("test", "test", "test", this));
+        owner = TradeComposer.getTradeComposer().getComponents().getOwner();
+        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
+        Card card2 = new Card("Test2", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
         friendslist.add(card);
         friendslist.add(card2);
+        TradeComposer.getTradeComposer().getComponents().setOwnerList(friendslist);
     }
 
     public View getView(){
@@ -179,5 +185,9 @@ public class CardTradeActivity extends AppCompatActivity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setupDemo() {
+        // fill with additional header data if neccessary.
     }
 }
