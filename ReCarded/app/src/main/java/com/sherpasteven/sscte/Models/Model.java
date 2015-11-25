@@ -25,7 +25,7 @@ public class Model<V extends IView> {
     }
 
     public void notifyViews(){
-        if(!views.isEmpty() || views != null) {
+        if(views != null) {
             for (IView view : views) {
                 view.Update(this);
             }
