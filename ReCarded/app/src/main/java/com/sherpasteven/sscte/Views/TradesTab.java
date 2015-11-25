@@ -14,12 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.Controllers.TradesTabController;
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.EditTradeActivity;
+import com.sherpasteven.sscte.FriendListActivity;
 import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
@@ -85,24 +87,6 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
 
-        ImageButton addItem = (ImageButton) rootView.findViewById(R.id.btnAddTrade);
-        addItem.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), AddTradeActivity.class);
-                getActivity().startActivity(myIntent);
-            }
-        });
-
-        Button editItem = (Button) rootView.findViewById(R.id.btnEditTrade);
-        editItem.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), EditTradeActivity.class);
-                getActivity().startActivity(myIntent);
-            }
-        });
-
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
@@ -133,11 +117,18 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
     }
 
     public void navigateToAddTradeActivity(){
-        Intent myIntent = new Intent(getActivity(), AddTradeActivity.class);
+        // process flow for the activity is like this:
+        // enter list of friends
+        // select the list of friends and instantiate activity there
+        // once you're in, you can select the + and go into cardlistactivity
+        // select cards from there
+        Intent myIntent = new Intent(getActivity(), FriendListActivity.class);
+        Toast.makeText(this.getContext(), "Adding a trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
     public void navigateToEditTradeActivity(){
         Intent myIntent = new Intent(getActivity(), EditTradeActivity.class);
+        Toast.makeText(this.getContext(), "Editing selected trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
     public View getView(){
