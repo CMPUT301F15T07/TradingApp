@@ -3,14 +3,13 @@ package com.sherpasteven.sscte.Controllers;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
+        import java.io.Serializable;
 
-import java.io.Serializable;
 
 /**
  * Created by ansonli on 2015-11-25.

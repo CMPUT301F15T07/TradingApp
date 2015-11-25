@@ -10,6 +10,7 @@ import java.util.List;
  * @param <V> The View class to associate with this model
  */
 public class Model<V extends IView> {
+
     private transient List<V> views;
 
     public Model(){
@@ -36,4 +37,10 @@ public class Model<V extends IView> {
             }
         }
     }
+
+    public List<V> getViews() {
+        return views;
+    }
+
+
 }

@@ -76,7 +76,7 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                     /**
                      * FIXME: Doesn't pass new image as 'primary image'.
                      */
-                    model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage),0);
+                    model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage), 0);
                     cardimage.recycle();
                     cardimage = null;
                 }
@@ -91,7 +91,7 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 model.getUser().getInventoryItem(view.getPosition()).setSeries(series);
                 model.getUser().getInventoryItem(view.getPosition()).setTradable(tradable);
                 model.getUser().getInventoryItem(view.getPosition()).setComments(comments);
-
+                model.getUser().getInventory().notifyViews();
                 profileSerializer.Serialize(model, view);
                 view.navigateToInventory();
             }

@@ -27,6 +27,7 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
 
+
     private Card card;
     View v;
     private ViewCardController c;
@@ -113,15 +114,11 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
         cardcomments.setText(card.getComments());
 
         if(!card.getImages().isEmpty()){
-        ImageView viewcard = getImageCard();
-        //viewcard.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
-        if(getIntent().hasExtra("com.sherpasteven.sscte.bitmap")) {
-            Bitmap b = BitmapFactory.decodeByteArray(
-                    getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap"),0,getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap").length);
-            viewcard.setImageBitmap(b);
+            ImageView viewcard = getImageCard();
+            viewcard.setImageBitmap(card.constructImage(0));
             }
         }
-    }
+
 
     /**
      * Serialises the profile (getter) for application registry.

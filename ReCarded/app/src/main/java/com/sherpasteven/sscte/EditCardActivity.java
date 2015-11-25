@@ -81,7 +81,6 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
          * FIXME: Import this information to controller
          */
         card = getProfile().getUser().getInventoryItem(position);
-        card.addView(this);
 
         EditText nameText = (EditText) findViewById(R.id.nameText);
         EditText seriesText = (EditText) findViewById(R.id.seriesText);
@@ -91,11 +90,8 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
         ImageView cardimage = getImageViewCard();
         cardimage.setTag("Default");
-        if(getIntent().hasExtra("com.sherpasteven.sscte.bitmap")) {
-            Bitmap b = BitmapFactory.decodeByteArray(
-                    getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap"),0,getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap").length);
-            cardimage.setImageBitmap(b);
-        }
+        cardimage.setImageBitmap(card.constructImage(0));
+
 
         nameText.setText(card.getName());
         int spinnerPosition = adapter.getPosition(card.getCatagory());

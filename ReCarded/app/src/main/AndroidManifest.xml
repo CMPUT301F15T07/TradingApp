@@ -74,8 +74,6 @@
         </activity>
         <activity android:name=".FriendListActivity" >
         </activity>
-        <activity android:name=".TradeItemActivity" >
-        </activity>
     </application>
 
 </manifest>
