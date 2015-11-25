@@ -3,6 +3,7 @@ package com.sherpasteven.sscte.Controllers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 
@@ -15,6 +16,8 @@ import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SettingsActivity;
 import com.sherpasteven.sscte.ViewCardActivity;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by joshua on 23/11/15.
@@ -44,7 +47,10 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
         } else if (id == R.id.edit_card) {
             Intent intent2 = new Intent(view, EditCardActivity.class);
             intent2.putExtra("pointer", view.getPosition());
-            intent2.putExtra("com.sherpasteven.sscte.bitmap", ((BitmapDrawable)view.getImageCard().getDrawable()).getBitmap());
+            Bitmap b = ((BitmapDrawable)view.getImageCard().getDrawable()).getBitmap();
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+            b.compress(Bitmap.CompressFormat.PNG, 50, bs);
+            intent2.putExtra("com.sherpasteven.sscte.bitmap", bs.toByteArray());
             view.startActivity(intent2);
         } else if (id == R.id.delete_card) {
             AlertDialog confirmDel = ConfirmDelete();

@@ -81,7 +81,7 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 if(view.getImageViewCard().getTag().equals("Changed")) {
                     cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
                 }
-                else{ cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);}
+                else { cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);}
                     Toast.makeText(view, "Submitted a card...",
                         Toast.LENGTH_SHORT).show();
                 Card card = new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner);

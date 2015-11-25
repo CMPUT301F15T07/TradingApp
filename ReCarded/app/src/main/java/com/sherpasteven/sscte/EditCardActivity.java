@@ -47,9 +47,6 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
         editcardcontroller = new EditCardController(this, getProfile());
 
-        getProfile().getUser().addView(this);
-
-
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
@@ -92,9 +89,13 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         EditText quantityText = (EditText) findViewById(R.id.quantityText);
         EditText commentsText = (EditText) findViewById(R.id.commentsText);
 
-        ImageView cardimage = getImageCard();
+        ImageView cardimage = getImageViewCard();
         cardimage.setTag("Default");
-        cardimage.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
+        if(getIntent().hasExtra("com.sherpasteven.sscte.bitmap")) {
+            Bitmap b = BitmapFactory.decodeByteArray(
+                    getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap"),0,getIntent().getByteArrayExtra("com.sherpasteven.sscte.bitmap").length);
+            cardimage.setImageBitmap(b);
+        }
 
         nameText.setText(card.getName());
         int spinnerPosition = adapter.getPosition(card.getCatagory());
@@ -104,6 +105,11 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         quantityText.setText(Integer.toString(card.getQuantity()));
         commentsText.setText(card.getComments());
         getCheckBox().setChecked(card.isTradable());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public ImageView getImageCard(){

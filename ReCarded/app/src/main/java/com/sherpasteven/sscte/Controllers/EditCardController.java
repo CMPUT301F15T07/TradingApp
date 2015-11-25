@@ -70,8 +70,12 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 if (comments.equals("")) {
                     comments = "No comments entered for this card...";
                 }
+
                 if (view.getImageViewCard().getTag().equals("Changed")) {
                     Bitmap cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
+                    /**
+                     * FIXME: Doesn't pass new image as 'primary image'.
+                     */
                     model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage),0);
                     cardimage.recycle();
                     cardimage = null;
