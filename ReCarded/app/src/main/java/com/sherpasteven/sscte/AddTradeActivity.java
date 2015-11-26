@@ -31,7 +31,7 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
     private AddTradeController addtradecontroller;
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-    private static final int SPAN_COUNT = 2;
+    private static final int SPAN_COUNT = 3;
     private static final int DATASET_COUNT = 60;
 
     private enum LayoutManagerType {
@@ -119,7 +119,6 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
     private void setupTradeComposer() {
         TradeComposer.getTradeComposer().getComponents().setBorrower(user);
         TradeComposer.getTradeComposer().getComponents().setOwner(friend);
-
 
     }
 
