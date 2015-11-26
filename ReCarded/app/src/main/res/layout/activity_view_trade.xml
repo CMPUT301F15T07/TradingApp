@@ -14,7 +14,7 @@
     android:nestedScrollingEnabled="true">
 
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="fill_parent"
         android:layout_height="215dp"
         android:id="@+id/greyRect"
@@ -26,7 +26,7 @@
         android:background="#d8d8d8"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        />
+        />-->
 
     <!--<ImageView
         android:layout_width="wrap_content"
@@ -37,18 +37,21 @@
         android:layout_below="@+id/imageSwitcher"
         android:layout_centerHorizontal="true" />-->
 
-    <ImageSwitcher
+    <!--<ImageSwitcher
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageSwitcher"
         android:layout_alignTop="@+id/greyRect"
         android:layout_toStartOf="@+id/imgNoImage" />
+        android:layout_toStartOf="@+id/imgNoImage" />-->
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Trade with Friend"
+        android:lineSpacingMultiplier="0.8"
         android:id="@+id/txtName"
         android:fontFamily="sans-serif"
         android:textSize="32dp"
@@ -56,25 +59,31 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="23dp"
         android:layout_below="@+id/greyRect"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:textAlignment="center"
+        android:singleLine="false"
+        android:gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Pending"
+        android:text="Trade Status: PENDING"
         android:id="@+id/StatusInfo"
         android:fontFamily="sans-serif"
         android:textSize="12sp"
         android:layout_below="@+id/txtName"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/brown_main" />
 
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Your Offer:"
+        android:text="Your Cards:"
         android:textSize="18sp"
         android:id="@+id/lblUserOffer"
         android:fontFamily="sans-serif-light"
@@ -115,7 +124,7 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Their Offer:"
+        android:text="Their Cards:"
         android:textSize="18sp"
         android:id="@+id/lblFriendOffer"
         android:fontFamily="sans-serif-light"

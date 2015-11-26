@@ -87,9 +87,6 @@ public class AddTradeActivity extends AppCompatActivity implements IView<Model> 
         TradeComposer.getTradeComposer().getComponents().addView(this);
         setupTradeComposer();
 
-
-
-
     }
 
     @Override

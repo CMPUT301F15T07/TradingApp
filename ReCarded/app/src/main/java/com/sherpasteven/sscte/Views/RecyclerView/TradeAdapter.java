@@ -16,6 +16,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 */
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewTradeActivity;
 
 import java.util.List;
 
@@ -55,6 +57,11 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ViewTradeActivity.class);
+                    intent.putExtra("com.sherpasteven.sscte.position", getPosition());
+                    v.getContext().startActivity(intent);
+
+                    /*
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Element " + getPosition() + " to be shown");
@@ -64,7 +71,8 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
                                     dialog.dismiss();
                                 }
                             });
-                    alertDialog.show();                }
+                    alertDialog.show();                */
+                }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             tradeName = (TextView) v.findViewById(R.id.trade_name);
