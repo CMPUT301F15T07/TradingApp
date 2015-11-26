@@ -21,14 +21,14 @@ import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 
-public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
+public class ViewCardActivity extends AppCompatActivity implements IView<Model> {
 
-
-    private Card card;
+   private Card card;
     View v;
     private ViewCardController c;
     private Integer position;
@@ -142,7 +142,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Card> {
     }
 
     @Override
-    public void Update(Card card) { //model is user, not card...
+    public void Update(Model model) { //model is user, not card...
         retrieveCardInfo(getCard());
     }
 

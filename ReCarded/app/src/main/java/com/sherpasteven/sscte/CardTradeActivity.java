@@ -15,17 +15,19 @@ import com.sherpasteven.sscte.Controllers.InventoryTabController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.CardTradeAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
 import java.util.ArrayList;
 
-public class CardTradeActivity extends AppCompatActivity {
+public class CardTradeActivity extends AppCompatActivity implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
     private ArrayList<Card> cardlist = new ArrayList<>();
@@ -142,11 +144,11 @@ public class CardTradeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    /*
-    @Override
-    public void Update(Profile profile) {
 
-    }*/
+    @Override
+    public void Update(Model model) {
+
+    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

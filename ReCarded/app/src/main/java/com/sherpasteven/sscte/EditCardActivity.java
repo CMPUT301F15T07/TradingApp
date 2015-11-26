@@ -24,10 +24,11 @@ import com.sherpasteven.sscte.Controllers.EditCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
-public class EditCardActivity extends AppCompatActivity implements IView<Card> {
+public class EditCardActivity extends AppCompatActivity implements IView<Model> {
 
     private static int RESULT_LOAD_IMAGE = 1;
     private EditCardController editcardcontroller;
@@ -229,10 +230,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
     /**
      * Updates the activity based on raised condition.
-     * @param card Card to be shown as edited.
+     * @paramcard Card to be shown as edited.
      */
     @Override
-    public void Update(Card card) {
+    public void Update(Model model) {
 
     }
 

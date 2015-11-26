@@ -22,10 +22,11 @@ import com.sherpasteven.sscte.Controllers.AddCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
-public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
+public class AddCardActivity extends AppCompatActivity implements IView<Model>{
     private static int RESULT_LOAD_IMAGE = 1;
     private AddCardController addcardcontroller;
 
@@ -160,7 +161,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
      * @param inventory Inventory to update to be identified in view.
      */
     @Override
-    public void Update(Inventory inventory) {
+    public void Update(Model model) {
 
     }
 

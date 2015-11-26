@@ -20,6 +20,7 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
@@ -34,7 +35,7 @@ import java.util.List;
  * {@link GridLayoutManager}.
  */
 @SuppressLint("ValidFragment")
-public class InventoryTab extends Fragment implements IView<Inventory> {
+public class InventoryTab extends Fragment implements IView<Model> {
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
@@ -61,22 +62,41 @@ public class InventoryTab extends Fragment implements IView<Inventory> {
         super();
     }
 
+    public void addInventoryTabtoCard(){
+        for(Card card: getUser().getInventory().getCards()){
+            if(card.getViews() != null){
+                if(!card.getViews().contains(this)) {
+                    card.addView(this);
+                }
+            }
+            else {
+                card.addView(this);
+            }
+        }
+    }
+
     @Override
-    public void Update(Inventory inventory) {
+    public void Update(Model model) {
         mAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         removeViewsfromCards();
+        addInventoryTabtoCard();
     }
 
     public void removeViewsfromCards(){
         ArrayList<Card> inventorycards = getUser().getInventory().getCards();
         for(Card card: inventorycards){
             if(card.getViews() != null) {
-                card.getViews().clear();
+                for(int i = 0; i < card.getViews().size();  i++) {
+                    if (!card.getViews().get(i).equals(this)){
+                        card.getViews().remove(i);
+                    }
+                }
             }
         }
 
