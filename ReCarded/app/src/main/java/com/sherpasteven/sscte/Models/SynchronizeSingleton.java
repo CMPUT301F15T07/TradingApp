@@ -10,7 +10,7 @@ public class SynchronizeSingleton {
 
     public static ProfileSynchronizer GetSynchronize(AppCompatActivity activity){
         if (instance == null){
-            instance = new ProfileSynchronizer();
+            instance = new ProfileSynchronizer(CurrentProfile.GetCurrentProfile(activity));
         }
         instance.SetActivity(activity);
         return instance;

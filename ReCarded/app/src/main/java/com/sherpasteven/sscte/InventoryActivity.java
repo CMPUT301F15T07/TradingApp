@@ -15,10 +15,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.FriendSynchronizer;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.ProfileSynchronizer;
 import com.sherpasteven.sscte.Models.SynchronizeSingleton;
@@ -27,7 +29,7 @@ import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
-public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
+public class InventoryActivity extends ActionBarActivity implements IView {
 
     // Declaring Your View and Variables
 
@@ -58,7 +60,14 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     protected void onPause(){
         super.onPause();
         ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
-        profileSynchronizer.InsertProfile(currentprofile);
+        profileSynchronizer.SynchronizeProfile();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.SynchronizeProfile();
     }
 
     /** (not Javadoc)
@@ -67,6 +76,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.addView(this);
         setContentView(R.layout.activity_inventory);
 
         currentprofile = CurrentProfile.GetCurrentProfile(this);
@@ -177,18 +188,18 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Updates the activity based on raised condition.
-     * @param inventory Updates inventory based on model response.
-     */
-    @Override
-    public void Update(Inventory inventory) {
-
-    }
 
     /**
      * Controller code to set intent switch.
      * Currently unused.
      */
     public void NavigateToFriendsActivity() {}
+
+    @Override
+    public void Update(Object model) {
+        if (model instanceof ProfileSynchronizer) {
+            ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+            profileSynchronizer.UpdateFriends();
+        }
+    }
 }

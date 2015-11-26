@@ -25,23 +25,16 @@ import java.lang.reflect.Type;
 /**
  * Created by elias on 16/11/15.
  */
-public class ElasticSearch {
+public class ElasticSearch extends Model {
 
     private static String SearchUrl = "http://cmput301.softwareprocess.es:8080/cmput301f15t07/profile/_search";
     private static String insertUrl = "http://cmput301.softwareprocess.es:8080/cmput301f15t07/profile/";
 
     private Gson gson;
-    private Profiles profiles;
+    public Profiles profiles;
 
     public ElasticSearch(){
         gson = new Gson();
-        //this should get all profiles. Do this on background thread
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                searchProfiles("*", null);
-            }
-        });
     }
 
     public Profiles getProfiles(){
@@ -57,7 +50,6 @@ public class ElasticSearch {
                 } catch (IOException ex){
                     throw new RuntimeException(ex);
                 }
-
             }
         });
 
@@ -70,7 +62,7 @@ public class ElasticSearch {
      */
     private void _insertProfile(Profile profile) throws IllegalStateException, IOException{
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(insertUrl+profile.getProfileId());
+        HttpPost httpPost = new HttpPost(insertUrl+profile.getProfileId().GetId());
         StringEntity stringentity = null;
         try {
             stringentity = new StringEntity(gson.toJson(profile));
@@ -111,12 +103,25 @@ public class ElasticSearch {
         httpPost.getEntity().getContent().close();
     }
 
+    public void searchProfiles(final String searchString, final String field) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    _searchProfiles(searchString, field);
+                } catch (RuntimeException ex){
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+    }
+
     /**
      * search method from cmput 301 lab
      * @param searchString
      * @param field
      */
-    public void searchProfiles(String searchString, String field) {
+    private void _searchProfiles(String searchString, String field) {
         profiles = new Profiles();
 
         /**
@@ -182,5 +187,6 @@ public class ElasticSearch {
         for (SearchHit<Profile> hit : getHits.getHits()){
             profiles.add(hit.getSource());
         }
+        notifyViews();
     }
 }

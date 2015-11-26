@@ -113,9 +113,9 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         serializer.Serialize(profile, this);
     }
 
-    public void setCloudProfile(Profile profile) {
+    public void setCloudProfile() {
         ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
-        profileSynchronizer.InsertProfile(profile);
+        profileSynchronizer.SynchronizeProfile();
     }
 
     /**

@@ -1,44 +1,79 @@
 package com.sherpasteven.sscte.Models;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
+import com.sherpasteven.sscte.Views.IView;
 
 /**
  * Created by elias on 19/11/15.
  */
-public class ProfileSynchronizer extends Model {
+public class ProfileSynchronizer extends Model implements IView {
     private ElasticSearch elasticSearch;
-    public Profiles profiles;
+    public Profiles cloudProfiles;
+    private Profile localProfile;
     private AppCompatActivity activity;
+    private FriendSynchronizer friendSynchronizer;
 
-    public ProfileSynchronizer(){
+    public ProfileSynchronizer(Profile profile){
+        this.localProfile = profile;
+        elasticSearch = new ElasticSearch();
+        friendSynchronizer = new FriendSynchronizer(profile);
+        elasticSearch.addView(this);
     }
 
     public void SetActivity(AppCompatActivity activity){
         this.activity = activity;
     }
 
+    public boolean SynchronizeProfile() {
+        //Insert local profile into elasticsearch
+        if (!InsertProfile()){
+            return false;
+        }
+        if (!PullProfiles()){
+            return false;
+        }
+        return true;
+
+    }
 
     //return a bool or something when you cant get profiles
-    public boolean PullProfiles(){
+    private boolean PullProfiles(){
         try {
             elasticSearch.searchProfiles("*", null);
-            profiles = elasticSearch.getProfiles();
-            activity.runOnUiThread(new Runnable() {
-                public void run() {
-                    notifyViews();
-                }
-            });
             return true;
         } catch (RuntimeException ex){
             return false;
         }
     }
 
-    public boolean InsertProfile(Profile profile){
+    private boolean InsertProfile(){
         try {
-            elasticSearch.InsertProfile(profile);
+            elasticSearch.InsertProfile(localProfile);
             return true;
         } catch (RuntimeException ex){
             return false;
         }
+    }
+
+    public void UpdateFriends(){
+        try {
+            friendSynchronizer.SynchronizeFriends(cloudProfiles);
+        } catch (RuntimeException ex){
+            throw ex;
+        }
+    }
+
+    @Override
+    public void Update(Object o) {
+        if (o instanceof ElasticSearch){
+            ElasticSearch es = (ElasticSearch) o;
+            cloudProfiles = es.getProfiles();
+        }
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                notifyViews();
+            }
+        });
     }
 }

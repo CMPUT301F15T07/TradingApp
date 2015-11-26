@@ -60,7 +60,7 @@ public class RegisterController extends Controller<SplashPage, Registration> {
                 //used to be model.generateProfile(view);
                 Profile newProfile = model.generateProfile(view);
                 view.setLocalProfile(newProfile);
-                view.setCloudProfile(newProfile);
+                view.setCloudProfile();
                 view.navigateToInventory();
             }
         });
