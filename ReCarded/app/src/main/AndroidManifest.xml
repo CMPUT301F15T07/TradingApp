@@ -75,6 +75,8 @@
         </activity>
         <activity android:name=".FriendListActivity" >
         </activity>
+        <activity android:name="com.sherpasteven.ViewTradeActivity" >
+        </activity>
     </application>
 
 </manifest>
