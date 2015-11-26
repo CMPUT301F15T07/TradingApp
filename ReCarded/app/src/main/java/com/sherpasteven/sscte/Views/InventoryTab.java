@@ -17,17 +17,13 @@ import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
-import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
-import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewCardActivity;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a

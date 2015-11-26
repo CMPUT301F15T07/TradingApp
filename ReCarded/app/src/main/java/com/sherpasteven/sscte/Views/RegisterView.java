@@ -1,6 +1,5 @@
 package com.sherpasteven.sscte.Views;
 
-import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Registration;
 
 /**

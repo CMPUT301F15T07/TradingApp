@@ -2,7 +2,6 @@ package com.sherpasteven.sscte.Controllers;
 
 import com.sherpasteven.sscte.FriendListActivity;
 import com.sherpasteven.sscte.Models.User;
-import com.sherpasteven.sscte.Views.FriendsTab;
 
 /**
  * Created by ansonli on 2015-11-25.

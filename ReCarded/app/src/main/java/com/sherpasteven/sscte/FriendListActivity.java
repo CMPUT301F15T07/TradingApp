@@ -1,8 +1,8 @@
 package com.sherpasteven.sscte;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -12,11 +12,9 @@ import com.sherpasteven.sscte.Controllers.FriendsListController;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Model;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
 import java.util.ArrayList;
 

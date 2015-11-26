@@ -19,8 +19,8 @@ import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
-import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Views.IView;
 

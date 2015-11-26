@@ -3,21 +3,15 @@ package com.sherpasteven.sscte.Controllers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.view.View;
 
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
-import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SettingsActivity;
 import com.sherpasteven.sscte.ViewCardActivity;
-
-import java.io.ByteArrayOutputStream;
 
 /**
  * Created by joshua on 23/11/15.

@@ -1,10 +1,7 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.TradeComposer;
-import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.SettingsActivity;
 
 import java.util.ArrayList;
 
