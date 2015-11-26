@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.util.Base64;
 
 import com.sherpasteven.sscte.R;
 
@@ -18,23 +19,12 @@ import java.nio.ByteBuffer;
 public class Image extends Model {
 
 
-    private byte[] imageserial;
-
-
-
-    private String configname;
-    private int height;
-    private int width;
-    private int rowbytes;
+    private String imageserial;
 
 
     public Image(Bitmap image){
 
-        image = formatBitmap(image);
-        setHeight(image.getHeight());
-        setWidth(image.getWidth());
-        setConfigname(image.getConfig().name());
-        setImageserial(convertBitmap(image));
+        setImageserial(BitMapToString(image));
         image.recycle();
         image = null;
 
@@ -42,130 +32,73 @@ public class Image extends Model {
 
     public Image(int imageID, Context context){
 
-        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), imageID);
-        bmp = formatBitmap(bmp);
-        setHeight(bmp.getHeight());
-        setWidth(bmp.getWidth());
-        setConfigname(bmp.getConfig().name());
-        setImageserial(convertBitmap(bmp));
-        bmp.recycle();
-        bmp = null;
-
-    }
-
-    public String getConfigname() {
-        return configname;
-    }
-
-    public void setConfigname(String configname) {
-        this.configname = configname;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-
-
-    private Bitmap formatBitmap(Bitmap image){
-
-        return scaleQuality(resizeBitmap(image));
-    }
-
-
-
-
-    private Bitmap scaleQuality(Bitmap image){
-        int scale = 0;
-        //Bitmap newimage;
-        //Bitmap retainimage = image;
-        ByteArrayOutputStream outstream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, scale, outstream);
+        Bitmap image = BitmapFactory.decodeResource(context.getResources(), imageID);
+        setImageserial(BitMapToString(image));
         image.recycle();
         image = null;
-        Bitmap newimage = BitmapFactory.decodeStream(new ByteArrayInputStream(outstream.toByteArray()));
-        setHeight(newimage.getHeight());
-        setWidth(newimage.getWidth());
-        setRowbytes(newimage.getRowBytes());
 
-                return newimage;
     }
 
 
-    private Bitmap resizeBitmap(Bitmap image){
+    private Bitmap resizeBitmap(Bitmap image) {
         Double width = (double) image.getWidth();
         Double height = (double) image.getHeight();
-        Double max = 20.0;
+        Double max = 500.0;
 
-        if(width > height){
-           height = max * (height/width);
-           width = max; }
-        else {
-           width = max * (width/height);
-           height = max;
+        if (width > height) {
+            height = max * (height / width);
+            width = max;
+        } else {
+            width = max * (width / height);
+            height = max;
         }
-
         Bitmap bmp = Bitmap.createScaledBitmap(image, width.intValue(), height.intValue(), Boolean.FALSE);
         image.recycle();
         image = null;
 
-        return  bmp;
+        return bmp;
 
 
     }
 
-    //taken from http://stackoverflow.com/questions/10191871/converting-bitmap-to-bytearray-android
-
-    private byte[] convertBitmap(Bitmap image) {
-
-        int bytes = image.getHeight() * image.getRowBytes();
-        ByteBuffer buffer = ByteBuffer.allocate(bytes);
-        image.copyPixelsToBuffer(buffer);
-        return buffer.array();
-    }
-
-
-    public byte[] getImageserial() {
+    public String getImageserial() {
         return imageserial;
     }
 
-    public void setImageserial(byte[] imageserial) {
+    public void setImageserial(String imageserial) {
         this.imageserial = imageserial;
     }
 
-    Bitmap constructImage(){
-
-
-        //Bitmap convert = BitmapFactory.decodeByteArray(getImageserial(), 0, getImageserial().length-1);
-
-        Bitmap.Config configBmp = Bitmap.Config.valueOf(getConfigname());
-        Bitmap construct = Bitmap.createBitmap(getWidth(), getHeight(), configBmp);
-        ByteBuffer buffer = ByteBuffer.wrap(getImageserial());
-
-        construct.copyPixelsFromBuffer(buffer);
-
-
-        return construct;
+    // Taken from http://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versahttp://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa
+    // Credit goes to: Shyam Deore
+    public Bitmap constructImage() {
+        try {
+            byte[] encodeByte = Base64.decode(getImageserial(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            encodeByte = null;
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
-    public int getRowbytes() {
-        return rowbytes;
+    // Taken from http://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versahttp://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa
+    // Credit goes to: Shyam Deore
+    public String BitMapToString(Bitmap bitmap){
+        bitmap = resizeBitmap(bitmap);
+
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        byte [] b = baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+
+        bitmap.recycle();
+        bitmap = null;
+        b = null;
+
+        return temp;
     }
 
-    public void setRowbytes(int rowbytes) {
-        this.rowbytes = rowbytes;
-    }
 
 }

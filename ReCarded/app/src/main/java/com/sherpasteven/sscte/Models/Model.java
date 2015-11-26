@@ -10,14 +10,20 @@ import java.util.List;
  * @param <V> The View class to associate with this model
  */
 public class Model<V extends IView> {
-    private List<V> views;
+
+    private transient List<V> views;
 
     public Model(){
         views = new ArrayList<V>();
     }
 
-    public void addView(V view){
-        if (!views.contains(view)) views.add(view);
+    public void addView(V view) {
+        if (views != null) {
+            if (!views.contains(view)) views.add(view);
+        } else {
+            views = new ArrayList<V>();
+            views.add(view);
+        }
     }
 
     public void deleteView(V view){
@@ -25,8 +31,16 @@ public class Model<V extends IView> {
     }
 
     public void notifyViews(){
-        for (IView view: views){
-            view.Update(this);
+        if(views != null) {
+            for (IView view : views) {
+                view.Update(this);
+            }
         }
     }
+
+    public List<V> getViews() {
+        return views;
+    }
+
+
 }

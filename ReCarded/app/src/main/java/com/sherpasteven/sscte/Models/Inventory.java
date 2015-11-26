@@ -32,8 +32,10 @@ public class Inventory extends Model {
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
-        else {getCards().add( new Card(card.getName()/* card.getImageID() */, card.getQuantity(), card.getQuality(), card.getCatagory(),
-                card.getSeries(), card.isTradable(), card.getComments(),card.getOwner()));}
+        else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
+                card.getSeries(), card.isTradable(), card.getComments(), card.getImages(), card.getOwner()));}
+
+        notifyViews();
     }
 
     /**
@@ -74,6 +76,7 @@ public class Inventory extends Model {
 
             if(getCard(i).equals(card)){
                 getCards().remove(i);
+                return;
             }
         }
 
@@ -118,10 +121,12 @@ public class Inventory extends Model {
             }
             else {throw new IllegalArgumentException("You tried removing more of card than the user had");
             }
+
+            notifyViews();
         }
 
         catch(IllegalArgumentException e){
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -136,4 +141,3 @@ public class Inventory extends Model {
         returnCard(card).setQuantity(returnCard(card).getQuantity() + amount);
     }
 }
-

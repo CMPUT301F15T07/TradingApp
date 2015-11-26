@@ -14,9 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Controllers.RegisterController;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Registration;
 import com.sherpasteven.sscte.Views.IView;
@@ -25,7 +27,7 @@ import com.sherpasteven.sscte.Views.IView;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SplashPage extends AppCompatActivity implements IView<Registration> {
+public class SplashPage extends AppCompatActivity implements IView<Model> {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -62,7 +64,8 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         super.onCreate(savedInstanceState);
 
         //if a profile already exists, there is no need to register
-        Profile localProfile = getLocalProfile();
+        //Profile localProfile = getLocalProfile();
+        Profile localProfile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (localProfile != null) navigateToInventory();
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -238,5 +241,10 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
                 !registration.getUserName().isEmpty() &&
                 !registration.getUserEmail().isEmpty() &&
                  registration.isValidEmail();
+    }
+
+    @Override
+    public void Update(Model model) {
+
     }
 }

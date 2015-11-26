@@ -104,8 +104,17 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.tradeName.setText(trades.get(position).getBorrower().getName());
-        viewHolder.tradeDescription.setText(trades.get(position).getBorrower().getEmail());
+        if (trades.get(position).getOwnerList().get(0).getImagebyIndex(0) != null) {
+            viewHolder.tradePhoto.setImageBitmap(trades.get(position).getOwnerList().get(0).constructImage(0));
+        } else {
+            if (trades.get(position).getBorrowList().get(0).getImagebyIndex(0) != null) {
+                viewHolder.tradePhoto.setImageBitmap(trades.get(position).getBorrowList().get(0).constructImage(0));
+            }
+        }
+
+        Integer cardsum = trades.get(position).getOwnerList().size() + trades.get(position).getBorrowList().size();
+        viewHolder.tradeName.setText("Trade with " + trades.get(position).getOwner().getName());
+        viewHolder.tradeDescription.setText(trades.get(position).getStatus() + ": " + cardsum + " cards in trade.");
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 

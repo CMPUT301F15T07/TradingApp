@@ -3,6 +3,7 @@ package com.sherpasteven.sscte.Controllers;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Models.User;
@@ -23,7 +24,7 @@ public class FriendsTabController extends Controller<FriendsTab, User> {
     }
     @Override
     protected void setListeners(final FriendsTab view) {
-        Button addFriend = (Button) view.getView().findViewById(R.id.btnAddFriend);
+        ImageButton addFriend = (ImageButton) view.getView().findViewById(R.id.btnAddFriend);
         addFriend.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {

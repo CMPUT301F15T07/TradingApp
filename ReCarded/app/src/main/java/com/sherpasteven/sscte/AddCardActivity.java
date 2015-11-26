@@ -10,20 +10,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
-public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
+public class AddCardActivity extends AppCompatActivity implements IView<Model>{
     private static int RESULT_LOAD_IMAGE = 1;
     private AddCardController addcardcontroller;
 
@@ -34,26 +37,20 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
+        addcardcontroller = new AddCardController(this, CurrentProfile.getCurrentProfile().getProfile(this));
 
-        ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+        Spinner spinner = (Spinner) findViewById(R.id.categoryText);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+    // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        ImageView imageView = getImageViewCard();
+        imageView.setTag("Default");
 
-            /**
-             * OnClick to enable camera switch.
-             * @param arg0
-             */
-            @Override
-            public void onClick(View arg0) {
 
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-            }
-        });
-
-        addcardcontroller = new AddCardController(this, CurrentProfile.GetCurrentProfile(this));
     }
 
 
@@ -80,8 +77,9 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.imgCard);
+            ImageView imageView = getImageViewCard();
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            imageView.setTag("Changed");
         }
 
 
@@ -99,6 +97,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         return true;
     }
 
+    public ImageView getImageViewCard(){return (ImageView) findViewById(R.id.imgCard);}
+
     public EditText getMediaText(){
         return (EditText) findViewById(R.id.mediaText);
     }
@@ -107,8 +107,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
         return (EditText) findViewById(R.id.nameText);
     }
 
-    public EditText getCatagoryText(){
-        return (EditText) findViewById(R.id.categoryText);
+    public Spinner getCatagoryText(){
+        return (Spinner) findViewById(R.id.categoryText);
     }
 
     public EditText getSeriesText(){
@@ -158,14 +158,23 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
     /**
      * Updates the activity based on raised condition.
-     * @param inventory Inventory to update to be identified in view.
+     * @param model Inventory to update to be identified in view.
      */
     @Override
-    public void Update(Inventory inventory) {
+    public void Update(Model model) {
 
     }
 
     public void navigateToInventory(){
-        startActivity(new Intent(this, InventoryActivity.class));
+        finish();
+
+    }
+
+    public void loadImage(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 }

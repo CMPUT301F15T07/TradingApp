@@ -22,16 +22,14 @@
             android:layout_width="fill_parent"
             android:layout_height="215dp"
             android:id="@+id/greyRect"
-            android:src="@drawable/mask_image"
             android:layout_marginTop="83dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:paddingEnd="-100dp"
-            android:paddingStart="-100dp"
+            android:scaleType="centerCrop"
             android:background="#d8d8d8"
+            android:src="@drawable/no_image_full"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
-
+        <!--
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +37,7 @@
             android:src="@drawable/grey_rectangle"
             android:layout_marginTop="75dp"
             android:layout_below="@+id/imageSwitcher"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true" />-->
 
         <ImageSwitcher
             android:layout_width="wrap_content"

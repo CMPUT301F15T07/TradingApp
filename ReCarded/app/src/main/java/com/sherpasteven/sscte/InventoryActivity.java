@@ -19,6 +19,7 @@ import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -27,7 +28,7 @@ import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
 import java.util.Set;
 
-public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
+public class InventoryActivity extends ActionBarActivity implements IView<Model>{
 
     // Declaring Your View and Variables
 
@@ -62,7 +63,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        currentprofile = CurrentProfile.GetCurrentProfile(this);
+        currentprofile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (currentprofile == null) {
             Toast.makeText(getApplicationContext(), "No profile loaded, returning to main page",
                     Toast.LENGTH_LONG).show();
@@ -78,7 +79,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
-        }*/
+        }
+        */
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -103,7 +105,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
         tabs.setViewPager(pager);
 
     }
-
+    /*
     public Button getAddButton(){
         return (Button) findViewById(R.id.btnAddItem);
     }
@@ -115,6 +117,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
     public Button getEditButton(){
         return (Button) findViewById(R.id.btnEditItem);
     }
+    */
 
     /**
      * Changes the toolbar color on the main page.
@@ -172,10 +175,10 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     /**
      * Updates the activity based on raised condition.
-     * @param inventory Updates inventory based on model response.
+     * @param model Updates inventory based on model response.
      */
     @Override
-    public void Update(Inventory inventory) {
+    public void Update(Model model) {
 
     }
 

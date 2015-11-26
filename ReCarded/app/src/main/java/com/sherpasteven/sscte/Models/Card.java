@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,27 @@ public class Card extends Model {
     private Boolean tradable;
     private String comments;
     private ArrayList<Image> images;
-    private User owner;
+    private String owner;
 
 
     public Card(String name, int quantity, Quality quality, String catagory,
                String series, Boolean tradable, String comments, ArrayList<Image> images , User owner){
+
+        this.name = name;
+        this.quantity = quantity;
+        this.quality = quality;
+        this.catagory = catagory;
+        this.series = series;
+        this.tradable = tradable;
+        this.comments = comments;
+        this.images = images;
+        setOwner(owner);;
+
+
+    }
+
+    public Card(String name, int quantity, Quality quality, String catagory,
+                String series, Boolean tradable, String comments, ArrayList<Image> images , String owner){
 
         this.name = name;
         this.quantity = quantity;
@@ -55,7 +72,7 @@ public class Card extends Model {
         this.tradable = tradable;
         this.comments = comments;
         this.images = new ArrayList<Image>();
-        this.owner = owner;
+        setOwner(owner);
 
 
     }
@@ -73,10 +90,25 @@ public class Card extends Model {
         this.tradable = tradable;
         this.comments = comments;
         this.images = new ArrayList<Image>();
-        this.owner = owner;
+        setOwner(owner);
         addImage(new Image(imageID, context));
+    }
 
+    public Card(String name, Image image, int quantity, Quality quality, String catagory,
+                String series, Boolean tradable, String comments , User owner){
 
+        BitmapFactory bmf = new BitmapFactory();
+
+        this.name = name;
+        this.quantity = quantity;
+        this.quality = quality;
+        this.catagory = catagory;
+        this.series = series;
+        this.tradable = tradable;
+        this.comments = comments;
+        this.images = new ArrayList<Image>();
+        setOwner(owner);
+        addImage(image);
     }
 
     public Image getImagebyIndex(int index){
@@ -130,6 +162,7 @@ public class Card extends Model {
 
     public void setName(String name) {
         this.name = name;
+        notifyViews();
     }
 
     public int getQuantity() {
@@ -138,6 +171,7 @@ public class Card extends Model {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+        notifyViews();
     }
 
     public Quality getQuality() {
@@ -146,6 +180,7 @@ public class Card extends Model {
 
     public void setQuality(Quality quality) {
         this.quality = quality;
+        notifyViews();
     }
 
     public String getCatagory() {
@@ -154,6 +189,7 @@ public class Card extends Model {
 
     public void setCatagory(String catagory) {
         this.catagory = catagory;
+        notifyViews();
     }
 
     public String getSeries() {
@@ -162,6 +198,7 @@ public class Card extends Model {
 
     public void setSeries(String series) {
         this.series = series;
+        notifyViews();
     }
 
     public Boolean isTradable() {
@@ -170,6 +207,7 @@ public class Card extends Model {
 
     public void setTradable(Boolean tradable) {
         this.tradable = tradable;
+        notifyViews();
     }
 
     public String getComments() {
@@ -178,22 +216,21 @@ public class Card extends Model {
 
     public void setComments(String comments) {
         this.comments = comments;
+        notifyViews();
     }
 
-  /*  public ArrayList<images> getImages() {
-        return images;
+    public void setImageByPosition(Image image, int position){
+        getImages().set(position, image);
+        notifyViews();
     }
 
-    public void setImages(ArrayList<images> images) {
-        this.images = images;
-    } */
 
-    public User getOwner() {
+    public String getOwner() {
         return owner;
     }
 
     public void setOwner(User owner) {
-        this.owner = owner;
+        this.owner = owner.getEmail() + "," + owner.getName() + "," + owner.getLocation();
     }
 
 

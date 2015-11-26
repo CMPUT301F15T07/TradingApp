@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class EditTradeActivity extends AppCompatActivity {
+import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Views.IView;
+
+public class EditTradeActivity extends AppCompatActivity implements IView<Model> {
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -20,4 +23,8 @@ public class EditTradeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void Update(Model model) {
+
+    }
 }

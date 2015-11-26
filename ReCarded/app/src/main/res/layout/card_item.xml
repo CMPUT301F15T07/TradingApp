@@ -16,7 +16,7 @@
         android:elevation="3dp">
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="8dp"
             android:scrollIndicators="top">
@@ -24,10 +24,10 @@
             <ImageView
                 android:layout_height="100dp"
                 android:layout_width="wrap_content"
-                android:scaleType="center"
+                android:scaleType="centerCrop"
                 android:id="@+id/card_photo"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/splash_page"
+                android:src="@drawable/img_no_img"
                 android:layout_alignParentTop="true"
                 android:cropToPadding="false" />
 
@@ -39,7 +39,11 @@
                 android:fontFamily="sans-serif-light"
                 android:text="Sample Name"
                 android:textSize="8pt"
-                android:paddingTop="5px" />
+                android:paddingTop="5px"
+                android:paddingEnd="30dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxLines="1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +52,19 @@
                 android:layout_below="@+id/card_name"
                 android:fontFamily="sans-serif-light"
                 android:textSize="6pt"
-                android:text="Sample Text" />
+                android:text="Sample Text"
+                android:paddingEnd="50dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgStatus"
+                android:src="@drawable/ic_trade_unavailable"
+                android:layout_alignBottom="@+id/card_text"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
