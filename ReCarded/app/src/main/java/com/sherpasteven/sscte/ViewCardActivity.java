@@ -35,6 +35,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     private ViewCardController c;
     private Integer position;
     private Profile profile;
+    int menuselector;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -44,11 +45,25 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_card);
 
+        menuselector = 0;
+
         Intent intent = getIntent();
         setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
         setPosition(intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0));
 
-        setCard(getProfile().getUser().getInventoryItem(getPosition()));
+        if (intent.hasExtra("com.sherpasteven.sscte.trades")) {
+            menuselector = 1;
+            invalidateOptionsMenu();
+            String tradescon = intent.getStringExtra("com.sherpasteven.sscte.trades");
+            int tradelistpos = intent.getIntExtra("com.sherpasteven.sscte.tradepos", 0);
+            if (tradescon.equals("owner")) {
+                setCard(getProfile().getUser().getTrades().getPendingTrades().get(tradelistpos).getOwnerList().get(position));
+            } else {
+                setCard(getProfile().getUser().getTrades().getPendingTrades().get(tradelistpos).getBorrowList().get(position));
+            }
+        } else {
+            setCard(getProfile().getUser().getInventoryItem(getPosition()));
+        }
 
         getCard().addView(this);
 
@@ -65,7 +80,9 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_card, menu);
+        if (menuselector == 0) {
+            getMenuInflater().inflate(R.menu.menu_view_card, menu);
+        }
         return true;
     }
 
@@ -116,9 +133,11 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
 
         if(!card.getImages().isEmpty()){
             ImageView viewcard = getImageCard();
-            viewcard.setImageBitmap(card.constructImage(0));
+            if (card.getImagebyIndex(0) != null) {
+                viewcard.setImageBitmap(card.constructImage(0));
             }
         }
+    }
 
 
     /**

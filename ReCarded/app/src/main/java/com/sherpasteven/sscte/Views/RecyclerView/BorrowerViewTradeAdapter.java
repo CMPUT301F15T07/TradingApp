@@ -15,31 +15,39 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sherpasteven.sscte.Models.Trade;
+import com.sherpasteven.sscte.AddTradeActivity;
+import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewCardActivity;
 import com.sherpasteven.sscte.ViewTradeActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
-public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> {
-    private static final String TAG = "TradeAdapter";
+public class BorrowerViewTradeAdapter extends RecyclerView.Adapter<BorrowerViewTradeAdapter.ViewHolder> {
+    private static final String TAG = "CardAdapter";
 
     private String[] mDataSet;
-    List<Trade> trades;
+    List<Card> cards;
+    static View view;
+    static ViewTradeActivity act;
+    static int tradelistpos;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -47,38 +55,35 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        TextView tradeName;
-        TextView tradeDescription;
-        ImageView tradePhoto;
+        TextView cardName;
+        TextView cardDescription;
+        ImageView cardPhoto;
 
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ViewTradeActivity.class);
-                    intent.putExtra("com.sherpasteven.sscte.position", getPosition());
-                    v.getContext().startActivity(intent);
-
-                    /*
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();                */
+                    Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
+                    myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
+                    myIntent.putExtra("com.sherpasteven.sscte.trades", "borrower");
+                    myIntent.putExtra("com.sherpasteven.sscte.tradepos", tradelistpos);
+                    view.getContext().startActivity(myIntent);
                 }
             });
-            cv = (CardView) v.findViewById(R.id.cv);
-            tradeName = (TextView) v.findViewById(R.id.trade_name);
-            tradeDescription = (TextView) v.findViewById(R.id.trade_text);
-            tradePhoto = (ImageView)itemView.findViewById(R.id.trade_photo);
 
+            cv = (CardView) v.findViewById(R.id.cv);
+            cardName = (TextView) v.findViewById(R.id.card_name);
+            cardDescription = (TextView) v.findViewById(R.id.card_text);
+            cardPhoto = getCardImage();
+            view = v;
+
+        }
+
+        public ImageView getCardImage(){
+            return (ImageView)itemView.findViewById(R.id.card_photo);
         }
 
     }
@@ -86,10 +91,14 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
 
     /**
      * Initialize the dataset of the Adapter.
-     * @param trades List of trades initialised for loading.
+     * @param card Initialise list of cards for loading.
+     * @param activity
      */
-    public TradeAdapter(List<Trade> trades){
-        this.trades = trades;
+
+    public BorrowerViewTradeAdapter(List<Card> card, ViewTradeActivity activity, int tradelistpos){
+        this.cards = card;
+        this.act = activity;
+        this.tradelistpos = tradelistpos;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -98,7 +107,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.trade_item, viewGroup, false);
+                .inflate(R.layout.card_item_mini, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -108,28 +117,24 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        if (trades.get(position).getOwnerList().get(0).getImagebyIndex(0) != null) {
-            viewHolder.tradePhoto.setImageBitmap(trades.get(position).getOwnerList().get(0).constructImage(0));
-        } else {
-            if (trades.get(position).getBorrowList().get(0).getImagebyIndex(0) != null) {
-                viewHolder.tradePhoto.setImageBitmap(trades.get(position).getBorrowList().get(0).constructImage(0));
-            }
+        viewHolder.cardName.setText(cards.get(position).getName());
+        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
+        if (cards.get(position).getImagebyIndex(0) != null) {
+            viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
         }
 
-        Integer cardsum = trades.get(position).getOwnerList().size() + trades.get(position).getBorrowList().size();
-        viewHolder.tradeName.setText("Trade with " + trades.get(position).getOwner().getName());
-        viewHolder.tradeDescription.setText(trades.get(position).getStatus() + ": " + cardsum + " cards in trade.");
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    /** Gets item for dynamic loading.
-     * @return size of dataset (invoked by layout manager)
+    /**
+     * @return the size of your dataset (invoked by the layout manager)
      */
     @Override
     public int getItemCount() {
-        return trades.size();
+        if (cards != null) {
+            return cards.size();
+        } return 0;
     }
 }
