@@ -1,15 +1,10 @@
 package com.sherpasteven.sscte;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -20,8 +15,8 @@ import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
-import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.TradeListAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.BorrowerTradeListAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;
 
 public class AddTradeActivity extends AppCompatActivity implements IView {
 
@@ -43,8 +38,8 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
 
     protected RecyclerView mYourRecycler;
     protected RecyclerView mTheirRecycler;
-    protected TradeListAdapter mYourAdapter;
-    protected TradeListAdapter mTheirAdapter;
+    protected BorrowerTradeListAdapter mYourAdapter;
+    protected OwnerTradeListAdapter mTheirAdapter;
     protected RecyclerView.LayoutManager mYourLayoutManager;
     protected RecyclerView.LayoutManager mTheirLayoutManager;
 
@@ -73,8 +68,8 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-        mYourAdapter = new TradeListAdapter(TradeComposer.getTradeComposer().getComponents().getBorrowList());
-        mTheirAdapter = new TradeListAdapter(TradeComposer.getTradeComposer().getComponents().getOwnerList());
+        mYourAdapter = new BorrowerTradeListAdapter(TradeComposer.getTradeComposer().getComponents().getBorrowList(), this);
+        mTheirAdapter = new OwnerTradeListAdapter(TradeComposer.getTradeComposer().getComponents().getOwnerList(), this);
         // Set CardAdapter as the adapter for RecyclerView.
         mYourRecycler.setAdapter(mYourAdapter);
         mTheirRecycler.setAdapter(mTheirAdapter);

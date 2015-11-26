@@ -158,17 +158,11 @@ public class FriendListActivity extends AppCompatActivity implements IView<Profi
      * FIXME: Keep this as unit test example
      */
     private void initializeData() {
-        friendslist.add(new User("test1", "location1", "email1", this.getApplicationContext()));
-        friendslist.add(new User("test2", "location2", "email2", this.getApplicationContext()));
-        friendslist.add(new User("test3", "location3", "email3", this.getApplicationContext()));
-        friendslist.add(new User("test4", "location4", "email4", this.getApplicationContext()));
-        friendslist.add(new User("test5", "location5", "email5", this.getApplicationContext()));
-        friendslist.add(new User("test6", "location6", "email6", this.getApplicationContext()));
-        friendslist.add(new User("test7", "location7", "email7", this.getApplicationContext()));
-        friendslist.add(new User("test8", "location8", "email8", this.getApplicationContext()));
-        friendslist.add(new User("test9", "location9", "email9", this.getApplicationContext()));
-        friendslist.add(new User("test10", "location10", "email10", this.getApplicationContext()));
-        friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
+        friendslist.add(new User("Shrek", "Swamp", "Shrek@theswamp.com", this.getApplicationContext()));
+        friendslist.add(new User("Donkey", "Canada", "dnkey@canada.com", this.getApplicationContext()));
+        friendslist.add(new User("Smashmouth", "New England", "sm@d3.com", this.getApplicationContext()));
+        friendslist.add(new User("Fiona", "The Castle", "Princess3@hotmail.com", this.getApplicationContext()));
+        friendslist.add(new User("Prince Farquaad", "The Kingdom", "kingd4@gmail.com", this.getApplicationContext()));
         currentUser.setFriends(friendslist);
     }
 

@@ -24,6 +24,16 @@ public class TradeComponents extends Model {
         if(getOwnerList() != null && getBorrowList() != null){
             if(!getOwnerList().isEmpty() &&  !getBorrowList().isEmpty()){
                 if(getOwner() != null && getBorrowList() != null){
+                    for (Card card : getBorrowList()) {
+                        if (!card.isTradable()) {
+                            return Boolean.FALSE;
+                        }
+                    }
+                    for (Card card : getOwnerList()) {
+                        if (!card.isTradable()) {
+                            return Boolean.FALSE;
+                        }
+                    }
                     return Boolean.TRUE;
                 }
             }

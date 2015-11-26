@@ -8,7 +8,7 @@ import java.util.Date;
  * Initialises the trade model used for trading inventory systems.
  */
 public class Trade extends Model {
-    private User borrower;
+    private transient User borrower;
     private User owner;
 
     //FIXME: Making this public to make tests correct, return to private

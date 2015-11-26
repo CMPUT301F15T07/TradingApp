@@ -15,31 +15,36 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
-import android.content.Intent;
-import android.support.v4.content.ContextCompat;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.ViewCardActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
-public class TradeListAdapter extends RecyclerView.Adapter<TradeListAdapter.ViewHolder> {
+public class BorrowerTradeListAdapter extends RecyclerView.Adapter<BorrowerTradeListAdapter.ViewHolder> {
     private static final String TAG = "CardAdapter";
 
     private String[] mDataSet;
     List<Card> cards;
     static View view;
+    static AddTradeActivity act;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -54,26 +59,34 @@ public class TradeListAdapter extends RecyclerView.Adapter<TradeListAdapter.View
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(v.getContext(), R.style.MainDiag));
+                    alertDialog.setTitle("Delete");
+                    alertDialog.setMessage("Do you want to remove this card from your trade?");
+                    AlertDialog alDialog = alertDialog.create();
+                    alDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ArrayList<Card> cards = TradeComposer.getTradeComposer().getComponents().getBorrowList();
+                                    cards.remove(getPosition());
+                                    act.Update(cards);
+                                    dialog.dismiss();
+                                }
+                            });
+                    alDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No thanks!",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                 }
                             });
-                    alertDialog.show(); */
-                    Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
-                    myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
-                    view.getContext().startActivity(myIntent);
-
+                    alDialog.show();
                 }
             });
+
             cv = (CardView) v.findViewById(R.id.cv);
             cardName = (TextView) v.findViewById(R.id.card_name);
             cardDescription = (TextView) v.findViewById(R.id.card_text);
@@ -94,8 +107,9 @@ public class TradeListAdapter extends RecyclerView.Adapter<TradeListAdapter.View
      * @param card Initialise list of cards for loading.
      */
 
-    public TradeListAdapter(List<Card> card){
+    public BorrowerTradeListAdapter(List<Card> card, AddTradeActivity activity){
         this.cards = card;
+        this.act = activity;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)

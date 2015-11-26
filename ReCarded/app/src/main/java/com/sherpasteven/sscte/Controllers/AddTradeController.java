@@ -83,6 +83,8 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
                 if (trade != null) {
                     Toast.makeText(v.getContext(), "Trade submitted!", Toast.LENGTH_SHORT).show();
                     CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().addPendingTrade(trade);
+                    LocalProfileSerializer lps = new LocalProfileSerializer();
+                    lps.Serialize(CurrentProfile.getCurrentProfile().getProfile(view), view);
                     view.finish();
                 } else {
                     Toast.makeText(v.getContext(), "Trade failed...", Toast.LENGTH_SHORT).show();

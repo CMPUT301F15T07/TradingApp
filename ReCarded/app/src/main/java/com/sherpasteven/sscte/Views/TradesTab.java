@@ -22,6 +22,7 @@ import com.sherpasteven.sscte.Controllers.TradesTabController;
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.EditTradeActivity;
 import com.sherpasteven.sscte.FriendListActivity;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.Card;
@@ -75,7 +76,13 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initializeData();
+        // initializeData();
+        dynamicLoad();
+    }
+
+    public void dynamicLoad() {
+        tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+        // doesn't get the other trades
     }
 
     @Override
@@ -114,7 +121,7 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
     @Override
     public void Update(TradeLog tradeLog) {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     public void navigateToAddTradeActivity(){
@@ -158,6 +165,8 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
     }
 
+
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save currently selected layout manager.
@@ -170,6 +179,7 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
      * FIXME: Change system for dynamic trade list loading.
      * FIXME: Implement tradelist as user-relevant trade list structure.
      */
+    /*
     private void initializeData() {
         tradelist = new ArrayList<>();
         Context context = this.getContext();
@@ -185,6 +195,6 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         tradelist.add(new Trade(new User("borrower10", "location", "email10", context), new User("owner1", "location", "email1", context)));
         tradelist.add(new Trade(new User("borrower11", "location", "email11", context), new User("owner1", "location", "email1", context)));
 
-    }
+    }*/
 
 }

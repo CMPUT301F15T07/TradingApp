@@ -68,8 +68,9 @@
             android:clipToPadding="true"
             android:numColumns="3"
             android:paddingBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
     </LinearLayout>
 
@@ -107,8 +108,9 @@
             android:clipToPadding="true"
             android:numColumns="3"
             android:paddingBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
         <Button
             android:layout_width="wrap_content"

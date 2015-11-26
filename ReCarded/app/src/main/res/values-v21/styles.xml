@@ -15,5 +15,10 @@
         <item name="colorAccent">@color/orange_main</item>
         <item name="colorPrimaryDark">@color/brown_dark</item>
         <item name="android:navigationBarColor">@color/brown_dark</item>
+        <item name="alertDialogTheme">@style/MainDiag</item>
+    </style>
+
+    <style name="MainDiag" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/brown_main</item>
     </style>
 </resources>
