@@ -73,7 +73,7 @@ public class BorrowerTradeListAdapter extends RecyclerView.Adapter<BorrowerTrade
                                 public void onClick(DialogInterface dialog, int which) {
                                     ArrayList<Card> cards = TradeComposer.getTradeComposer().getComponents().getBorrowList();
                                     cards.remove(getPosition());
-                                    act.Update(cards);
+                                    act.Update(null);
                                     dialog.dismiss();
                                 }
                             });

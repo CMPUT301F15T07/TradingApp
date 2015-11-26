@@ -72,7 +72,7 @@ public class OwnerTradeListAdapter extends RecyclerView.Adapter<OwnerTradeListAd
                                 public void onClick(DialogInterface dialog, int which) {
                                     ArrayList<Card> cards = TradeComposer.getTradeComposer().getComponents().getOwnerList();
                                     cards.remove(getPosition());
-                                    act.Update(cards);
+                                    act.Update(null);
                                     dialog.dismiss();
                                 }
                             });
