@@ -19,6 +19,7 @@ import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -27,7 +28,7 @@ import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
 import java.util.Set;
 
-public class InventoryActivity extends ActionBarActivity implements IView<Inventory>{
+public class InventoryActivity extends ActionBarActivity implements IView<Model>{
 
     // Declaring Your View and Variables
 
@@ -174,10 +175,10 @@ public class InventoryActivity extends ActionBarActivity implements IView<Invent
 
     /**
      * Updates the activity based on raised condition.
-     * @param inventory Updates inventory based on model response.
+     * @param model Updates inventory based on model response.
      */
     @Override
-    public void Update(Inventory inventory) {
+    public void Update(Model model) {
 
     }
 

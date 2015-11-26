@@ -23,6 +23,7 @@ import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.EditTradeActivity;
 import com.sherpasteven.sscte.FriendListActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.Card;
@@ -39,7 +40,7 @@ import java.util.List;
 /**
  * Implements the TradesTab system using the TradeLog model.
  */
-public class TradesTab extends Fragment implements IView<TradeLog> {
+public class TradesTab extends Fragment implements IView<Model> {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
@@ -120,7 +121,7 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
     }
 
     @Override
-    public void Update(TradeLog tradeLog) {
+    public void Update(Model model) {
         mAdapter.notifyDataSetChanged();
     }
 

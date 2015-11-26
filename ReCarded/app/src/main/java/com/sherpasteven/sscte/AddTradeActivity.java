@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.sherpasteven.sscte.Controllers.AddTradeController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
@@ -18,7 +19,7 @@ import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.BorrowerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;
 
-public class AddTradeActivity extends AppCompatActivity implements IView {
+public class AddTradeActivity extends AppCompatActivity implements IView<Model> {
 
     private User user;
     private User friend;
@@ -131,10 +132,9 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
     }
 
     @Override
-    public void Update(Object o) {
+    public void Update(Model model) {
         mTheirAdapter.notifyDataSetChanged();
         mYourAdapter.notifyDataSetChanged();
-
     }
 
     public Button getSubmitButton(){

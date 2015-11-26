@@ -24,12 +24,13 @@ import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 import java.io.File;
 
-public class ProfileActivity extends AppCompatActivity implements IView<Profile>{
+public class ProfileActivity extends AppCompatActivity implements IView<Model>{
 
     private Profile profile;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -173,10 +174,10 @@ public class ProfileActivity extends AppCompatActivity implements IView<Profile>
 
     /**
      * Updates the activity based on raised condition.
-     * @param profile Profile to be updated on load.
+     * @param model Profile to be updated on load.
      */
     @Override
-    public void Update(Profile profile) {
+    public void Update(Model model) {
         
     }
 

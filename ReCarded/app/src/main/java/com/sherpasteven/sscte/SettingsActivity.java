@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
-public class SettingsActivity extends AppCompatActivity implements IView<Profile>{
+public class SettingsActivity extends AppCompatActivity implements IView<Model>{
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -22,10 +23,10 @@ public class SettingsActivity extends AppCompatActivity implements IView<Profile
 
     /**
      * Updates the activity based on raised condition.
-     * @param profile Updates profile with settings with load.
+     * @param model Updates profile with settings with load.
      */
     @Override
-    public void Update(Profile profile) {
+    public void Update(Model model) {
 
     }
 }

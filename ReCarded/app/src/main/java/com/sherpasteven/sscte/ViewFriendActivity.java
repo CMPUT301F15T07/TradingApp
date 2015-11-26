@@ -3,7 +3,10 @@ package com.sherpasteven.sscte;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ViewFriendActivity extends AppCompatActivity {
+import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Views.IView;
+
+public class ViewFriendActivity extends AppCompatActivity implements IView<Model> {
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -12,5 +15,10 @@ public class ViewFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friend);
+    }
+
+    @Override
+    public void Update(Model model) {
+
     }
 }

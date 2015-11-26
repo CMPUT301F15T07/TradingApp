@@ -15,6 +15,7 @@ import com.sherpasteven.sscte.Controllers.InventoryTabController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.Trade;
@@ -29,7 +30,8 @@ import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
 import java.util.ArrayList;
 
-public class CardTradeActivity extends AppCompatActivity implements IView<Trade> {
+
+public class CardTradeActivity extends AppCompatActivity implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
     private ArrayList<Card> cardlist = new ArrayList<>();
@@ -98,10 +100,6 @@ public class CardTradeActivity extends AppCompatActivity implements IView<Trade>
         //initializeData();
     }
 
-    @Override
-    public void Update(Trade trade) {
-
-    }
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER, LINEAR_LAYOUT_MANAGER
@@ -151,6 +149,12 @@ public class CardTradeActivity extends AppCompatActivity implements IView<Trade>
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+
+    @Override
+    public void Update(Model model) {
+
     }
 
     @Override

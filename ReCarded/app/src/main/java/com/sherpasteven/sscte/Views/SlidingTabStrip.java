@@ -9,10 +9,12 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.sherpasteven.sscte.Models.Model;
+
 /**
  * SlidingTabStrip implements the activity bar to decide between tabs.
  */
-class SlidingTabStrip extends LinearLayout {
+class SlidingTabStrip extends LinearLayout implements IView<Model> {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;
     private static final byte DEFAULT_BOTTOM_BORDER_COLOR_ALPHA = 0x26;
@@ -135,6 +137,11 @@ class SlidingTabStrip extends LinearLayout {
         float g = (Color.green(color1) * ratio) + (Color.green(color2) * inverseRation);
         float b = (Color.blue(color1) * ratio) + (Color.blue(color2) * inverseRation);
         return Color.rgb((int) r, (int) g, (int) b);
+    }
+
+    @Override
+    public void Update(Model model) {
+
     }
 
     private static class SimpleTabColorizer implements SlidingTabLayout.TabColorizer {
