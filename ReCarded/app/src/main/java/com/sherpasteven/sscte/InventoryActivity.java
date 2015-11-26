@@ -42,14 +42,6 @@ public class InventoryActivity extends ActionBarActivity implements IView {
 
     private Profile currentprofile;
     private User currentuser;
-    private ISerializer<Profile> profileISerializer;
-    private IDeSerializer<Profile> profileIDeSerializer;
-
-
-    public Profile getProfile() {
-        currentprofile = profileIDeSerializer.Deserialize(currentprofile, this);
-        return currentprofile;
-    }
 
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
@@ -59,9 +51,13 @@ public class InventoryActivity extends ActionBarActivity implements IView {
     @Override
     protected void onPause(){
         super.onPause();
-        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
-        profileSynchronizer.SynchronizeProfile();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
 
     @Override
     protected void onResume(){
