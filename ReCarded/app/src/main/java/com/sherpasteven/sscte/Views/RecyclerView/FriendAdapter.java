@@ -15,6 +15,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,11 +30,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sherpasteven.sscte.AddTradeActivity;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Trade;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewCardActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +50,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     private String[] mDataSet;
     static boolean tradeState = false;
     static User currentUser;
+    static Activity a;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -81,7 +87,11 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                     public void onClick(View v) {
                         Intent myIntent = new Intent(v.getContext(), AddTradeActivity.class);
                         myIntent.putExtra("com.sherpasteven.sscte.friend", getPosition());
+                        a.finish();
                         v.getContext().startActivity(myIntent);
+                        //ArrayList<User> friends = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getFriends();
+                        //TradeComposer.getTradeComposer().getComponents().setOwner(friends.get(getPosition()));
+
                     }
                 });
             }
@@ -141,5 +151,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
     public void setTradeState(Boolean cond) {
         tradeState = cond;
+    }
+
+    public void setActivity(Activity acc) {
+        a = acc;
     }
 }

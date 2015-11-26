@@ -100,7 +100,7 @@ public class CardTradeActivity extends AppCompatActivity implements IView<Trade>
 
     @Override
     public void Update(Trade trade) {
-        
+
     }
 
     private enum LayoutManagerType {
@@ -172,7 +172,6 @@ public class CardTradeActivity extends AppCompatActivity implements IView<Trade>
         Card card2 = new Card("Test2", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
         friendslist.add(card);
         friendslist.add(card2);
-        TradeComposer.getTradeComposer().getComponents().setOwnerList(friendslist);
     }
 
     public View getView(){

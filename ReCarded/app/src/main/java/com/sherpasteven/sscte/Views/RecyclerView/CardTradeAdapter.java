@@ -33,7 +33,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    ArrayList<Card> cardList;
+    static ArrayList<Card> cardList;
     static View view;
     static Activity cta;
     static Boolean userState;
@@ -65,7 +65,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
                         }
                     } else { // FIXME: Demo until friend's cards can be pulled
-                        Card tradeCard = TradeComposer.getTradeComposer().getComponents().getOwnerList().get(getPosition());
+                        Card tradeCard = cardList.get(getPosition());
                         if (tradeCard != null) {
                             TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
                             Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();

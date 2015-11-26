@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -84,7 +86,19 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
             Toast.makeText(this, "Invalid friend selected, returning...", Toast.LENGTH_SHORT).show();
             finish();
         }
+
+
+        TradeComposer.getTradeComposer().getComponents().addView(this);
         setupTradeComposer();
+
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     /**
@@ -103,8 +117,10 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
     }
 
     private void setupTradeComposer() {
-        TradeComposer.getTradeComposer().getComponents().setOwner(friend);
         TradeComposer.getTradeComposer().getComponents().setBorrower(user);
+        TradeComposer.getTradeComposer().getComponents().setOwner(friend);
+
+
     }
 
     public ImageButton getItemUserBtn() {
@@ -122,6 +138,12 @@ public class AddTradeActivity extends AppCompatActivity implements IView {
 
     @Override
     public void Update(Object o) {
+        mTheirAdapter.notifyDataSetChanged();
+        mYourAdapter.notifyDataSetChanged();
 
+    }
+
+    public Button getSubmitButton(){
+        return (Button) findViewById(R.id.btnEnter);
     }
 }

@@ -22,6 +22,7 @@ import com.sherpasteven.sscte.Controllers.TradesTabController;
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.EditTradeActivity;
 import com.sherpasteven.sscte.FriendListActivity;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
@@ -131,6 +132,16 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         Toast.makeText(this.getContext(), "Editing selected trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(TradeComposer.getTradeComposer().getComponents() != null){
+            TradeComposer.getTradeComposer().getComponents().getViews().clear();
+            TradeComposer.getTradeComposer().resetComponents();
+        }
+    }
+
     public View getView(){
         return inflate_view;
     }
