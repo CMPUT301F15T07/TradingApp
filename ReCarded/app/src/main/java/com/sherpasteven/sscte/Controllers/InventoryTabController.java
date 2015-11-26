@@ -2,6 +2,7 @@ package com.sherpasteven.sscte.Controllers;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.R;
@@ -26,7 +27,7 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
      */
     @Override
     protected void setListeners(final InventoryTab view) {
-        Button addItem = (Button) view.getView().findViewById(R.id.btnAddItem);
+        ImageButton addItem = (ImageButton) view.getView().findViewById(R.id.btnAddItem);
         addItem.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +35,9 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
             }
         });
 
+
+
+        /*
         Button editItem = (Button) view.getView().findViewById(R.id.btnEditItem);
         editItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +53,7 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
                 view.navigateToViewCardActivity();
             }
         });
-
+        */
 
     }
 }

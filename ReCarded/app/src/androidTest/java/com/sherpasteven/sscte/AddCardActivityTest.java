@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Inventory;
@@ -19,7 +20,7 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
 
 
     private EditText nametext;
-    private EditText catagorytext;
+    private Spinner catagorytext;
     private EditText seriestext;
     private EditText qualitytext;
     private EditText quantitytext;
@@ -63,7 +64,7 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         activity.runOnUiThread((new Runnable() {
             public void run() {
                 nametext.setText(name);
-                catagorytext.setText(catagory);
+                //catagorytext.set(catagory);
                 seriestext.setText(series);
                 qualitytext.setText(quality);
                 quantitytext.setText(quantity);

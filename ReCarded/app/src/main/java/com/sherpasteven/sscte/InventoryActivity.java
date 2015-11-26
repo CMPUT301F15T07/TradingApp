@@ -29,7 +29,9 @@ import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
-public class InventoryActivity extends ActionBarActivity implements IView {
+import java.util.Set;
+
+public class InventoryActivity extends ActionBarActivity implements IView<Model>{
 
     // Declaring Your View and Variables
 
@@ -76,7 +78,7 @@ public class InventoryActivity extends ActionBarActivity implements IView {
         profileSynchronizer.addView(this);
         setContentView(R.layout.activity_inventory);
 
-        currentprofile = CurrentProfile.GetCurrentProfile(this);
+        currentprofile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (currentprofile == null) {
             Toast.makeText(getApplicationContext(), "No profile loaded, returning to main page",
                     Toast.LENGTH_LONG).show();
@@ -92,7 +94,8 @@ public class InventoryActivity extends ActionBarActivity implements IView {
         /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
-        }*/
+        }
+        */
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -117,7 +120,7 @@ public class InventoryActivity extends ActionBarActivity implements IView {
         tabs.setViewPager(pager);
 
     }
-
+    /*
     public Button getAddButton(){
         return (Button) findViewById(R.id.btnAddItem);
     }
@@ -129,6 +132,7 @@ public class InventoryActivity extends ActionBarActivity implements IView {
     public Button getEditButton(){
         return (Button) findViewById(R.id.btnEditItem);
     }
+    */
 
     /**
      * Changes the toolbar color on the main page.
@@ -184,6 +188,14 @@ public class InventoryActivity extends ActionBarActivity implements IView {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Updates the activity based on raised condition.
+     * @param model Updates inventory based on model response.
+     */
+    //@Override
+    //public void Update(Model model) {
+    //}
+
 
     /**
      * Controller code to set intent switch.
@@ -192,7 +204,7 @@ public class InventoryActivity extends ActionBarActivity implements IView {
     public void NavigateToFriendsActivity() {}
 
     @Override
-    public void Update(Object model) {
+    public void Update(Model model) {
         if (model instanceof ProfileSynchronizer) {
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
             profileSynchronizer.UpdateFriends();

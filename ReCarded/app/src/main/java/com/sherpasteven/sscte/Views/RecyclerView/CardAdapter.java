@@ -16,9 +16,15 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 */
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +33,9 @@ import android.widget.TextView;
 
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewCardActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /**
@@ -38,6 +46,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     private String[] mDataSet;
     List<Card> cards;
+    static View view;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -48,6 +57,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         TextView cardName;
         TextView cardDescription;
         ImageView cardPhoto;
+        ImageView cardStatus;
 
         public ViewHolder(View v) {
             super(v);
@@ -55,6 +65,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Element " + getPosition() + " to be shown");
@@ -64,21 +75,26 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                                     dialog.dismiss();
                                 }
                             });
-                    alertDialog.show();                }
+                    alertDialog.show(); */
+                    Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
+                    myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
+                    view.getContext().startActivity(myIntent);
+
+                }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             cardName = (TextView) v.findViewById(R.id.card_name);
             cardDescription = (TextView) v.findViewById(R.id.card_text);
-            cardPhoto = (ImageView)itemView.findViewById(R.id.card_photo);
+            cardPhoto = getCardImage();
+            cardStatus = (ImageView)itemView.findViewById(R.id.imgStatus);
+            view = v;
 
         }
 
-        public TextView getCardName() {
-            return cardName;
+        public ImageView getCardImage(){
+            return (ImageView)itemView.findViewById(R.id.card_photo);
         }
-        public TextView getCardDescription() {
-            return cardDescription;
-        }
+
     }
     // END_INCLUDE(recyclerViewSampleViewHolder)
 
@@ -113,6 +129,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         viewHolder.cardDescription.setText(cards.get(position).getCatagory());
         if (cards.get(position).getImagebyIndex(0) != null) {
             viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
+        }
+        if (cards.get(position).isTradable() == true) {
+            viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_available));
+        } else if (cards.get(position).isTradable() == false) {
+            viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
 
     }

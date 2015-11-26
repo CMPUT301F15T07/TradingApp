@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 '{"user":null,"config":null,"ProfileId":{"id":"TestId"}}'
+=======
+'{"user":null,"config":null,"profileId":{"id":"TestId"}}'
+>>>>>>> master

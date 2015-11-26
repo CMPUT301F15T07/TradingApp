@@ -82,7 +82,7 @@ public class Registration extends Model {
     public Profile generateProfile(Context context){
         User user = new User(getUserName(), getLocation(), getUserEmail(), context);
         ProfileId profileId = new ProfileId(context);
-        Profile profile = new Profile(user, profileId);
+        Profile profile = new Profile(user);
         profileSerializer.Serialize(profile, context);
         return profile;
     }

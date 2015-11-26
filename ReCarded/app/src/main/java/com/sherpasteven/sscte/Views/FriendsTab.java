@@ -14,12 +14,21 @@ import android.widget.Button;
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.ElasticSearch;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+
+import com.sherpasteven.sscte.AddFriendActivity;
+import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewFriendActivity;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FriendsTab extends Fragment implements IView<User> {
+public class FriendsTab extends Fragment implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
     private User currentUser;
@@ -40,6 +49,11 @@ public class FriendsTab extends Fragment implements IView<User> {
         this.elasticSearch = new ElasticSearch();
     }
 
+    @Override
+    public void Update(Model model) {
+
+    }
+
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
         LINEAR_LAYOUT_MANAGER
@@ -57,10 +71,6 @@ public class FriendsTab extends Fragment implements IView<User> {
         return inflate_view;
     }
 
-    @Override
-    public void Update(User user) {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +91,7 @@ public class FriendsTab extends Fragment implements IView<User> {
 
         rootView.setTag(TAG);
 
-        Button addItem = (Button) rootView.findViewById(R.id.btnAddFriend);
+        ImageButton addItem = (ImageButton) rootView.findViewById(R.id.btnAddFriend);
         addItem.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {

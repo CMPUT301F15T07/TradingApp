@@ -15,7 +15,11 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -25,8 +29,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.AddTradeActivity;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Trade;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewCardActivity;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -35,7 +48,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    User currentUser;
+    static boolean tradeState = false;
+    static User currentUser;
+    static Activity a;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -50,25 +65,41 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();                }
-            });
+            if (tradeState == false) { // you're selecting from friendtab
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                        alertDialog.setTitle("Alert");
+                        alertDialog.setMessage("Element " + getPosition() + " to be shown");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                });
+            } else { // you're selecting from tradetab -> add new trade
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent myIntent = new Intent(v.getContext(), AddTradeActivity.class);
+                        myIntent.putExtra("com.sherpasteven.sscte.friend", getPosition());
+                        a.finish();
+                        v.getContext().startActivity(myIntent);
+                        //ArrayList<User> friends = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getFriends();
+                        //TradeComposer.getTradeComposer().getComponents().setOwner(friends.get(getPosition()));
+
+                    }
+                });
+            }
+
             cv = (CardView) v.findViewById(R.id.cv);
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
-            userPhoto = (ImageView)itemView.findViewById(R.id.friend_photo);
-
+            userPhoto = (ImageView) itemView.findViewById(R.id.friend_photo);
         }
 
     }
@@ -116,5 +147,13 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         } else {
             return currentUser.getFriends().size();
         }
+    }
+
+    public void setTradeState(Boolean cond) {
+        tradeState = cond;
+    }
+
+    public void setActivity(Activity acc) {
+        a = acc;
     }
 }

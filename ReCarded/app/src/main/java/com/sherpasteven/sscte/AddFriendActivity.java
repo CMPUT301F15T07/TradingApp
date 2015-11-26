@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -16,7 +17,7 @@ import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
 import java.util.ArrayList;
 
-public class AddFriendActivity extends AppCompatActivity implements IView<Profile>{
+public class AddFriendActivity extends AppCompatActivity implements IView<Model>{
 
     private FriendsTabController friendstabcontroller;
     private ArrayList<User> friendslist = new ArrayList<>();
@@ -113,10 +114,10 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Profil
 
     /**
      * Updates the activity based on raised condition.
-     * @param profile Profile to reference friend list.
+     * @param model Profile to reference friend list.
      */
     @Override
-    public void Update(Profile profile) {
+    public void Update(Model model) {
 
     }
 
