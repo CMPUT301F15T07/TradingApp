@@ -3,13 +3,19 @@ package com.sherpasteven.sscte.Controllers;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
-        import java.io.Serializable;
+import com.sherpasteven.sscte.Models.TradeComposer;
+
+import java.io.Serializable;
 
 
 /**
@@ -22,6 +28,7 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
 
     ImageButton addUser;
     ImageButton addOther;
+    Button submit;
 
     private LocalProfileSerializer profileSerializer = new LocalProfileSerializer();
 
@@ -38,7 +45,7 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
     }
 
     @Override
-    protected void setListeners(AddTradeActivity view) {
+    protected void setListeners(final AddTradeActivity view) {
         addUser = view.getItemUserBtn();
         addOther = view.getItemFriendBtn();
         addUser.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +72,24 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
                 myIntent.putExtra("com.sherpasteven.sscte.friend", true);
                 v.getContext().startActivity(myIntent);
 
+            }
+        });
+
+        submit = view.getSubmitButton();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Trade trade = TradeComposer.getTradeComposer().composeTrade();
+                if (trade != null) {
+                    Toast.makeText(v.getContext(), "Trade submitted!", Toast.LENGTH_SHORT).show();
+                    CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().addPendingTrade(trade);
+                    view.finish();
+                } else {
+                    Toast.makeText(v.getContext(), "Trade failed...", Toast.LENGTH_SHORT).show();
+                }
+                /**
+                 * FIXME: Add functionality to bring to server-side here.
+                 */
             }
         });
 

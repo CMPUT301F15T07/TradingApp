@@ -230,7 +230,7 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
 
     /**
      * Updates the activity based on raised condition.
-     * @paramcard Card to be shown as edited.
+     * @param update Card to be shown as edited.
      */
     @Override
     public void Update(Model model) {

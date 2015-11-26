@@ -36,7 +36,9 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
     protected FriendAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
-    /** (not Javadoc)
+    /**
+     * (not Javadoc)
+     *
      * @see android.app.Activity#onStart()
      */
     @Override
@@ -65,6 +67,7 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
         friendslistcontroller = new FriendsListController(this, currentUser);
 
         mAdapter = new FriendAdapter(currentUser);
+        mAdapter.setActivity(this);
         mAdapter.setTradeState(true);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
@@ -99,6 +102,7 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
 
     /**
      * Generates hamburger menu options.
+     *
      * @param menu Menu item to be created.
      * @return true
      */
@@ -111,6 +115,7 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
 
     /**
      * OnSelect options for option selected from hamburger menu.
+     *
      * @param item Item selected by user.
      * @return true
      */
@@ -131,8 +136,7 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
     }
 
     /**
-     * Updates the activity based on raised condition.
-     * @paramprofile Profile to reference friend list.
+     * @param model Profile to reference friend list.
      */
     @Override
     public void Update(Model model) {
@@ -166,4 +170,5 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
         friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
         currentUser.setFriends(friendslist);
     }
+
 }

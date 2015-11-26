@@ -174,7 +174,7 @@ public class ProfileActivity extends AppCompatActivity implements IView<Model>{
 
     /**
      * Updates the activity based on raised condition.
-     * @paramprofile Profile to be updated on load.
+     * @param model Profile to be updated on load.
      */
     @Override
     public void Update(Model model) {

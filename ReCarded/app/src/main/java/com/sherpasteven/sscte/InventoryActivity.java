@@ -76,9 +76,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
         }
+        */
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -173,7 +175,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
 
     /**
      * Updates the activity based on raised condition.
-     * @paraminventory Updates inventory based on model response.
+     * @param model Updates inventory based on model response.
      */
     @Override
     public void Update(Model model) {

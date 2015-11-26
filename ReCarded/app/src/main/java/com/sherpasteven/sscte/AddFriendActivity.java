@@ -120,7 +120,7 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
 
     /**
      * Updates the activity based on raised condition.
-     * @paramprofile Profile to reference friend list.
+     * @param model Profile to reference friend list.
      */
     @Override
     public void Update(Model model) {

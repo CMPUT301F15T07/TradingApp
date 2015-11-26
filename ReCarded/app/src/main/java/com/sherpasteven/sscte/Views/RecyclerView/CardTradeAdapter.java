@@ -1,6 +1,8 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
@@ -10,10 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sherpasteven.sscte.AddTradeActivity;
+import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -25,8 +33,10 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    ArrayList<Card> cardList;
+    static ArrayList<Card> cardList;
     static View view;
+    static Activity cta;
+    static Boolean userState;
 
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
@@ -45,6 +55,27 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (userState) {
+                        Card tradeCard = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getInventoryItem(getPosition());
+                        if (tradeCard != null) {
+                            TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
+                            Toast.makeText(v.getContext(), "Card added to your trade list.", Toast.LENGTH_SHORT).show();
+                            cta.finish();
+                        } else {
+                            Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                        }
+                    } else { // FIXME: Demo until friend's cards can be pulled
+                        Card tradeCard = cardList.get(getPosition());
+                        if (tradeCard != null) {
+                            TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
+                            Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
+                            cta.finish();
+                        } else {
+                            Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    /*
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Element " + getPosition() + " to be shown");
@@ -55,6 +86,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                                 }
                             });
                     alertDialog.show();
+                    */
                 }
             });
             cv = (CardView) v.findViewById(R.id.cv);
@@ -74,8 +106,10 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
      * @param cardList User data loaded to identify friends used by adapter.
      */
 
-    public CardTradeAdapter(ArrayList<Card> cardList){
+    public CardTradeAdapter(ArrayList<Card> cardList, Boolean state, CardTradeActivity cta){
         this.cardList = cardList;
+        this.userState = state;
+        this.cta = cta;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)

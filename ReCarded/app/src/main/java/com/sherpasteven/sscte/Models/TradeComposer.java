@@ -23,7 +23,7 @@ public class TradeComposer {
         }
     }
 
-    private void resetComponents() {
+    public void resetComponents() {
         this.components = null;
     }
 

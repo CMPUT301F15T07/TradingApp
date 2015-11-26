@@ -158,7 +158,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
 
     /**
      * Updates the activity based on raised condition.
-     * @param inventory Inventory to update to be identified in view.
+     * @param model Inventory to update to be identified in view.
      */
     @Override
     public void Update(Model model) {
