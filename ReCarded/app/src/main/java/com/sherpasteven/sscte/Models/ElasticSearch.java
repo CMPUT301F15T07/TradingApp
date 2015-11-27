@@ -31,22 +31,22 @@ public class ElasticSearch extends Model {
     private static String insertUrl = "http://cmput301.softwareprocess.es:8080/cmput301f15t07/profile/";
 
     private Gson gson;
-    public Profiles profiles;
+    public Friends friends;
 
     public ElasticSearch(){
         gson = new Gson();
     }
 
-    public Profiles getProfiles(){
-        return profiles;
+    public Friends getFriends(){
+        return friends;
     }
 
-    public void InsertProfile(final Profile profile) {
+    public void InsertFriend(final Friend friend) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    _insertProfile(profile);
+                    _insertFriend(friend);
                 } catch (IOException ex){
                     throw new RuntimeException(ex);
                 }
@@ -60,12 +60,12 @@ public class ElasticSearch extends Model {
      * @throws IOException
      * @throws IllegalStateException
      */
-    private void _insertProfile(Profile profile) throws IllegalStateException, IOException{
+    private void _insertFriend(Friend friend) throws IllegalStateException, IOException{
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(insertUrl+profile.getProfileId().GetId());
+        HttpPost httpPost = new HttpPost(insertUrl+friend.getProfileId().GetId());
         StringEntity stringentity = null;
         try {
-            stringentity = new StringEntity(gson.toJson(profile));
+            stringentity = new StringEntity(gson.toJson(friend));
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -103,12 +103,12 @@ public class ElasticSearch extends Model {
         httpPost.getEntity().getContent().close();
     }
 
-    public void searchProfiles(final String searchString, final String field) {
+    public void searchFriends(final String searchString, final String field) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    _searchProfiles(searchString, field);
+                    _searchFriends(searchString, field);
                 } catch (RuntimeException ex){
                     throw new RuntimeException(ex);
                 }
@@ -121,8 +121,8 @@ public class ElasticSearch extends Model {
      * @param searchString
      * @param field
      */
-    private void _searchProfiles(String searchString, String field) {
-        profiles = new Profiles();
+    private void _searchFriends(String searchString, String field) {
+        friends = new Friends();
 
         /**
          * Creates a search request from a search string and a field
@@ -164,9 +164,9 @@ public class ElasticSearch extends Model {
          * Parses the response of a search
          */
 
-        Type searchResponseType = new TypeToken<SearchResponse<Profile>>() {
+        Type searchResponseType = new TypeToken<SearchResponse<Friend>>() {
         }.getType();
-        SearchResponse<Profile> esResponse;
+        SearchResponse<Friend> esResponse;
         try {
             esResponse = gson.fromJson(
                     new InputStreamReader(response.getEntity().getContent()),
@@ -182,10 +182,10 @@ public class ElasticSearch extends Model {
         }
 
         // Extract the movies from the esResponse and put them in result
-        Hits<Profile> getHits = esResponse.getHits();
+        Hits<Friend> getHits = esResponse.getHits();
 
-        for (SearchHit<Profile> hit : getHits.getHits()){
-            profiles.add(hit.getSource());
+        for (SearchHit<Friend> hit : getHits.getHits()){
+            friends.add(hit.getSource());
         }
         notifyViews();
     }

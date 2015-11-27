@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.ElasticSearch;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
@@ -35,15 +37,15 @@ public class FriendsTab extends Fragment implements IView<Model> {
     protected RecyclerView.LayoutManager mLayoutManager;
     private ElasticSearch elasticSearch;
 
+    @SuppressLint("ValidFragment")
     public FriendsTab(User currentUser){
         super();
-        this.currentUser = currentUser;
         this.elasticSearch = new ElasticSearch();
     }
 
     @Override
     public void Update(Model model) {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     private enum LayoutManagerType {
@@ -76,7 +78,7 @@ public class FriendsTab extends Fragment implements IView<Model> {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.friends_tab,container,false);
-
+        currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
         inflate_view = rootView;
         currentUser.addView(this);
         friendstabcontroller = new FriendsTabController(this, currentUser);
@@ -142,6 +144,7 @@ public class FriendsTab extends Fragment implements IView<Model> {
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
     private void initializeData() {
+        /*
         currentUser = new User("","","", this.getContext());
         currentUser.addFriend(new User("test1", "location1", "email1", this.getContext()));
         currentUser.addFriend(new User("test2", "location2", "email2", this.getContext()));
@@ -154,7 +157,8 @@ public class FriendsTab extends Fragment implements IView<Model> {
         currentUser.addFriend(new User("test9", "location9", "email9", this.getContext()));
         currentUser.addFriend(new User("test10", "location10", "email10", this.getContext()));
         currentUser.addFriend(new User("test11", "location11", "email11", this.getContext()));
-
+        */
     }
+
 
 }

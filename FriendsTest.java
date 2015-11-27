@@ -15,18 +15,18 @@ public class FriendsTest extends ApplicationTestCase<Application> {
 
 
     public void testAddFriend() {
-        //User johnCena = new User("WWE","Salt lake City","theChampion@yahoo.com");
-        //User user1 = new User("User1", "City1","email@myspace.gog");
-        //johnCena.addFriend(user1);
-        //assertEquals(user1, johnCena.getFriend("User1"));
+        User johnCena = new User("WWE","Salt lake City","theChampion@yahoo.com",null);
+        User user1 = new User("User1", "City1","email@myspace.gog",null);
+        johnCena.addFriend(user1);
+        assertEquals(user1, johnCena.getFriend("User1"));
     }
 
 
 
     public void testRemoveFriend() {
-        User user1 = new User("user1","city1","email1@myspace.gog");
-        User johnCena = new User("johnCena","WWE","theChampion@yahoo.com");
-        User user2 = new User("user2","city2","email2@myspace.gog");
+        User user1 = new User("user1","city1","email1@myspace.gog",null);
+        User johnCena = new User("johnCena","WWE","theChampion@yahoo.com",null);
+        User user2 = new User("user2","city2","email2@myspace.gog",null);
         user1.addFriend(johnCena);
         user1.addFriend(user2);
 
@@ -36,7 +36,7 @@ public class FriendsTest extends ApplicationTestCase<Application> {
 
 
     public void testProfileData() {
-        User johnCena = new User("The Heavyweight Champion","WWE RAW","theChampion@yahoo.com");
+        User johnCena = new User("The Heavyweight Champion","WWE RAW","theChampion@yahoo.com",null);
         assertEquals("The Heavyweight Champion",johnCena.getName());
         assertEquals("WWE RAW", johnCena.getLocation());
         johnCena.setName("John Felix Anthony Cena");
@@ -48,9 +48,9 @@ public class FriendsTest extends ApplicationTestCase<Application> {
 
 
     public void testViewOtherProfiles() {
-        User user1 = new User("user1","city1","email1@myspace.gog");
-        User johnCena = new User("The Heavyweight Champion","WWE RAW","theChampion@yahoo.com");
-        User user2 = new User("user2","city2","email2@myspace.gog");
+        User user1 = new User("user1","city1","email1@myspace.gog",null);
+        User johnCena = new User("The Heavyweight Champion","WWE RAW","theChampion@yahoo.com",null);
+        User user2 = new User("user2","city2","email2@myspace.gog",null);
         user1.addFriend(johnCena);
         user1.addFriend(user2);
 
