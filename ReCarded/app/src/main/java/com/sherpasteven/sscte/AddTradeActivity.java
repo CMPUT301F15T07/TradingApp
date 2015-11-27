@@ -15,6 +15,7 @@ import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.BorrowerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;
@@ -22,7 +23,7 @@ import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;
 public class AddTradeActivity extends AppCompatActivity implements IView<Model> {
 
     private User user;
-    private User friend;
+    private Friend friend;
     private Trade trade;
     private AddTradeController addtradecontroller;
     private static final String TAG = "RecyclerViewFragment";

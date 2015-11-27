@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class AddFriendActivity extends AppCompatActivity implements IView<Model>{
 
     private FriendsTabController friendstabcontroller;
-    private ArrayList<User> friendslist = new ArrayList<>();
+    private ArrayList<Friend> friendslist = new ArrayList<>();
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 
@@ -134,17 +135,17 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
      */
     private void initializeData() {
 
-        friendslist.add(new User("test1", "location1", "email1", this.getApplicationContext()));
-        friendslist.add(new User("test2", "location2", "email2", this.getApplicationContext()));
-        friendslist.add(new User("test3", "location3", "email3", this.getApplicationContext()));
-        friendslist.add(new User("test4", "location4", "email4", this.getApplicationContext()));
-        friendslist.add(new User("test5", "location5", "email5", this.getApplicationContext()));
-        friendslist.add(new User("test6", "location6", "email6", this.getApplicationContext()));
-        friendslist.add(new User("test7", "location7", "email7", this.getApplicationContext()));
-        friendslist.add(new User("test8", "location8", "email8", this.getApplicationContext()));
-        friendslist.add(new User("test9", "location9", "email9", this.getApplicationContext()));
-        friendslist.add(new User("test10", "location10", "email10", this.getApplicationContext()));
-        friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test1", "location1", "email1", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test2", "location2", "email2", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test3", "location3", "email3", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test4", "location4", "email4", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test5", "location5", "email5", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test6", "location6", "email6", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test7", "location7", "email7", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test8", "location8", "email8", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test9", "location9", "email9", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test10", "location10", "email10", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("test11", "location11", "email11", this.getApplicationContext()), this.getApplicationContext()));
 
     }
     public void returnFromActivity(){
