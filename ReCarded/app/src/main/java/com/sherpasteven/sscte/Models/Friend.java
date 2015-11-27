@@ -18,6 +18,7 @@ public class Friend extends User{
         setProfilePic(user.getProfilePic());
         setFriends(null);
         setTrades(user.getTrades());
+        setProfileID(user.getProfileId());
     }
 
 

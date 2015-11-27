@@ -56,7 +56,6 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
         TextView userName;
         TextView userDescription;
         ImageView userPhoto;
@@ -92,7 +91,6 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
                     }
                 }
             });
-            cv = (CardView) v.findViewById(R.id.cv);
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
             userPhoto = (ImageView)itemView.findViewById(R.id.friend_photo);

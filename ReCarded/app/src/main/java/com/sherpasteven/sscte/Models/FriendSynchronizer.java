@@ -27,7 +27,7 @@ public class FriendSynchronizer {
             newfriend = allProfiles.get(oldfriend.getProfileId());
             if (newfriend != null){
                 unsynchronizedFriends.remove(i);
-                unsynchronizedFriends.add(i, newfriend.getUser());
+                unsynchronizedFriends.add(i, new Friend(newfriend.getUser()),);
             }
         }
     }

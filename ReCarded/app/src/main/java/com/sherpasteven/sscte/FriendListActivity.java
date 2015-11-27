@@ -158,11 +158,9 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
     private void initializeData() {
         friendslist.add(new Friend(new User("Shrek", "Swamp", "Shrek@theswamp.com", this.getApplicationContext()), this.getApplicationContext()));
         friendslist.add(new Friend(new User("Donkey", "Canada", "dnkey@canada.com", this.getApplicationContext()), this.getApplicationContext()));
-        /*
-        friendslist.add(new User("Smashmouth", "New England", "sm@d3.com", this.getApplicationContext()));
-        friendslist.add(new User("Fiona", "The Castle", "Princess3@hotmail.com", this.getApplicationContext()));
-        friendslist.add(new User("Prince Farquaad", "The Kingdom", "kingd4@gmail.com", this.getApplicationContext()));
-        */
+        friendslist.add(new Friend(new User("Smashmouth", "New England", "sm@d3.com", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend( new User("Fiona", "The Castle", "Princess3@hotmail.com", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("Prince Farquaad", "The Kingdom", "kingd4@gmail.com", this.getApplicationContext()), this.getApplicationContext()));
         currentUser.setFriends(friendslist);
     }
 
