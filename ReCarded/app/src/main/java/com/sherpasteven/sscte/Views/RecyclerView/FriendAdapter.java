@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.ViewFriendActivity;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -59,6 +60,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        /*
                         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                         alertDialog.setTitle("Alert");
                         alertDialog.setMessage("Element " + getPosition() + " to be shown");
@@ -69,6 +71,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                                     }
                                 });
                         alertDialog.show();
+                        */
+                        Intent myIntent = new Intent(v.getContext(), ViewFriendActivity.class);
+                        myIntent.putExtra("com.sherpasteven.sscte.viewfriend", getPosition());
+                        v.getContext().startActivity(myIntent);
                     }
                 });
             } else { // you're selecting from tradetab -> add new trade

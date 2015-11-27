@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.InventoryActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
@@ -44,7 +45,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    static ArrayList<User> friendsList;
+    static ArrayList<Friend> friendsList;
     static View view;
     static AddFriendActivity activity;
     static LocalProfileSerializer profileSerializer = new LocalProfileSerializer();
@@ -55,7 +56,6 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
         TextView userName;
         TextView userDescription;
         ImageView userPhoto;
@@ -91,7 +91,6 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
                     }
                 }
             });
-            cv = (CardView) v.findViewById(R.id.cv);
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
             userPhoto = (ImageView)itemView.findViewById(R.id.friend_photo);
@@ -106,7 +105,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
      * @param friendsList User data loaded to identify friends used by adapter.
      */
 
-    public NewFriendAdapter(ArrayList<User> friendsList, AddFriendActivity activity){
+    public NewFriendAdapter(ArrayList<Friend> friendsList, AddFriendActivity activity){
         this.friendsList = friendsList;
         this.activity = activity;
     }
