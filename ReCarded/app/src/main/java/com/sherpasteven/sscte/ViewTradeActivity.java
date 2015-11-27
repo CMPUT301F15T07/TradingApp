@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,6 +36,10 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
     private static final int SPAN_COUNT = 3;
     private static final int DATASET_COUNT = 60;
     int position;
+
+    Button acceptButton;
+    Button declineButton;
+    Button counterofferButton;
 
     TextView nametext;
 
@@ -82,8 +87,11 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
         /**
          * FIXME: Only gets pending trades at the moment.
          */
-        mYourAdapter = new BorrowerViewTradeAdapter(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position).getBorrowList(), this, position);
-        mTheirAdapter = new OwnerViewTradeAdapter(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position).getOwnerList(), this, position);
+
+        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
+
+        mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
+        mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
         // Set CardAdapter as the adapter for RecyclerView.
         mYourRecycler.setAdapter(mYourAdapter);
         mTheirRecycler.setAdapter(mTheirAdapter);
@@ -92,7 +100,48 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
          * FIXME: Move controller information to the controller.
          */
         nametext = getNameText();
-        nametext.setText("Trade with " + CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position).getOwner().getName());
+        nametext.setText("Trade with " + trade.getOwner().getName());
+        updateButtons();
+
+    }
+
+    public Button getAcceptButton() {
+        return (Button) findViewById(R.id.btnAccept);
+    }
+
+    public Button getDeclineButton() {
+        return (Button) findViewById(R.id.btnDecline);
+    }
+
+    public Button getCounterOfferButton() {
+        return (Button) findViewById(R.id.btnCounterOffer);
+    }
+
+    public void updateButtons() {
+        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
+        acceptButton = getAcceptButton();
+        declineButton = getDeclineButton();
+        counterofferButton = getCounterOfferButton();
+
+        if (trade != null && trade.getBorrower() != null) {
+            if (trade.getStatus().equals("PENDING"))
+            if (trade.getBorrower().equals(
+                    CurrentProfile.getCurrentProfile().getProfile(this).getUser())) {
+                // if you are the borrower, you can only decline -- change color of other trade buttons
+                acceptButton.setBackgroundResource(R.drawable.trade_options_top);
+                acceptButton.setClickable(false);
+                counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
+                acceptButton.setClickable(false);
+
+            } else if (trade.getStatus().equals("DECLINED") || trade.getStatus().equals("ACCEPTED")) {
+                    acceptButton.setBackgroundResource(R.drawable.trade_options_top);
+                    acceptButton.setClickable(false);
+                    declineButton.setBackgroundResource(R.drawable.trade_options_mid);
+                    declineButton.setClickable(false);
+                    counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
+                    acceptButton.setClickable(false);
+            }
+        }
     }
 
     public TextView getNameText() {

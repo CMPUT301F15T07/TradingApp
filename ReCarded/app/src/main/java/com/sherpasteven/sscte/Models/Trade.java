@@ -18,7 +18,6 @@ public class Trade extends Model {
     private Calendar accepted;
     private String status;
 
-
     public Trade(User borrower, User owner) {
         setBorrower(borrower);
         setOwner(owner);
@@ -138,8 +137,6 @@ public class Trade extends Model {
         }
 
         return counter;
-
-
     }
 
 }
