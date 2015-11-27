@@ -30,4 +30,12 @@ public class Friends extends Model{
     public ArrayList<Friend> getAll(){
         return friends;
     }
+
+    public void remove(ProfileId  id){
+        for(int i = 0; i < friends.size(); i++){
+            if(friends.get(i).getProfileId().GetId().equals(id.GetId())){
+                friends.remove(i);
+            }
+        }
+    }
 }

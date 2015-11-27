@@ -63,7 +63,6 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
         ProfileSynchronizer synchronizer = SynchronizeSingleton.GetSynchronize(this);
         synchronizer.addView(this);
         synchronizer.PullProfiles();
-        initializeData();
     }
 
     private enum LayoutManagerType {
@@ -142,16 +141,7 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
      * FIXME: Convert for dynamic friend data loading.
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
-    private void initializeData() {
 
-        for(int i = 1; i < 12; i++) {
-            String ist = Integer.toString(i);
-            friendslist.add(new Friend(new User("test" + ist, "location" + ist, "email" + ist, this.getApplicationContext()),
-                    this.getApplicationContext()));
-
-        }
-
-    }
     public void returnFromActivity(){
         finish();
     }

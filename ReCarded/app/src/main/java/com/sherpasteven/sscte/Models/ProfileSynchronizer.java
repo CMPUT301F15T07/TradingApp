@@ -70,7 +70,9 @@ public class ProfileSynchronizer extends Model implements IView<Model> {
     public void Update(Model o) {
         if (o instanceof ElasticSearch){
             ElasticSearch es = (ElasticSearch) o;
-            cloudFriends = es.getFriends();
+            Friends friends = es.getFriends();
+            friends.remove(localProfile.getProfileId());
+            cloudFriends = friends;
         }
         activity.runOnUiThread(new Runnable() {
             public void run() {
