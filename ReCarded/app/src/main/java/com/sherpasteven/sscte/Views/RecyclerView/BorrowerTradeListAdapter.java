@@ -15,7 +15,6 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.widget.CardView;

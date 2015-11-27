@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,7 +19,9 @@ import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
 import com.sherpasteven.sscte.Models.Registration;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Views.IView;
 
 /**
@@ -67,7 +68,6 @@ public class SplashPage extends AppCompatActivity implements IView<Model> {
         //Profile localProfile = getLocalProfile();
         Profile localProfile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (localProfile != null) navigateToInventory();
-
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_page);
         mVisible = true;
@@ -112,6 +112,11 @@ public class SplashPage extends AppCompatActivity implements IView<Model> {
     public void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, this);
+    }
+
+    public void setCloudProfile() {
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.SynchronizeProfile();
     }
 
     /**
@@ -163,8 +168,14 @@ public class SplashPage extends AppCompatActivity implements IView<Model> {
         return (EditText) findViewById(R.id.cityText);
     }
 
-
-    public void Update(Registration registration) {
+    @Override
+    public void Update(Model model) {
+        Registration registration;
+        if (model instanceof Registration) {
+            registration = (Registration) model;
+        } else {
+            return;
+        }
         Button submitButton = getEnterButton();
 
         EditText emailText = getEmailText();
@@ -243,8 +254,4 @@ public class SplashPage extends AppCompatActivity implements IView<Model> {
                  registration.isValidEmail();
     }
 
-    @Override
-    public void Update(Model model) {
-
-    }
 }

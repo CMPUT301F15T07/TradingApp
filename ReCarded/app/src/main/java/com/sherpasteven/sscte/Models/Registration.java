@@ -2,8 +2,6 @@ package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
 
-import com.sherpasteven.sscte.Controllers.Controller;
-
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -83,6 +81,7 @@ public class Registration extends Model {
     //Can be removed once serializtion becomes operational and tested
     public Profile generateProfile(Context context){
         User user = new User(getUserName(), getLocation(), getUserEmail(), context);
+        ProfileId profileId = new ProfileId(context);
         Profile profile = new Profile(user);
         profileSerializer.Serialize(profile, context);
         return profile;

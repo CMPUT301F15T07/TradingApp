@@ -6,6 +6,7 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -73,6 +74,8 @@
         <activity android:name=".CardTradeActivity" >
         </activity>
         <activity android:name=".FriendListActivity" >
+        </activity>
+        <activity android:name=".ViewTradeActivity" >
         </activity>
     </application>
 

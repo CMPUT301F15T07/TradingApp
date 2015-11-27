@@ -11,22 +11,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
-import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
-
-import java.util.Set;
 
 public class InventoryActivity extends ActionBarActivity implements IView<Model>{
 
@@ -41,18 +38,28 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
 
     private Profile currentprofile;
     private User currentuser;
-    private ISerializer<Profile> profileISerializer;
-    private IDeSerializer<Profile> profileIDeSerializer;
-
-
-    public Profile getProfile() {
-        currentprofile = profileIDeSerializer.Deserialize(currentprofile, this);
-        return currentprofile;
-    }
 
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, this);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.SynchronizeProfile();
     }
 
     /** (not Javadoc)
@@ -61,6 +68,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.addView(this);
         setContentView(R.layout.activity_inventory);
 
         currentprofile = CurrentProfile.getCurrentProfile().getProfile(this);
@@ -177,14 +186,22 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
      * Updates the activity based on raised condition.
      * @param model Updates inventory based on model response.
      */
-    @Override
-    public void Update(Model model) {
+    //@Override
+    //public void Update(Model model) {
+    //}
 
-    }
 
     /**
      * Controller code to set intent switch.
      * Currently unused.
      */
     public void NavigateToFriendsActivity() {}
+
+    @Override
+    public void Update(Model model) {
+        if (model instanceof ProfileSynchronizer) {
+            ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+            profileSynchronizer.UpdateFriends();
+        }
+    }
 }

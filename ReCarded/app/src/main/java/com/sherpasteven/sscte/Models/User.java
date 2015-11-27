@@ -2,7 +2,6 @@ package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import com.sherpasteven.sscte.R;
 
@@ -23,6 +22,12 @@ public class User extends Model {
     private Inventory inventory;
     public TradeLog trades;
 
+    public ProfileId getProfileId() {
+        return profileId;
+    }
+
+    private ProfileId profileId;
+
     public User(String name, String location, String email, Context context){
 
         this.name = name;
@@ -32,6 +37,8 @@ public class User extends Model {
         this.trades = new TradeLog();
         setFriends(new ArrayList<User>());
         setProfilePic(new Image(R.drawable.grey_rectangle, context));
+        //get id here
+        profileId = new ProfileId(context);
     }
 
     public String getEmail() {

@@ -1,7 +1,6 @@
 package com.sherpasteven.sscte.Controllers;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -11,11 +10,8 @@ import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
-
-import java.io.Serializable;
 
 
 /**

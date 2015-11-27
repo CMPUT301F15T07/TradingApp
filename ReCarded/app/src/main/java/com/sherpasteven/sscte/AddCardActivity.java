@@ -9,21 +9,16 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
-import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Model;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Model>{

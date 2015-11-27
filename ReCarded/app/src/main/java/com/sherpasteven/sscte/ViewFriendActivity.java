@@ -1,7 +1,7 @@
 package com.sherpasteven.sscte;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Views.IView;

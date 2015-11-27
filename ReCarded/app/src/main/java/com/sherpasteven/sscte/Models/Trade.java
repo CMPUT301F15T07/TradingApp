@@ -2,7 +2,6 @@ package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Initialises the trade model used for trading inventory systems.

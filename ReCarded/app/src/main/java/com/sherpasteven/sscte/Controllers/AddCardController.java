@@ -1,25 +1,16 @@
 package com.sherpasteven.sscte.Controllers;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.Image;
-import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;

@@ -15,16 +15,10 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +29,6 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewCardActivity;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /**
