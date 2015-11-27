@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.ElasticSearch;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
@@ -35,15 +37,15 @@ public class FriendsTab extends Fragment implements IView<Model> {
     protected RecyclerView.LayoutManager mLayoutManager;
     private ElasticSearch elasticSearch;
 
+    @SuppressLint("ValidFragment")
     public FriendsTab(User currentUser){
         super();
-        this.currentUser = currentUser;
         this.elasticSearch = new ElasticSearch();
     }
 
     @Override
     public void Update(Model model) {
-
+        mAdapter.notifyDataSetChanged();
     }
 
     private enum LayoutManagerType {
@@ -76,7 +78,7 @@ public class FriendsTab extends Fragment implements IView<Model> {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.friends_tab,container,false);
-
+        currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
         inflate_view = rootView;
         currentUser.addView(this);
         friendstabcontroller = new FriendsTabController(this, currentUser);
