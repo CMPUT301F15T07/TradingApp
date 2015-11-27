@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="email@sample.com"
-        android:id="@+id/quantityInfo"
+        android:id="@+id/emailinfo"
         android:fontFamily="sans-serif"
         android:textSize="12sp"
         android:layout_marginTop="2dp"

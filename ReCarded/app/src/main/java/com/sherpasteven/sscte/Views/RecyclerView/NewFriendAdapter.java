@@ -15,7 +15,9 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +27,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.AddFriendActivity;
+import com.sherpasteven.sscte.InventoryActivity;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 
@@ -37,7 +44,11 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    ArrayList<User> friendsList;
+    static ArrayList<User> friendsList;
+    static View view;
+    static AddFriendActivity activity;
+    static LocalProfileSerializer profileSerializer = new LocalProfileSerializer();
+
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -55,22 +66,36 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();                }
+
+                    Profile profile = CurrentProfile.getCurrentProfile().getProfile(view.getContext());
+                    User user = profile.getUser();
+                    if(!user.getFriends().contains(friendsList.get(getPosition()))) {
+                        user.addFriend(friendsList.get(getPosition()));
+
+                        //profileSerializer.Serialize(profile, view.getContext());
+
+                        activity.returnFromActivity();
+
+
+                    } else{
+                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                        alertDialog.setTitle("Sorry");
+                        alertDialog.setMessage("You are already friends with this user!");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
             userPhoto = (ImageView)itemView.findViewById(R.id.friend_photo);
-
+            view = v;
         }
 
     }
@@ -81,8 +106,9 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
      * @param friendsList User data loaded to identify friends used by adapter.
      */
 
-    public NewFriendAdapter(ArrayList<User> friendsList){
+    public NewFriendAdapter(ArrayList<User> friendsList, AddFriendActivity activity){
         this.friendsList = friendsList;
+        this.activity = activity;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
