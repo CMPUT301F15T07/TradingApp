@@ -40,7 +40,7 @@ public class ProfileSynchronizer extends Model implements IView<Model> {
     }
 
     //return a bool or something when you cant get friends
-    private boolean PullProfiles(){
+    public boolean PullProfiles(){
         try {
             elasticSearch.searchFriends("*", null);
             return true;

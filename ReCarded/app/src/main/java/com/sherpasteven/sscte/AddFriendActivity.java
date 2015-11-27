@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
@@ -58,7 +60,9 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
         mAdapter = new NewFriendAdapter(friendslist, this);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
-
+        ProfileSynchronizer synchronizer = SynchronizeSingleton.GetSynchronize(this);
+        synchronizer.addView(this);
+        synchronizer.PullProfiles();
         initializeData();
     }
 
@@ -118,7 +122,12 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
      */
     @Override
     public void Update(Model model) {
-
+        if(model instanceof ProfileSynchronizer){
+            ProfileSynchronizer synchronizer = (ProfileSynchronizer) model;
+            friendslist.clear();
+            friendslist.addAll(synchronizer.cloudFriends.getAll());
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

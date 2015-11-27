@@ -26,4 +26,8 @@ public class Friends extends Model{
         }
         return null;
     }
+
+    public ArrayList<Friend> getAll(){
+        return friends;
+    }
 }
