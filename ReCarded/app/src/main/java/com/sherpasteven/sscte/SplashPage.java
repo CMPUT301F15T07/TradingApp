@@ -106,6 +106,7 @@ public class SplashPage extends AppCompatActivity implements IView<Model> {
      * Generates intent and moves application to inventory page.
      */
     public void navigateToInventory(){
+        finish();
         startActivity(new Intent(this, InventoryActivity.class));
     }
 
