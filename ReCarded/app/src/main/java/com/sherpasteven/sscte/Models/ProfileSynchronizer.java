@@ -1,5 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
+import android.app.Application;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sherpasteven.sscte.Views.IView;
@@ -7,9 +9,9 @@ import com.sherpasteven.sscte.Views.IView;
 /**
  * Created by elias on 19/11/15.
  */
-public class ProfileSynchronizer extends Model implements IView {
+public class ProfileSynchronizer extends Model implements IView<Model> {
     private ElasticSearch elasticSearch;
-    public Profiles cloudProfiles;
+    public Friends cloudFriends;
     private Profile localProfile;
     private AppCompatActivity activity;
     private FriendSynchronizer friendSynchronizer;
@@ -37,10 +39,10 @@ public class ProfileSynchronizer extends Model implements IView {
 
     }
 
-    //return a bool or something when you cant get profiles
+    //return a bool or something when you cant get friends
     private boolean PullProfiles(){
         try {
-            elasticSearch.searchProfiles("*", null);
+            elasticSearch.searchFriends("*", null);
             return true;
         } catch (RuntimeException ex){
             return false;
@@ -49,7 +51,7 @@ public class ProfileSynchronizer extends Model implements IView {
 
     private boolean InsertProfile(){
         try {
-            elasticSearch.InsertProfile(localProfile);
+            elasticSearch.InsertFriend(new Friend(localProfile.getUser(), activity.getApplicationContext()));
             return true;
         } catch (RuntimeException ex){
             return false;
@@ -58,17 +60,17 @@ public class ProfileSynchronizer extends Model implements IView {
 
     public void UpdateFriends(){
         try {
-            friendSynchronizer.SynchronizeFriends(cloudProfiles);
+            friendSynchronizer.SynchronizeFriends(cloudFriends);
         } catch (RuntimeException ex){
             throw ex;
         }
     }
 
     @Override
-    public void Update(Object o) {
+    public void Update(Model o) {
         if (o instanceof ElasticSearch){
             ElasticSearch es = (ElasticSearch) o;
-            cloudProfiles = es.getProfiles();
+            cloudFriends = es.getFriends();
         }
         activity.runOnUiThread(new Runnable() {
             public void run() {

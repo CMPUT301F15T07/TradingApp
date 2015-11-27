@@ -15,19 +15,21 @@ public class FriendSynchronizer {
     /**
      * This method will update a profile's friends using
      * an updated friends source
-     * @param allProfiles updated profiles to pull from
+     * @param allProfiles updated friends to pull from
      */
-    public void SynchronizeFriends(Profiles allProfiles){
+    public void SynchronizeFriends(Friends allProfiles){
         User localUser = localProfile.getUser();
         List<Friend> unsynchronizedFriends = localUser.getFriends();
-        User oldfriend;
-        Profile newfriend;
+
+        Friend oldfriend;
+        Friend newfriend;
+
         for (int i = 0; i < unsynchronizedFriends.size(); i++){
             oldfriend = unsynchronizedFriends.get(i);
             newfriend = allProfiles.get(oldfriend.getProfileId());
             if (newfriend != null){
                 unsynchronizedFriends.remove(i);
-                unsynchronizedFriends.add(i, new Friend(newfriend.getUser()),);
+                unsynchronizedFriends.add(i, newfriend);
             }
         }
     }
