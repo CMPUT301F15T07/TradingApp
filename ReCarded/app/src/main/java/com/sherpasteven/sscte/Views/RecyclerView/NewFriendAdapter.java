@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.InventoryActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
@@ -44,7 +45,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    static ArrayList<User> friendsList;
+    static ArrayList<Friend> friendsList;
     static View view;
     static AddFriendActivity activity;
     static LocalProfileSerializer profileSerializer = new LocalProfileSerializer();
@@ -106,7 +107,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
      * @param friendsList User data loaded to identify friends used by adapter.
      */
 
-    public NewFriendAdapter(ArrayList<User> friendsList, AddFriendActivity activity){
+    public NewFriendAdapter(ArrayList<Friend> friendsList, AddFriendActivity activity){
         this.friendsList = friendsList;
         this.activity = activity;
     }

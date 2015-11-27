@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.User;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import com.sherpasteven.sscte.Views.IView;
 
 public class ViewFriendActivity extends AppCompatActivity implements IView<Model> {
 
-    ArrayList<User> listOfFriends;
+    ArrayList<Friend> listOfFriends;
     User friend;
 
     /** (not Javadoc)
