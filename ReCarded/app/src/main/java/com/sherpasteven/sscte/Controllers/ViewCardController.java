@@ -3,14 +3,11 @@ package com.sherpasteven.sscte.Controllers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.view.View;
 
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
-import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SettingsActivity;
@@ -44,7 +41,6 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
         } else if (id == R.id.edit_card) {
             Intent intent2 = new Intent(view, EditCardActivity.class);
             intent2.putExtra("pointer", view.getPosition());
-            intent2.putExtra("com.sherpasteven.sscte.bitmap", ((BitmapDrawable)view.getImageCard().getDrawable()).getBitmap());
             view.startActivity(intent2);
         } else if (id == R.id.delete_card) {
             AlertDialog confirmDel = ConfirmDelete();
@@ -63,10 +59,14 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        view.getProfile().getUser().removeInventoryItem(view.getCard(), view.getCard().getQuantity());
-                        setLocalProfile(view.getProfile());
-
+                        Card card = view.getCard();
+                        int quan = view.getCard().getQuantity();
+                        Profile profile = view.getProfile();
                         view.finish();
+                        profile.getUser().removeInventoryItem(card, quan);
+                        setLocalProfile(profile);
+
+
                     }
 
                 })

@@ -1,22 +1,17 @@
 package com.sherpasteven.sscte.Controllers;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.EditCardActivity;
-import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
-import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 
 /**
@@ -70,9 +65,10 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 if (comments.equals("")) {
                     comments = "No comments entered for this card...";
                 }
+
                 if (view.getImageViewCard().getTag().equals("Changed")) {
                     Bitmap cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
-                    model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage),0);
+                    model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage), 0);
                     cardimage.recycle();
                     cardimage = null;
                 }
@@ -88,6 +84,7 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 model.getUser().getInventoryItem(view.getPosition()).setTradable(tradable);
                 model.getUser().getInventoryItem(view.getPosition()).setComments(comments);
 
+                //model.getUser().getInventory().notifyViews();
                 profileSerializer.Serialize(model, view);
                 view.navigateToInventory();
             }

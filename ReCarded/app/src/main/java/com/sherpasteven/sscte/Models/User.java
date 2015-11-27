@@ -2,7 +2,6 @@ package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import com.sherpasteven.sscte.R;
 
@@ -23,6 +22,12 @@ public class User extends Model {
     private Inventory inventory;
     public TradeLog trades;
 
+    public ProfileId getProfileId() {
+        return profileId;
+    }
+
+    private ProfileId profileId;
+
     public User(String name, String location, String email, Context context){
 
         this.name = name;
@@ -31,8 +36,9 @@ public class User extends Model {
         this.inventory = new Inventory();
         this.trades = new TradeLog();
         setFriends(new ArrayList<User>());
-        //setProfilePic(new Image(BitmapFactory.decodeResource(context.getResources(), R.drawable.grey_rectangle)));
         setProfilePic(new Image(R.drawable.grey_rectangle, context));
+        //get id here
+        profileId = new ProfileId(context);
     }
 
     public String getEmail() {
@@ -41,6 +47,7 @@ public class User extends Model {
 
     public void setEmail(String email) {
         this.email = email;
+        notifyViews();
     }
 
     public String getName() {
@@ -49,6 +56,7 @@ public class User extends Model {
 
     public void setName(String name) {
         this.name = name;
+        notifyViews();
     }
 
     public String getLocation() {
@@ -56,14 +64,18 @@ public class User extends Model {
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.location = location;notifyViews();
     }
 
     public ArrayList<User> getFriends() {
         return this.friends;
     }
 
-    public void addFriend(User user){ this.friends.add(user);}
+    public void addFriend(User user){
+        this.friends.add(user);
+        notifyViews();
+    }
+
 
     public void removeFriend(User user){
         this.friends.remove(user);
@@ -71,6 +83,7 @@ public class User extends Model {
 
     public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
+        notifyViews();
     }
 
     /**
@@ -94,14 +107,17 @@ public class User extends Model {
 
     public void setTrades(TradeLog trades) {
         this.trades = trades;
+        notifyViews();
     }
 
     public void addPendingTrade(Trade trade){
         getTrades().addTrade(trade);
+        notifyViews();
     }
 
     public void finalizeTrade(Trade trade){
         getTrades().tradeFinalized(trade);
+        notifyViews();
     }
 
     public Inventory getInventory() {
@@ -110,10 +126,12 @@ public class User extends Model {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+        notifyViews();
     }
 
     public void addInventoryItem(Card card){
         getInventory().addCard(card);
+        notifyViews();
     }
 
     public Boolean hasInventoryItem(Card card){
@@ -130,11 +148,12 @@ public class User extends Model {
 
     public void removeInventoryItem(Card card, int amount){
         getInventory().removeCard(card, amount);
+        notifyViews();
     }
 
     public void deletePastTrade(Trade trade){
         getTrades().removeFinalizedTrade(trade);
-
+        notifyViews();
     }
 
     public Image getProfilePic() {
@@ -143,6 +162,7 @@ public class User extends Model {
 
     public void setProfilePic(Image profilepic) {
         this.profilepic = profilepic;
+        notifyViews();
     }
 
     public Bitmap  constructProfilePic(){

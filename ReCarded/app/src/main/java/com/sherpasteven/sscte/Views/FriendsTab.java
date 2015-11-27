@@ -9,22 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.ElasticSearch;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewFriendActivity;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class FriendsTab extends Fragment implements IView<User> {
+public class FriendsTab extends Fragment implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
     private User currentUser;
@@ -37,10 +33,17 @@ public class FriendsTab extends Fragment implements IView<User> {
     protected RecyclerView mRecyclerView;
     protected FriendAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
+    private ElasticSearch elasticSearch;
 
     public FriendsTab(User currentUser){
         super();
         this.currentUser = currentUser;
+        this.elasticSearch = new ElasticSearch();
+    }
+
+    @Override
+    public void Update(Model model) {
+
     }
 
     private enum LayoutManagerType {
@@ -60,10 +63,6 @@ public class FriendsTab extends Fragment implements IView<User> {
         return inflate_view;
     }
 
-    @Override
-    public void Update(User user) {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

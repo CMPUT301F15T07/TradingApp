@@ -2,13 +2,12 @@ package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Initialises the trade model used for trading inventory systems.
  */
 public class Trade extends Model {
-    private User borrower;
+    private transient User borrower;
     private User owner;
 
     //FIXME: Making this public to make tests correct, return to private
@@ -79,7 +78,7 @@ public class Trade extends Model {
     }
 
     public Boolean addBorrowList(Card card){
-        if(card.isTradable()) {
+        if(card != null && card.isTradable()) {
             getBorrowList().add(card);
             return Boolean.TRUE;
         }

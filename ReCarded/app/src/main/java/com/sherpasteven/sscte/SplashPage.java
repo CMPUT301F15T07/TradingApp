@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,15 +17,18 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
 import com.sherpasteven.sscte.Models.Registration;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Views.IView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class SplashPage extends AppCompatActivity implements IView<Registration> {
+public class SplashPage extends AppCompatActivity implements IView<Model> {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -66,7 +68,6 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         //Profile localProfile = getLocalProfile();
         Profile localProfile = CurrentProfile.getCurrentProfile().getProfile(this);
         if (localProfile != null) navigateToInventory();
-
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_page);
         mVisible = true;
@@ -105,12 +106,18 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
      * Generates intent and moves application to inventory page.
      */
     public void navigateToInventory(){
+        finish();
         startActivity(new Intent(this, InventoryActivity.class));
     }
 
     public void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, this);
+    }
+
+    public void setCloudProfile() {
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
+        profileSynchronizer.SynchronizeProfile();
     }
 
     /**
@@ -162,8 +169,14 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
         return (EditText) findViewById(R.id.cityText);
     }
 
-
-    public void Update(Registration registration) {
+    @Override
+    public void Update(Model model) {
+        Registration registration;
+        if (model instanceof Registration) {
+            registration = (Registration) model;
+        } else {
+            return;
+        }
         Button submitButton = getEnterButton();
 
         EditText emailText = getEmailText();
@@ -241,4 +254,5 @@ public class SplashPage extends AppCompatActivity implements IView<Registration>
                 !registration.getUserEmail().isEmpty() &&
                  registration.isValidEmail();
     }
+
 }

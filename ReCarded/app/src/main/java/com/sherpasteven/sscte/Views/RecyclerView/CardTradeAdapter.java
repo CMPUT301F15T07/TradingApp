@@ -1,8 +1,7 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
 
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.R;
 
 import java.util.ArrayList;
@@ -25,8 +27,10 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
     private static final String TAG = "FriendAdapter";
 
     private String[] mDataSet;
-    ArrayList<Card> cardList;
+    static ArrayList<Card> cardList;
     static View view;
+    static Activity cta;
+    static Boolean userState;
 
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
@@ -45,6 +49,50 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (userState) {
+                        Card tradeCard = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getInventoryItem(getPosition());
+                        if (tradeCard != null) {
+                            if(tradeCard.isTradable()) {
+                                if(!TradeComposer.getTradeComposer().getComponents().getBorrowList().contains(tradeCard)) {
+                                    TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
+                                    Toast.makeText(v.getContext(), "Card added to your trade list.", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(v.getContext(), "Card is already in your trade list.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            else {
+                                Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } else {
+                            Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                        }
+                        cta.finish();
+                    } else { // FIXME: Demo until friend's cards can be pulled
+                        Card tradeCard = cardList.get(getPosition());
+                        if (tradeCard != null) {
+                            if(tradeCard.isTradable()) {
+                                if(!TradeComposer.getTradeComposer().getComponents().getOwnerList().contains(tradeCard)) {
+                                    TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
+                                    Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else {
+                                    Toast.makeText(v.getContext(), "Card is already in their trade list", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else {
+                                Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                        }
+                        cta.finish();
+                    }
+
+                    /*
                     AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
                     alertDialog.setTitle("Alert");
                     alertDialog.setMessage("Element " + getPosition() + " to be shown");
@@ -55,12 +103,13 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                                 }
                             });
                     alertDialog.show();
+                    */
                 }
             });
             cv = (CardView) v.findViewById(R.id.cv);
             cardName = (TextView) v.findViewById(R.id.card_name);
             cardDescription = (TextView) v.findViewById(R.id.card_text);
-            //cardPhoto = getCardImage();
+            cardPhoto =  (ImageView) v.findViewById(R.id.card_photo);
             cardStatus = (ImageView)itemView.findViewById(R.id.imgStatus);
             view = v;
 
@@ -74,8 +123,10 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
      * @param cardList User data loaded to identify friends used by adapter.
      */
 
-    public CardTradeAdapter(ArrayList<Card> cardList){
+    public CardTradeAdapter(ArrayList<Card> cardList, Boolean state, CardTradeActivity cta){
         this.cardList = cardList;
+        this.userState = state;
+        this.cta = cta;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)

@@ -11,7 +11,13 @@ import com.sherpasteven.sscte.Models.User;
 
 import java.util.ArrayList;
 
-public class ViewFriendActivity extends AppCompatActivity {
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Views.IView;
+
+public class ViewFriendActivity extends AppCompatActivity implements IView<Model> {
 
     ArrayList<User> listOfFriends;
     User friend;
@@ -49,5 +55,10 @@ public class ViewFriendActivity extends AppCompatActivity {
             ImageView viewuser = (ImageView) findViewById(R.id.greyRect);
             viewuser.setImageBitmap(user.constructProfilePic());
         }
+    }
+
+    @Override
+    public void Update(Model model) {
+
     }
 }

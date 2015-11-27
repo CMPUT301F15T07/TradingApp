@@ -9,23 +9,19 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
-import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Inventory;
-import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Views.IView;
 
-public class AddCardActivity extends AppCompatActivity implements IView<Inventory>{
+public class AddCardActivity extends AppCompatActivity implements IView<Model>{
     private static int RESULT_LOAD_IMAGE = 1;
     private AddCardController addcardcontroller;
 
@@ -157,10 +153,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Inventor
 
     /**
      * Updates the activity based on raised condition.
-     * @param inventory Inventory to update to be identified in view.
+     * @param model Inventory to update to be identified in view.
      */
     @Override
-    public void Update(Inventory inventory) {
+    public void Update(Model model) {
 
     }
 

@@ -2,7 +2,6 @@ package com.sherpasteven.sscte;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,15 +18,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.sherpasteven.sscte.Controllers.AddCardController;
 import com.sherpasteven.sscte.Controllers.EditCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Inventory;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
 
-public class EditCardActivity extends AppCompatActivity implements IView<Card> {
+public class EditCardActivity extends AppCompatActivity implements IView<Model> {
 
     private static int RESULT_LOAD_IMAGE = 1;
     private EditCardController editcardcontroller;
@@ -46,9 +44,6 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
         setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
         editcardcontroller = new EditCardController(this, getProfile());
-
-        getProfile().getUser().addView(this);
-
 
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +79,6 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
          * FIXME: Import this information to controller
          */
         card = getProfile().getUser().getInventoryItem(position);
-        card.addView(this);
 
         EditText nameText = (EditText) findViewById(R.id.nameText);
         EditText seriesText = (EditText) findViewById(R.id.seriesText);
@@ -92,9 +86,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         EditText quantityText = (EditText) findViewById(R.id.quantityText);
         EditText commentsText = (EditText) findViewById(R.id.commentsText);
 
-        ImageView cardimage = getImageCard();
+        ImageView cardimage = getImageViewCard();
         cardimage.setTag("Default");
-        cardimage.setImageBitmap((Bitmap) getIntent().getParcelableExtra("com.sherpasteven.sscte.bitmap"));
+        cardimage.setImageBitmap(card.constructImage(0));
+
 
         nameText.setText(card.getName());
         int spinnerPosition = adapter.getPosition(card.getCatagory());
@@ -104,6 +99,11 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
         quantityText.setText(Integer.toString(card.getQuantity()));
         commentsText.setText(card.getComments());
         getCheckBox().setChecked(card.isTradable());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public ImageView getImageCard(){
@@ -227,10 +227,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Card> {
 
     /**
      * Updates the activity based on raised condition.
-     * @param card Card to be shown as edited.
+     * @param update Card to be shown as edited.
      */
     @Override
-    public void Update(Card card) {
+    public void Update(Model model) {
 
     }
 

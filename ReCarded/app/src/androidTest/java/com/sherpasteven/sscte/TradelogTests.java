@@ -7,8 +7,8 @@ import android.test.ApplicationTestCase;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.Trade;
-import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Models.TradeLog;
+import com.sherpasteven.sscte.Models.User;
 
 public class TradelogTests extends ApplicationTestCase<Application> {
     public TradelogTests() {

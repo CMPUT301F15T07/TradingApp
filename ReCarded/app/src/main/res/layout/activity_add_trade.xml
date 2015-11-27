@@ -40,13 +40,13 @@
         android:text="Your Offer:"
         android:textSize="18sp"
         android:id="@+id/lblUserOffer"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-light"
         android:textColor="#fff"
         android:layout_marginTop="11dp"
         android:layout_below="@+id/imgStatus"
         android:background="@drawable/trade_header"
         android:paddingLeft="15dp"
-        android:paddingTop="13dp"
+        android:paddingTop="12dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
 
@@ -61,15 +61,17 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="-10dp">
 
-        <GridView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/YourOfferCards"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/YourOfferCards"
-            android:columnWidth="85dp"
             android:clipToPadding="true"
             android:numColumns="3"
-            android:layout_marginTop="-5dp"
-            android:paddingBottom="10dp"></GridView>
+            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
     </LinearLayout>
 
     <TextView
@@ -79,7 +81,7 @@
         android:text="Their Offer:"
         android:textSize="18sp"
         android:id="@+id/lblFriendOffer"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-light"
         android:textColor="#fff"
         android:layout_below="@+id/lblUserGrid"
         android:background="@drawable/trade_header"
@@ -99,14 +101,16 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="-10dp">
 
-        <GridView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/theirOfferCards"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/theirOfferCards"
             android:clipToPadding="true"
-            android:columnWidth="85dp"
             android:numColumns="3"
-            android:paddingBottom="10dp"></GridView>
+            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
         <Button
             android:layout_width="wrap_content"

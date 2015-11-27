@@ -1,50 +1,64 @@
 package com.sherpasteven.sscte;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.Inventory;
-import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Models.Quality;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
-import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.CardTradeAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
 import java.util.ArrayList;
 
-public class CardTradeActivity extends AppCompatActivity {
+
+public class CardTradeActivity extends AppCompatActivity implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
     private ArrayList<Card> cardlist = new ArrayList<>();
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+    private static final int SPAN_COUNT = 2;
 
+    private boolean isUserList = false;
     protected LayoutManagerType mCurrentLayoutManagerType;
+    private ArrayList<Card> cardslist;
+    // demo code before get friends inventory
+    private ArrayList<Card> friendslist;
+    private View inflate_view;
+
+    private User user;
+    private User owner;
 
     protected RecyclerView mRecyclerView;
-    protected NewFriendAdapter mAdapter;
+    protected CardTradeAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_trade);
+        setUser(CurrentProfile.getCurrentProfile().getProfile(this).getUser());
+        //this.getView().setTag(TAG);
+
+        cardslist = new ArrayList<Card>();
+        friendslist = new ArrayList<Card>();
 
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
 
-        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
-        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
-        // elements are laid out.
         mLayoutManager = new LinearLayoutManager(this);
-
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
@@ -54,15 +68,33 @@ public class CardTradeActivity extends AppCompatActivity {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        //mAdapter = new CardTradeAdapter(cardlist);
+        Intent intent = getIntent();
+        isUserList = intent.getBooleanExtra("com.sherpasteven.sscte.user", false);
+        //setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
+        //setPosition(intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0));
+
+        if (isUserList) {
+            setTitle("Your Inventory");
+            cardslist = getUser().getInventory().getCards();
+            mAdapter = new CardTradeAdapter(cardslist, true, this);
+        } else {
+            setTitle("Friend's Inventory");
+            initializeData(); // build sample data for friends, then show the friendslist
+                              // we don't have friends setup yet, so this is sample data to test...
+            mAdapter = new CardTradeAdapter(friendslist, false, this);
+        }
+        setupDemo(); // setup structure for sample structure until friends comes up...
+
+        //
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
         //initializeData();
     }
 
+
     private enum LayoutManagerType {
-        LINEAR_LAYOUT_MANAGER
+        GRID_LAYOUT_MANAGER, LINEAR_LAYOUT_MANAGER
     }
 
     /**
@@ -72,8 +104,8 @@ public class CardTradeActivity extends AppCompatActivity {
      */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        mLayoutManager = new GridLayoutManager(this, SPAN_COUNT);
+        mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
         mRecyclerView.setLayoutManager(mLayoutManager);
 
     }
@@ -111,11 +143,11 @@ public class CardTradeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    /*
-    @Override
-    public void Update(Profile profile) {
 
-    }*/
+    @Override
+    public void Update(Model model) {
+
+    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -130,18 +162,27 @@ public class CardTradeActivity extends AppCompatActivity {
      * FIXME: Convert for dynamic friend data loading.
      * FIXME: Adapt currentUser structure for user-hosted profile.
      */
-    /*
     private void initializeData() {
-        friendslist.add(new User("test1", "location1", "email1", this.getApplicationContext()));
-        friendslist.add(new User("test2", "location2", "email2", this.getApplicationContext()));
-        friendslist.add(new User("test3", "location3", "email3", this.getApplicationContext()));
-        friendslist.add(new User("test4", "location4", "email4", this.getApplicationContext()));
-        friendslist.add(new User("test5", "location5", "email5", this.getApplicationContext()));
-        friendslist.add(new User("test6", "location6", "email6", this.getApplicationContext()));
-        friendslist.add(new User("test7", "location7", "email7", this.getApplicationContext()));
-        friendslist.add(new User("test8", "location8", "email8", this.getApplicationContext()));
-        friendslist.add(new User("test9", "location9", "email9", this.getApplicationContext()));
-        friendslist.add(new User("test10", "location10", "email10", this.getApplicationContext()));
-        friendslist.add(new User("test11", "location11", "email11", this.getApplicationContext()));
-    }*/
+        owner = TradeComposer.getTradeComposer().getComponents().getOwner();
+        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
+        Card card2 = new Card("Test2", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
+        friendslist.add(card);
+        friendslist.add(card2);
+    }
+
+    public View getView(){
+        return inflate_view;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setupDemo() {
+        // fill with additional header data if neccessary.
+    }
 }

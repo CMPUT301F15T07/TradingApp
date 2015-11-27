@@ -15,12 +15,8 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 * limitations under the License.
 */
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,8 +71,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     alertDialog.show(); */
                     Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
-                    myIntent.putExtra("com.sherpasteven.sscte.bitmap", ((BitmapDrawable)getCardImage().getDrawable()).getBitmap());
                     view.getContext().startActivity(myIntent);
+
                 }
             });
             cv = (CardView) v.findViewById(R.id.cv);

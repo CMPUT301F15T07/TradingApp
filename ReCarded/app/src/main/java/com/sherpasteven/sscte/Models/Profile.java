@@ -10,11 +10,16 @@ public class Profile extends Model {
 
     private User user;
     private Config config;
+    private ProfileId profileId;
 
+    public ProfileId getProfileId() {
+        return profileId;
+    }
 
     Profile(User user) {
         this.user = user;
         this.config = new Config();
+        this.profileId = user.getProfileId();
     }
 
     public User getUser() {

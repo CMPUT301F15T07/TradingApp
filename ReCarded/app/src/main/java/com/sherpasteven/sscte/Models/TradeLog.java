@@ -35,6 +35,7 @@ public class TradeLog extends Model {
 
     public void addTrade(Trade trade){
         pendingTrades.add(trade);
+        notifyViews();
     }
 
     public ArrayList<Trade> getPendingTrades() {

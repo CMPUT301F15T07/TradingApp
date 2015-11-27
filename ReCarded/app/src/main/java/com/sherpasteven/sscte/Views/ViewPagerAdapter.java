@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.User;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {

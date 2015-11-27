@@ -14,6 +14,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.R;
 
 /**
@@ -32,7 +33,12 @@ import com.sherpasteven.sscte.R;
  * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
  * providing the layout ID of your custom layout.
  */
-public class SlidingTabLayout extends HorizontalScrollView {
+public class SlidingTabLayout extends HorizontalScrollView implements IView<Model> {
+
+    @Override
+    public void Update(Model model) {
+    }
+
     /**
      * Allows complete control over the colors drawn in the tab layout. Set with
      * {@link #setCustomTabColorizer(TabColorizer)}.

@@ -1,41 +1,34 @@
 package com.sherpasteven.sscte.Views;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
-import com.sherpasteven.sscte.AddCardActivity;
-import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.Controllers.TradesTabController;
-import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.EditTradeActivity;
-import com.sherpasteven.sscte.Models.TradeLog;
-import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.Quality;
+import com.sherpasteven.sscte.FriendListActivity;
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Trade;
-import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Models.TradeComposer;
+import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.R;
-import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Implements the TradesTab system using the TradeLog model.
  */
-public class TradesTab extends Fragment implements IView<TradeLog> {
+public class TradesTab extends Fragment implements IView<Model> {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
@@ -72,7 +65,13 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initializeData();
+        // initializeData();
+        dynamicLoad();
+    }
+
+    public void dynamicLoad() {
+        tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+        // doesn't get the other trades
     }
 
     @Override
@@ -84,24 +83,6 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
-
-        ImageButton addItem = (ImageButton) rootView.findViewById(R.id.btnAddTrade);
-        addItem.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), AddTradeActivity.class);
-                getActivity().startActivity(myIntent);
-            }
-        });
-
-        Button editItem = (Button) rootView.findViewById(R.id.btnEditTrade);
-        editItem.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), EditTradeActivity.class);
-                getActivity().startActivity(myIntent);
-            }
-        });
 
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -128,18 +109,35 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
     }
 
     @Override
-    public void Update(TradeLog tradeLog) {
-
+    public void Update(Model model) {
+        mAdapter.notifyDataSetChanged();
     }
 
     public void navigateToAddTradeActivity(){
-        Intent myIntent = new Intent(getActivity(), AddTradeActivity.class);
+        // process flow for the activity is like this:
+        // enter list of friends
+        // select the list of friends and instantiate activity there
+        // once you're in, you can select the + and go into cardlistactivity
+        // select cards from there
+        Intent myIntent = new Intent(getActivity(), FriendListActivity.class);
+        Toast.makeText(this.getContext(), "Adding a trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
     public void navigateToEditTradeActivity(){
         Intent myIntent = new Intent(getActivity(), EditTradeActivity.class);
+        Toast.makeText(this.getContext(), "Editing selected trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(TradeComposer.getTradeComposer().getComponents() != null){
+            TradeComposer.getTradeComposer().getComponents().getViews().clear();
+            TradeComposer.getTradeComposer().resetComponents();
+        }
+    }
+
     public View getView(){
         return inflate_view;
     }
@@ -156,6 +154,8 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
 
     }
 
+
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save currently selected layout manager.
@@ -168,6 +168,7 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
      * FIXME: Change system for dynamic trade list loading.
      * FIXME: Implement tradelist as user-relevant trade list structure.
      */
+    /*
     private void initializeData() {
         tradelist = new ArrayList<>();
         Context context = this.getContext();
@@ -183,6 +184,6 @@ public class TradesTab extends Fragment implements IView<TradeLog> {
         tradelist.add(new Trade(new User("borrower10", "location", "email10", context), new User("owner1", "location", "email1", context)));
         tradelist.add(new Trade(new User("borrower11", "location", "email11", context), new User("owner1", "location", "email1", context)));
 
-    }
+    }*/
 
 }
