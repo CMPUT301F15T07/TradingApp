@@ -18,7 +18,7 @@ public class User extends Model {
     private String location;
     private String email;
     private Image profilepic;
-    private ArrayList<User> friends = new ArrayList<User>();
+    private ArrayList<Friend> friends = new ArrayList<Friend>();
     private Inventory inventory;
     public TradeLog trades;
 
@@ -35,7 +35,7 @@ public class User extends Model {
         this.email = email;
         this.inventory = new Inventory();
         this.trades = new TradeLog();
-        setFriends(new ArrayList<User>());
+        setFriends(new ArrayList<Friend>());
         setProfilePic(new Image(R.drawable.grey_rectangle, context));
         //get id here
         profileId = new ProfileId(context);
@@ -67,21 +67,21 @@ public class User extends Model {
         this.location = location;notifyViews();
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<Friend> getFriends() {
         return this.friends;
     }
 
-    public void addFriend(User user){
-        this.friends.add(user);
+    public void addFriend(Friend friend){
+        this.friends.add(friend);
         notifyViews();
     }
 
 
-    public void removeFriend(User user){
-        this.friends.remove(user);
+    public void removeFriend(Friend friend){
+        this.friends.remove(friend);
     }
 
-    public void setFriends(ArrayList<User> friends) {
+    public void setFriends(ArrayList<Friend> friends) {
         this.friends = friends;
         notifyViews();
     }
