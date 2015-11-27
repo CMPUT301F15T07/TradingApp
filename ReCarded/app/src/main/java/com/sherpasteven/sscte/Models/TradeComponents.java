@@ -1,5 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 /**
@@ -43,13 +45,22 @@ public class TradeComponents extends Model {
     }
 
     public void addToOwner(Card card){
-        getOwnerList().add(card);
-        notifyViews();
+        if(card.isTradable()) {
+            if(!getOwnerList().contains(card)) {
+                getOwnerList().add(card);
+                notifyViews();
+            }
+        }
     }
 
-    public void addToBorrower(Card card){
-        getBorrowList().add(card);
-        notifyViews();
+
+public void addToBorrower(Card card){
+        if(card.isTradable()) {
+            if(!getBorrowList().contains(card)) {
+                getBorrowList().add(card);
+                notifyViews();
+            }
+        }
     }
 
 

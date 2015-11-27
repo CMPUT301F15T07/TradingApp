@@ -58,21 +58,44 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                     if (userState) {
                         Card tradeCard = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getInventoryItem(getPosition());
                         if (tradeCard != null) {
-                            TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
-                            Toast.makeText(v.getContext(), "Card added to your trade list.", Toast.LENGTH_SHORT).show();
-                            cta.finish();
+                            if(tradeCard.isTradable()) {
+                                if(!TradeComposer.getTradeComposer().getComponents().getBorrowList().contains(tradeCard)) {
+                                    TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
+                                    Toast.makeText(v.getContext(), "Card added to your trade list.", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(v.getContext(), "Card is already in your trade list.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            else {
+                                Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+
+                            }
                         } else {
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
                         }
+                        cta.finish();
                     } else { // FIXME: Demo until friend's cards can be pulled
                         Card tradeCard = cardList.get(getPosition());
                         if (tradeCard != null) {
-                            TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
-                            Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
-                            cta.finish();
+                            if(tradeCard.isTradable()) {
+                                if(!TradeComposer.getTradeComposer().getComponents().getOwnerList().contains(tradeCard)) {
+                                    TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
+                                    Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else {
+                                    Toast.makeText(v.getContext(), "Card is already in their trade list", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else {
+                                Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
                         }
+                        cta.finish();
                     }
 
                     /*
