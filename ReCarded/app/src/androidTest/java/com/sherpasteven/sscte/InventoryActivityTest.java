@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.Views.FriendsTab;
 import com.sherpasteven.sscte.Views.InventoryTab;
@@ -19,7 +20,7 @@ import com.sherpasteven.sscte.Views.TradesTab;
  */
 public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
 
-    private Button btnadditem;
+    private ImageButton btnadditem;
     private Button btnviewitem;
     private Button btnedititem;
 
@@ -84,7 +85,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
         InventoryActivity activity = (InventoryActivity) getActivity();
 
         btnviewitem = activity.getViewButton();
-
+        // enter the recyclerview actions
 
         // Set up an ActivityMonitor
         Instrumentation.ActivityMonitor receiverActivityMonitor =
@@ -127,7 +128,8 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
         InventoryActivity activity = (InventoryActivity) getActivity();
 
         btnedititem = activity.getEditButton();
-
+        // enter the recyclerview action -> enter the view card activity
+        // click on edit item in the menu from there
 
         // Set up an ActivityMonitor
         Instrumentation.ActivityMonitor receiverActivityMonitor =
