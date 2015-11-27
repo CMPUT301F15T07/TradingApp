@@ -166,6 +166,46 @@
             android:layout_gravity="right" />
     </LinearLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lblFriendGrid"
+        android:id="@+id/btnAccept"
+        android:background="@drawable/trade_options_top"
+        android:textColor="@color/white"
+        android:text="Accept"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/btnDecline"
+        android:textColor="@color/brown_main"
+        android:background="@drawable/trade_options_mid"
+        android:text="Decline"
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@+id/btnAccept"
+        android:layout_alignEnd="@+id/btnAccept"
+        android:layout_alignStart="@+id/btnAccept"
+        android:layout_marginTop="-9dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/btnCounterOffer"
+        android:layout_below="@id/btnDecline"
+        android:textColor="@color/brown_main"
+        android:background="@drawable/trade_options_bot"
+        android:text="Counteroffer"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="-9dp"
+        android:layout_alignStart="@+id/btnDecline"
+        android:layout_alignEnd="@+id/btnDecline"
+        android:layout_alignParentEnd="false" />
+
 
 </RelativeLayout>
 </ScrollView>

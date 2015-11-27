@@ -30,6 +30,8 @@ public class AddTradeActivity extends AppCompatActivity implements IView<Model> 
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 3;
     private static final int DATASET_COUNT = 60;
+    private int position = 0;
+    private boolean isCounter = false;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -78,16 +80,31 @@ public class AddTradeActivity extends AppCompatActivity implements IView<Model> 
 
         if (getIntent().hasExtra("com.sherpasteven.sscte.friend")) {
             friend = user.getFriends().get(getIntent().getIntExtra("com.sherpasteven.sscte.friend", 0));
-            setTitle("Trade with " + friend.getName());
         } else {
             Toast.makeText(this, "Invalid friend selected, returning...", Toast.LENGTH_SHORT).show();
             finish();
         }
 
+        setupTradeComposer();
+        setTitle("Trade with " + TradeComposer.getTradeComposer().getComponents().getOwner().getName());
+
+
+        if (getIntent().hasExtra("com.sherpasteven.sscte.counterindex")) {
+            position = getIntent().getIntExtra("com.sherpasteven.sscte.counterindex", 0);
+            isCounter = true;
+        }
+
 
         TradeComposer.getTradeComposer().getComponents().addView(this);
-        setupTradeComposer();
 
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public boolean getCounter() {
+        return isCounter;
     }
 
     @Override
