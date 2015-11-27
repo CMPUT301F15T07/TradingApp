@@ -22,9 +22,7 @@ public class User extends Model {
     private Inventory inventory;
     public TradeLog trades;
 
-    public ProfileId getProfileId() {
-        return profileId;
-    }
+
 
     private ProfileId profileId;
 
@@ -169,4 +167,11 @@ public class User extends Model {
         return getProfilePic().constructImage();
     }
 
+    public ProfileId getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileID(ProfileId id){
+        this.profileId = id;
+    }
 }
