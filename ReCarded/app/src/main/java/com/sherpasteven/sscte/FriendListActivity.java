@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.sherpasteven.sscte.Controllers.FriendsListController;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 public class FriendListActivity extends AppCompatActivity implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
-    private ArrayList<User> friendslist = new ArrayList<>();
+    private ArrayList<Friend> friendslist = new ArrayList<>();
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 
@@ -155,11 +156,13 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
      * FIXME: Keep this as unit test example
      */
     private void initializeData() {
-        friendslist.add(new User("Shrek", "Swamp", "Shrek@theswamp.com", this.getApplicationContext()));
-        friendslist.add(new User("Donkey", "Canada", "dnkey@canada.com", this.getApplicationContext()));
+        friendslist.add(new Friend(new User("Shrek", "Swamp", "Shrek@theswamp.com", this.getApplicationContext()), this.getApplicationContext()));
+        friendslist.add(new Friend(new User("Donkey", "Canada", "dnkey@canada.com", this.getApplicationContext()), this.getApplicationContext()));
+        /*
         friendslist.add(new User("Smashmouth", "New England", "sm@d3.com", this.getApplicationContext()));
         friendslist.add(new User("Fiona", "The Castle", "Princess3@hotmail.com", this.getApplicationContext()));
         friendslist.add(new User("Prince Farquaad", "The Kingdom", "kingd4@gmail.com", this.getApplicationContext()));
+        */
         currentUser.setFriends(friendslist);
     }
 

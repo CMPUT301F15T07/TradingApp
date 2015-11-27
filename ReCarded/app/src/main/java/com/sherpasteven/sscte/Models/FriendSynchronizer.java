@@ -19,7 +19,7 @@ public class FriendSynchronizer {
      */
     public void SynchronizeFriends(Profiles allProfiles){
         User localUser = localProfile.getUser();
-        List<User> unsynchronizedFriends = localUser.getFriends();
+        List<Friend> unsynchronizedFriends = localUser.getFriends();
         User oldfriend;
         Profile newfriend;
         for (int i = 0; i < unsynchronizedFriends.size(); i++){
