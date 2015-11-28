@@ -79,11 +79,9 @@
             android:layout_height="70dp"
             android:id="@id/mediaText"
             android:layout_below="@+id/greyRect"
-            android:background="@drawable/curved_rect"
+            android:background="@drawable/input_image_bar_empty"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
-
-
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
