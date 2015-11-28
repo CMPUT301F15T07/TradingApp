@@ -2,6 +2,7 @@ package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.UUID;
 
 /**
  * Initialises the trade model used for trading inventory systems.
@@ -11,12 +12,18 @@ public class Trade extends Model {
     private Friend owner;
 
     //FIXME: Making this public to make tests correct, return to private
-    private ArrayList<Card> borrowlist;
-    private ArrayList<Card> ownerlist;
     private Calendar created;
     private Calendar lastupdate;
     private Calendar accepted;
     private String status;
+    private UUID id;
+
+
+    //FIXME: Making this public to make tests correct, return to private
+    private ArrayList<Card> borrowlist;
+    private ArrayList<Card> ownerlist;
+
+
 
     public Trade(User borrower, Friend owner) {
         setBorrower(borrower);
@@ -25,6 +32,38 @@ public class Trade extends Model {
         setBorrowList(new ArrayList<Card>());
         created = Calendar.getInstance();
         setStatus("PENDING");
+        id = UUID.randomUUID();
+        //sets the created time to the current time
+        created = Calendar.getInstance();
+    }
+
+
+    public Calendar getCreated() {
+        return created;
+    }
+
+    public void setCreated(Calendar created) {
+        this.created = created;
+    }
+
+    public Calendar getLastupdate() {
+        return lastupdate;
+    }
+
+    public void setLastupdate(Calendar lastupdate) {
+        this.lastupdate = lastupdate;
+    }
+
+    public Calendar getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Calendar accepted) {
+        this.accepted = accepted;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     /**
@@ -43,6 +82,7 @@ public class Trade extends Model {
     }
 
     //public void setNotification(User user){}
+
 
     public User getBorrower() {
         return borrower;
@@ -118,6 +158,10 @@ public class Trade extends Model {
 
     public void setStatus(String status) {
         this.status = status;
+        lastupdate = Calendar.getInstance();
+        if (status.equals("ACCEPTED")) {
+            accepted = Calendar.getInstance();
+        }
     }
 
     /**
