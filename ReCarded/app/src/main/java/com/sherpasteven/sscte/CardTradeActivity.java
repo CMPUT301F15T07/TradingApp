@@ -164,10 +164,7 @@ public class CardTradeActivity extends AppCompatActivity implements IView<Model>
      */
     private void initializeData() {
         owner = TradeComposer.getTradeComposer().getComponents().getOwner();
-        Card card = new Card("Test", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
-        Card card2 = new Card("Test2", null, 4, new Quality(4), "Test", "Test", true, "Test", owner);
-        friendslist.add(card);
-        friendslist.add(card2);
+        friendslist = owner.getInventory().getCards();
     }
 
     public View getView(){
