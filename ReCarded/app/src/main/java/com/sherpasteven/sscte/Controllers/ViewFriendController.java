@@ -55,7 +55,7 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Friend friend = view.getFriend();
-                        Profile profile = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext());
+                        Profile profile = CurrentProfile.getCurrentProfile().getProfile(view);
                         profile.getUser().removeFriend(friend);
                         setLocalProfile(profile);
                         view.finish();
