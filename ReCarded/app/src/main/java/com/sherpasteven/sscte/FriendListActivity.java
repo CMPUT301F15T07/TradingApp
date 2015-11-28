@@ -13,6 +13,7 @@ import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
@@ -71,7 +72,6 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
-        initializeData();
         currentUser.addView(this);
 
     }
@@ -155,13 +155,5 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
      * FIXME: Adapt currentUser structure for user-hosted profile.
      * FIXME: Keep this as unit test example
      */
-    private void initializeData() {
-        friendslist.add(new Friend(new User("Shrek", "Swamp", "Shrek@theswamp.com", this.getApplicationContext()), this.getApplicationContext()));
-        friendslist.add(new Friend(new User("Donkey", "Canada", "dnkey@canada.com", this.getApplicationContext()), this.getApplicationContext()));
-        friendslist.add(new Friend(new User("Smashmouth", "New England", "sm@d3.com", this.getApplicationContext()), this.getApplicationContext()));
-        friendslist.add(new Friend( new User("Fiona", "The Castle", "Princess3@hotmail.com", this.getApplicationContext()), this.getApplicationContext()));
-        friendslist.add(new Friend(new User("Prince Farquaad", "The Kingdom", "kingd4@gmail.com", this.getApplicationContext()), this.getApplicationContext()));
-        currentUser.setFriends(friendslist);
-    }
 
 }
