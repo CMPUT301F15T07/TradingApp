@@ -53,8 +53,10 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
 
     protected RecyclerView mYourRecycler;
     protected RecyclerView mTheirRecycler;
-    protected BorrowerViewTradeAdapter mYourAdapter;
-    protected OwnerViewTradeAdapter mTheirAdapter;
+    //protected BorrowerViewTradeAdapter mYourAdapter;
+    //protected OwnerViewTradeAdapter mTheirAdapter;
+    protected RecyclerView.Adapter mYourAdapter;
+    protected RecyclerView.Adapter mTheirAdapter;
     protected RecyclerView.LayoutManager mYourLayoutManager;
     protected RecyclerView.LayoutManager mTheirLayoutManager;
 
@@ -66,7 +68,7 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_trade);
-
+        user = CurrentProfile.getCurrentProfile().getProfile(this).getUser();
         mYourRecycler = (RecyclerView) this.findViewById(R.id.YourOfferCards);
         mTheirRecycler = (RecyclerView) this.findViewById(R.id.theirOfferCards);
         mYourLayoutManager = new LinearLayoutManager(this);
@@ -92,8 +94,17 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
          * FIXME: Only gets pending trades at the moment.
          */
 
-        mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
-        mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
+        if (user.getProfileId().equals(trade.getOwner().getProfileId())) {
+            //user is the owner
+            mYourAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
+            mTheirAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
+        } else {
+            //user is the borrower
+            mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
+            mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
+        }
+       // mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
+       // mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
         // Set CardAdapter as the adapter for RecyclerView.
         mYourRecycler.setAdapter(mYourAdapter);
         mTheirRecycler.setAdapter(mTheirAdapter);
@@ -102,7 +113,13 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
          * FIXME: Move controller information to the controller.
          */
         nametext = getNameText();
-        nametext.setText("Trade with " + trade.getOwner().getName());
+
+        //we want to set the trade text to the friend
+        if (trade.getOwner().getProfileId().equals(user.getProfileId())) {
+            nametext.setText("Trade with " + trade.getBorrower().getName());
+        } else {
+            nametext.setText("Trade with " + trade.getOwner().getName());
+        }
         updateButtons();
 
     }
@@ -127,7 +144,7 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
 
         if (trade != null) {
             if (trade.getStatus().equals("PENDING")) {
-                if ((trade.getOwner().getProfileId().equals(
+                if ((trade.getBorrower().getProfileId().equals(
                         CurrentProfile.getCurrentProfile().getProfile(this).getProfileId()))) {
                     // if you are the borrower, you can only decline -- change color of other trade buttons
                     acceptButton.setBackgroundResource(R.drawable.trade_options_top_grey);

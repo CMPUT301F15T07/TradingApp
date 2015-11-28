@@ -36,7 +36,7 @@ public class TradeSynchronizer {
 
                     //local user doesn't have trade
                     if (localUser.getTrades().getTrade(friendTrade.getId()) == null) {
-
+                        //Trade swappedTrade = tradeReverse(friendTrade, friend);
                         //add new trade to user from friend
                         pendingTrades.add(friendTrade);
                     }
@@ -55,6 +55,7 @@ public class TradeSynchronizer {
                 //The friend has a newer version of the trade then the user does
                 if (friendTrade.getLastupdate().after(userTrade.getLastupdate())) {
                     pendingTrades.remove(i);
+                    //Trade swappedTrade = tradeReverse(friendTrade, friend);
                     if (friendTrade.getStatus().equals("PENDING")){
                         pendingTrades.add(friendTrade);
                     } else {
@@ -67,4 +68,16 @@ public class TradeSynchronizer {
         localUser.getTrades().setPendingTrades(pendingTrades);
         localUser.getTrades().setPastTrades(pastTrades);
     }
+
+    private Trade tradeReverse(Trade initialTrade, Trader borrower) {
+        //tradelog.addCounterOfferTrade(model, countertrade);
+        TradeComposer.getTradeComposer().resetComponents();
+        TradeComposer.getTradeComposer().getComponents().setOwner(borrower);
+        TradeComposer.getTradeComposer().getComponents().setBorrower(initialTrade.getOwner());
+        TradeComposer.getTradeComposer().getComponents().setTradeId(initialTrade.getId());
+        TradeComposer.getTradeComposer().getComponents().setOwnerList(initialTrade.getBorrowList());
+        TradeComposer.getTradeComposer().getComponents().setBorrowList(initialTrade.getOwnerList());
+        return TradeComposer.getTradeComposer().composeTrade();
+    }
+
 }

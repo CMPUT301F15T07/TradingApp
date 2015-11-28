@@ -21,7 +21,6 @@ public class Friend extends User{
         setProfileID(user.getProfileId());
     }
 
-
     @Override
     public ArrayList<Friend> getFriends() {
         throw new RuntimeException("This functionality is not permissable");
