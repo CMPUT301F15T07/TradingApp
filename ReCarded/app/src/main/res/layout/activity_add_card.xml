@@ -81,7 +81,7 @@
             android:id="@id/mediaText"
             android:layout_below="@+id/card_image"
             android:background="@drawable/input_image_bar"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:orientation="horizontal">
 
 
