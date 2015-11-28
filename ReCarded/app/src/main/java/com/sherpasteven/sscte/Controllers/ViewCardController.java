@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
@@ -61,7 +62,7 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Card card = view.getCard();
                         int quan = view.getCard().getQuantity();
-                        Profile profile = view.getProfile();
+                        Profile profile = CurrentProfile.getCurrentProfile().getProfile(view);
                         view.finish();
                         profile.getUser().removeInventoryItem(card, quan);
                         setLocalProfile(profile);

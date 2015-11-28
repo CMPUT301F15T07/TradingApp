@@ -75,23 +75,37 @@
             android:textSize="12dp"
             android:layout_marginBottom="-35dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:id="@+id/mediaText"
-            android:background="@drawable/add_media_bar"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="sans-serif-light"
-            android:textColor="#444444"
-            android:maxLines="1"
-            android:nestedScrollingEnabled="true"
-            android:paddingStart="10dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@id/mediaText"
             android:layout_below="@+id/card_image"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
-            android:paddingEnd="50dp" />
+            android:background="@drawable/input_image_bar"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="310dp"
+                android:layout_height="match_parent"
+                android:clipToPadding="true"
+                android:numColumns="3"
+                android:paddingBottom="9dp"
+                android:paddingTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:paddingEnd="0dp"
+                android:layout_weight="9"/>
+
+            <Button
+                android:layout_width="49dp"
+                android:layout_height="match_parent"
+                android:background="#0000"
+                android:id="@+id/addmoreimages" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

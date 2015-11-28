@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
 
     ArrayList<Friend> listOfFriends;
     Friend friend;
+    int position;
 
     private ViewFriendController viewfriendcontroller;
 
@@ -42,8 +45,10 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
 
         viewfriendcontroller = new ViewFriendController(this, friend);
 
+
+
         Intent intent = getIntent();
-        int position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
+        position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
         listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
         friend = listOfFriends.get(position);
         retrieveUserInfo(friend);
@@ -71,11 +76,40 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
 
     public ImageButton getDeclineButton() {
         return (ImageButton) findViewById(R.id.btnDeleteFriend);
+
+        /**
+         * Generates hamburger menu options.
+         * @param menu Menu item to be created.
+         * @return true
+         */
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_view_friend, menu);
+        return true;
     }
 
+    /**
+     * OnSelect options for option selected from hamburger menu.
+     * @param item Item selected by user.
+     * @return true
+     */
     @Override
-    public void Update(Model model) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_inventory) {
+            Intent intent1 = new Intent(this, FriendInventoryActivity.class);
+            intent1.putExtra("com.sherpasteven.sscte.friend_inventory", position);
+            this.startActivity(intent1);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public Friend getFriend() {
@@ -84,5 +118,10 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
 
     public Profile getProfile() {
         return profile;
+    }
+
+    @Override
+    public void Update(Model model) {
+
     }
 }

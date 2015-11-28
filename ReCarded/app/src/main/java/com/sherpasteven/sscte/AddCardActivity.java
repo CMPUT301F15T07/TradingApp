@@ -2,11 +2,14 @@ package com.sherpasteven.sscte;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -17,22 +20,47 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
+import com.sherpasteven.sscte.Controllers.FriendsListController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Views.IView;
+import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
+import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
+
+import java.util.ArrayList;
 
 public class AddCardActivity extends AppCompatActivity implements IView<Model>{
     private static int RESULT_LOAD_IMAGE = 1;
     private AddCardController addcardcontroller;
+
+    private enum LayoutManagerType {
+        GRID_LAYOUT_MANAGER,
+        LINEAR_LAYOUT_MANAGER
+    }
+    Boolean filledMainImage;
+
+    private static final String TAG = "RecyclerViewFragment";
+    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+    protected LayoutManagerType mCurrentLayoutManagerType;
+
+    protected RecyclerView mRecyclerView;
+    protected MediaAdapter mAdapter;
+    protected RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Bitmap> cardimages;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        cardimages = new ArrayList<Bitmap>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
         addcardcontroller = new AddCardController(this, CurrentProfile.getCurrentProfile().getProfile(this));
+
+        filledMainImage = Boolean.FALSE;
 
         Spinner spinner = (Spinner) findViewById(R.id.categoryText);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -44,6 +72,25 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
         spinner.setAdapter(adapter);
         ImageView imageView = getImageViewCard();
         imageView.setTag("Default");
+
+        // BEGIN_INCLUDE(initializeRecyclerView)
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
+
+        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
+        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
+        // elements are laid out.
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+
+        if (savedInstanceState != null) {
+            // Restore saved layout manager type.
+            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
+                    .getSerializable(KEY_LAYOUT_MANAGER);
+        }
+        setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
+        mAdapter = new MediaAdapter(getCardImages(), this);
+        mRecyclerView.setAdapter(mAdapter);
 
 
     }
@@ -72,9 +119,18 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = getImageViewCard();
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            imageView.setTag("Changed");
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+
+
+            if(!filledMainImage) {
+                ImageView imageView = getImageViewCard();
+                imageView.setImageBitmap(bitmap);
+                imageView.setTag("Changed");
+                filledMainImage = Boolean.TRUE;
+            }
+
+            getCardImages().add(bitmap);
+            mAdapter.notifyDataSetChanged();
         }
 
 
@@ -171,5 +227,16 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(i, RESULT_LOAD_IMAGE);
+    }
+
+    public ArrayList<Bitmap> getCardImages(){
+        return this.cardimages;
+    }
+
+    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
+
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
     }
 }

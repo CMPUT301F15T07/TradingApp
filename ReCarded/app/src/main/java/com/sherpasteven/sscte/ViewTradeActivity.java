@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -76,6 +77,9 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
 
         //setUser(CurrentProfile.getCurrentProfile().getProfile(this).getUser());
         //trade = new Trade(user, friend);
+        //this crashes
+        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
+
         viewtradecontroller = new ViewTradeController(this, trade);
 
         if (savedInstanceState != null) {
@@ -87,8 +91,6 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
         /**
          * FIXME: Only gets pending trades at the moment.
          */
-
-        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
 
         mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
         mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
@@ -123,23 +125,28 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
         declineButton = getDeclineButton();
         counterofferButton = getCounterOfferButton();
 
-        if (trade != null && trade.getBorrower() != null) {
-            if (trade.getStatus().equals("PENDING"))
-            if (trade.getBorrower().equals(
-                    CurrentProfile.getCurrentProfile().getProfile(this).getUser())) {
-                // if you are the borrower, you can only decline -- change color of other trade buttons
-                acceptButton.setBackgroundResource(R.drawable.trade_options_top);
-                acceptButton.setClickable(false);
-                counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
-                acceptButton.setClickable(false);
-
+        if (trade != null) {
+            if (trade.getStatus().equals("PENDING")) {
+                if ((trade.getOwner().getProfileId().equals(
+                        CurrentProfile.getCurrentProfile().getProfile(this).getProfileId()))) {
+                    // if you are the borrower, you can only decline -- change color of other trade buttons
+                    acceptButton.setBackgroundResource(R.drawable.trade_options_top_grey);
+                    acceptButton.setTextColor(Color.parseColor("#484848"));
+                    acceptButton.setClickable(false);
+                    counterofferButton.setBackgroundResource(R.drawable.trade_options_bot_grey);
+                    counterofferButton.setTextColor(Color.parseColor("#484848"));
+                    counterofferButton.setClickable(false);
+                }
             } else if (trade.getStatus().equals("DECLINED") || trade.getStatus().equals("ACCEPTED")) {
                     acceptButton.setBackgroundResource(R.drawable.trade_options_top);
                     acceptButton.setClickable(false);
+                    acceptButton.setTextColor(Color.parseColor("#484848"));
                     declineButton.setBackgroundResource(R.drawable.trade_options_mid);
                     declineButton.setClickable(false);
+                    declineButton.setTextColor(Color.parseColor("#484848"));
                     counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
-                    acceptButton.setClickable(false);
+                    counterofferButton.setTextColor(Color.parseColor("#484848"));
+                    counterofferButton.setClickable(false);
             }
         }
     }

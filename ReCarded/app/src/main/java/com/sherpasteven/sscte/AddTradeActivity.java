@@ -55,6 +55,7 @@ public class AddTradeActivity extends AppCompatActivity implements IView<Model> 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trade);
+        TradeComposer.getTradeComposer().getComponents().addView(this);
 
         mYourRecycler = (RecyclerView) this.findViewById(R.id.YourOfferCards);
         mTheirRecycler = (RecyclerView) this.findViewById(R.id.theirOfferCards);
@@ -78,25 +79,32 @@ public class AddTradeActivity extends AppCompatActivity implements IView<Model> 
         mYourRecycler.setAdapter(mYourAdapter);
         mTheirRecycler.setAdapter(mTheirAdapter);
 
-        if (getIntent().hasExtra("com.sherpasteven.sscte.friend")) {
-            friend = user.getFriends().get(getIntent().getIntExtra("com.sherpasteven.sscte.friend", 0));
+        if (getIntent().hasExtra("com.sherpasteven.sscte.counterindex")) {
+            position = getIntent().getIntExtra("com.sherpasteven.sscte.counterindex", 0);
+            friend = TradeComposer.getTradeComposer().getComponents().getOwner();
+            setCounter(true);
+        }
+
+        if (getIntent().hasExtra("com.sherpasteven.sscte.friend") || getIntent().hasExtra("com.sherpasteven.sscte.counterindex")) {
+            if (!(getIntent().hasExtra("com.sherpasteven.sscte.counterindex"))) {
+                friend = user.getFriends().get(getIntent().getIntExtra("com.sherpasteven.sscte.friend", 0));
+                setupTradeComposer();
+            }
         } else {
             Toast.makeText(this, "Invalid friend selected, returning...", Toast.LENGTH_SHORT).show();
             finish();
         }
 
-        setupTradeComposer();
         setTitle("Trade with " + TradeComposer.getTradeComposer().getComponents().getOwner().getName());
 
+    }
 
-        if (getIntent().hasExtra("com.sherpasteven.sscte.counterindex")) {
-            position = getIntent().getIntExtra("com.sherpasteven.sscte.counterindex", 0);
-            isCounter = true;
-        }
+    public void setPosition(int pos) {
+        this.position = pos;
+    }
 
-
-        TradeComposer.getTradeComposer().getComponents().addView(this);
-
+    public void setCounter(boolean counter) {
+        this.isCounter = counter;
     }
 
     public int getPosition() {

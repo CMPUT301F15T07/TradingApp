@@ -77,6 +77,14 @@
         </activity>
         <activity android:name=".ViewTradeActivity" >
         </activity>
+        <activity
+            android:name=".FriendInventoryActivity"
+            android:label="@string/title_activity_friend_inventory"
+            android:parentActivityName=".ViewFriendActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sherpasteven.sscte.ViewFriendActivity" />
+        </activity>
     </application>
 
 </manifest>

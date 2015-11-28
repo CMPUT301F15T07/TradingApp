@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Friends;
 import com.sherpasteven.sscte.Models.ISerializer;
@@ -52,15 +53,13 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
                 .setTitle("Delete")
                 .setMessage("Are you sure you want to delete Friend?")
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Friend friend = view.getFriend();
-                        Profile profile = view.getProfile();
-                        view.finish();
+                        Profile profile = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext());
                         profile.getUser().removeFriend(friend);
                         setLocalProfile(profile);
+                        view.finish();
                     }
-
                 })
 
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

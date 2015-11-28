@@ -17,6 +17,8 @@ import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 
+import java.util.ArrayList;
+
 /**
  * Controller for AddCardActivity.
  */
@@ -69,16 +71,23 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
                 }
                 User owner = model.getUser();
                 Bitmap cardimage = null;
+                ArrayList<Image> cardImages = new ArrayList<Image>();
                 if(view.getImageViewCard().getTag().equals("Changed")) {
-                    cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
+                    for(Bitmap bmp: view.getCardImages()) {
+                        //cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
+                        cardImages.add(new Image(bmp));
+                    }
                 }
-                else { cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);}
+                else {
+                    cardimage = BitmapFactory.decodeResource(view.getResources(), R.drawable.img_no_img);
+                    cardImages.add(new Image(cardimage));
+                }
                     Toast.makeText(view, "Submitted a card...",
                         Toast.LENGTH_SHORT).show();
-                Card card = new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner);
+                Card card = new Card(name, quantity, quality, catagory, series, tradable, comments, cardImages, owner);
                 model.getUser().addInventoryItem(card);
                 //model.getUser().addInventoryItem(new Card(name, new Image(cardimage), quantity, quality, catagory, series, tradable, comments, owner));
-                    cardimage.recycle();
+                    //cardimage.recycle();
                     cardimage = null;
 
                 profileSerializer.Serialize(model, view);
@@ -93,6 +102,14 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
             public void onClick(View v) {
                 view.loadImage();
 
+            }
+        });
+
+        Button addmedia = (Button) view.findViewById(R.id.addmoreimages);
+        addmedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                view.loadImage();
             }
         });
 

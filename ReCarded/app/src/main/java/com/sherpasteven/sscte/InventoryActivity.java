@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
@@ -85,11 +87,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        /*
+
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
         }
-        */
+
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs,currentuser);
@@ -114,19 +116,8 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
         tabs.setViewPager(pager);
 
     }
-    /*
-    public Button getAddButton(){
-        return (Button) findViewById(R.id.btnAddItem);
-    }
 
-    public Button getViewButton(){
-        return (Button) findViewById(R.id.btnViewItem);
-    }
 
-    public Button getEditButton(){
-        return (Button) findViewById(R.id.btnEditItem);
-    }
-    */
 
     /**
      * Changes the toolbar color on the main page.
@@ -201,7 +192,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
     public void Update(Model model) {
         if (model instanceof ProfileSynchronizer) {
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
-            profileSynchronizer.UpdateFriends();
+            profileSynchronizer.UpdateProfile();
         }
+    }
+
+    public ImageButton getAddButton() {
+        return (ImageButton)findViewById(R.id.btnAddItem);
     }
 }

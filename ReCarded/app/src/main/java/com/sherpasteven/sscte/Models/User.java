@@ -77,6 +77,7 @@ public class User extends Model {
 
     public void removeFriend(Friend friend){
         this.friends.remove(friend);
+        notifyViews();
     }
 
     public void setFriends(ArrayList<Friend> friends) {

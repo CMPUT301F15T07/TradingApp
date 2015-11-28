@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Develops a tradelog, similar to an arraylist of trades.
@@ -58,6 +59,20 @@ public class TradeLog extends Model {
 
     public void setPastTrades(ArrayList<Trade> pastTrades) {
         this.pastTrades = pastTrades;
+    }
+
+    public Trade getTrade(UUID id){
+        for (Trade trade : pendingTrades) {
+            if (trade.getId().equals(id)) {
+                return trade;
+            }
+        }
+        for (Trade trade : pastTrades) {
+            if (trade.getId().equals(id)) {
+                return trade;
+            }
+        }
+        return null;
     }
 
     /**
