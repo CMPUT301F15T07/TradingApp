@@ -71,6 +71,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
                     User user = profile.getUser();
                     if(!user.getFriends().contains(friendsList.get(getPosition()))) {
                         user.addFriend(friendsList.get(getPosition()));
+                        profileSerializer.Serialize(profile,view.getContext());
 
                         //profileSerializer.Serialize(profile, view.getContext());
 
