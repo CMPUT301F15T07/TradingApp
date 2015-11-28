@@ -18,6 +18,7 @@
         android:nestedScrollingEnabled="true">
 
 
+
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="215dp"
@@ -72,6 +73,32 @@
             android:layout_below="@+id/txtStatus"
             android:layout_alignStart="@+id/txtStatus" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@id/mediaText"
+            android:layout_below="@+id/greyRect"
+            android:background="@drawable/curved_rect"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="310dp"
+                android:layout_height="match_parent"
+                android:clipToPadding="true"
+                android:numColumns="3"
+                android:paddingBottom="9dp"
+                android:paddingTop="3dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:paddingEnd="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +109,7 @@
             android:textStyle="bold"
             android:textSize="12dp"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/greyRect"
+            android:layout_below="@+id/mediaText"
             android:layout_alignStart="@+id/txtStatus" />
 
         <TextView

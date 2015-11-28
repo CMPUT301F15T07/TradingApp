@@ -77,7 +77,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="92dp"
+            android:layout_height="70dp"
             android:id="@id/mediaText"
             android:layout_below="@+id/card_image"
             android:background="@drawable/add_media_bar"
@@ -92,10 +92,10 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="true"
                 android:numColumns="3"
-                android:paddingBottom="10dp"
-                android:paddingTop="5dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="0dp"
+                android:paddingBottom="9dp"
+                android:paddingTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="6dp"
                 android:paddingEnd="0dp"
                 android:layout_weight="9"/>
 

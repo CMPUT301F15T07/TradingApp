@@ -16,8 +16,8 @@
         android:elevation="3dp">
 
         <RelativeLayout
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="3dp"
             android:scrollIndicators="top">
 

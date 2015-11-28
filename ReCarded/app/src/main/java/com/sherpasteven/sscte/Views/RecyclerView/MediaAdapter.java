@@ -44,6 +44,8 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
     List<Bitmap> images;
     static View view;
     static AddCardActivity addCardActivity;
+    static ViewCardActivity viewCardActivity;
+    static String fromwhere;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -59,9 +61,16 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(fromwhere.equals("Add")) {
 
-                   ImageView image = addCardActivity.getImageViewCard();
-                    image.setImageBitmap(addCardActivity.getCardImages().get(getPosition()));
+                        ImageView image = addCardActivity.getImageViewCard();
+                        image.setImageBitmap(addCardActivity.getCardImages().get(getPosition()));
+                    }
+
+                    else if(fromwhere.equals("View")){
+                        ImageView image = viewCardActivity.getImageCard();
+                        image.setImageBitmap(viewCardActivity.getCardImages().get(getPosition()));
+                    }
 
                 }
             });
@@ -86,6 +95,13 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
     public MediaAdapter(List<Bitmap> images, AddCardActivity addCardActivity){
         this.images = images;
         this.addCardActivity = addCardActivity;
+        this.fromwhere = "Add";
+    }
+
+    public MediaAdapter(List<Bitmap> images, ViewCardActivity viewCardActivity){
+        this.images = images;
+        this.viewCardActivity = viewCardActivity;
+        this.fromwhere = "View";
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
