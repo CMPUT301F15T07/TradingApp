@@ -17,12 +17,7 @@ public class FriendSynchronizer {
      * an updated friends source
      * @param allProfiles updated friends to pull from
      */
-<<<<<<< Updated upstream
     public void SynchronizeFriends(Friends allProfiles){
-=======
-    public void SynchronizeFriends(Profiles allProfiles){
-        /*
->>>>>>> Stashed changes
         User localUser = localProfile.getUser();
         List<Friend> unsynchronizedFriends = localUser.getFriends();
 
@@ -37,6 +32,5 @@ public class FriendSynchronizer {
                 unsynchronizedFriends.add(i, newfriend);
             }
         }
-        */
     }
 }

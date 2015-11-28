@@ -159,10 +159,6 @@ public class FriendsTab extends Fragment implements IView<Model> {
         currentUser.addFriend(new User("test10", "location10", "email10", this.getContext()));
         currentUser.addFriend(new User("test11", "location11", "email11", this.getContext()));
         */
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     }
 
 
