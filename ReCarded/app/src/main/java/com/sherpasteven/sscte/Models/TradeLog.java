@@ -38,6 +38,11 @@ public class TradeLog extends Model {
         notifyViews();
     }
 
+    public void addCounterOfferTrade(Trade original, Trade counter) {
+        this.getPendingTrades().remove(original);
+        this.getPendingTrades().add(counter);
+    }
+
     public ArrayList<Trade> getPendingTrades() {
         return pendingTrades;
     }
@@ -45,6 +50,7 @@ public class TradeLog extends Model {
     public void setPendingTrades(ArrayList<Trade> pendingTrades) {
         this.pendingTrades = pendingTrades;
     }
+
 
     public ArrayList<Trade> getPastTrades() {
         return pastTrades;

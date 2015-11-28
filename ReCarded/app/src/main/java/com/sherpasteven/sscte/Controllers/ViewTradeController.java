@@ -12,6 +12,7 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
+import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.ViewTradeActivity;
 
 
@@ -22,10 +23,11 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
 
     private final ViewTradeActivity view;
     private final Trade model;
+    private final TradeLog tradelog;
 
-    ImageButton addUser;
-    ImageButton addOther;
-    Button submit;
+    Button acceptButton;
+    Button declineButton;
+    Button counterofferButton;
 
     private LocalProfileSerializer profileSerializer = new LocalProfileSerializer();
 
@@ -39,10 +41,48 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
         super(view, model);
         this.view = view;
         this.model = model;
+        this.tradelog = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext()).getUser().getTrades();
     }
 
     @Override
     protected void setListeners(final ViewTradeActivity view) {
+
+        acceptButton = view.getAcceptButton();
+        declineButton = view.getDeclineButton();
+        counterofferButton = view.getCounterOfferButton();
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.setStatus("ACCEPTED");
+                tradelog.tradeFinalized(model);
+            }
+        });
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                model.setStatus("DECLINED");
+                tradelog.tradeFinalized(model);
+            }
+        });
+        counterofferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trade countertrade = model.counterOffer();
+                // removes from pending trades for counteroffer
+                tradelog.getPendingTrades().remove(model);
+                //tradelog.addCounterOfferTrade(model, countertrade);
+                TradeComposer.getTradeComposer().getComponents().setOwner(countertrade.getOwner());
+                TradeComposer.getTradeComposer().getComponents().setBorrower(countertrade.getBorrower());
+                TradeComposer.getTradeComposer().getComponents().setOwnerList(countertrade.getOwnerList());
+                TradeComposer.getTradeComposer().getComponents().setBorrowList(countertrade.getBorrowList());
+                int position = tradelog.getPendingTrades().indexOf(model);
+                Intent intent = new Intent(v.getContext(), AddTradeActivity.class);
+                intent.getIntExtra("com.sherpasteven.sscte.counterindex", position);
+                v.getContext().startActivity(intent);
+            }
+        });
+
         /*
         addUser = view.getItemUserBtn();
         addOther = view.getItemFriendBtn();
