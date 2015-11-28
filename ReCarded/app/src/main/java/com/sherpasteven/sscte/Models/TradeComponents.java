@@ -12,7 +12,7 @@ public class TradeComponents extends Model {
 
 
     private User borrower;
-    private User owner;
+    private Friend owner;
     private ArrayList<Card> borrowlist;
     private ArrayList<Card> ownerlist;
 
@@ -73,11 +73,11 @@ public void addToBorrower(Card card){
         notifyViews();
     }
 
-    public User getOwner() {
+    public Friend getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Friend owner) {
         this.owner = owner;
         notifyViews();
     }

@@ -8,7 +8,7 @@ import java.util.Calendar;
  */
 public class Trade extends Model {
     private transient User borrower;
-    private User owner;
+    private Friend owner;
 
     //FIXME: Making this public to make tests correct, return to private
     private ArrayList<Card> borrowlist;
@@ -18,7 +18,7 @@ public class Trade extends Model {
     private Calendar accepted;
     private String status;
 
-    public Trade(User borrower, User owner) {
+    public Trade(User borrower, Friend owner) {
         setBorrower(borrower);
         setOwner(owner);
         setOwnerList(new ArrayList<Card>());
@@ -52,11 +52,11 @@ public class Trade extends Model {
         this.borrower = borrower;
     }
 
-    public User getOwner() {
+    public Friend getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Friend owner) {
         this.owner = owner;
     }
 
@@ -127,7 +127,7 @@ public class Trade extends Model {
      */
     public Trade counterOffer(){
         this.setStatus("DECLINED");
-        Trade counter = new Trade(this.getOwner(), this.getBorrower());
+        Trade counter = new Trade(this.getBorrower(), this.getOwner());
         for(Card cards: this.getOwnerList()) {
             counter.addBorrowList(cards);
         }

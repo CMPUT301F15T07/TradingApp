@@ -22,8 +22,8 @@ import com.sherpasteven.sscte.ViewTradeActivity;
 public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
 
     private final ViewTradeActivity view;
-    private final Trade model;
-    private final TradeLog tradelog;
+    private Trade model;
+    private TradeLog tradelog;
 
     Button acceptButton;
     Button declineButton;
@@ -56,6 +56,8 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
             public void onClick(View v) {
                 model.setStatus("ACCEPTED");
                 tradelog.tradeFinalized(model);
+                model.notifyViews();
+                view.finish();
             }
         });
         declineButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +65,8 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
             public void onClick(View v) {
                 model.setStatus("DECLINED");
                 tradelog.tradeFinalized(model);
+                model.notifyViews();
+                view.finish();
             }
         });
         counterofferButton.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +82,9 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 TradeComposer.getTradeComposer().getComponents().setBorrowList(countertrade.getBorrowList());
                 int position = tradelog.getPendingTrades().indexOf(model);
                 Intent intent = new Intent(v.getContext(), AddTradeActivity.class);
-                intent.getIntExtra("com.sherpasteven.sscte.counterindex", position);
+                intent.putExtra("com.sherpasteven.sscte.counterindex", position);
+                model.notifyViews();
+                view.finish();
                 v.getContext().startActivity(intent);
             }
         });
