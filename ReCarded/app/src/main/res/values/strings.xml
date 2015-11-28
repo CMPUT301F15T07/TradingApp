@@ -32,4 +32,6 @@
         <item>Shrek Trading Cards</item>
         <item>MISC</item>
     </string-array>
+    <string name="title_activity_friend_inventory">FriendInventoryActivity</string>
+    <string name="action_inventory">View Inventory</string>
 </resources>
