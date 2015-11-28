@@ -201,7 +201,7 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
     public void Update(Model model) {
         if (model instanceof ProfileSynchronizer) {
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
-            profileSynchronizer.UpdateFriends();
+            profileSynchronizer.UpdateProfile();
         }
     }
 }
