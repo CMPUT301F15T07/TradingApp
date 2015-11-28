@@ -1,8 +1,12 @@
 package com.sherpasteven.sscte;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +18,15 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.IDeSerializer;
+import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
+import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
+
+import java.util.ArrayList;
 
 public class ViewCardActivity extends AppCompatActivity implements IView<Model> {
 
@@ -29,6 +37,23 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     private Profile profile;
     int menuselector;
     private Friend friend;
+
+    private static final String TAG = "RecyclerViewFragment";
+    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+    protected LayoutManagerType mCurrentLayoutManagerType;
+
+    private enum LayoutManagerType {
+        GRID_LAYOUT_MANAGER,
+        LINEAR_LAYOUT_MANAGER
+    }
+
+
+    protected RecyclerView mRecyclerView;
+    protected MediaAdapter mAdapter;
+    protected RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Bitmap> cardimages;
+
+
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
@@ -62,6 +87,26 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         } else{
             setCard(getProfile().getUser().getInventoryItem(getPosition()));
         }
+
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
+
+        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
+        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
+        // elements are laid out.
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+
+        if (savedInstanceState != null) {
+            // Restore saved layout manager type.
+            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
+                    .getSerializable(KEY_LAYOUT_MANAGER);
+        }
+
+        setCardImages( createCardImageBitmaps());
+        setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
+        mAdapter = new MediaAdapter(getCardImages(), this);
+        mRecyclerView.setAdapter(mAdapter);
 
         getCard().addView(this);
 
@@ -147,6 +192,13 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         return deSerializer.Deserialize(null, this);
     }
 
+    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
+
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+    }
+
     public ImageView getImageCard(){
         return (ImageView) findViewById(R.id.greyRect);
     }
@@ -186,4 +238,20 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         this.card = card;
     }
 
+    public ArrayList<Bitmap> getCardImages(){
+        return this.cardimages;
+    }
+
+    public void setCardImages(ArrayList<Bitmap> bmps){
+        this.cardimages = bmps;
+    }
+
+    public ArrayList<Bitmap> createCardImageBitmaps(){
+        ArrayList<Bitmap> bmps = new ArrayList<>();
+        for(Image image: getCard().getImages()){
+            bmps.add(image.constructImage());
+        }
+
+        return bmps;
+    }
 }
