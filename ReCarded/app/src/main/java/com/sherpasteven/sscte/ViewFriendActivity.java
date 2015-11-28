@@ -24,6 +24,7 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
 
     ArrayList<Friend> listOfFriends;
     Friend friend;
+    int position;
 
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
@@ -34,7 +35,7 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         setContentView(R.layout.activity_view_friend);
 
         Intent intent = getIntent();
-        int position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
+        position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
         listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
         friend = listOfFriends.get(position);
         retrieveUserInfo(friend);
@@ -87,6 +88,7 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_inventory) {
             Intent intent1 = new Intent(this, FriendInventoryActivity.class);
+            intent1.putExtra("com.sherpasteven.sscte.friend_inventory", position);
             this.startActivity(intent1);
         }
 
