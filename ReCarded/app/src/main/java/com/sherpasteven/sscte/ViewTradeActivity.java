@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -130,21 +131,21 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
                         CurrentProfile.getCurrentProfile().getProfile(this).getProfileId()))) {
                     // if you are the borrower, you can only decline -- change color of other trade buttons
                     acceptButton.setBackgroundResource(R.drawable.trade_options_top_grey);
-                    acceptButton.setTextColor(989898);
+                    acceptButton.setTextColor(Color.parseColor("#484848"));
                     acceptButton.setClickable(false);
                     counterofferButton.setBackgroundResource(R.drawable.trade_options_bot_grey);
-                    counterofferButton.setTextColor(989898);
+                    counterofferButton.setTextColor(Color.parseColor("#484848"));
                     counterofferButton.setClickable(false);
                 }
             } else if (trade.getStatus().equals("DECLINED") || trade.getStatus().equals("ACCEPTED")) {
                     acceptButton.setBackgroundResource(R.drawable.trade_options_top);
                     acceptButton.setClickable(false);
-                    acceptButton.setTextColor(989898);
+                    acceptButton.setTextColor(Color.parseColor("#484848"));
                     declineButton.setBackgroundResource(R.drawable.trade_options_mid);
                     declineButton.setClickable(false);
-                    declineButton.setTextColor(989898);
+                    declineButton.setTextColor(Color.parseColor("#484848"));
                     counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
-                    counterofferButton.setTextColor(989898);
+                    counterofferButton.setTextColor(Color.parseColor("#484848"));
                     counterofferButton.setClickable(false);
             }
         }
