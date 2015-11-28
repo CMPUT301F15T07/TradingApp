@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.sherpasteven.sscte.Controllers.ViewCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.IDeSerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
@@ -27,7 +28,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     private Integer position;
     private Profile profile;
     int menuselector;
-
+    private Friend friend;
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
@@ -52,7 +53,13 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
             } else {
                 setCard(getProfile().getUser().getTrades().getPendingTrades().get(tradelistpos).getBorrowList().get(position));
             }
-        } else {
+        } else if(intent.hasExtra("com.sherpasteven.sscte.friendscard")){
+            friend = getProfile().getUser().getFriends().get(intent.getIntExtra("com.sherpasteven.sscte.friendscard",0));
+            setCard(friend.getInventoryItem(getPosition()));
+            setTitle("View Card - " + card.getName());
+            menuselector = 1;
+            invalidateOptionsMenu();
+        } else{
             setCard(getProfile().getUser().getInventoryItem(getPosition()));
         }
 
