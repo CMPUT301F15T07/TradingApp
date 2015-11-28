@@ -3,13 +3,17 @@ package com.sherpasteven.sscte;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Controllers.ViewFriendController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 
 import java.util.ArrayList;
@@ -26,6 +30,11 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
     Friend friend;
     int position;
 
+    private ViewFriendController viewfriendcontroller;
+
+    ImageButton removeFriends;
+    private Profile profile;
+
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
@@ -33,6 +42,10 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friend);
+
+        viewfriendcontroller = new ViewFriendController(this, friend);
+
+
 
         Intent intent = getIntent();
         position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
@@ -61,11 +74,15 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         }
     }
 
-    /**
-     * Generates hamburger menu options.
-     * @param menu Menu item to be created.
-     * @return true
-     */
+    public ImageButton getDeclineButton() {
+        return (ImageButton) findViewById(R.id.btnDeleteFriend);
+
+        /**
+         * Generates hamburger menu options.
+         * @param menu Menu item to be created.
+         * @return true
+         */
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -93,6 +110,14 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 
     @Override

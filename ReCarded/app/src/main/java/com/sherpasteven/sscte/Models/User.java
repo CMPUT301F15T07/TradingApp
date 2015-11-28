@@ -76,7 +76,13 @@ public class User extends Model {
 
 
     public void removeFriend(Friend friend){
-        this.friends.remove(friend);
+        for(Friend f:friends){
+            if(f.getName().equals(friend.getName()) && f.getLocation().equals(friend.getLocation()) && f.getEmail().equals(friend.getEmail())){
+                this.friends.remove(f);
+            }
+        }
+        //this.friends.remove(friend);
+        notifyViews();
     }
 
     public void setFriends(ArrayList<Friend> friends) {
