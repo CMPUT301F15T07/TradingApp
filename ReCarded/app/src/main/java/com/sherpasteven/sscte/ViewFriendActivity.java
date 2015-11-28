@@ -3,11 +3,15 @@ package com.sherpasteven.sscte;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Controllers.ViewFriendController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 
 import java.util.ArrayList;
@@ -23,6 +27,11 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
     ArrayList<Friend> listOfFriends;
     Friend friend;
 
+    private ViewFriendController viewfriendcontroller;
+
+    ImageButton removeFriends;
+    private Profile profile;
+
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
@@ -30,6 +39,8 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friend);
+
+        viewfriendcontroller = new ViewFriendController(this, friend);
 
         Intent intent = getIntent();
         int position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
@@ -58,8 +69,20 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         }
     }
 
+    public ImageButton getDeclineButton() {
+        return (ImageButton) findViewById(R.id.btnDeleteFriend);
+    }
+
     @Override
     public void Update(Model model) {
 
+    }
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 }
