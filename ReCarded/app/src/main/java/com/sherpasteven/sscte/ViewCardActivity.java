@@ -126,6 +126,9 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         if (menuselector == 0) {
             getMenuInflater().inflate(R.menu.menu_view_card, menu);
         }
+        if(menuselector == 1){
+            getMenuInflater().inflate(R.menu.menu_view_friend_card, menu);
+        }
         return true;
     }
 

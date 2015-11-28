@@ -10,6 +10,7 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SettingsActivity;
 import com.sherpasteven.sscte.ViewCardActivity;
@@ -46,6 +47,9 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
         } else if (id == R.id.delete_card) {
             AlertDialog confirmDel = ConfirmDelete();
             confirmDel.show();
+        } else if (id == R.id.clone_card){
+            AlertDialog confirmclone = ConfirmClone();
+            confirmclone.show();
         }
 
     }
@@ -80,8 +84,37 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
                 .create();
         return myQuittingDialogBox;
 
-    }
 
+    }
+    private AlertDialog ConfirmClone()
+    {
+        AlertDialog myCloningDialogBox =new AlertDialog.Builder(view)
+                //set message, title, and icon
+                .setTitle("Clone")
+                .setMessage("Add a copy of this card to your inventory?")
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Card card = view.getCard();
+                        Profile profile = CurrentProfile.getCurrentProfile().getProfile(view);
+                        view.finish();
+                        profile.getUser().getInventory().addCard(card);
+                        setLocalProfile(profile);
+
+                    }
+
+                })
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return myCloningDialogBox;
+
+
+    }
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, view);
