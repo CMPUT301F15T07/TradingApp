@@ -77,9 +77,12 @@ public class TradesTab extends Fragment implements IView<Model> {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.trades_tab,container,false);
-
+        hostActivity = (AppCompatActivity) rootView.getContext();
         inflate_view = rootView;
         trades.addView(this);
+
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        profileSynchronizer.addView(this);
 
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
@@ -104,7 +107,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         mAdapter = new TradeAdapter(tradelist);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
-        hostActivity = (AppCompatActivity) rootView.getContext();
+
         return rootView;
     }
 
@@ -137,6 +140,8 @@ public class TradesTab extends Fragment implements IView<Model> {
     @Override
     public void onResume() {
         super.onResume();
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        profileSynchronizer.SynchronizeProfile();
         if(TradeComposer.getTradeComposer().getComponents() != null){
             TradeComposer.getTradeComposer().getComponents().getViews().clear();
             TradeComposer.getTradeComposer().resetComponents();
