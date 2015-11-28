@@ -77,7 +77,9 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
 
         //setUser(CurrentProfile.getCurrentProfile().getProfile(this).getUser());
         //trade = new Trade(user, friend);
+        //this crashes
         trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
+
         viewtradecontroller = new ViewTradeController(this, trade);
 
         if (savedInstanceState != null) {
@@ -89,8 +91,6 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
         /**
          * FIXME: Only gets pending trades at the moment.
          */
-
-        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
 
         mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
         mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);

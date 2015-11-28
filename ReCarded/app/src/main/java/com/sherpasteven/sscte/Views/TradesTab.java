@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import com.sherpasteven.sscte.EditTradeActivity;
 import com.sherpasteven.sscte.FriendListActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
@@ -58,14 +61,11 @@ public class TradesTab extends Fragment implements IView<Model> {
     protected TradeAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
+    protected AppCompatActivity hostActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Initialize dataset, this data would usually come from a local content provider or
-        // remote server.
-        // initializeData();
         dynamicLoad();
     }
 
@@ -77,9 +77,12 @@ public class TradesTab extends Fragment implements IView<Model> {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.trades_tab,container,false);
-
+        hostActivity = (AppCompatActivity) rootView.getContext();
         inflate_view = rootView;
         trades.addView(this);
+
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        profileSynchronizer.addView(this);
 
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
@@ -110,6 +113,11 @@ public class TradesTab extends Fragment implements IView<Model> {
 
     @Override
     public void Update(Model model) {
+        if (model instanceof ProfileSynchronizer) {
+            ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+            profileSynchronizer.UpdateProfile();
+            dynamicLoad();
+        }
         mAdapter.notifyDataSetChanged();
     }
 
@@ -132,6 +140,8 @@ public class TradesTab extends Fragment implements IView<Model> {
     @Override
     public void onResume() {
         super.onResume();
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        profileSynchronizer.SynchronizeProfile();
         if(TradeComposer.getTradeComposer().getComponents() != null){
             TradeComposer.getTradeComposer().getComponents().getViews().clear();
             TradeComposer.getTradeComposer().resetComponents();
@@ -162,28 +172,4 @@ public class TradesTab extends Fragment implements IView<Model> {
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
-
-    /** Initialises data for trades tab given trade objects.
-     * Completed with respect to tradelist object.
-     * FIXME: Change system for dynamic trade list loading.
-     * FIXME: Implement tradelist as user-relevant trade list structure.
-     */
-    /*
-    private void initializeData() {
-        tradelist = new ArrayList<>();
-        Context context = this.getContext();
-        tradelist.add(new Trade(new User("borrower1", "location", "email1", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower2", "location", "email2", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower3", "location", "email3", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower4", "location", "email4", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower5", "location", "email5", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower6", "location", "email6", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower7", "location", "email7", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower8", "location", "email8", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower9", "location", "email9", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower10", "location", "email10", context), new User("owner1", "location", "email1", context)));
-        tradelist.add(new Trade(new User("borrower11", "location", "email11", context), new User("owner1", "location", "email1", context)));
-
-    }*/
-
 }

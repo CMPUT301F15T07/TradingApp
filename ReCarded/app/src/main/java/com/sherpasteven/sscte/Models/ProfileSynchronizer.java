@@ -15,11 +15,13 @@ public class ProfileSynchronizer extends Model implements IView<Model> {
     private Profile localProfile;
     private AppCompatActivity activity;
     private FriendSynchronizer friendSynchronizer;
+    private TradeSynchronizer tradeSynchronizer;
 
     public ProfileSynchronizer(Profile profile){
         this.localProfile = profile;
         elasticSearch = new ElasticSearch();
         friendSynchronizer = new FriendSynchronizer(profile);
+        tradeSynchronizer = new TradeSynchronizer(profile);
         elasticSearch.addView(this);
     }
 
@@ -58,10 +60,23 @@ public class ProfileSynchronizer extends Model implements IView<Model> {
         }
     }
 
-    public void UpdateFriends(){
+    public void UpdateProfile() {
+        UpdateFriends();
+        UpdateTrades();
+    }
+
+    private void UpdateFriends(){
         try {
             friendSynchronizer.SynchronizeFriends(cloudFriends);
         } catch (RuntimeException ex){
+            throw ex;
+        }
+    }
+
+    private void UpdateTrades() {
+        try {
+            tradeSynchronizer.SynchronizeTrades();
+        } catch (RuntimeException ex) {
             throw ex;
         }
     }

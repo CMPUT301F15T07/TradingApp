@@ -80,8 +80,8 @@
             android:layout_height="70dp"
             android:id="@id/mediaText"
             android:layout_below="@+id/card_image"
-            android:background="@drawable/add_media_bar"
-            android:layout_marginTop="30dp"
+            android:background="@drawable/input_image_bar"
+            android:layout_marginTop="35dp"
             android:orientation="horizontal">
 
 
@@ -95,16 +95,15 @@
                 android:paddingBottom="9dp"
                 android:paddingTop="3dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="10dp"
                 android:paddingEnd="0dp"
                 android:layout_weight="9"/>
 
             <Button
-                android:layout_width="40dp"
+                android:layout_width="49dp"
                 android:layout_height="match_parent"
                 android:background="#0000"
-                android:id="@+id/addmoreimages"
-                android:layout_weight="1"/>
+                android:id="@+id/addmoreimages" />
 
         </LinearLayout>
 
