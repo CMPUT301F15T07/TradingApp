@@ -180,4 +180,25 @@ public class User extends Model {
     public void setProfileID(ProfileId id){
         this.profileId = id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+        final User other = (User) o;
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if ((this.location == null) ? (other.location != null) : !this.location.equals(other.location)) {
+            return false;
+        }
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        return true;
+    }
 }

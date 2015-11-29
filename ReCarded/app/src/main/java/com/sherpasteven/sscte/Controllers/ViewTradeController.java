@@ -8,14 +8,19 @@ import android.widget.Toast;
 
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
+import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
+import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.ViewTradeActivity;
+
+import java.util.ArrayList;
 
 
 /**
@@ -27,8 +32,11 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
     private Trade model;
     private TradeLog tradelog;
 
+    private Profile profile;
     private User owner;
     private User borrower;
+    private ArrayList<Card> newborrowlist;
+    private ArrayList<Card> newownerlist;
 
     Button acceptButton;
     Button declineButton;
@@ -59,6 +67,31 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                owner = model.getOwner();
+                borrower = model.getBorrower();
+                profile = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext());
+
+                newownerlist = model.getOwnerList();
+                newborrowlist = model.getBorrowList();
+
+                if(borrower.equals(profile.getUser())){
+                    for(Card bc: newborrowlist){
+                        borrower.getInventory().removeCard(bc, bc.getQuantity());
+                    }
+                    for(Card oc: newownerlist){
+                        borrower.getInventory().addCard(oc);
+                    }
+                    profile.setUser(borrower);
+                } else {
+                    for(Card bc: newborrowlist){
+                        owner.getInventory().addCard(bc);
+                    }
+                    for(Card oc: newownerlist){
+                        owner.getInventory().removeCard(oc, oc.getQuantity());
+                    }
+                    profile.setUser(owner);
+                }
+                setLocalProfile(profile);
                 model.setStatus("ACCEPTED");
                 tradelog.tradeFinalized(model);
                 model.notifyViews();
@@ -99,5 +132,10 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 v.getContext().startActivity(intent);
             }
         });
+    }
+
+    private void setLocalProfile(Profile profile) {
+        ISerializer<Profile> serializer = new LocalProfileSerializer();
+        serializer.Serialize(profile, view);
     }
 }
