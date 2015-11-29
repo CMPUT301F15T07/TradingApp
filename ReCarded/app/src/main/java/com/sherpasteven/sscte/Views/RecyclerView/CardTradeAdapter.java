@@ -196,11 +196,13 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
         myQuittingDialogBox.setPositiveButton("Trade", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
-                tradeCard.setQuantity((deletequantity));
+                Card pendingCard = new Card(tradeCard);
+                pendingCard.setQuantity((deletequantity));
+                tradeCard.setQuantity(tradeCard.getQuantity()-deletequantity);
                 if(userState) {
-                    TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
+                    TradeComposer.getTradeComposer().getComponents().addToBorrower(pendingCard);
                 } else {
-                    TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
+                    TradeComposer.getTradeComposer().getComponents().addToOwner(pendingCard);
                 }
                 Toast.makeText(view.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
                 cta.finish();
