@@ -90,7 +90,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
             menuselector = 1;
             invalidateOptionsMenu();
         } else{
-            
+
             setCard(getProfile().getUser().getInventoryItem(getPosition()));
         }
 

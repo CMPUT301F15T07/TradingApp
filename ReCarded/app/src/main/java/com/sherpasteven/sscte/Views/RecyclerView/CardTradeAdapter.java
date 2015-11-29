@@ -64,17 +64,20 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                                 }
                                 else {
                                     Toast.makeText(v.getContext(), "Card is already in your trade list.", Toast.LENGTH_SHORT).show();
+                                    cta.finish();
                                 }
                             }
 
                             else {
                                 Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+                                cta.finish();
 
                             }
                         } else {
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                            cta.finish();
                         }
-                        cta.finish();
+
                     } else { // FIXME: Demo until friend's cards can be pulled
                         tradeCard = cardList.get(getPosition());
                         if (tradeCard != null) {
@@ -87,15 +90,18 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                                 }
                                 else {
                                     Toast.makeText(v.getContext(), "Card is already in their trade list", Toast.LENGTH_SHORT).show();
+                                    cta.finish();
                                 }
                             }
                             else {
                                 Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+                                cta.finish();
                             }
                         } else {
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                            cta.finish();
                         }
-                        cta.finish();
+
                     }
 
                     /*
@@ -178,7 +184,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
         AlertDialog.Builder myQuittingDialogBox =new AlertDialog.Builder(view.getContext());
 
-        myQuittingDialogBox.setTitle("Delete selected quantity?");
+        myQuittingDialogBox.setTitle("How many would you like to trade?");
         //myQuittingDialogBox.setMessage("Are you sure you want to delete all copies of this card?");
         myQuittingDialogBox.setSingleChoiceItems(getQuantityList(), -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
@@ -187,7 +193,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
             }
         });
-        myQuittingDialogBox.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+        myQuittingDialogBox.setPositiveButton("Trade", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
                 tradeCard.setQuantity((deletequantity));
