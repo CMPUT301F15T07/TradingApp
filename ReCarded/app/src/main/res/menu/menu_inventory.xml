@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sherpasteven.sscte.InventoryActivity">
     <item android:id="@+id/search"
-        android:title="search_title"
+        android:title="search"
         android:icon="@drawable/ic_search"
         app:showAsAction="ifRoom"
-        android:actionViewClass="android.widget.SearchView"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />

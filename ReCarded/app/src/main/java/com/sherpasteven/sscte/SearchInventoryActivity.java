@@ -1,5 +1,6 @@
 package com.sherpasteven.sscte;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -42,52 +44,31 @@ public class SearchInventoryActivity extends AppCompatActivity implements IView<
     private User owner;
 
     protected RecyclerView mRecyclerView;
-    protected CardTradeAdapter mAdapter;
+    protected CardAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_trade);
-        setUser(CurrentProfile.getCurrentProfile().getProfile(this).getUser());
 
-        cardslist = new ArrayList<Card>();
-        friendslist = new ArrayList<Card>();
+        handleIntent(getIntent());
+        setTitle("Search Results");
+
+        setContentView(R.layout.activity_card_trade);
+
 
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
-
         mLayoutManager = new LinearLayoutManager(this);
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-
         if (savedInstanceState != null) {
             // Restore saved layout manager type.
             mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-
-        Intent intent = getIntent();
-        isUserList = intent.getBooleanExtra("com.sherpasteven.sscte.user", false);
-        //setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
-        //setPosition(intent.getIntExtra("com.sherpasteven.sscte.viewcard", 0));
-
-        if (isUserList) {
-            setTitle("Your Inventory");
-            cardslist = getUser().getInventory().getCards();
-            mAdapter = new CardAdapter(cardslist, true, this);
-        } else {
-            setTitle("Friend's Inventory");
-            initializeData(); // build sample data for friends, then show the friendslist
-                              // we don't have friends setup yet, so this is sample data to test...
-        }
-        setupDemo(); // setup structure for sample structure until friends comes up...
-
-        //
+        mAdapter = new CardAdapter(cardslist);
         mRecyclerView.setAdapter(mAdapter);
-        // END_INCLUDE(initializeRecyclerView)
-
-        //initializeData();
     }
 
 
@@ -155,15 +136,6 @@ public class SearchInventoryActivity extends AppCompatActivity implements IView<
     }
 
 
-    /**
-     * Generates data for friends with respect to currentUser object.
-     * FIXME: Convert for dynamic friend data loading.
-     * FIXME: Adapt currentUser structure for user-hosted profile.
-     */
-    private void initializeData() {
-        owner = TradeComposer.getTradeComposer().getComponents().getOwner();
-        friendslist = owner.getInventory().getCards();
-    }
 
     public View getView(){
         return inflate_view;
@@ -177,7 +149,30 @@ public class SearchInventoryActivity extends AppCompatActivity implements IView<
         this.user = user;
     }
 
-    public void setupDemo() {
-        // fill with additional header data if neccessary.
+
+
+    public void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query =
+                    intent.getStringExtra(SearchManager.QUERY);
+            SearchSingleton.getSearchSingleton().setSearchterm(query);
+            doSearch();
+        }
+    }
+
+    private void doSearch() {
+        cardslist = SearchSingleton.getSearchSingleton().search();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SearchSingleton.getSearchSingleton().reset();
     }
 }
