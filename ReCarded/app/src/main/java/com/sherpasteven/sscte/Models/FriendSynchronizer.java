@@ -4,7 +4,8 @@ import java.util.List;
 
 /**
  * This class is for synchronizing and updating the friends of a user
- * from an external source such as elasticsearch.
+ * from an external source such as elasticsearch. It takes updated friends
+ * and then synchronizes the local profile's friends.
  */
 public class FriendSynchronizer {
     private Profile localProfile;
@@ -14,8 +15,9 @@ public class FriendSynchronizer {
 
     /**
      * This method will update a profile's friends using
-     * an updated friends source
-     * @param allProfiles updated friends to pull from
+     * an updated friends source. This will replace friends
+     * with the same profileId.
+     * @param allProfiles updated friends
      */
     public void SynchronizeFriends(Friends allProfiles){
         User localUser = localProfile.getUser();

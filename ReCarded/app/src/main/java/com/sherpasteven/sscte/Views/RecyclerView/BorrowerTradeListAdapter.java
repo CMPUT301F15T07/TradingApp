@@ -130,7 +130,7 @@ public class BorrowerTradeListAdapter extends RecyclerView.Adapter<BorrowerTrade
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.cardName.setText(cards.get(position).getName());
-        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
+        viewHolder.cardDescription.setText(cards.get(position).getCategory());
         if (cards.get(position).getImagebyIndex(0) != null) {
             viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
         }

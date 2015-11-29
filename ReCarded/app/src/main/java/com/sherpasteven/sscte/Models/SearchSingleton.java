@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class SearchSingleton {
 
     private ArrayList<Card> inventory = null;
+    private ArrayList<Card> searched = null;
     private String searchterm = null;
     private static SearchSingleton ourInstance = new SearchSingleton();
 
@@ -22,6 +23,9 @@ public class SearchSingleton {
 
     public ArrayList<Card> getInventory(){
         return this.inventory;
+    }
+    public ArrayList<Card> getSearchedInventory(){
+        return this.searched;
     }
 
     public String getSearchterm(){
@@ -39,11 +43,12 @@ public class SearchSingleton {
     public void reset(){
         this.inventory = null;
         this.searchterm= null;
+        this.searched = null;
     }
 
     public ArrayList<Card> search(){
 
-        ArrayList<Card> searched = new ArrayList<Card>();
+        searched = new ArrayList<Card>();
 
         for(Card card: getInventory()){
             if(searcher(getSearchterm(), card)){
@@ -57,7 +62,7 @@ public class SearchSingleton {
 
     private Boolean searcher(String term, Card card){
 
-        String line = card.getCatagory() + " " + card.getName() + " " + card.getComments();
+        String line = card.getCategory() + " " + card.getName() + " " + card.getComments();
         String pattern = "(.*" + term + ".*)";
 
         Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);

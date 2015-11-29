@@ -5,7 +5,9 @@ import java.util.List;
 
 /**
  * Hits class from CMPUT 301 Lab
- * @param <T>
+ * This class is a collections of SearchHits
+ * that is returned after an http request.
+ * @param <T> Type of data source of the hit (i.e Friend)
  */
 public class Hits<T> {
     private int total;

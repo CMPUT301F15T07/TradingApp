@@ -129,7 +129,7 @@ public class InventoryTab extends Fragment implements IView<Model> {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CardAdapter(inventory.getCards());
+        mAdapter = new CardAdapter(inventory.getCards(), false);
         // Set CardAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)

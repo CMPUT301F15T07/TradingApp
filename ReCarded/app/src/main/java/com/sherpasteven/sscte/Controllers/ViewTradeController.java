@@ -13,6 +13,7 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.Email;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
@@ -98,31 +99,9 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 model.getOwner().incrementRating();
                 tradelog.tradeFinalized(model);
                 model.notifyViews();
+                Email email = new Email();
+                email.tradeEmail(model, view);
                 view.finish();
-
-                String subject = "SSCTE Trade Completed" ;
-                String body = model.getOwner().getName() + " has accepted a trade with " + model.getBorrower().getName() + ".\n" +
-                        "+=================================+\n" +
-                        " " + model.getOwner().getName() + "'s cards traded:\n";
-                for (Card card : model.getOwnerList()) {
-                    body = body + " [" + card.getQuantity() + "] " + card.getName() + "\n";
-                }
-                body = body +
-                        "+=====================+\n" +
-                        " " + model.getBorrower().getName() + "'s cards traded:\n";
-                for (Card card : model.getBorrowList()) {
-                    body = body + " [" + card.getQuantity() + "] " + card.getName() + "\n";
-                }
-                body = body +
-                        "+=================================+\n\n" +
-                        " [Add some comments for continuing trade here]";
-
-
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",model.getOwner().getEmail() + ","+model.getBorrower().getEmail(), null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                view.startActivity(Intent.createChooser(emailIntent, "Send email..."));
 
             }
         });
