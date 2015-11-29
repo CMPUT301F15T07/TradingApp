@@ -57,7 +57,7 @@ public class SearchSingleton {
 
     private Boolean searcher(String term, Card card){
 
-        String line = card.getCatagory() + " " + card.getName() + " " + card.getComments();
+        String line = card.getCategory() + " " + card.getName() + " " + card.getComments();
         String pattern = "(.*" + term + ".*)";
 
         Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
