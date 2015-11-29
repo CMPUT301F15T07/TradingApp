@@ -13,9 +13,11 @@ import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 
-
 /**
- * Created by ansonli on 2015-11-25.
+ * This controller is used with the addtradeactivity.
+ * The main functions for this controller are adding cards to
+ * the trade when the add card button is hit and also construct
+ * and submit the trade when the submit button is hit
  */
 public class AddTradeController extends Controller<AddTradeActivity, Trade> {
 
@@ -44,7 +46,14 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
     protected void setListeners(final AddTradeActivity view) {
         addUser = view.getItemUserBtn();
         addOther = view.getItemFriendBtn();
+
+
         addUser.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This starts a new cardtradeactivity when
+             * the adduser button was hit
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 // send to activity with the trade in hand.
@@ -61,6 +70,11 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
             }
         });
         addOther.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This starts a new cardtradeactivity when
+             * the addother button is hit
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(v.getContext(), CardTradeActivity.class);
@@ -73,6 +87,11 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
 
         submit = view.getSubmitButton();
         submit.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This constructs and submits the trade when
+             * the submit trade button is hit.
+             * @param v
+             */
             @Override
             public void onClick(View v){
                 Trade trade = TradeComposer.getTradeComposer().composeTrade();
@@ -88,9 +107,6 @@ public class AddTradeController extends Controller<AddTradeActivity, Trade> {
                 } else {
                     Toast.makeText(v.getContext(), "Trade failed...", Toast.LENGTH_SHORT).show();
                 }
-                /**
-                 * FIXME: Add functionality to bring to server-side here.
-                 */
             }
         });
 

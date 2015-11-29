@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sherpasteven.sscte.ViewCardActivity">
     <item android:id="@+id/clone_card"
+        android:icon="@drawable/ic_clone"
         android:title="Clone Card"
         app:showAsAction="ifRoom" />
 
