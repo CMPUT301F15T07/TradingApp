@@ -17,12 +17,11 @@ public class User extends Model {
     private String name;
     private String location;
     private String email;
+    private Integer rating;
     private Image profilepic;
     private ArrayList<Friend> friends = new ArrayList<Friend>();
     private Inventory inventory;
     public TradeLog trades;
-
-
 
     private ProfileId profileId;
 
@@ -33,6 +32,7 @@ public class User extends Model {
         this.email = email;
         this.inventory = new Inventory();
         this.trades = new TradeLog();
+        rating = 0;
         setFriends(new ArrayList<Friend>());
         setProfilePic(new Image(R.drawable.splash_page, context));
         //get id here
@@ -179,5 +179,17 @@ public class User extends Model {
 
     public void setProfileID(ProfileId id){
         this.profileId = id;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public void incrementRating() {
+        rating++;
     }
 }

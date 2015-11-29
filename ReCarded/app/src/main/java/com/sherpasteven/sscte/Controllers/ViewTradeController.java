@@ -55,6 +55,8 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
             @Override
             public void onClick(View v) {
                 model.setStatus("ACCEPTED");
+                model.getBorrower().incrementRating();
+                model.getOwner().incrementRating();
                 tradelog.tradeFinalized(model);
                 model.notifyViews();
                 view.finish();
