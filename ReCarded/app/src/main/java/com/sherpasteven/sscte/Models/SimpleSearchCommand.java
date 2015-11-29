@@ -2,6 +2,10 @@ package com.sherpasteven.sscte.Models;
 
 /**
  * SimpleSearchCommand from CMPUT 301 Lab
+ * This class is used for constructing a search
+ * command that is sent to elasticsearch. It
+ * holds the query to search and the fields to
+ * search on.
  */
 public class SimpleSearchCommand {
     private SimpleSearchQuery query;
