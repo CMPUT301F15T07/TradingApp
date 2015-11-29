@@ -44,6 +44,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
     private String[] mDataSet;
     List<Trade> trades;
     private User currentUser;
+    static int pendingCount;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -92,9 +93,10 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
      * Initialize the dataset of the Adapter.
      * @param trades List of trades initialised for loading.
      */
-    public TradeAdapter(List<Trade> trades, User currentUser){
+    public TradeAdapter(List<Trade> trades, User currentUser, int pendingCount){
         this.trades = trades;
         this.currentUser = currentUser;
+        this.pendingCount = pendingCount;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
