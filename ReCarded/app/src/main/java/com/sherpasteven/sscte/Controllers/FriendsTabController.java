@@ -29,12 +29,5 @@ public class FriendsTabController extends Controller<FriendsTab, User> {
                 view.navigateToFriend();
             }
         });
-        /*Button viewFriend = (Button) view.getView().findViewById(R.id.btnViewFriend);
-        viewFriend.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                view.navigateToView();
-            }
-        }); */
     }
 }

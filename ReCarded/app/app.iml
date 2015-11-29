@@ -106,5 +106,6 @@
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.4" level="project" />
     <orderEntry type="library" exported="" name="httpclient-4.2.1" level="project" />
+    <orderEntry type="library" exported="" name="httpclient-cache-4.2.1" level="project" />
   </component>
 </module>

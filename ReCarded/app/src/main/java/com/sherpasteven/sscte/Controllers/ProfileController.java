@@ -9,6 +9,7 @@ import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.ProfileActivity;
+import com.sherpasteven.sscte.R;
 
 /**
  * Controller for ProfileActivity.
