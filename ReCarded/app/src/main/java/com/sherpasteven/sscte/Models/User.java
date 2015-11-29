@@ -34,7 +34,7 @@ public class User extends Model {
         this.inventory = new Inventory();
         this.trades = new TradeLog();
         setFriends(new ArrayList<Friend>());
-        setProfilePic(new Image(R.drawable.grey_rectangle, context));
+        setProfilePic(new Image(R.drawable.splash_page, context));
         //get id here
         profileId = new ProfileId(context);
     }

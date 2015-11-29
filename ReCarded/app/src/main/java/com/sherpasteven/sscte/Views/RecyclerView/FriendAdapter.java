@@ -131,6 +131,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         // with that element
         viewHolder.userName.setText(currentUser.getFriends().get(position).getName());
         viewHolder.userDescription.setText(currentUser.getFriends().get(position).getLocation());
+        if (currentUser.getFriends().get(position).getProfilePic() != null) {
+            viewHolder.userPhoto.setImageBitmap(currentUser.getFriends().get(position).constructProfilePic());
+        }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 

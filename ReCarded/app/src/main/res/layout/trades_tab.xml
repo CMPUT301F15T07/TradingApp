@@ -15,16 +15,6 @@
         android:src="@drawable/ic_plus_lg"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
-        android:layout_alignEnd="@+id/btnEditTrade" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit a Trade"
-        android:id="@+id/btnEditTrade"
-        android:layout_marginRight="2dp"
-        android:fontFamily="sans-serif-light"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
