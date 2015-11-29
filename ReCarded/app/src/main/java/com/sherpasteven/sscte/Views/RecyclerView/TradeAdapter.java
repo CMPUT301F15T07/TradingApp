@@ -26,7 +26,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewTradeActivity;
 
@@ -40,6 +43,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
 
     private String[] mDataSet;
     List<Trade> trades;
+    private User currentUser;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -88,8 +92,9 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
      * Initialize the dataset of the Adapter.
      * @param trades List of trades initialised for loading.
      */
-    public TradeAdapter(List<Trade> trades){
+    public TradeAdapter(List<Trade> trades, User currentUser){
         this.trades = trades;
+        this.currentUser = currentUser;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -120,7 +125,13 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
         }
 
         Integer cardsum = trades.get(position).getOwnerList().size() + trades.get(position).getBorrowList().size();
-        viewHolder.tradeName.setText("Trade with " + trades.get(position).getOwner().getName());
+
+        //we want to print "Trade with Other User" so we need to find if they are the owner or borrower
+        if (trades.get(position).getOwner().getProfileId().equals(currentUser.getProfileId())) {
+            viewHolder.tradeName.setText("Trade with " + trades.get(position).getBorrower().getName());
+        } else {
+            viewHolder.tradeName.setText("Trade with " + trades.get(position).getOwner().getName());
+        }
         viewHolder.tradeDescription.setText(trades.get(position).getStatus() + ": " + cardsum + " cards in trade.");
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)

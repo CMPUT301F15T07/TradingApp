@@ -3,6 +3,7 @@ package com.sherpasteven.sscte.Models;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by joshua on 25/11/15.
@@ -11,10 +12,20 @@ public class TradeComponents extends Model {
 
 
 
-    private User borrower;
-    private Friend owner;
+    private Trader borrower;
+    private Trader owner;
     private ArrayList<Card> borrowlist;
     private ArrayList<Card> ownerlist;
+
+    public UUID getTradeId() {
+        return tradeId;
+    }
+
+    public void setTradeId(UUID tradeId) {
+        this.tradeId = tradeId;
+    }
+
+    private UUID tradeId;
 
     public TradeComponents()  {
 
@@ -64,20 +75,20 @@ public void addToBorrower(Card card){
     }
 
 
-    public User getBorrower() {
+    public Trader getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(User borrower) {
+    public void setBorrower(Trader borrower) {
         this.borrower = borrower;
         notifyViews();
     }
 
-    public Friend getOwner() {
+    public Trader getOwner() {
         return owner;
     }
 
-    public void setOwner(Friend owner) {
+    public void setOwner(Trader owner) {
         this.owner = owner;
         notifyViews();
     }

@@ -29,8 +29,16 @@ public class TradeComposer {
 
     public Trade composeTrade(){
         if(getComponents().isComposable()){
-            Trade trade =  new Trade(getComponents().getBorrower(),
-                    getComponents().getOwner());
+            Trade trade;
+
+            if (getComponents().getTradeId() == null) {
+                trade =  new Trade(getComponents().getBorrower(),
+                        getComponents().getOwner());
+            } else {
+                trade = new Trade(getComponents().getBorrower(),
+                        getComponents().getOwner(), getComponents().getTradeId());
+            }
+
             trade.setBorrowList(getComponents().getBorrowList());
             trade.setOwnerList(getComponents().getOwnerList());
             resetComponents();

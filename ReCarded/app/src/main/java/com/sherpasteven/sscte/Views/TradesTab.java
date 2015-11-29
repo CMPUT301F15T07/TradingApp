@@ -104,7 +104,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new TradeAdapter(tradelist);
+        mAdapter = new TradeAdapter(tradelist, CurrentProfile.getCurrentProfile().getProfile(hostActivity).getUser());
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
