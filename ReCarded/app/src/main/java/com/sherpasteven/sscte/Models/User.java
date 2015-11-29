@@ -25,6 +25,13 @@ public class User extends Model {
 
     private ProfileId profileId;
 
+    /**
+     * Used for initializing a new user
+     * @param name
+     * @param location
+     * @param email
+     * @param context
+     */
     public User(String name, String location, String email, Context context){
 
         this.name = name;
@@ -38,6 +45,30 @@ public class User extends Model {
         //get id here
         profileId = new ProfileId(context);
     }
+
+    /**
+     * used for the subclasses of user where id and profile pic are already exitant
+     * @param name
+     * @param location
+     * @param email
+     * @param profilepic
+     * @param id
+     */
+    public User(String name, String location, String email, Image profilepic, ProfileId id){
+
+        this.name = name;
+        this.location = location;
+        this.email = email;
+        this.inventory = new Inventory();
+        this.trades = new TradeLog();
+        rating = 0;
+        setFriends(new ArrayList<Friend>());
+        setProfilePic(profilepic);
+        //get id here
+        profileId = id;
+    }
+
+
 
     public String getEmail() {
         return email;
@@ -75,13 +106,16 @@ public class User extends Model {
     }
 
 
+    /**
+     * Removes a friend from a users friend list
+     * @param friend
+     */
     public void removeFriend(Friend friend){
         for(Friend f:friends){
             if(f.getName().equals(friend.getName()) && f.getLocation().equals(friend.getLocation()) && f.getEmail().equals(friend.getEmail())){
                 this.friends.remove(f);
             }
         }
-        //this.friends.remove(friend);
         notifyViews();
     }
 
@@ -114,11 +148,19 @@ public class User extends Model {
         notifyViews();
     }
 
+    /**
+     * Adds a pending trade that the user is a part of
+     * @param trade
+     */
     public void addPendingTrade(Trade trade){
         getTrades().addTrade(trade);
         notifyViews();
     }
 
+    /**
+     * Finalizes the the trade given
+     * @param trade
+     */
     public void finalizeTrade(Trade trade){
         getTrades().tradeFinalized(trade);
         notifyViews();
@@ -133,28 +175,53 @@ public class User extends Model {
         notifyViews();
     }
 
+
     public void addInventoryItem(Card card){
         getInventory().addCard(card);
         notifyViews();
     }
 
+    /**
+     * Tells if the inventory contains the card, bypassing the quantity attribute
+     * @param card
+     * @return boolean
+     */
     public Boolean hasInventoryItem(Card card){
         return getInventory().containsCard(card);
     }
 
+    /**
+     * returns a card matching the given card from the users inventory, bypassing the quantity attribute
+     * @param card
+     * @return card
+     */
     public Card returnInventoryItem(Card card){
         return getInventory().returnCard(card);
     }
 
+    /**
+     * returns the card at that index in the users invnetory
+     * @param index
+     * @return card
+     */
     public Card getInventoryItem(int index){
         return getInventory().getCard(index);
     }
 
+    /**
+     * removes the given card in amount from the users inventory
+     * @param card
+     * @param amount
+     */
     public void removeInventoryItem(Card card, int amount){
         getInventory().removeCard(card, amount);
         notifyViews();
     }
 
+    /**
+     * removes the given finzalized trade
+     * @param trade
+     */
     public void deletePastTrade(Trade trade){
         getTrades().removeFinalizedTrade(trade);
         notifyViews();

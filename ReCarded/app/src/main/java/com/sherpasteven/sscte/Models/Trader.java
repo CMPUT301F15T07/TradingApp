@@ -14,10 +14,8 @@ import android.content.Context;
 public class Trader extends User {
 
     public Trader(User user, Context context) {
-        super(user.getName(), user.getLocation(), user.getEmail(), context);
+        super(user.getName(), user.getLocation(), user.getEmail(), user.getProfilePic(), user.getProfileId());
         setInventory(user.getInventory());
-        setProfilePic(user.getProfilePic());
-        setProfileID(user.getProfileId());
         setFriends(null);
         this.trades = null;
     }

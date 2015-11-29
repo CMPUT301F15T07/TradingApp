@@ -2,7 +2,9 @@ package com.sherpasteven.sscte.Models;
 
 /**
  * SearchResponse class from CMPUT 301 Lab
- * @param <T>
+ * This class represents a response from a
+ * search query to elasticsearch.
+ * @param <T> type of data from search query i.e Profile
  */
 public class SearchResponse<T> {
 

@@ -11,7 +11,6 @@ public class Trade extends Model {
     private Trader borrower;
     private Trader owner;
 
-    //FIXME: Making this public to make tests correct, return to private
     private Calendar created;
     private Calendar lastupdate;
     private Calendar accepted;
@@ -19,7 +18,6 @@ public class Trade extends Model {
     private UUID id;
 
 
-    //FIXME: Making this public to make tests correct, return to private
     private ArrayList<Card> borrowlist;
     private ArrayList<Card> ownerlist;
 
@@ -121,6 +119,11 @@ public class Trade extends Model {
         this.ownerlist = ownerlsit;
     }
 
+    /**
+     * Adds the card to the borrow list (local user)
+     * @param card
+     * @return boolean (true on success)
+     */
     public Boolean addBorrowList(Card card){
         if(card != null && card.isTradable()) {
             getBorrowList().add(card);
@@ -130,6 +133,11 @@ public class Trade extends Model {
         else{return Boolean.FALSE;}
     }
 
+    /**
+     * Remove the card to the owner lsit (local user)
+     * @param card
+     * @return  boolean (true on success)
+     */
     public Boolean removeBorrowList(Card card){
         if(getBorrowList().contains(card)) {
             getBorrowList().remove(card);
@@ -139,6 +147,11 @@ public class Trade extends Model {
         else{return Boolean.FALSE;}
     }
 
+    /**
+     * Add the card to the owner lsit (friend)
+     * @param card
+     * @return  boolean (true on success)
+     */
     public Boolean addOwnerList(Card card){
         if(card.isTradable()){
             getOwnerList().add(card);
@@ -148,6 +161,11 @@ public class Trade extends Model {
         else{return Boolean.FALSE;}
     }
 
+    /**
+     * Remove the card to the owner lsit (friend)
+     * @param card
+     * @return  boolean (true on success)
+     */
     public Boolean removeOwnerList(Card card){
         if(getOwnerList().contains(card)) {
             getOwnerList().remove(card);

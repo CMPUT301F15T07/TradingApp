@@ -28,6 +28,9 @@ import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -91,7 +94,9 @@ public class TradesTab extends Fragment implements IView<Model> {
     }
 
     public void dynamicLoad() {
+        //tradelist = createTradesList();
         tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+
         if (mAdapter != null) mAdapter.notifyDataSetChanged();
         // doesn't get the other trades
     }
@@ -140,8 +145,9 @@ public class TradesTab extends Fragment implements IView<Model> {
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
             profileSynchronizer.UpdateProfile();
             localProfileSerializer.Serialize(CurrentProfile.getCurrentProfile().getProfile(hostActivity), hostActivity);
-            dynamicLoad();
         }
+        dynamicLoad();
+        //tradelist = createTradesList();
         mAdapter.notifyDataSetChanged();
     }
 
@@ -202,5 +208,21 @@ public class TradesTab extends Fragment implements IView<Model> {
         // Save currently selected layout manager.
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public ArrayList<Trade> createTradesList(){
+        ArrayList<Trade> pending = (ArrayList<Trade>) CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades().clone();
+        ArrayList<Trade> past = (ArrayList<Trade>) CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPastTrades().clone();
+
+        Collections.reverse(pending);
+        Collections.reverse(past);
+
+        for(Trade trade: past){
+            pending.add(trade);
+        }
+
+        //for()
+
+        return pending;
     }
 }
