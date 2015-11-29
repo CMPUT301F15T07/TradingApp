@@ -39,6 +39,16 @@ public class TradeLog extends Model {
         notifyViews();
     }
 
+    public void removeTrade(Trade trade) {
+        pendingTrades.remove(trade);
+        notifyViews();
+    }
+
+    public void removeTrade(int index) {
+        pendingTrades.remove(index);
+        notifyViews();
+    }
+
     public void addCounterOfferTrade(Trade original, Trade counter) {
         this.getPendingTrades().remove(original);
         this.getPendingTrades().add(counter);

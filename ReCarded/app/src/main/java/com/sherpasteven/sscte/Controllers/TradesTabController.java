@@ -29,6 +29,5 @@ public class TradesTabController extends Controller<TradesTab, TradeLog> {
                 view.navigateToAddTradeActivity();
             }
         });
-
     }
 }

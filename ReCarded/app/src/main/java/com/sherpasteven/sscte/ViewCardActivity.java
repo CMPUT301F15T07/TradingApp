@@ -258,4 +258,10 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
 
         return bmps;
     }
+
+    @Override
+    public void onBackPressed() {
+        card.deleteView(this);
+        super.onBackPressed();
+    }
 }
