@@ -93,7 +93,7 @@ public class InventoryTab extends Fragment implements IView<Model> {
         addInventoryTabtoCard();
     }
 
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

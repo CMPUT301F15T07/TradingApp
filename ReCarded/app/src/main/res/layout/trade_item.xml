@@ -32,7 +32,7 @@
                     android:scaleType="centerCrop"
                     android:id="@+id/trade_photo"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/splash_page"
+                    android:src="@drawable/img_mountain_mini"
                     android:layout_alignParentTop="true"
                     android:cropToPadding="false" />
 

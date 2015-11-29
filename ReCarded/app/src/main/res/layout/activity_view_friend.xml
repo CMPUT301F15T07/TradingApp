@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -9,19 +13,33 @@
     android:nestedScrollingEnabled="true">
 
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="215dp"
-        android:id="@+id/greyRect"
-        android:src="@drawable/img_no_img"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:paddingEnd="-100dp"
-        android:paddingStart="-100dp"
-        android:background="#d8d8d8"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-         />
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:id="@+id/card_image"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/greyRect"
+            android:src="@drawable/no_image_full"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:background="#d8d8d8"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/greyRectMask"
+            android:src="@drawable/mask_thin_grey" />
+
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,9 +50,13 @@
         android:fontFamily="sans-serif"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:layout_below="@+id/greyRect"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp" />
+        android:layout_below="@+id/card_image"
+        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/card_image"
+        android:ellipsize="end"
+        android:maxLines="5"
+        android:layout_alignEnd="@+id/card_image"
+        android:layout_marginLeft="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,7 +81,10 @@
         android:textSize="12dp"
         android:layout_marginTop="2dp"
         android:layout_below="@+id/txtCity"
-        android:layout_alignStart="@+id/txtName" />
+        android:layout_alignStart="@+id/txtName"
+        android:maxLines="1"
+        android:ellipsize="middle"
+        android:layout_alignEnd="@+id/card_image" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,7 +95,7 @@
         android:fontFamily="sans-serif"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/cityInfo"
         android:layout_alignStart="@+id/txtName" />
 
@@ -84,17 +109,48 @@
         android:textSize="12sp"
         android:layout_marginTop="2dp"
         android:layout_below="@+id/txtEmail"
-        android:layout_alignStart="@+id/txtName" />
+        android:layout_alignStart="@+id/txtName"
+        android:layout_alignEnd="@+id/cityInfo"
+        android:maxLines="1"
+        android:ellipsize="middle" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnDeleteFriend"
         android:background="@drawable/btn_cancel"
-        android:layout_below="@id/greyRect"
-        android:layout_alignEnd="@id/greyRect"
-        android:layout_marginTop="-35dp"
-        android:layout_marginRight="15dp" /> />
+        android:layout_marginRight="15dp"
+        android:layout_gravity="right|bottom"
+        android:layout_alignBottom="@+id/txtName"
+        android:layout_alignEnd="@+id/card_image"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rating:"
+        android:id="@+id/txtRating"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_below="@+id/emailinfo"
+        android:layout_alignStart="@+id/emailinfo"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/ratingInfo"
+        android:fontFamily="sans-serif"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="middle"
+        android:layout_below="@+id/txtRating"
+        android:layout_alignLeft="@+id/emailinfo" />
 
 
 </RelativeLayout>
+</ScrollView>
