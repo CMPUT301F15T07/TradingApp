@@ -19,14 +19,17 @@ import java.lang.reflect.Type;
 //https://github.com/joshua2ua/lonelyTwitter/blob/f15monday/app/src/main/java/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java
 
 /**
- * This class is used to serialze and deserialize Profile objects using GSON.
+ * This class is used to serialze and deserialize Profile objects
+ * to the the sd card using GSON. The profile is saved in the app
+ * data folder i.e. : data/data/com.sherpasteven.sscte/files
  */
 public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializer<Profile> {
 
     private String profileLocation = "userProfile.sav";
 
     /**
-     * Deserialize an object from file
+     * Deserialize a Profile from file
+     * using GSON.
      * @param id unique id of the file
      * @param context app context
      * @return deserialized Profile
@@ -46,12 +49,15 @@ public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializ
             return null;
         } catch (IOException e) {
             return null;
+        } catch (RuntimeException e) {
+            return null;
         }
         return profile;
     }
 
     /**
-     * Serialize an object to file
+     * Serialize an Profile to file using
+     * GSON.
      * @param item object to serialize to file
      * @param context app context
      */

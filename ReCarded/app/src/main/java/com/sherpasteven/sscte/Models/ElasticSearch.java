@@ -23,7 +23,8 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 
 /**
- * Created by elias on 16/11/15.
+ * This class is responsible for doing the
+ * raw http requests to the elasticsearch server.
  */
 public class ElasticSearch extends Model {
 
@@ -37,10 +38,22 @@ public class ElasticSearch extends Model {
         gson = new Gson();
     }
 
+
     public Friends getFriends(){
         return friends;
     }
 
+    /**
+     * Insert a friend into elasticsearch.
+     * This will use the friend.ProfileId to
+     * index in elasticsearch. The profileId is
+     * a unique string from the android device so
+     * there can only be one instance of a friend
+     * in elasticsearch per android device.
+     * This method is asynchronous and there is no
+     * return value.
+     * @param friend friend to insert/update in elasticsearch
+     */
     public void InsertFriend(final Friend friend) {
         AsyncTask.execute(new Runnable() {
             @Override
@@ -56,9 +69,13 @@ public class ElasticSearch extends Model {
     }
 
     /**
-     * Consumes the POST/Insert operation of the service
-     * @throws IOException
+     * Asynchronous operation of inserting a friend
+     * into elasticsearch. This will insert the friend
+     * or overwrite an existing friend with the same
+     * profileId.
+     * @param friend friend to insert/update into elasticsearch
      * @throws IllegalStateException
+     * @throws IOException
      */
     private void _insertFriend(Friend friend) throws IllegalStateException, IOException{
         HttpClient httpclient = new DefaultHttpClient();
@@ -103,6 +120,15 @@ public class ElasticSearch extends Model {
         httpPost.getEntity().getContent().close();
     }
 
+    /**
+     * Search friends in elasticsearch. This is an async
+     * method that will request profiles from elasticsearch
+     * and then call notifyviews() when the profiles have
+     * succesfully been loaded into the attribute friends.
+     * To search all profiles simply call searchFriends("*", null)
+     * @param searchString search query
+     * @param field fields to search on
+     */
     public void searchFriends(final String searchString, final String field) {
         AsyncTask.execute(new Runnable() {
             @Override
@@ -117,9 +143,12 @@ public class ElasticSearch extends Model {
     }
 
     /**
-     * search method from cmput 301 lab
-     * @param searchString
-     * @param field
+     * Asynchronous operation of searching a friend
+     * from elasticsearch. This will get the result
+     * from the request and then call notifyviews()
+     * after the "friends" attirbute is populated
+     * @param searchString search query
+     * @param field fields to search on
      */
     private void _searchFriends(String searchString, String field) {
         friends = new Friends();
