@@ -104,8 +104,8 @@ public class TradesTab extends Fragment implements IView<Model> {
         trades.addView(this);
         localProfileSerializer = new LocalProfileSerializer();
 
-        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
-        profileSynchronizer.addView(this);
+        //ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        //profileSynchronizer.addView(this);
 
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
@@ -172,7 +172,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         super.onResume();
         //ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
         //profileSynchronizer.SynchronizeProfile();
-        synchronizeTrades();
+        //synchronizeTrades(); trades should be synchronized in the InventoryActivity
         if(TradeComposer.getTradeComposer().getComponents() != null){
             TradeComposer.getTradeComposer().getComponents().getViews().clear();
             TradeComposer.getTradeComposer().resetComponents();
