@@ -47,6 +47,11 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
         this.tradelog = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext()).getUser().getTrades();
     }
 
+    /**
+     * Sets the listener activity on the view in order to process response.
+     * Lets the user accept, decline and counteroffer trades.
+     * @param view view to set listeners on.
+     */
     @Override
     protected void setListeners(final ViewTradeActivity view) {
 
