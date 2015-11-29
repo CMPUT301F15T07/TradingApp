@@ -155,7 +155,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.cardName.setText(cardList.get(position).getName());
-        viewHolder.cardDescription.setText(cardList.get(position).getCatagory());
+        viewHolder.cardDescription.setText(cardList.get(position).getCategory());
         if (cardList.get(position).getImagebyIndex(0) != null) {
             viewHolder.cardPhoto.setImageBitmap(cardList.get(position).constructImage(0));
         }

@@ -10,9 +10,6 @@ import javax.mail.internet.InternetAddress;
  * registering a new user into the app. This class takes
  * in the arguments needed to generate a new user and then
  * can generate the user once all required fields are filled;
- *
- * FIXME: There is an issue serializing the Registration object using GSON
- * FIXME: Getting a security exception when serializing the object to file.
  */
 public class Registration extends Model {
 
