@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by elias on 28/11/15.
+ * This class is responsible for synchronizing the trades of
+ * the user with their friends such as when a new trade is made
+ * or counteroffered.
  */
 public class TradeSynchronizer {
     private Profile localProfile;
@@ -15,7 +17,7 @@ public class TradeSynchronizer {
 
     /**
      * This method will syncronize the trades of the user after
-     * thier friends are updated
+     * their friends are updated
      */
     public void SynchronizeTrades(){
         User localUser = localProfile.getUser();
@@ -55,7 +57,6 @@ public class TradeSynchronizer {
                 //The friend has a newer version of the trade then the user does
                 if (friendTrade.getLastupdate().after(userTrade.getLastupdate())) {
                     pendingTrades.remove(i);
-                    //Trade swappedTrade = tradeReverse(friendTrade, friend);
                     if (friendTrade.getStatus().equals("PENDING")){
                         pendingTrades.add(friendTrade);
                     } else {
@@ -68,16 +69,4 @@ public class TradeSynchronizer {
         localUser.getTrades().setPendingTrades(pendingTrades);
         localUser.getTrades().setPastTrades(pastTrades);
     }
-
-    private Trade tradeReverse(Trade initialTrade, Trader borrower) {
-        //tradelog.addCounterOfferTrade(model, countertrade);
-        TradeComposer.getTradeComposer().resetComponents();
-        TradeComposer.getTradeComposer().getComponents().setOwner(borrower);
-        TradeComposer.getTradeComposer().getComponents().setBorrower(initialTrade.getOwner());
-        TradeComposer.getTradeComposer().getComponents().setTradeId(initialTrade.getId());
-        TradeComposer.getTradeComposer().getComponents().setOwnerList(initialTrade.getBorrowList());
-        TradeComposer.getTradeComposer().getComponents().setBorrowList(initialTrade.getOwnerList());
-        return TradeComposer.getTradeComposer().composeTrade();
-    }
-
 }

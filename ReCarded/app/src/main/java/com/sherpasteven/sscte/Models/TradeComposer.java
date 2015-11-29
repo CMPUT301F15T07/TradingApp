@@ -1,17 +1,21 @@
 package com.sherpasteven.sscte.Models;
 
 /**
- * Created by joshua on 25/11/15.
+ * TradeComposer is a singleton designed to hold
+ * a temporary trade in action. This ensures that the
+ * tradelog space is preserved while a trade is being manipulated.
+ * TradeComposer is stored throughout the entire application - as such
+ * there will only ever be one instance of such composer.
  */
 public class TradeComposer {
     private static TradeComposer ourInstance = new TradeComposer();
     private TradeComponents components;
 
-    public static TradeComposer getTradeComposer() {
-        return ourInstance;
+    private TradeComposer() {
     }
 
-    private TradeComposer() {
+    public static TradeComposer getTradeComposer() {
+        return ourInstance;
     }
 
     public TradeComponents getComponents() {
@@ -27,6 +31,11 @@ public class TradeComposer {
         this.components = null;
     }
 
+    /**
+     * If the components are complete and correct, the trade will be
+     * created and become available for use.
+     * @return trade, containing compoenents, for processing.
+     */
     public Trade composeTrade(){
         if(getComponents().isComposable()){
             Trade trade;

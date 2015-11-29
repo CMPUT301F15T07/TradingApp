@@ -8,22 +8,32 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Created by joshua on 05/11/15.
+ * Image processes Bitmaps or Drawable Paths.  It trims them down to a set width and height and then
+ * compresses them to JPEG format.  Fially is sets the bitmap to a string and stores that as an
+ * object attribute "imageserial"
  */
 public class Image extends Model {
 
 
     private String imageserial;
 
+    /**
+     *
+     * @param bitmap 
+     */
+    public Image(Bitmap bitmap){
 
-    public Image(Bitmap image){
-
-        setImageserial(BitMapToString(image));
-        image.recycle();
-        image = null;
+        setImageserial(BitMapToString(bitmap));
+        bitmap.recycle();
+        bitmap = null;
 
     }
 
+    /**
+     *
+     * @param imageID
+     * @param context
+     */
     public Image(int imageID, Context context){
 
         Bitmap image = BitmapFactory.decodeResource(context.getResources(), imageID);
@@ -33,10 +43,14 @@ public class Image extends Model {
 
     }
 
-
-    private Bitmap resizeBitmap(Bitmap image) {
-        Double width = (double) image.getWidth();
-        Double height = (double) image.getHeight();
+    /**
+     *
+     * @param bitmap
+     * @return bmpresized
+     */
+    private Bitmap resizeBitmap(Bitmap bitmap) {
+        Double width = (double) bitmap.getWidth();
+        Double height = (double) bitmap.getHeight();
         Double max = 500.0;
 
         if (width > height) {
@@ -46,11 +60,11 @@ public class Image extends Model {
             width = max * (width / height);
             height = max;
         }
-        Bitmap bmp = Bitmap.createScaledBitmap(image, width.intValue(), height.intValue(), Boolean.FALSE);
-        image.recycle();
-        image = null;
+        Bitmap bmpresized = Bitmap.createScaledBitmap(bitmap, width.intValue(), height.intValue(), Boolean.FALSE);
+        bitmap.recycle();
+        bitmap = null;
 
-        return bmp;
+        return bmpresized;
 
 
     }
@@ -63,8 +77,15 @@ public class Image extends Model {
         this.imageserial = imageserial;
     }
 
-    // Taken from http://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versahttp://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa
-    // Credit goes to: Shyam Deore
+
+
+
+    /**
+     *  Taken from http://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versahttp://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa
+     * Credit goes to: Shyam Deore
+     * Creates a Bitmap from the imageserial associated with this image object
+     * @return bitmap
+     */
     public Bitmap constructImage() {
         try {
             byte[] encodeByte = Base64.decode(getImageserial(), Base64.DEFAULT);
@@ -77,21 +98,26 @@ public class Image extends Model {
         }
     }
 
-    // Taken from http://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versahttp://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa
-    // Credit goes to: Shyam Deore
-    public String BitMapToString(Bitmap bitmap){
+    /**
+     * Taken from http://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versahttp://stackoverflow.com/questions/13562429/how-many-ways-to-convert-bitmap-to-string-and-vice-versa
+     * Credit goes to: Shyam Deore
+     * Used to produce a String from a given when a new Image object is created. This string is what the imageserial attribute is set to
+     * @param bitmap
+     * @return string
+     */
+    private String BitMapToString(Bitmap bitmap){
         bitmap = resizeBitmap(bitmap);
 
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte [] b = baos.toByteArray();
-        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        String string=Base64.encodeToString(b, Base64.DEFAULT);
 
         bitmap.recycle();
         bitmap = null;
         b = null;
 
-        return temp;
+        return string;
     }
 
 

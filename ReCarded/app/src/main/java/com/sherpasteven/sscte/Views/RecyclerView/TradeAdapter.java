@@ -133,6 +133,13 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
             viewHolder.tradeName.setText("Trade with " + trades.get(position).getOwner().getName());
         }
         viewHolder.tradeDescription.setText(trades.get(position).getStatus() + ": " + cardsum + " cards in trade.");
+
+        if(trades.get(position).getStatus().equals("ACCEPTED")){
+            viewHolder.itemView.setBackgroundColor(0xccffcc);
+        }
+        else if(trades.get(position).getStatus().equals("DECLINED")){
+            viewHolder.itemView.setBackgroundColor(0xffcccc);
+        }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
