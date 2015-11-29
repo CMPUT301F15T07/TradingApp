@@ -102,6 +102,17 @@ public class Card extends Model {
         setOwner(owner);
         addImage(image);
     }
+    public Card( Card card){
+        this.name = card.getName();
+        this.quantity = card.getQuantity();
+        this.quality = card.getQuality();
+        this.category = card.getCategory();
+        this.series = card.getSeries();
+        this.tradeable = card.isTradable();
+        this.comments = card.getComments();
+        this.images = card.getImages();
+        setOwner(card.getOwner());
+    }
 
     /**
      * Retrieves the image from the album of a card.
@@ -229,6 +240,9 @@ public class Card extends Model {
 
     public void setOwner(User owner) {
         this.owner = owner.getEmail() + "," + owner.getName() + "," + owner.getLocation();
+    }
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
 
