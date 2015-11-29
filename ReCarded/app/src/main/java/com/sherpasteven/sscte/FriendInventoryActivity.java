@@ -108,7 +108,7 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        
+
         return true;
     }
 
