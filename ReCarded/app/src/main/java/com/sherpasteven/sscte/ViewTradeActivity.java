@@ -61,7 +61,9 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
     protected RecyclerView.LayoutManager mTheirLayoutManager;
 
 
-    /** (not Javadoc)
+    /**
+     * (not Javadoc)
+     *
      * @see android.app.Activity#onStart()
      */
     @Override
@@ -103,8 +105,8 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
             mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
             mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
         }
-       // mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
-       // mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
+        // mYourAdapter = new BorrowerViewTradeAdapter(trade.getBorrowList(), this, position);
+        // mTheirAdapter = new OwnerViewTradeAdapter(trade.getOwnerList(), this, position);
         // Set CardAdapter as the adapter for RecyclerView.
         mYourRecycler.setAdapter(mYourAdapter);
         mTheirRecycler.setAdapter(mTheirAdapter);
@@ -155,15 +157,15 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
                     counterofferButton.setClickable(false);
                 }
             } else if (trade.getStatus().equals("DECLINED") || trade.getStatus().equals("ACCEPTED")) {
-                    acceptButton.setBackgroundResource(R.drawable.trade_options_top);
-                    acceptButton.setClickable(false);
-                    acceptButton.setTextColor(Color.parseColor("#484848"));
-                    declineButton.setBackgroundResource(R.drawable.trade_options_mid);
-                    declineButton.setClickable(false);
-                    declineButton.setTextColor(Color.parseColor("#484848"));
-                    counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
-                    counterofferButton.setTextColor(Color.parseColor("#484848"));
-                    counterofferButton.setClickable(false);
+                acceptButton.setBackgroundResource(R.drawable.trade_options_top);
+                acceptButton.setClickable(false);
+                acceptButton.setTextColor(Color.parseColor("#484848"));
+                declineButton.setBackgroundResource(R.drawable.trade_options_mid);
+                declineButton.setClickable(false);
+                declineButton.setTextColor(Color.parseColor("#484848"));
+                counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
+                counterofferButton.setTextColor(Color.parseColor("#484848"));
+                counterofferButton.setClickable(false);
             }
         }
     }

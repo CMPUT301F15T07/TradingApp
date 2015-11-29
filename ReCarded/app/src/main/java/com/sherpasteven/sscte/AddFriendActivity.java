@@ -13,7 +13,6 @@ import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.ProfileSynchronizer;
 import com.sherpasteven.sscte.Models.SynchronizeSingleton;
-import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.NewFriendAdapter;
 
@@ -62,7 +61,7 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
         // END_INCLUDE(initializeRecyclerView)
         ProfileSynchronizer synchronizer = SynchronizeSingleton.GetSynchronize(this);
         synchronizer.addView(this);
-        synchronizer.PullProfiles();
+        synchronizer.PullFriends();
     }
 
     private enum LayoutManagerType {
@@ -127,6 +126,11 @@ public class AddFriendActivity extends AppCompatActivity implements IView<Model>
             friendslist.addAll(synchronizer.cloudFriends.getAll());
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     @Override

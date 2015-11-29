@@ -67,7 +67,7 @@ public class SearchInventoryActivity extends AppCompatActivity implements IView<
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-        mAdapter = new CardAdapter(cardslist);
+        mAdapter = new CardAdapter(cardslist, true);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -172,7 +172,11 @@ public class SearchInventoryActivity extends AppCompatActivity implements IView<
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         SearchSingleton.getSearchSingleton().reset();
+        super.onBackPressed();
+        finish();
+
     }
+
+
 }

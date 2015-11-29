@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -50,8 +54,9 @@
         android:layout_marginTop="15dp"
         android:layout_alignStart="@+id/card_image"
         android:ellipsize="end"
-        android:maxLines="5"
-        android:layout_alignEnd="@+id/card_image" />
+        android:maxLines="1"
+        android:layout_marginLeft="15dp"
+        android:layout_toStartOf="@+id/btnDeleteFriend" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +70,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/txtName"
         android:layout_alignStart="@+id/txtName"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,8 +85,8 @@
         android:layout_alignStart="@+id/txtName"
         android:maxLines="1"
         android:ellipsize="middle"
-        android:layout_marginLeft="30dp"
-        android:layout_alignEnd="@+id/card_image" />
+        android:layout_alignEnd="@+id/card_image"
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,10 +97,10 @@
         android:fontFamily="sans-serif"
         android:textStyle="bold"
         android:textSize="12sp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/cityInfo"
         android:layout_alignStart="@+id/txtName"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -111,7 +116,7 @@
         android:layout_alignEnd="@+id/cityInfo"
         android:maxLines="1"
         android:ellipsize="middle"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="15dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -122,13 +127,34 @@
         android:layout_gravity="right|bottom"
         android:layout_alignBottom="@+id/txtName"
         android:layout_alignEnd="@+id/card_image"
-        android:layout_marginBottom="20dp" /><![CDATA[
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rating:"
+        android:id="@+id/txtRating"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_below="@+id/emailinfo"
+        android:layout_alignStart="@+id/emailinfo"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/ratingInfo"
+        android:fontFamily="sans-serif"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="middle"
+        android:layout_below="@+id/txtRating"
+        android:layout_alignLeft="@+id/emailinfo" />
 
 
-
-    />
-
-
-
-]]>
 </RelativeLayout>
+</ScrollView>

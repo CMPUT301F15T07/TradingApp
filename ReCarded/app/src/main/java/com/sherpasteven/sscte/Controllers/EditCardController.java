@@ -1,22 +1,13 @@
 package com.sherpasteven.sscte.Controllers;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.sherpasteven.sscte.EditCardActivity;
-import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
-import com.sherpasteven.sscte.R;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Controller for EditCardActivity.
@@ -77,7 +68,7 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 model.getUser().getInventoryItem(view.getPosition()).setName(name);
                 model.getUser().getInventoryItem(view.getPosition()).setQuantity(quantity);
                 model.getUser().getInventoryItem(view.getPosition()).setQuality(quality);
-                model.getUser().getInventoryItem(view.getPosition()).setCatagory(catagory);
+                model.getUser().getInventoryItem(view.getPosition()).setCategory(catagory);
                 model.getUser().getInventoryItem(view.getPosition()).setSeries(series);
                 model.getUser().getInventoryItem(view.getPosition()).setTradable(tradable);
                 model.getUser().getInventoryItem(view.getPosition()).setComments(comments);

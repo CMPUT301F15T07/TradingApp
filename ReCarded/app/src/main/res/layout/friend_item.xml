@@ -33,7 +33,7 @@
                     android:scaleType="centerCrop"
                     android:id="@+id/friend_photo"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/splash_page"
+                    android:src="@drawable/img_mountain_mini"
                     android:layout_alignParentTop="true"
                     android:cropToPadding="false" />
 
@@ -58,18 +58,32 @@
                 android:text="Sample Name"
                 android:textSize="8pt"
                 android:paddingTop="25px"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:layout_toStartOf="@+id/imgRating"
+                android:layout_marginRight="5dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/friend_text"
                 android:layout_toRightOf="@+id/img_frame"
-                android:layout_below="@+id/friend_name"
                 android:fontFamily="sans-serif-light"
                 android:textSize="6pt"
                 android:text="Sample Text"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:layout_toStartOf="@+id/imgRating"
+                android:layout_below="@+id/friend_name"
+                android:layout_marginRight="5dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgRating"
+                android:src="@drawable/ic_not_top_trader"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp" />
 
         </RelativeLayout>
 

@@ -49,8 +49,8 @@ public class TradesTab extends Fragment implements IView<Model> {
 
     public TradesTab() {
         super();
-        User currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
-        trades = currentUser.getTrades();
+        //User currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
+        //trades = currentUser.getTrades();
     }
 
     public TradesTab(TradeLog trades){
@@ -88,6 +88,8 @@ public class TradesTab extends Fragment implements IView<Model> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
+        trades = currentUser.getTrades();
         dynamicLoad();
     }
 
@@ -107,8 +109,8 @@ public class TradesTab extends Fragment implements IView<Model> {
         trades.addView(this);
         localProfileSerializer = new LocalProfileSerializer();
 
-        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
-        profileSynchronizer.addView(this);
+        //ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        //profileSynchronizer.addView(this);
 
         tradestabcontroller = new TradesTabController(this, trades);
         rootView.setTag(TAG);
@@ -176,7 +178,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         super.onResume();
         //ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
         //profileSynchronizer.SynchronizeProfile();
-        synchronizeTrades();
+        //synchronizeTrades(); trades should be synchronized in the InventoryActivity
         if(TradeComposer.getTradeComposer().getComponents() != null){
             TradeComposer.getTradeComposer().getComponents().getViews().clear();
             TradeComposer.getTradeComposer().resetComponents();

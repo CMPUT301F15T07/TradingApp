@@ -1,13 +1,8 @@
 package com.sherpasteven.sscte;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -107,7 +101,7 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
         for (Image tmpImage : card.getImages()) {
             this.cardimages.add(tmpImage.constructImage());
         }
-        int spinnerPosition = adapter.getPosition(card.getCatagory());
+        int spinnerPosition = adapter.getPosition(card.getCategory());
         spinner.setSelection(spinnerPosition);
         seriesText.setText(card.getSeries());
         qualityText.setText(Integer.toString(card.getQuality().getQuality()));

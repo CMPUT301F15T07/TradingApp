@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -22,6 +21,7 @@ import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
@@ -84,7 +84,13 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
             setTitle("View Card - " + card.getName());
             menuselector = 1;
             invalidateOptionsMenu();
+        } else if (intent.hasExtra("com.sherpasteven.sscte.searched") && SearchSingleton.getSearchSingleton().getSearchedInventory() != null){
+            setCard(SearchSingleton.getSearchSingleton().getSearchedInventory().get(getPosition()));
+            setTitle("View Card - " + card.getName());
+            menuselector = 1;
+            invalidateOptionsMenu();
         } else{
+            
             setCard(getProfile().getUser().getInventoryItem(getPosition()));
         }
 
@@ -157,7 +163,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         } else {
             tradable = "Not Tradable";
         }
-        String headertext = card.getCatagory()+ " - " + card.getSeries()+ " - " + tradable;
+        String headertext = card.getCategory()+ " - " + card.getSeries()+ " - " + tradable;
         TextView header = (TextView) findViewById(R.id.txtStatus);
         header.setText(headertext);
 
@@ -263,5 +269,6 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     public void onBackPressed() {
         card.deleteView(this);
         super.onBackPressed();
+
     }
 }
