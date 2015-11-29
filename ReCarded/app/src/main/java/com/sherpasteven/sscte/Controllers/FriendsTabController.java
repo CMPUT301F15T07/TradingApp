@@ -10,6 +10,8 @@ import com.sherpasteven.sscte.Views.FriendsTab;
 
 /**
  * Controller for FriendsTab.
+ * Only used for navigating to the view friend
+ * when a friend is selected
  */
 public class FriendsTabController extends Controller<FriendsTab, User> {
     private final FriendsTab view;
