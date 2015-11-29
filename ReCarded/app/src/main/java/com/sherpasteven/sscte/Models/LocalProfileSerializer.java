@@ -46,6 +46,8 @@ public class LocalProfileSerializer implements ISerializer<Profile>, IDeSerializ
             return null;
         } catch (IOException e) {
             return null;
+        } catch (RuntimeException e) {
+            return null;
         }
         return profile;
     }
