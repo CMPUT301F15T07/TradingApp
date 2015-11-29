@@ -97,7 +97,9 @@
             android:name=".FriendInventoryActivity"
             android:label="@string/title_activity_friend_inventory"
             android:parentActivityName=".ViewFriendActivity" >
-
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchInventoryActivity"/>
         </activity>
     </application>
 

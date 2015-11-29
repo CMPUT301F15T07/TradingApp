@@ -1,5 +1,7 @@
 package com.sherpasteven.sscte;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +21,7 @@ import com.sherpasteven.sscte.Models.Friend;
 
 import com.sherpasteven.sscte.Models.Model;
 
+import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
@@ -100,6 +104,11 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_friend_inventory, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        
         return true;
     }
 
@@ -121,5 +130,15 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
     @Override
     public void Update(Model model) {
 
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        // check if search intent
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            SearchSingleton.getSearchSingleton().setInventory(friend.getInventory().getCards());
+        }
+
+        super.startActivity(intent);
     }
 }
