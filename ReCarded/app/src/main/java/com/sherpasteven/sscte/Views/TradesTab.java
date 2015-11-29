@@ -92,8 +92,9 @@ public class TradesTab extends Fragment implements IView<Model> {
     }
 
     public void dynamicLoad() {
-        tradelist = createTradesList();
-        //tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+        //tradelist = createTradesList();
+        tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+
         if (mAdapter != null) mAdapter.notifyDataSetChanged();
         // doesn't get the other trades
     }
@@ -142,8 +143,9 @@ public class TradesTab extends Fragment implements IView<Model> {
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
             profileSynchronizer.UpdateProfile();
             localProfileSerializer.Serialize(CurrentProfile.getCurrentProfile().getProfile(hostActivity), hostActivity);
-            dynamicLoad();
         }
+        dynamicLoad();
+        //tradelist = createTradesList();
         mAdapter.notifyDataSetChanged();
     }
 
@@ -216,6 +218,8 @@ public class TradesTab extends Fragment implements IView<Model> {
         for(Trade trade: past){
             pending.add(trade);
         }
+
+        //for()
 
         return pending;
     }

@@ -5,7 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by joshua on 28/11/15.
+ * Used to provide the necessary info to the SearchInventoryClass when trying to search
+ * a specific inventory
  */
 public class SearchSingleton {
 
@@ -36,11 +37,19 @@ public class SearchSingleton {
         this.searchterm = searchterm;
     }
 
+    /**
+     * Resets the componants for the search
+     */
     public void reset(){
         this.inventory = null;
         this.searchterm= null;
     }
 
+    /**
+     * Iterates through the searched Inventory and provides the cards that contain
+     * information that is searched for.
+     * @return searched cards
+     */
     public ArrayList<Card> search(){
 
         ArrayList<Card> searched = new ArrayList<Card>();
@@ -55,6 +64,13 @@ public class SearchSingleton {
 
     }
 
+    /**
+     * Searches the card's title, comments and catagory for the given search term using regular
+     * expressions and returns if there was a match found
+     * @param term
+     * @param card
+     * @return matcher.matches
+     */
     private Boolean searcher(String term, Card card){
 
         String line = card.getCatagory() + " " + card.getName() + " " + card.getComments();

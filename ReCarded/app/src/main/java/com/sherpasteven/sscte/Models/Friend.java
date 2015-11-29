@@ -13,12 +13,10 @@ import java.util.ArrayList;
 public class Friend extends User{
 
     public Friend(User user, Context context){
-        super(user.getName(), user.getLocation(), user.getEmail(), context);
+        super(user.getName(), user.getLocation(), user.getEmail(), user.getProfilePic(), user.getProfileId());
         setInventory(user.getInventory());
-        setProfilePic(user.getProfilePic());
         setFriends(null);
         setTrades(user.getTrades());
-        setProfileID(user.getProfileId());
     }
 
     @Override

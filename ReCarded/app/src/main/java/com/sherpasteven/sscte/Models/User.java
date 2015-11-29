@@ -39,6 +39,22 @@ public class User extends Model {
         profileId = new ProfileId(context);
     }
 
+    public User(String name, String location, String email, Image profilepic, ProfileId id){
+
+        this.name = name;
+        this.location = location;
+        this.email = email;
+        this.inventory = new Inventory();
+        this.trades = new TradeLog();
+        rating = 0;
+        setFriends(new ArrayList<Friend>());
+        setProfilePic(profilepic);
+        //get id here
+        profileId = id;
+    }
+
+
+
     public String getEmail() {
         return email;
     }
