@@ -3,6 +3,8 @@ package com.sherpasteven.sscte.Controllers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
@@ -15,6 +17,8 @@ import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SettingsActivity;
 import com.sherpasteven.sscte.ViewCardActivity;
 
+import java.util.ArrayList;
+
 /**
  * Created by joshua on 23/11/15.
  */
@@ -22,7 +26,7 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
     ViewCardActivity view;
     Card model;
-
+    int deletequantity;
 
         public ViewCardController(ViewCardActivity view, Card model) {
             super(view, model);
@@ -45,7 +49,7 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
             intent2.putExtra("pointer", view.getPosition());
             view.startActivity(intent2);
         } else if (id == R.id.delete_card) {
-            AlertDialog confirmDel = ConfirmDelete();
+            AlertDialog confirmDel = ConfirmDelete().create();
             confirmDel.show();
         } else if (id == R.id.clone_card){
             AlertDialog confirmclone = ConfirmClone();
@@ -55,33 +59,40 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
     }
 
 
-    private AlertDialog ConfirmDelete()
+    private AlertDialog.Builder ConfirmDelete()
     {
-        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(view)
-                //set message, title, and icon
-                .setTitle("Delete")
-                .setMessage("Are you sure you want to delete all copies of this card?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Card card = view.getCard();
-                        int quan = view.getCard().getQuantity();
-                        Profile profile = CurrentProfile.getCurrentProfile().getProfile(view);
-                        view.finish();
-                        profile.getUser().removeInventoryItem(card, quan);
-                        setLocalProfile(profile);
+        AlertDialog.Builder myQuittingDialogBox =new AlertDialog.Builder(view);
+
+        myQuittingDialogBox.setTitle("Delete selected quantity?");
+        //myQuittingDialogBox.setMessage("Are you sure you want to delete all copies of this card?");
+        myQuittingDialogBox.setSingleChoiceItems(getQuantityList(), -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                 deletequantity = item;
+            }
+        });
+        myQuittingDialogBox.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Card card = view.getCard();
+                Profile profile = CurrentProfile.getCurrentProfile().getProfile(view);
+                view.finish();
+                profile.getUser().removeInventoryItem(card, deletequantity);
+                setLocalProfile(profile);
 
 
-                    }
+            }
 
-                })
+        });
 
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create();
+
+        myQuittingDialogBox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        myQuittingDialogBox.create();
         return myQuittingDialogBox;
 
 
@@ -118,6 +129,16 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, view);
+    }
+    private CharSequence[] getQuantityList(){
+        int i;
+        CharSequence[] quantityArray = new CharSequence[model.getQuantity()];
+
+        for(i = 0; i<model.getQuantity();i++) {
+            quantityArray[i] = String.valueOf(i+1);
+        }
+        return quantityArray;
+
     }
 
 
