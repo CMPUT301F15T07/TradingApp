@@ -59,6 +59,10 @@ public class InventoryTab extends Fragment implements IView<Model> {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
 
+    public InventoryTab() {
+        super();
+    }
+
     @SuppressLint("ValidFragment")
     public InventoryTab(Inventory inventory) {
         super();
@@ -89,7 +93,7 @@ public class InventoryTab extends Fragment implements IView<Model> {
         addInventoryTabtoCard();
     }
 
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

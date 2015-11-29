@@ -48,7 +48,7 @@ public class ElasticSearch extends Model {
                 try {
                     _insertFriend(friend);
                 } catch (IOException ex){
-                    throw new RuntimeException(ex);
+                    //TODO(what do we do when we cant get to elasticsearch?)
                 }
             }
         });
@@ -83,7 +83,7 @@ public class ElasticSearch extends Model {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        if (response == null) return;
         String status = response.getStatusLine().toString();
         System.out.println(status);
         HttpEntity entity = response.getEntity();
@@ -110,7 +110,7 @@ public class ElasticSearch extends Model {
                 try {
                     _searchFriends(searchString, field);
                 } catch (RuntimeException ex){
-                    throw new RuntimeException(ex);
+                    //TODO(what to do when we cant get to elasticsearch?)
                 }
             }
         });
