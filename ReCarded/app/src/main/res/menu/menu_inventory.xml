@@ -1,9 +1,17 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sherpasteven.sscte.InventoryActivity">
+    <item android:id="@+id/search"
+        android:title="search"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_profile" android:title="@string/action_profile"
         android:orderInCategory="200" app:showAsAction="never" />
+
 </menu>

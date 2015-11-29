@@ -238,4 +238,9 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
         mRecyclerView.setLayoutManager(mLayoutManager);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

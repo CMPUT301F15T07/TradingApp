@@ -17,12 +17,14 @@ import com.sherpasteven.sscte.Controllers.TradesTabController;
 import com.sherpasteven.sscte.EditTradeActivity;
 import com.sherpasteven.sscte.FriendListActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.ProfileSynchronizer;
 import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 
@@ -41,6 +43,12 @@ public class TradesTab extends Fragment implements IView<Model> {
     private TradeLog trades;
     private TradesTabController tradestabcontroller;
     private View inflate_view;
+
+    public TradesTab() {
+        super();
+        User currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
+        trades = currentUser.getTrades();
+    }
 
     public TradesTab(TradeLog trades){
         super();
@@ -62,6 +70,17 @@ public class TradesTab extends Fragment implements IView<Model> {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
     protected AppCompatActivity hostActivity;
+    protected LocalProfileSerializer localProfileSerializer;
+    protected View view;
+/*
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            synchronizeTrades();
+        }
+        else {  }
+    } */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +90,7 @@ public class TradesTab extends Fragment implements IView<Model> {
 
     public void dynamicLoad() {
         tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+        if (mAdapter != null) mAdapter.notifyDataSetChanged();
         // doesn't get the other trades
     }
 
@@ -80,6 +100,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         hostActivity = (AppCompatActivity) rootView.getContext();
         inflate_view = rootView;
         trades.addView(this);
+        localProfileSerializer = new LocalProfileSerializer();
 
         ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
         profileSynchronizer.addView(this);
@@ -116,10 +137,12 @@ public class TradesTab extends Fragment implements IView<Model> {
         if (model instanceof ProfileSynchronizer) {
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
             profileSynchronizer.UpdateProfile();
+            localProfileSerializer.Serialize(CurrentProfile.getCurrentProfile().getProfile(hostActivity), hostActivity);
             dynamicLoad();
         }
         mAdapter.notifyDataSetChanged();
     }
+
 
     public void navigateToAddTradeActivity(){
         // process flow for the activity is like this:
@@ -137,11 +160,17 @@ public class TradesTab extends Fragment implements IView<Model> {
         getActivity().startActivity(myIntent);
     }
 
+    public void synchronizeTrades() {
+        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        profileSynchronizer.SynchronizeProfile();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-        ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
-        profileSynchronizer.SynchronizeProfile();
+        //ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        //profileSynchronizer.SynchronizeProfile();
+        synchronizeTrades();
         if(TradeComposer.getTradeComposer().getComponents() != null){
             TradeComposer.getTradeComposer().getComponents().getViews().clear();
             TradeComposer.getTradeComposer().resetComponents();

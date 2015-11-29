@@ -1,91 +1,86 @@
 package com.sherpasteven.sscte;
 
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sherpasteven.sscte.Controllers.InventoryTabController;
-
+import com.sherpasteven.sscte.Controllers.FriendsTabController;
+import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Friend;
-
 import com.sherpasteven.sscte.Models.Model;
-
 import com.sherpasteven.sscte.Models.SearchSingleton;
+import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.ViewFriendsCardAdapter;
-
+import com.sherpasteven.sscte.Views.RecyclerView.CardTradeAdapter;
 
 import java.util.ArrayList;
-public class FriendInventoryActivity extends AppCompatActivity implements IView<Model>{
 
-    Friend friend;
+
+public class SearchInventoryActivity extends AppCompatActivity implements IView<Model> {
+
+    private FriendsTabController friendstabcontroller;
+    private ArrayList<Card> cardlist = new ArrayList<>();
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60;
-    private InventoryTabController inventorytabcontroller;
-    private View inflate_view;
-    private User user;
-    private int position;
 
-    private enum LayoutManagerType {
-        GRID_LAYOUT_MANAGER,
-        LINEAR_LAYOUT_MANAGER
-    }
-
+    private boolean isUserList = false;
     protected LayoutManagerType mCurrentLayoutManagerType;
+    private ArrayList<Card> cardslist;
+    // demo code before get friends inventory
+    private ArrayList<Card> friendslist;
+    private View inflate_view;
+
+    private User user;
+    private User owner;
 
     protected RecyclerView mRecyclerView;
-    protected ViewFriendsCardAdapter mAdapter;
+    protected CardAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_friend_inventory);
-        Intent intent = getIntent();
-        position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
-        ArrayList<Friend> listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
-        friend = listOfFriends.get(position);
+        handleIntent(getIntent());
+        setTitle("Search Results");
+
+        setContentView(R.layout.activity_card_trade);
+
+
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
-        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
-        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
-        // elements are laid out.
         mLayoutManager = new LinearLayoutManager(this);
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-
         if (savedInstanceState != null) {
             // Restore saved layout manager type.
             mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-
-        mAdapter = new ViewFriendsCardAdapter(friend.getInventory().getCards(), position);
-
-        // Set CardAdapter as the adapter for RecyclerView.
+        mAdapter = new CardAdapter(cardslist);
         mRecyclerView.setAdapter(mAdapter);
-        // END_INCLUDE(initializeRecyclerView)
-
-        setTitle(friend.getName() + "'s Inventory");
-
     }
+
+
+    private enum LayoutManagerType {
+        GRID_LAYOUT_MANAGER, LINEAR_LAYOUT_MANAGER
+    }
+
+    /**
+     * Set RecyclerView's LayoutManager to the one given.
+     *
+     * @param layoutManagerType Type of layout manager to switch to.
+     */
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
 
         mLayoutManager = new GridLayoutManager(this, SPAN_COUNT);
@@ -94,24 +89,23 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
 
     }
 
-
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    /**
+     * Generates hamburger menu options.
+     * @param menu Menu item to be created.
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_friend_inventory, menu);
-
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
+    /**
+     * OnSelect options for option selected from hamburger menu.
+     * @param item Item selected by user.
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -121,11 +115,13 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent1 = new Intent(this, SettingsActivity.class);
+            this.startActivity(intent1);
         }
 
         return super.onOptionsItemSelected(item);
     }
+    
 
     @Override
     public void Update(Model model) {
@@ -133,12 +129,50 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
     }
 
     @Override
-    public void startActivity(Intent intent) {
-        // check if search intent
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            SearchSingleton.getSearchSingleton().setInventory(friend.getInventory().getCards());
-        }
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save currently selected layout manager.
+        savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
+        super.onSaveInstanceState(savedInstanceState);
+    }
 
-        super.startActivity(intent);
+
+
+    public View getView(){
+        return inflate_view;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
+    public void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query =
+                    intent.getStringExtra(SearchManager.QUERY);
+            SearchSingleton.getSearchSingleton().setSearchterm(query);
+            doSearch();
+        }
+    }
+
+    private void doSearch() {
+        cardslist = SearchSingleton.getSearchSingleton().search();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SearchSingleton.getSearchSingleton().reset();
     }
 }

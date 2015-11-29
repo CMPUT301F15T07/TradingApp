@@ -10,11 +10,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name=".SearchInventoryActivity"
+            android:label="search_results"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity
             android:name=".SplashPage"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -30,6 +43,9 @@
             android:name=".InventoryActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchInventoryActivity" />
         </activity>
         <activity
             android:name=".AddCardActivity"
@@ -82,8 +98,8 @@
             android:label="@string/title_activity_friend_inventory"
             android:parentActivityName=".ViewFriendActivity" >
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sherpasteven.sscte.ViewFriendActivity" />
+                android:name="android.app.default_searchable"
+                android:value=".SearchInventoryActivity"/>
         </activity>
     </application>
 
