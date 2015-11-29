@@ -176,7 +176,7 @@ public class Trade extends Model {
      */
     public Trade counterOffer(){
         this.setStatus("DECLINED");
-        Trade counter = new Trade(this.getBorrower(), this.getOwner());
+        Trade counter = new Trade(this.getBorrower(), this.getOwner(), this.getId());
         for(Card cards: this.getOwnerList()) {
             counter.addBorrowList(cards);
         }

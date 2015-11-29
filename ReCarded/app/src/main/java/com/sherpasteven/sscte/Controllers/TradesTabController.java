@@ -30,13 +30,13 @@ public class TradesTabController extends Controller<TradesTab, TradeLog> {
             }
         });
 
-        Button editItem = (Button) view.getView().findViewById(R.id.btnEditTrade);
+        /*Button editItem = (Button) view.getView().findViewById(R.id.btnEditTrade);
         editItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 view.navigateToEditTradeActivity();
             }
-        });
+        });*/
 
     }
 }

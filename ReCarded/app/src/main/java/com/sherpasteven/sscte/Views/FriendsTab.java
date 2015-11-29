@@ -72,7 +72,6 @@ public class FriendsTab extends Fragment implements IView<Model> {
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initializeData();
     }
 
     @Override
@@ -137,29 +136,4 @@ public class FriendsTab extends Fragment implements IView<Model> {
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
-
-    /**
-     * Generates data for friends with respect to currentUser object.
-     * FIXME: Convert for dynamic friend data loading.
-     * FIXME: Adapt currentUser structure for user-hosted profile.
-     */
-    private void initializeData() {
-        /*
-        currentUser = new User("","","", this.getContext());
-        /*
-        currentUser.addFriend(new User("test1", "location1", "email1", this.getContext()));
-        currentUser.addFriend(new User("test2", "location2", "email2", this.getContext()));
-        currentUser.addFriend(new User("test3", "location3", "email3", this.getContext()));
-        currentUser.addFriend(new User("test4", "location4", "email4", this.getContext()));
-        currentUser.addFriend(new User("test5", "location5", "email5", this.getContext()));
-        currentUser.addFriend(new User("test6", "location6", "email6", this.getContext()));
-        currentUser.addFriend(new User("test7", "location7", "email7", this.getContext()));
-        currentUser.addFriend(new User("test8", "location8", "email8", this.getContext()));
-        currentUser.addFriend(new User("test9", "location9", "email9", this.getContext()));
-        currentUser.addFriend(new User("test10", "location10", "email10", this.getContext()));
-        currentUser.addFriend(new User("test11", "location11", "email11", this.getContext()));
-        */
-    }
-
-
 }

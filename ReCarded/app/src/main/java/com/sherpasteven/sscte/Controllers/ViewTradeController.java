@@ -73,14 +73,20 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
             @Override
             public void onClick(View v) {
                 Trade countertrade = model.counterOffer();
-                // removes from pending trades for counteroffer
-                tradelog.getPendingTrades().remove(model);
+                // removes from pending trades for counteroffer]
+                int position = tradelog.getPendingTrades().indexOf(model);
+                //tradelog.getPendingTrades().remove(model);
                 //tradelog.addCounterOfferTrade(model, countertrade);
-                TradeComposer.getTradeComposer().getComponents().setOwner(countertrade.getOwner());
+                /*TradeComposer.getTradeComposer().getComponents().setOwner(countertrade.getOwner());
                 TradeComposer.getTradeComposer().getComponents().setBorrower(countertrade.getBorrower());
                 TradeComposer.getTradeComposer().getComponents().setOwnerList(countertrade.getOwnerList());
+                TradeComposer.getTradeComposer().getComponents().setBorrowList(countertrade.getBorrowList());*/
+                TradeComposer.getTradeComposer().getComponents().setOwner(countertrade.getBorrower());
+                TradeComposer.getTradeComposer().getComponents().setBorrower(countertrade.getOwner());
+                TradeComposer.getTradeComposer().getComponents().setOwnerList(countertrade.getOwnerList());
                 TradeComposer.getTradeComposer().getComponents().setBorrowList(countertrade.getBorrowList());
-                int position = tradelog.getPendingTrades().indexOf(model);
+                TradeComposer.getTradeComposer().getComponents().setTradeId(countertrade.getId());
+                //tradelog.addCounterOfferTrade();
                 Intent intent = new Intent(v.getContext(), AddTradeActivity.class);
                 intent.putExtra("com.sherpasteven.sscte.counterindex", position);
                 model.notifyViews();
