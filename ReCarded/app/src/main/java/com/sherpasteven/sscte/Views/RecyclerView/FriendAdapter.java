@@ -136,8 +136,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         if (currentUser.getFriends().get(position).getProfilePic() != null) {
             viewHolder.userPhoto.setImageBitmap(currentUser.getFriends().get(position).constructProfilePic());
         }
-        if (currentUser.getFriends().get(position).getRating() >= 5) {
-            viewHolder.userRating.setImageDrawable(a.getResources().getDrawable(R.drawable.ic_top_trader));
+        if (currentUser.getFriends().get(position).getRating() != null) {
+            if (currentUser.getFriends().get(position).getRating() >= 5) {
+                viewHolder.userRating.setImageDrawable(a.getResources().getDrawable(R.drawable.ic_top_trader));
+            }
         }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
