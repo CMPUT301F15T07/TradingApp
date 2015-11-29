@@ -95,7 +95,6 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
 
     }
 
-
     /**
      * Response is generated once load image intent is completed.
      * Finds and decodes image based on path, connects image to activity.
@@ -150,8 +149,8 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
 
     public ImageView getImageViewCard(){return (ImageView) findViewById(R.id.imgCard);}
 
-    public EditText getMediaText(){
-        return (EditText) findViewById(R.id.mediaText);
+    public RecyclerView getMediaText(){
+        return (RecyclerView) findViewById(R.id.recyclerView);
     }
 
     public EditText getNameText(){
