@@ -22,6 +22,7 @@ import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
+import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
@@ -81,6 +82,11 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         } else if(intent.hasExtra("com.sherpasteven.sscte.friendscard")){
             friend = getProfile().getUser().getFriends().get(intent.getIntExtra("com.sherpasteven.sscte.friendscard",0));
             setCard(friend.getInventoryItem(getPosition()));
+            setTitle("View Card - " + card.getName());
+            menuselector = 1;
+            invalidateOptionsMenu();
+        } else if (intent.hasExtra("com.sherpasteven.sscte.searched") && SearchSingleton.getSearchSingleton().getSearchedInventory() != null){
+            setCard(SearchSingleton.getSearchSingleton().getSearchedInventory().get(getPosition()));
             setTitle("View Card - " + card.getName());
             menuselector = 1;
             invalidateOptionsMenu();
@@ -263,5 +269,6 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     public void onBackPressed() {
         card.deleteView(this);
         super.onBackPressed();
+
     }
 }

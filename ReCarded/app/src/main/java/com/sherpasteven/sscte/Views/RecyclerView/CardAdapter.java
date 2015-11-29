@@ -40,6 +40,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private String[] mDataSet;
     List<Card> cards;
     static View view;
+    static boolean wassearched;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -71,6 +72,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     alertDialog.show(); */
                     Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
+                    if (wassearched){
+                        myIntent.putExtra("com.sherpasteven.sscte.searched", 1);
+                    }
                     view.getContext().startActivity(myIntent);
 
                 }
@@ -96,8 +100,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
      * @param card Initialise list of cards for loading.
      */
 
-    public CardAdapter(List<Card> card){
+    public CardAdapter(List<Card> card, boolean checkforsearch){
         this.cards = card;
+        this.wassearched = checkforsearch;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
