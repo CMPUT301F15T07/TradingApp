@@ -69,6 +69,7 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
         myQuittingDialogBox.setSingleChoiceItems(getQuantityList(), -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                  deletequantity = item;
+                 deletequantity++; //iterate
             }
         });
         myQuittingDialogBox.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
