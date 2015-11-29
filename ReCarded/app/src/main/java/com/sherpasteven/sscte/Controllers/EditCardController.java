@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte.Controllers;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,9 @@ import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.R;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Controller for EditCardActivity.
@@ -66,12 +70,6 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                     comments = "No comments entered for this card...";
                 }
 
-                if (view.getImageViewCard().getTag().equals("Changed")) {
-                    Bitmap cardimage = ((BitmapDrawable) view.getImageViewCard().getDrawable()).getBitmap();
-                    model.getUser().getInventoryItem(view.getPosition()).setImageByPosition(new Image(cardimage), 0);
-                    cardimage.recycle();
-                    cardimage = null;
-                }
                 Toast.makeText(view, "Updated a card...",
                         Toast.LENGTH_SHORT).show();
 
@@ -84,20 +82,11 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 model.getUser().getInventoryItem(view.getPosition()).setTradable(tradable);
                 model.getUser().getInventoryItem(view.getPosition()).setComments(comments);
 
-                //model.getUser().getInventory().notifyViews();
+                model.getUser().getInventory().notifyViews();
                 profileSerializer.Serialize(model, view);
                 view.navigateToInventory();
             }
         });
 
-        ImageButton buttonLoadImage = (ImageButton) view.findViewById(R.id.btnCardImage);
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                view.loadImage();
-
-            }
-        });
     }
 }

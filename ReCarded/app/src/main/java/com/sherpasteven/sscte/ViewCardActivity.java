@@ -183,6 +183,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
                 viewcard.setImageBitmap(card.constructImage(0));
             }
         }
+        mAdapter.notifyDataSetChanged();
     }
 
 

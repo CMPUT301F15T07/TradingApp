@@ -8,8 +8,8 @@ import java.util.UUID;
  * Initialises the trade model used for trading inventory systems.
  */
 public class Trade extends Model {
-    private transient User borrower;
-    private Friend owner;
+    private Trader borrower;
+    private Trader owner;
 
     //FIXME: Making this public to make tests correct, return to private
     private Calendar created;
@@ -25,7 +25,7 @@ public class Trade extends Model {
 
 
 
-    public Trade(User borrower, Friend owner) {
+    public Trade(Trader borrower, Trader owner) {
         setBorrower(borrower);
         setOwner(owner);
         setOwnerList(new ArrayList<Card>());
@@ -35,6 +35,11 @@ public class Trade extends Model {
         id = UUID.randomUUID();
         //sets the created time to the current time
         created = Calendar.getInstance();
+    }
+
+    public Trade(Trader borrower, Trader owner, UUID tradeId) {
+        this(borrower, owner);
+        this.id = tradeId;
     }
 
 
@@ -84,19 +89,19 @@ public class Trade extends Model {
     //public void setNotification(User user){}
 
 
-    public User getBorrower() {
+    public Trader getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(User borrower) {
+    public void setBorrower(Trader borrower) {
         this.borrower = borrower;
     }
 
-    public Friend getOwner() {
+    public Trader getOwner() {
         return owner;
     }
 
-    public void setOwner(Friend owner) {
+    public void setOwner(Trader owner) {
         this.owner = owner;
     }
 

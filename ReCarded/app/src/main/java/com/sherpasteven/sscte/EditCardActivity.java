@@ -2,11 +2,15 @@ package com.sherpasteven.sscte;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +25,13 @@ import android.widget.Spinner;
 import com.sherpasteven.sscte.Controllers.EditCardController;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Views.IView;
+import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
+
+import java.util.ArrayList;
 
 public class EditCardActivity extends AppCompatActivity implements IView<Model> {
 
@@ -34,6 +42,23 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
     Integer position;
     View v;
 
+    private enum LayoutManagerType {
+        GRID_LAYOUT_MANAGER,
+        LINEAR_LAYOUT_MANAGER
+    }
+
+    private static final String TAG = "RecyclerViewFragment";
+    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
+    protected LayoutManagerType mCurrentLayoutManagerType;
+
+    protected RecyclerView mRecyclerView;
+    protected RecyclerView.LayoutManager mLayoutManager;
+
+    Boolean filledMainImage;
+    protected MediaAdapter mAdapter;
+    private ArrayList<Bitmap> cardimages;
+
+
     /** (not Javadoc)
      * @see android.app.Activity#onStart()
      */
@@ -42,27 +67,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_card);
 
+        cardimages = new ArrayList<Bitmap>();
+
         setProfile(CurrentProfile.getCurrentProfile().getProfile(this));
         editcardcontroller = new EditCardController(this, getProfile());
-
-        ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.btnCardImage);
-        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
-
-            /**
-             * OnClick to enable camera switch.
-             * @param arg0
-             */
-            @Override
-            public void onClick(View arg0) {
-
-                Intent i = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
-            }
-        });
-
         position = getIntent().getExtras().getInt("pointer");
 
         Spinner spinner = (Spinner) findViewById(R.id.categoryText);
@@ -86,12 +94,19 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
         EditText quantityText = (EditText) findViewById(R.id.quantityText);
         EditText commentsText = (EditText) findViewById(R.id.commentsText);
 
-        ImageView cardimage = getImageViewCard();
-        cardimage.setTag("Default");
-        cardimage.setImageBitmap(card.constructImage(0));
+        ImageView imageView = getImageViewCard();
+        imageView.setTag("Default");
+        if (card.getImages().size() != 0) {
+            imageView.setImageBitmap(card.constructImage(0));
+        } else {
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.img_no_img));
+        }
 
 
         nameText.setText(card.getName());
+        for (Image tmpImage : card.getImages()) {
+            this.cardimages.add(tmpImage.constructImage());
+        }
         int spinnerPosition = adapter.getPosition(card.getCatagory());
         spinner.setSelection(spinnerPosition);
         seriesText.setText(card.getSeries());
@@ -99,6 +114,41 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
         quantityText.setText(Integer.toString(card.getQuantity()));
         commentsText.setText(card.getComments());
         getCheckBox().setChecked(card.isTradable());
+
+
+        if (card.getImages().size() != 0) {
+            filledMainImage = Boolean.TRUE;
+        } else {
+            filledMainImage = Boolean.FALSE;
+        }
+
+
+        // BEGIN_INCLUDE(initializeRecyclerView)
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
+
+        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
+        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
+        // elements are laid out.
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+
+        if (savedInstanceState != null) {
+            // Restore saved layout manager type.
+            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
+                    .getSerializable(KEY_LAYOUT_MANAGER);
+        }
+
+        setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
+        mAdapter = new MediaAdapter(getCardImages(), this);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
+
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
     }
 
     @Override
@@ -107,14 +157,14 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
     }
 
     public ImageView getImageCard(){
-        return (ImageView) findViewById(R.id.greyRectMask);
+        return (ImageView) findViewById(R.id.imgCard);
     }
 
 
     public ImageView getImageViewCard(){return (ImageView) findViewById(R.id.imgCard);}
 
-    public EditText getMediaText(){
-        return (EditText) findViewById(R.id.mediaText);
+    public RecyclerView getMediaText(){
+        return (RecyclerView) findViewById(R.id.recyclerView);
     }
 
     public EditText getNameText(){
@@ -163,34 +213,10 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
-    /**
-     * Response is generated once load image intent is completed.
-     * Finds and decodes image based on path, connects image to activity.
-     * @param requestCode Identifies intent of the process.
-     * @param resultCode Result of the previous image intent.
-     * @param data Resultant data set from intent.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            ImageView imageView = getImageViewCard();
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            imageView.setTag("Changed");
-        }
+    public ArrayList<Bitmap> getCardImages(){
+        return this.cardimages;
     }
+
 
     /**
      * Generates hamburger menu options.
@@ -227,7 +253,7 @@ public class EditCardActivity extends AppCompatActivity implements IView<Model> 
 
     /**
      * Updates the activity based on raised condition.
-     * @param update Card to be shown as edited.
+     * @param model Card to be shown as edited.
      */
     @Override
     public void Update(Model model) {
