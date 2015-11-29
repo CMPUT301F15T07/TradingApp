@@ -22,6 +22,11 @@ import java.util.ArrayList;
 /**
  * Created by joshua on 23/11/15.
  */
+
+/**
+ * controller used to implement functionality used in ViewCardActivity.
+ * Includes MEnu function and
+ */
 public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
     ViewCardActivity view;
