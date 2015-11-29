@@ -174,4 +174,10 @@ public class AddTradeActivity extends AppCompatActivity implements IView<Model> 
     public Button getSubmitButton(){
         return (Button) findViewById(R.id.btnEnter);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

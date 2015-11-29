@@ -86,24 +86,10 @@ public class InventoryTab extends Fragment implements IView<Model> {
     @Override
     public void onResume() {
         super.onResume();
-        removeViewsfromCards();
         addInventoryTabtoCard();
     }
 
-    public void removeViewsfromCards(){
-        ArrayList<Card> inventorycards = getUser().getInventory().getCards();
-        for(Card card: inventorycards){
-            if(card.getViews() != null) {
-                for(int i = 0; i < card.getViews().size();  i++) {
-                    if (!card.getViews().get(i).equals(this)){
-                        card.getViews().remove(i);
-                    }
-                }
-            }
-        }
-
-    }
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
