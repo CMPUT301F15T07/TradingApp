@@ -9,10 +9,12 @@ import android.widget.Toast;
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.ViewTradeActivity;
 
 
@@ -24,6 +26,9 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
     private final ViewTradeActivity view;
     private Trade model;
     private TradeLog tradelog;
+
+    private User owner;
+    private User borrower;
 
     Button acceptButton;
     Button declineButton;
