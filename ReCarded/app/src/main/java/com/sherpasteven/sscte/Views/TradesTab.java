@@ -24,6 +24,7 @@ import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 
@@ -42,6 +43,12 @@ public class TradesTab extends Fragment implements IView<Model> {
     private TradeLog trades;
     private TradesTabController tradestabcontroller;
     private View inflate_view;
+
+    public TradesTab() {
+        super();
+        User currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
+        trades = currentUser.getTrades();
+    }
 
     public TradesTab(TradeLog trades){
         super();
