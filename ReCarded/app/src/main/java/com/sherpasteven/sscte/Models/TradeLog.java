@@ -32,6 +32,7 @@ public class TradeLog extends Model {
             pastTrades.add(trade);
             pendingTrades.remove(trade);
         }
+        notifyViews();
     }
 
     public void addTrade(Trade trade){
