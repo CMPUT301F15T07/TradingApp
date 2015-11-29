@@ -45,8 +45,6 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
 
         viewfriendcontroller = new ViewFriendController(this, friend);
 
-
-
         Intent intent = getIntent();
         position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
         listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
@@ -67,6 +65,10 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         //set user email
         TextView useremail = (TextView) findViewById(R.id.emailinfo);
         useremail.setText(String.valueOf(user.getEmail()));
+
+        TextView userrating = (TextView) findViewById(R.id.ratingInfo);
+        userrating.setText(String.valueOf(user.getRating()));
+
 
         if(!user.getProfilePic().equals(null)){
             ImageView viewuser = (ImageView) findViewById(R.id.greyRect);

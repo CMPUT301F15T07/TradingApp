@@ -18,6 +18,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +60,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
         TextView userName;
         TextView userDescription;
         ImageView userPhoto;
+        ImageView userRating;
 
         public ViewHolder(View v) {
             super(v);
@@ -95,6 +97,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
             userPhoto = (ImageView)itemView.findViewById(R.id.friend_photo);
+            userRating = (ImageView)v.findViewById(R.id.imgRating);
             view = v;
         }
 
@@ -132,6 +135,10 @@ public class NewFriendAdapter extends RecyclerView.Adapter<NewFriendAdapter.View
         // with that element
         viewHolder.userName.setText(friendsList.get(position).getName());
         viewHolder.userDescription.setText(friendsList.get(position).getLocation());
+        viewHolder.userPhoto.setImageBitmap(friendsList.get(position).getProfilePic().constructImage());
+        if (friendsList.get(position).getRating() >= 5) {
+            viewHolder.userRating.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_top_trader));
+        }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 

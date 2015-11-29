@@ -52,6 +52,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         TextView userName;
         TextView userDescription;
         ImageView userPhoto;
+        ImageView userRating;
 
         public ViewHolder(View v) {
             super(v);
@@ -96,6 +97,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             userName = (TextView) v.findViewById(R.id.friend_name);
             userDescription = (TextView) v.findViewById(R.id.friend_text);
             userPhoto = (ImageView) itemView.findViewById(R.id.friend_photo);
+            userRating = (ImageView) v.findViewById(R.id.imgRating);
         }
 
     }
@@ -133,6 +135,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         viewHolder.userDescription.setText(currentUser.getFriends().get(position).getLocation());
         if (currentUser.getFriends().get(position).getProfilePic() != null) {
             viewHolder.userPhoto.setImageBitmap(currentUser.getFriends().get(position).constructProfilePic());
+        }
+        if (currentUser.getFriends().get(position).getRating() >= 5) {
+            viewHolder.userRating.setImageDrawable(a.getResources().getDrawable(R.drawable.ic_top_trader));
         }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
