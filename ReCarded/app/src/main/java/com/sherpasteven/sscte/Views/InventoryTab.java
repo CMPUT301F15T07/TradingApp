@@ -1,6 +1,8 @@
 package com.sherpasteven.sscte.Views;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +10,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.Controllers.InventoryTabController;
@@ -18,8 +23,10 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Model;
+import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
+import com.sherpasteven.sscte.SearchInventoryActivity;
 import com.sherpasteven.sscte.ViewCardActivity;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 
@@ -140,6 +147,8 @@ public class InventoryTab extends Fragment implements IView<Model> {
         return rootView;
     }
 
+
+
     /**
      * Set RecyclerView's LayoutManager to the one given.
      *
@@ -165,7 +174,7 @@ public class InventoryTab extends Fragment implements IView<Model> {
         Intent myIntent = new Intent(getActivity(), AddCardActivity.class);
         getActivity().startActivity(myIntent);
     }
-    public void navigateToEditCardActivity(){
+    public void navigateToEditCardActivity() {
         Intent myIntent = new Intent(getActivity(), EditCardActivity.class);
         getActivity().startActivity(myIntent);
     }
@@ -177,12 +186,7 @@ public class InventoryTab extends Fragment implements IView<Model> {
     }
 
 
-    /*
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getUser().getInventory().deleteView(this);
-    } */
+
 
     public View getView(){
         return inflate_view;

@@ -1,11 +1,14 @@
 package com.sherpasteven.sscte;
 
 import android.annotation.TargetApi;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.ProfileSynchronizer;
+import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.SynchronizeSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
@@ -87,10 +91,11 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        
+        /*
         if (android.os.Build.VERSION.SDK_INT >= 21) { // attempt for conditional run
             changeToolbarColor();
         }
+        */
 
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
@@ -146,8 +151,13 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_inventory, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo( searchManager.getSearchableInfo(getComponentName()) );
+
         return true;
-    }
+        }
 
     /**
      * OnSelect options for option selected from hamburger menu.
@@ -194,6 +204,16 @@ public class InventoryActivity extends ActionBarActivity implements IView<Model>
             ProfileSynchronizer profileSynchronizer = SynchronizeSingleton.GetSynchronize(this);
             profileSynchronizer.UpdateProfile();
         }
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        // check if search intent
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            SearchSingleton.getSearchSingleton().setInventory(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getInventory().getCards());
+        }
+
+        super.startActivity(intent);
     }
 
     public ImageButton getAddButton() {
