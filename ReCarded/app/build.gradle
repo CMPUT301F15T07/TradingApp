@@ -10,12 +10,16 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    sourceSets {
+        instrumentTest.setRoot('src/instrumentTest')
     }
 
     // Fixes duplicate META-INF/LICENSE.txt error when packaging.
@@ -38,6 +42,13 @@ dependencies {
     compile 'com.android.support:design:23.0.1'
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.android.support:recyclerview-v7:21.0.+'
+    androidTestCompile 'com.android.support:support-annotations:23.0.1'
+    androidTestCompile 'com.android.support.test:runner:0.4.1'
+    androidTestCompile 'com.android.support.test:rules:0.4.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+
+
+
     /* // we exceed the maximum # of methods imported @ this point:
            // see http://stackoverflow.com/questions/29756188/java-finished-with-non-zero-exit-value-2-android-gradle/31759781#31759781
         compile 'io.searchbox:jest-droid:0.1.6'

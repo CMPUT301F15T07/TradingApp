@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 
 /**
@@ -15,80 +17,80 @@ import com.sherpasteven.sscte.Models.Profile;
 public class SplashPageTest extends ActivityInstrumentationTestCase2 {
 
 
-        private Button enterbutton;
-        private EditText nametext;
-        private EditText citytext;
-        private EditText emailtext;
+    private Button enterbutton;
+    private EditText nametext;
+    private EditText citytext;
+    private EditText emailtext;
 
-        public SplashPageTest() {
-            super(com.sherpasteven.sscte.SplashPage.class);}
-/*
-        public void testStart() throws Exception{
+    public SplashPageTest() {
+        super(com.sherpasteven.sscte.SplashPage.class);
+    }
 
-            Activity activity = getActivity();
-        }
+    public void testStart() throws Exception {
 
-        public void testRegistration() {
-            SplashPage activity = (SplashPage) getActivity();
+        Activity activity = getActivity();
+    }
 
-
-            final String name = "Joshua";
-            final String city = "Edmonton";
-            final String email = "jjwhite@ualberta.ca";
-
-            nametext = activity.getNameText();
-            citytext = activity.getCityText();
-            emailtext = activity.getEmailText();
-
-            enterbutton = activity.getEnterButton();
-
-            activity.runOnUiThread((new Runnable() {
-                public void run() {
-                    nametext.setText(name);
-                    citytext.setText(city);
-                    emailtext.setText(email);
-                }
-            }));
-
-            // Set up an ActivityMonitor
-            Instrumentation.ActivityMonitor receiverActivityMonitor =
-                    getInstrumentation().addMonitor(InventoryActivity.class.getName(),
-                            null, false);
-
-            getInstrumentation().waitForIdleSync();
-            activity.runOnUiThread(new Runnable() {
-                public void run() {
-                    enterbutton.performClick();
-                }
-            });
-
-            getInstrumentation().waitForIdleSync();
-
-            //Profile profile = activity.getProfile();
-            assertEquals(profile.getUser().getName(), name);
-            assertEquals(profile.getUser().getLocation(), city);
-            assertEquals(profile.getUser().getEmail(), email);
+    public void testRegistration() {
+        SplashPage activity = (SplashPage) getActivity();
 
 
+        final String name = "Joshua";
+        final String city = "Edmonton";
+        final String email = "jjwhite@ualberta.ca";
+
+        nametext = activity.getNameText();
+        citytext = activity.getCityText();
+        emailtext = activity.getEmailText();
+
+        enterbutton = activity.getEnterButton();
+
+        activity.runOnUiThread((new Runnable() {
+            public void run() {
+                nametext.setText(name);
+                citytext.setText(city);
+                emailtext.setText(email);
+            }
+        }));
+
+        // Set up an ActivityMonitor
+        Instrumentation.ActivityMonitor receiverActivityMonitor =
+                getInstrumentation().addMonitor(InventoryActivity.class.getName(),
+                        null, false);
+
+        getInstrumentation().waitForIdleSync();
+        activity.runOnUiThread(new Runnable() {
+            public void run() {
+                enterbutton.performClick();
+            }
+        });
+
+        getInstrumentation().waitForIdleSync();
 
 
+        LocalProfileSerializer serializer = new LocalProfileSerializer();
+        Profile profile = serializer.Deserialize(null, activity);
+
+        assertEquals(profile.getUser().getName(), name);
+        assertEquals(profile.getUser().getLocation(), city);
+        assertEquals(profile.getUser().getEmail(), email);
 
 
-            InventoryActivity receiverActivity = (InventoryActivity)
-                    receiverActivityMonitor.waitForActivityWithTimeout(1000);
-            assertNotNull("ReceiverActivity is null", receiverActivity);
-            assertEquals("Monitor for ReceiverActivity has not been called",
-                    1, receiverActivityMonitor.getHits());
-            assertEquals("Activity is of wrong type",
-                    InventoryActivity.class, receiverActivity.getClass());
+        InventoryActivity receiverActivity = (InventoryActivity)
+                receiverActivityMonitor.waitForActivityWithTimeout(1000);
+        assertNotNull("ReceiverActivity is null", receiverActivity);
+        assertEquals("Monitor for ReceiverActivity has not been called",
+                1, receiverActivityMonitor.getHits());
+        assertEquals("Activity is of wrong type",
+                InventoryActivity.class, receiverActivity.getClass());
 
-            // Remove the ActivityMonitor
-            getInstrumentation().removeMonitor(receiverActivityMonitor);
+        // Remove the ActivityMonitor
+        getInstrumentation().removeMonitor(receiverActivityMonitor);
 
 
+        getInstrumentation().waitForIdleSync();
 
-            getInstrumentation().waitForIdleSync();
+        receiverActivity.finish();
 
-            receiverActivity.finish();
-            */
+    }
 }

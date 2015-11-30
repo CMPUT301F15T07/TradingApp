@@ -211,6 +211,7 @@ public class Card extends Model {
     }
 
     public Boolean isTradable() {
+        if (tradeable == null) return false;
         return tradeable;
     }
 

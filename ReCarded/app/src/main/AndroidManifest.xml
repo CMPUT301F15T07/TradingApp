@@ -17,6 +17,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <uses-library android:name="android.test.runner"/>
+
         <activity
             android:name=".SearchInventoryActivity"
             android:label="search_results"
