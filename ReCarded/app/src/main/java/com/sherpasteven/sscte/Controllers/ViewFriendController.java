@@ -7,14 +7,10 @@ import android.widget.ImageButton;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
-import com.sherpasteven.sscte.Models.Friends;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
-import com.sherpasteven.sscte.Models.Trade;
-import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.ViewFriendActivity;
-import com.sherpasteven.sscte.ViewTradeActivity;
 
 /**
  * Created by salim_000 on 2015-11-28.

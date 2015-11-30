@@ -8,25 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.sherpasteven.sscte.Controllers.InventoryTabController;
-
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
-
 import com.sherpasteven.sscte.Models.Model;
-
 import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
-import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.ViewFriendsCardAdapter;
-
 
 import java.util.ArrayList;
 public class FriendInventoryActivity extends AppCompatActivity implements IView<Model>{

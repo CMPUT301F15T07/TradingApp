@@ -3,8 +3,6 @@ package com.sherpasteven.sscte.Controllers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.sherpasteven.sscte.EditCardActivity;
 import com.sherpasteven.sscte.Models.Card;
@@ -12,12 +10,9 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
-import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.SettingsActivity;
 import com.sherpasteven.sscte.ViewCardActivity;
-
-import java.util.ArrayList;
 
 /**
  * Created by joshua on 23/11/15.

@@ -17,9 +17,7 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
@@ -27,17 +25,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.sherpasteven.sscte.AddCardActivity;
 import com.sherpasteven.sscte.EditCardActivity;
-import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.Image;
-import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewCardActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

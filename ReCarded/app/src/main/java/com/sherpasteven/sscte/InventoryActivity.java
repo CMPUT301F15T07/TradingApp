@@ -6,17 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -28,11 +25,9 @@ import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.ProfileSynchronizer;
 import com.sherpasteven.sscte.Models.SearchSingleton;
 import com.sherpasteven.sscte.Models.SynchronizeSingleton;
-import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.SlidingTabLayout;
-import com.sherpasteven.sscte.Views.TradesTab;
 import com.sherpasteven.sscte.Views.ViewPagerAdapter;
 
 public class InventoryActivity extends ActionBarActivity implements IView<Model>{

@@ -1,28 +1,22 @@
 package com.sherpasteven.sscte;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sherpasteven.sscte.Controllers.ViewFriendController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
+import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
-import com.sherpasteven.sscte.Models.User;
+import com.sherpasteven.sscte.Views.IView;
 
 import java.util.ArrayList;
-
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
-import com.sherpasteven.sscte.Models.Model;
-import com.sherpasteven.sscte.Views.IView;
 
 public class ViewFriendActivity extends AppCompatActivity implements IView<Model> {
 

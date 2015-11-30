@@ -1,19 +1,13 @@
 package com.sherpasteven.sscte.Controllers;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.sherpasteven.sscte.AddTradeActivity;
-import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.ISerializer;
-import com.sherpasteven.sscte.Models.Email;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;

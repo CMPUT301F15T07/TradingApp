@@ -13,14 +13,11 @@ import android.view.View;
 
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.SearchSingleton;
-import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.CardTradeAdapter;
 
 import java.util.ArrayList;
 
