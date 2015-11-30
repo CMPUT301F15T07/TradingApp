@@ -39,18 +39,14 @@ public class FriendsTab extends Fragment implements IView<Model> {
     protected RecyclerView mRecyclerView;
     protected FriendAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    private ElasticSearch elasticSearch;
-
 
     public FriendsTab() {
         super();
-        this.elasticSearch = new ElasticSearch();
     }
 
     @SuppressLint("ValidFragment")
     public FriendsTab(User currentUser){
         super();
-        this.elasticSearch = new ElasticSearch();
     }
 
     @Override
