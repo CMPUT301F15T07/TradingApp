@@ -31,6 +31,7 @@ import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -134,12 +135,38 @@ public class TradesTab extends Fragment implements IView<Model> {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
+        sortByStatus(tradelist);
         mAdapter = new TradeAdapter(tradelist, CurrentProfile.getCurrentProfile().getProfile(hostActivity).getUser(), pendingCount);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
         return rootView;
     }
+
+    public void sortByStatus(List<Trade> tradelist) {
+        Collections.sort(tradelist, tradelistSort);
+    }
+
+    static private Comparator<Trade> tradelistSort;
+    static {
+        tradelistSort = new Comparator<Trade>() {
+            @Override
+            public int compare(Trade t1, Trade t2){
+                if (t1.getStatus().equals("PENDING")) {
+                    return -1;
+                } else if (t2.getStatus().equals("PENDING")) {
+                    return 1;
+                } else if (t1.getStatus().equals("ACCEPTED")) {
+                    return -1;
+                } else if (t2.getStatus().equals("ACCEPTED")) {
+                    return 1;
+                } else {
+                    return 1;
+                }
+            }
+        };
+    }
+
 
     @Override
     public void Update(Model model) {

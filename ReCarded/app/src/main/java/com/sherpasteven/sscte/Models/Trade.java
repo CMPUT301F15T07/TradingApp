@@ -1,7 +1,11 @@
 package com.sherpasteven.sscte.Models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -205,5 +209,4 @@ public class Trade extends Model {
 
         return counter;
     }
-
 }
