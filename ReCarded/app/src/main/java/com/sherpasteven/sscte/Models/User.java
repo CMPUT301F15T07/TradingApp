@@ -259,4 +259,9 @@ public class User extends Model {
     public void incrementRating() {
         rating++;
     }
+
+
+    public String getOwnerInfo() {
+        return(getEmail() + "," + getName() + "," + getLocation());
+    }
 }
