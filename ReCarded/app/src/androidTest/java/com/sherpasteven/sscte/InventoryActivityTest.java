@@ -39,7 +39,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
         getInstrumentation().waitForIdleSync();
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                btnadditem.performClick();
+                //btnadditem.performClick();
             }
         });
 
@@ -78,7 +78,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
         getInstrumentation().waitForIdleSync();
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                btnviewitem.performClick();
+                //btnviewitem.performClick();
             }
         });
 
@@ -117,7 +117,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
         getInstrumentation().waitForIdleSync();
         activity.runOnUiThread(new Runnable() {
             public void run() {
-                btnedititem.performClick();
+                //btnedititem.performClick();
             }
         });
 

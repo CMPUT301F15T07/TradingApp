@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 
 /**
@@ -64,7 +65,10 @@ public class SplashPageTest extends ActivityInstrumentationTestCase2 {
 
             getInstrumentation().waitForIdleSync();
 
-            Profile profile = CurrentProfile.getCurrentProfile().getProfile(activity);
+
+            //Profile profile = CurrentProfile.getCurrentProfile().getProfile(activity);
+            LocalProfileSerializer serializer = new LocalProfileSerializer();
+            Profile profile = serializer.Deserialize(null, activity);
             assertEquals(profile.getUser().getName(), name);
             assertEquals(profile.getUser().getLocation(), city);
             assertEquals(profile.getUser().getEmail(), email);
