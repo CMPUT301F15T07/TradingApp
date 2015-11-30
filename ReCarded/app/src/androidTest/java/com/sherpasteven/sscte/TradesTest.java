@@ -15,7 +15,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
     public TradesTest() {
         super(Application.class);
     }
-
+/*
     public Card setupCards(int i, User user){
         switch(i){
             case 1:
@@ -186,7 +186,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
         }
     } 
         */
-
+/*
     public void testDeleteTrade() {
 
         User joshua = setupJoshua
@@ -252,5 +252,5 @@ public class TradesTest extends ApplicationTestCase<Application> {
         assertEquals(emailBorrower.status(), "SENT");
     }
 
-
+*/
 }

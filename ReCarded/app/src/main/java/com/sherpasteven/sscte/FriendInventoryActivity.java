@@ -59,7 +59,7 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
 
         setContentView(R.layout.activity_friend_inventory);
         Intent intent = getIntent();
-        position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
+        position = intent.getIntExtra("com.sherpasteven.sscte.friend_inventory", 0);
         ArrayList<Friend> listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
         friend = listOfFriends.get(position);
         // BEGIN_INCLUDE(initializeRecyclerView)

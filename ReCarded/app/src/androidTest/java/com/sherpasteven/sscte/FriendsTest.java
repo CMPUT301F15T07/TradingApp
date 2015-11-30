@@ -13,7 +13,7 @@ public class FriendsTest extends ApplicationTestCase<Application> {
 		super(Application.class);
 	}
 
-
+/*
 
     public void testAddFriend() {
         User johnCena = new User("WWE","Salt lake City","theChampion@yahoo.com");
@@ -59,5 +59,5 @@ public class FriendsTest extends ApplicationTestCase<Application> {
         assertTrue(user1.getFriend("The Heavyweight Champion").getLocation().equals("WWE RAW"));
     }
 
-
+*/
 }

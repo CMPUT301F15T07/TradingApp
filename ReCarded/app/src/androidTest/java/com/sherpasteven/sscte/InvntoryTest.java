@@ -7,14 +7,14 @@ import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 
-
+/*
 public class InventoryTest extends ApplicationTestCase<Application> {
     public InventoryTest() {
         super(Application.class);
     }
 
-    public User inventorySetUp(){
-
+    //public User inventorySetUp() {
+/*
         User user = new User("Joshua", "Edmonton", "DummyEmail@ualberta.ca");
 
         String name = "Charizard";
@@ -30,9 +30,10 @@ public class InventoryTest extends ApplicationTestCase<Application> {
         user.addInventoryItem(card);
 
         return user;
+        }
+*/
 
-    }
-
+/*
     
     public void testAddRemove(){
 
@@ -141,7 +142,8 @@ public class InventoryTest extends ApplicationTestCase<Application> {
 
 
     }
+*/
 
 
+ //   }
 
-}

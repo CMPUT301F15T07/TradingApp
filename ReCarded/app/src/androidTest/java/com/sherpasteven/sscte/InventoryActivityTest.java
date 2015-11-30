@@ -20,6 +20,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
     public InventoryActivityTest() {
         super(com.sherpasteven.sscte.InventoryActivity.class);}
 
+    /*
     public void testStart() throws Exception{
 
         Activity activity = getActivity();
@@ -141,5 +142,5 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
 
         receiverActivity.finish();
     }
-
+*/
 }

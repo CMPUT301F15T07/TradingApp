@@ -121,6 +121,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
 
+
             if(!filledMainImage) {
                 ImageView imageView = getImageViewCard();
                 imageView.setImageBitmap(bitmap);
@@ -183,6 +184,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
 
     public CheckBox getCheckBox(){
         return (CheckBox) findViewById(R.id.checkBox);
+    }
+
+    public Button getAddImageButton(){
+        return (Button) findViewById(R.id.addmoreimages);
     }
 
     /**
