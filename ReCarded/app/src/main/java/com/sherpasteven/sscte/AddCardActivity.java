@@ -208,6 +208,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
      */
     @Override
     public void Update(Model model) {
+        mAdapter.notifyDataSetChanged();
 
     }
 
