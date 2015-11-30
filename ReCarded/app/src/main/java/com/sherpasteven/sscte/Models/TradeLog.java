@@ -14,7 +14,7 @@ public class TradeLog extends Model {
 
     public TradeLog(ArrayList<Trade> pendingTrades, ArrayList<Trade> pastTrades) {
         this.pendingTrades = pendingTrades;
-        this.pastTrades = pastTrades;
+        //this.pastTrades = pastTrades;
     }
 
     public TradeLog(){
@@ -29,8 +29,8 @@ public class TradeLog extends Model {
      */
     public void tradeFinalized(Trade trade) {
         if (trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")) {
-            pastTrades.add(trade);
-            pendingTrades.remove(trade);
+           // pastTrades.add(trade);
+            //pendingTrades.remove(trade);
             notifyViews();
         }
         notifyViews();
