@@ -78,7 +78,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         addCardActivity.getCardImages().remove(addCardActivity.getCardImages().get(getPosition()));
-                                        //images.remove(images.get(getPosition()));
+                                        addCardActivity.Update(null);
                                         ImageView image = addCardActivity.getImageViewCard();
                                         if (addCardActivity.getCardImages().size() != 0) {
                                             image.setImageBitmap(addCardActivity.getCardImages().get(0));
@@ -94,8 +94,8 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
-                                        ImageView image = editCardActivity.getImageCard();
-                                        image.setImageBitmap(editCardActivity.getCardImages().get(getPosition()));
+                                        ImageView image = addCardActivity.getImageViewCard();
+                                        image.setImageBitmap(addCardActivity.getCardImages().get(getPosition()));
                                     }
                                 });
                         alDialog.show();
