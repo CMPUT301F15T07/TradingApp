@@ -199,6 +199,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         Toast.makeText(this.getContext(), "Adding a trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
+
     public void navigateToEditTradeActivity(){
         Intent myIntent = new Intent(getActivity(), EditTradeActivity.class);
         Toast.makeText(this.getContext(), "Editing selected trade...", Toast.LENGTH_SHORT).show();
