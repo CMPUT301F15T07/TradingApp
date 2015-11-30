@@ -104,8 +104,8 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 model.getOwner().incrementRating();
                 tradelog.tradeFinalized(model);
                 model.notifyViews();
-                Email email = new Email();
-                email.tradeEmail(model, view);
+                //Email email = new Email();
+                //email.tradeEmail(model, view);
                 view.finish();
 
             }
