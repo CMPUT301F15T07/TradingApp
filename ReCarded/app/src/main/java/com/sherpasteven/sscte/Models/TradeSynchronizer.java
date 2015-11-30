@@ -66,6 +66,7 @@ public class TradeSynchronizer {
                         pendingTrades.add(friendTrade);
                     } else {
                         //trade was accepted
+                        //TODO(should this be added to pendingTrades?)
                         pastTrades.add(friendTrade);
                         swapItems(friendTrade);
                     }
@@ -98,7 +99,7 @@ public class TradeSynchronizer {
 
         for (Card card : friendList) {
             //TODO(swap the card owner's name here) <- test this
-            card.setOwner(localProfile.getUser().getName());
+            //card.setOwner(localProfile.getUser().getName());
             inventory.addCard(card);
         }
     }

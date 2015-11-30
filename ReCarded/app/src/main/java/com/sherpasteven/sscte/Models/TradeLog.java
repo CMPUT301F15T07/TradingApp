@@ -28,12 +28,14 @@ public class TradeLog extends Model {
      * @param trade Trade to be added to the trade log.
      */
     public void tradeFinalized(Trade trade) {
-        if (trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")) {
+        //if (trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")) {
            // pastTrades.add(trade);
             //pendingTrades.remove(trade);
-            notifyViews();
-        }
+            //notifyViews();
+        //}
         //TODO(take out one of these notifyViews())
+        pastTrades.add(trade);
+        pendingTrades.remove(trade);
         notifyViews();
     }
 

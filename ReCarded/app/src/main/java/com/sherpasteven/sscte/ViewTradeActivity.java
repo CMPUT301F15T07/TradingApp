@@ -86,10 +86,11 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
         //setUser(CurrentProfile.getCurrentProfile().getProfile(this).getUser());
         //trade = new Trade(user, friend);
         //this crashes
-        ArrayList<Trade> tradelist = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades();
-        tradelist.addAll(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPastTrades());
+        ArrayList<Trade> tradeList = new ArrayList<>();
+        tradeList.addAll(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades());
+        tradeList.addAll(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPastTrades());
 
-        trade = tradelist.get(position);
+        trade = tradeList.get(position);
 
         viewtradecontroller = new ViewTradeController(this, trade);
 
@@ -150,7 +151,6 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
     }
 
     public void updateButtons() {
-        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
         statusInfo = getStatusInfo();
         acceptButton = getAcceptButton();
         declineButton = getDeclineButton();
