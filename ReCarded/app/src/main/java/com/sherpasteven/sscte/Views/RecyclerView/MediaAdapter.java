@@ -65,7 +65,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
 
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(v.getContext(), R.style.MainDiag));
                         alertDialog.setTitle("Delete");
-                        alertDialog.setMessage("Do you want to remove this card from your trade?");
+                        alertDialog.setMessage("Remove image?");
                         AlertDialog alDialog = alertDialog.create();
                         alDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                                 new DialogInterface.OnClickListener() {
@@ -73,10 +73,13 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
                                         addCardActivity.getCardImages().remove(addCardActivity.getCardImages().get(getPosition()));
                                         addCardActivity.Update(null);
                                         ImageView image = addCardActivity.getImageViewCard();
-                                        if (addCardActivity.getCardImages().size() != 0) {
-                                            image.setImageBitmap(addCardActivity.getCardImages().get(0));
+                                        //if(addCardActivity.getCardImages() == null){
+                                            if (addCardActivity.getCardImages().size() != 0) {
+                                                image.setImageBitmap(addCardActivity.getCardImages().get(0));
+                                          //  }
                                         } else {
-                                            image.setImageDrawable(editCardActivity.getResources().getDrawable(R.drawable.img_no_img));
+                                            image.setImageDrawable(addCardActivity.getResources().getDrawable(R.drawable.img_no_img));
+                                                addCardActivity.setFilledMainImage(Boolean.FALSE);
                                         }
                                         image.setTag("Changed");
                                         addCardActivity.Update(null);

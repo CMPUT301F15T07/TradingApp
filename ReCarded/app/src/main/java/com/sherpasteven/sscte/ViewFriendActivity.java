@@ -40,7 +40,7 @@ public class ViewFriendActivity extends AppCompatActivity implements IView<Model
         viewfriendcontroller = new ViewFriendController(this, friend);
 
         Intent intent = getIntent();
-        position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 0);
+        position = intent.getIntExtra("com.sherpasteven.sscte.viewfriend", 1);
         listOfFriends = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getFriends();
         friend = listOfFriends.get(position);
         retrieveUserInfo(friend);

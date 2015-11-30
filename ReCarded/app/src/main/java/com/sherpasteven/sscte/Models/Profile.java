@@ -1,5 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
+import android.graphics.PointF;
+
 /**
  * This class represents all of the data and configuration settings for a certain User.
  * The User class represents the data associated with the user such as trades and cards.
@@ -40,6 +42,16 @@ public class Profile extends Model {
 
     public void setConfig(Config config) {
         this.config = config;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Profile) {
+            Profile otherProfile = (Profile) other;
+            return getProfileId().equals(((Profile) other).getProfileId());
+        } else {
+            return false;
+        }
     }
 
 }

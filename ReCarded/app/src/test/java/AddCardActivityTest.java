@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Models.Card;
-import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Inventory;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
@@ -32,20 +31,20 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
     private CheckBox checkbox;
 
     public AddCardActivityTest(){
-        super(com.sherpasteven.sscte.AddCardActivity.class);
-    }
+
+        super(com.sherpasteven.sscte.AddCardActivity.class);}
 
     public void testStart() throws Exception{
 
         Activity activity = getActivity();
     }
-/*
+
     public void testRegistration() {
-        final AddCardActivity activity = (AddCardActivity) getActivity();
+        AddCardActivity activity = (AddCardActivity) getActivity();
 
 
         final String name = "Dr.Fate";
-        final String catagory = "YuGiOh";
+        final String catagory = "DC";
         final String series = "Zantana and Friends";
         final String quality = "93";
         final String quantity = "2";
@@ -65,35 +64,13 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         activity.runOnUiThread((new Runnable() {
             public void run() {
                 nametext.setText(name);
+                //catagorytext.set(catagory);
                 seriestext.setText(series);
                 qualitytext.setText(quality);
                 quantitytext.setText(quantity);
                 commentstext.setText(comments);
             }
         }));
-
-
-
-        activity.runOnUiThread((new Runnable() {
-            public void run() {
-                nametext.setText(name);
-                seriestext.setText(series);
-                qualitytext.setText(quality);
-                quantitytext.setText(quantity);
-                commentstext.setText(comments);
-            }
-        }));
-
-        getInstrumentation().waitForIdleSync();
-
-        activity.runOnUiThread(
-                new Runnable() {
-                    public void run() {
-                        catagorytext.requestFocus();
-                        catagorytext.setSelection(2);
-                    }
-                }
-        );
 
         getInstrumentation().waitForIdleSync();
 
@@ -105,6 +82,10 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
 
         getInstrumentation().waitForIdleSync();
 
+        // Set up an ActivityMonitor
+        Instrumentation.ActivityMonitor receiverActivityMonitor =
+                getInstrumentation().addMonitor(InventoryActivity.class.getName(),
+                        null, false);
 
         getInstrumentation().waitForIdleSync();
         activity.runOnUiThread(new Runnable() {
@@ -116,31 +97,26 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         getInstrumentation().waitForIdleSync();
 
         //get the local user and see if that new card was added to inventory
-        User user = CurrentProfile.getCurrentProfile().getProfile(activity).getUser();
+        User user = new User("joshua","edmonton", "jjwhite@ualberta.ca",null); //-> replace with method to obtain local user
         Inventory inventory = user.getInventory();
         Card card = new Card(name, Integer.parseInt(quantity), new Quality(Integer.parseInt(quality)), catagory, series,
                 Boolean.TRUE, comments, user);
 
 
-        assertTrue(user.hasInventoryItem(card));
+
         InventoryActivity receiverActivity = (InventoryActivity)
                 receiverActivityMonitor.waitForActivityWithTimeout(1000);
-
         assertNotNull("ReceiverActivity is null", receiverActivity);
         assertEquals("Monitor for ReceiverActivity has not been called",
                 1, receiverActivityMonitor.getHits());
-        assertEquals("Activityat com.sherpasteven.sscte.AddCardActivityTest.testRegistration(AddCardActivityTest.java:110)\n" +
-                        "at java.lang.reflect.Method.invoke(Native Method)\n is of wrong type",
+        assertEquals("Activity is of wrong type",
                 InventoryActivity.class, receiverActivity.getClass());
 
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
-
-
         getInstrumentation().waitForIdleSync();
 
         receiverActivity.finish();
-
-    } */
+    }
 }

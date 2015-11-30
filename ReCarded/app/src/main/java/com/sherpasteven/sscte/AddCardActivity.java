@@ -35,7 +35,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
         GRID_LAYOUT_MANAGER,
         LINEAR_LAYOUT_MANAGER
     }
-    Boolean filledMainImage;
+
+
+
+    private Boolean filledMainImage;
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
@@ -117,6 +120,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
 
+
             if(!filledMainImage) {
                 ImageView imageView = getImageViewCard();
                 imageView.setImageBitmap(bitmap);
@@ -125,7 +129,7 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
             }
 
             getCardImages().add(bitmap);
-            mAdapter.notifyDataSetChanged();
+            this.Update(null);
         }
 
 
@@ -179,6 +183,10 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
 
     public CheckBox getCheckBox(){
         return (CheckBox) findViewById(R.id.checkBox);
+    }
+
+    public Button getAddImageButton(){
+        return (Button) findViewById(R.id.addmoreimages);
     }
 
     /**
@@ -239,5 +247,13 @@ public class AddCardActivity extends AppCompatActivity implements IView<Model>{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public Boolean getFilledMainImage() {
+        return filledMainImage;
+    }
+
+    public void setFilledMainImage(Boolean filledMainImage) {
+        this.filledMainImage = filledMainImage;
     }
 }
