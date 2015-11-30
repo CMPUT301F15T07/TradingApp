@@ -18,6 +18,7 @@ import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
+import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.IView;
@@ -25,6 +26,8 @@ import com.sherpasteven.sscte.Views.RecyclerView.BorrowerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.BorrowerViewTradeAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.OwnerViewTradeAdapter;
+
+import java.util.ArrayList;
 
 public class ViewTradeActivity extends AppCompatActivity implements IView<Model> {
 
@@ -41,6 +44,7 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
     Button acceptButton;
     Button declineButton;
     Button counterofferButton;
+    TextView statusInfo;
 
     TextView nametext;
 
@@ -82,7 +86,10 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
         //setUser(CurrentProfile.getCurrentProfile().getProfile(this).getUser());
         //trade = new Trade(user, friend);
         //this crashes
-        trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
+        ArrayList<Trade> tradelist = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades();
+        tradelist.addAll(CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPastTrades());
+
+        trade = tradelist.get(position);
 
         viewtradecontroller = new ViewTradeController(this, trade);
 
@@ -126,6 +133,10 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
 
     }
 
+    public TextView getStatusInfo() {
+        return (TextView) findViewById(R.id.StatusInfo);
+    }
+
     public Button getAcceptButton() {
         return (Button) findViewById(R.id.btnAccept);
     }
@@ -140,9 +151,12 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
 
     public void updateButtons() {
         trade = CurrentProfile.getCurrentProfile().getProfile(this).getUser().getTrades().getPendingTrades().get(position);
+        statusInfo = getStatusInfo();
         acceptButton = getAcceptButton();
         declineButton = getDeclineButton();
         counterofferButton = getCounterOfferButton();
+
+        statusInfo.setText("Trade Status: " + trade.getStatus().toString());
 
         if (trade != null) {
             if (trade.getStatus().equals("PENDING")) {
@@ -157,13 +171,13 @@ public class ViewTradeActivity extends AppCompatActivity implements IView<Model>
                     counterofferButton.setClickable(false);
                 }
             } else if (trade.getStatus().equals("DECLINED") || trade.getStatus().equals("ACCEPTED")) {
-                acceptButton.setBackgroundResource(R.drawable.trade_options_top);
+                acceptButton.setBackgroundResource(R.drawable.trade_options_top_grey);
                 acceptButton.setClickable(false);
                 acceptButton.setTextColor(Color.parseColor("#484848"));
-                declineButton.setBackgroundResource(R.drawable.trade_options_mid);
+                declineButton.setBackgroundResource(R.drawable.trade_options_mid_grey);
                 declineButton.setClickable(false);
                 declineButton.setTextColor(Color.parseColor("#484848"));
-                counterofferButton.setBackgroundResource(R.drawable.trade_options_bot);
+                counterofferButton.setBackgroundResource(R.drawable.trade_options_bot_grey);
                 counterofferButton.setTextColor(Color.parseColor("#484848"));
                 counterofferButton.setClickable(false);
             }
