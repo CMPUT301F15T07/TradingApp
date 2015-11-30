@@ -97,6 +97,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         //tradelist = createTradesList();
         tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
 
+
         if (mAdapter != null) mAdapter.notifyDataSetChanged();
         // doesn't get the other trades
     }
