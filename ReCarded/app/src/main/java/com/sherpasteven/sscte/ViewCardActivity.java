@@ -22,11 +22,13 @@ import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.SearchSingleton;
+import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewCardActivity extends AppCompatActivity implements IView<Model> {
 
@@ -35,6 +37,7 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
     private ViewCardController c;
     private Integer position;
     private Profile profile;
+    private List<Trade> trades;
     int menuselector;
     private Friend friend;
 
@@ -73,10 +76,13 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
             invalidateOptionsMenu();
             String tradescon = intent.getStringExtra("com.sherpasteven.sscte.trades");
             int tradelistpos = intent.getIntExtra("com.sherpasteven.sscte.tradepos", 0);
+            trades = new ArrayList<>();
+            trades.addAll(getProfile().getUser().getTrades().getPendingTrades());
+            trades.addAll(getProfile().getUser().getTrades().getPastTrades());
             if (tradescon.equals("owner")) {
-                setCard(getProfile().getUser().getTrades().getPendingTrades().get(tradelistpos).getOwnerList().get(position));
+                setCard(trades.get(tradelistpos).getOwnerList().get(position));
             } else {
-                setCard(getProfile().getUser().getTrades().getPendingTrades().get(tradelistpos).getBorrowList().get(position));
+                setCard(trades.get(tradelistpos).getBorrowList().get(position));
             }
         } else if(intent.hasExtra("com.sherpasteven.sscte.friendscard")){
             friend = getProfile().getUser().getFriends().get(intent.getIntExtra("com.sherpasteven.sscte.friendscard",0));
