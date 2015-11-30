@@ -10,7 +10,9 @@ import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
 
 /**
- * Controller for EditCardActivity.
+ * Controller for EditCardActivity. Mainly just
+ * used for editing fields of a card and then
+ * saving them to the card model.
  */
 public class EditCardController extends Controller<EditCardActivity, Profile> {
 
@@ -33,6 +35,12 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
     protected void setListeners(final EditCardActivity view) {
         Button submitButton = view.getEnterButton();
         submitButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On submit, we want to grab all the
+             * fields from the views and then update the
+             * model
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 

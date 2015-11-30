@@ -133,7 +133,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         } else if (cards.get(position).isTradable() == false) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
-
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 

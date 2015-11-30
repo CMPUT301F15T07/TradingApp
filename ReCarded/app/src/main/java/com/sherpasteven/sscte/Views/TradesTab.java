@@ -42,6 +42,7 @@ public class TradesTab extends Fragment implements IView<Model> {
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60;
     private List<Trade> tradelist;
+    int pendingCount = 0;
 
     private TradeLog trades;
     private TradesTabController tradestabcontroller;
@@ -96,7 +97,8 @@ public class TradesTab extends Fragment implements IView<Model> {
     public void dynamicLoad() {
         //tradelist = createTradesList();
         tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
-
+        tradelist.addAll(CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPastTrades());
+        pendingCount = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades().size();
         if (mAdapter != null) mAdapter.notifyDataSetChanged();
         // doesn't get the other trades
     }
@@ -132,7 +134,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new TradeAdapter(tradelist, CurrentProfile.getCurrentProfile().getProfile(hostActivity).getUser());
+        mAdapter = new TradeAdapter(tradelist, CurrentProfile.getCurrentProfile().getProfile(hostActivity).getUser(), pendingCount);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 

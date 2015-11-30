@@ -4,7 +4,8 @@ import com.sherpasteven.sscte.FriendListActivity;
 import com.sherpasteven.sscte.Models.User;
 
 /**
- * Created by ansonli on 2015-11-25.
+ * Controller for friendlistactivity.
+ *
  */
 public class FriendsListController extends Controller<FriendListActivity, User> {
 

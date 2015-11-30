@@ -9,6 +9,8 @@ import com.sherpasteven.sscte.Views.InventoryTab;
 
 /**
  * Controller for InventoryTab.
+ * Used for navigating to the add card activity
+ * when the add card button is hit
  */
 public class InventoryTabController extends Controller<InventoryTab,Inventory>{
     private final InventoryTab view;
