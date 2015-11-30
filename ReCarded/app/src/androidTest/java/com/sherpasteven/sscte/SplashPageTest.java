@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Profile;
 
 /**
@@ -63,7 +64,7 @@ public class SplashPageTest extends ActivityInstrumentationTestCase2 {
 
             getInstrumentation().waitForIdleSync();
 
-            Profile profile = activity.getProfile();
+            Profile profile = CurrentProfile.getCurrentProfile().getProfile(activity);
             assertEquals(profile.getUser().getName(), name);
             assertEquals(profile.getUser().getLocation(), city);
             assertEquals(profile.getUser().getEmail(), email);
