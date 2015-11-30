@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.R;
 

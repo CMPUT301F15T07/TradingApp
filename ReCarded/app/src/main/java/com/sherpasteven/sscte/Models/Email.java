@@ -3,7 +3,6 @@ package com.sherpasteven.sscte.Models;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * Create an email to send to a both the borrower and the owner.

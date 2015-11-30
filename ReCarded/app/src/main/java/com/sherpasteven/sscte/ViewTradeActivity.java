@@ -1,30 +1,21 @@
 package com.sherpasteven.sscte;
 
 import android.graphics.Color;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sherpasteven.sscte.Controllers.AddTradeController;
 import com.sherpasteven.sscte.Controllers.ViewTradeController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.Trade;
-import com.sherpasteven.sscte.Models.TradeComposer;
-import com.sherpasteven.sscte.Models.TradeLog;
 import com.sherpasteven.sscte.Models.User;
-import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.Views.IView;
-import com.sherpasteven.sscte.Views.RecyclerView.BorrowerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.BorrowerViewTradeAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.OwnerViewTradeAdapter;
 
 import java.util.ArrayList;

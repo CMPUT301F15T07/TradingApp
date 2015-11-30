@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
-import android.widget.EditText;
-
-import com.sherpasteven.sscte.Models.Profile;
 
 /**
  * Created by joshua on 06/11/15.

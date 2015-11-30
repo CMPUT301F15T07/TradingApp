@@ -1,9 +1,6 @@
 package com.sherpasteven.sscte.Models;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-
-import com.sherpasteven.sscte.Controllers.Controller;
 
 import java.util.ArrayList;
 

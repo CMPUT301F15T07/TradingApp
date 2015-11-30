@@ -16,7 +16,6 @@ import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.Trader;
 import com.sherpasteven.sscte.Models.User;
-import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.BorrowerTradeListAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.OwnerTradeListAdapter;

@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Inventory;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
 import com.sherpasteven.sscte.Models.User;
 

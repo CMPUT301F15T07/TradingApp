@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import com.sherpasteven.sscte.AddFriendActivity;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.ElasticSearch;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.R;
