@@ -51,7 +51,8 @@ public class TradeSynchronizer {
         }
 
         //updating existing trades
-        for (int i = 0; i < pendingTrades.size(); i++) {
+        int numPending = pendingTrades.size();
+        for (int i = 0; i < numPending; i++) {
             Trade userTrade = pendingTrades.get(i);
             UUID id = userTrade.getId();
             for (Friend friend : friends) {
@@ -65,6 +66,7 @@ public class TradeSynchronizer {
                         pendingTrades.add(friendTrade);
                     } else {
                         //trade was accepted
+                        //TODO(should this be added to pendingTrades?)
                         pastTrades.add(friendTrade);
                         swapItems(friendTrade);
                     }
@@ -96,6 +98,8 @@ public class TradeSynchronizer {
         }
 
         for (Card card : friendList) {
+            //TODO(swap the card owner's name here) <- test this
+            //card.setOwner(localProfile.getUser().getName());
             inventory.addCard(card);
         }
     }

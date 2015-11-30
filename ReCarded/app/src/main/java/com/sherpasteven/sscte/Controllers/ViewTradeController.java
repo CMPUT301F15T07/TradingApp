@@ -105,8 +105,8 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 tradelog.tradeFinalized(model);
                 setLocalProfile(profile);
                 model.notifyViews();
-                Email email = new Email();
-                email.tradeEmail(model, view);
+                //Email email = new Email();
+                //email.tradeEmail(model, view);
                 view.finish();
 
             }
