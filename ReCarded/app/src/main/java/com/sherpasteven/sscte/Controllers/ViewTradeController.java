@@ -11,11 +11,18 @@ import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Friend;
+import com.sherpasteven.sscte.Models.ISerializer;
+import com.sherpasteven.sscte.Models.Email;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Trade;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.Models.TradeLog;
+import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.ViewTradeActivity;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +33,12 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
     private final ViewTradeActivity view;
     private Trade model;
     private TradeLog tradelog;
+
+    private Profile profile;
+    private User owner;
+    private User borrower;
+    private ArrayList<Card> newborrowlist;
+    private ArrayList<Card> newownerlist;
 
     Button acceptButton;
     Button declineButton;
@@ -46,6 +59,11 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
         this.tradelog = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext()).getUser().getTrades();
     }
 
+    /**
+     * Sets the listener activity on the view in order to process response.
+     * Lets the user accept, decline and counteroffer trades.
+     * @param view view to set listeners on.
+     */
     @Override
     protected void setListeners(final ViewTradeActivity view) {
 
@@ -56,36 +74,39 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                owner = model.getOwner();
+                borrower = model.getBorrower();
+                profile = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext());
+
+                newownerlist = model.getOwnerList();
+                newborrowlist = model.getBorrowList();
+
+                if(borrower.equals(profile.getUser())){
+                    for(Card bc: newborrowlist){
+                        borrower.getInventory().removeCard(bc, bc.getQuantity());
+                    }
+                    for(Card oc: newownerlist){
+                        borrower.getInventory().addCard(oc);
+                    }
+                    profile.setUser(borrower);
+                } else {
+                    for(Card bc: newborrowlist){
+                        owner.getInventory().addCard(bc);
+                    }
+                    for(Card oc: newownerlist){
+                        owner.getInventory().removeCard(oc, oc.getQuantity());
+                    }
+                    profile.setUser(owner);
+                }
+                setLocalProfile(profile);
                 model.setStatus("ACCEPTED");
                 model.getBorrower().incrementRating();
                 model.getOwner().incrementRating();
                 tradelog.tradeFinalized(model);
                 model.notifyViews();
+                Email email = new Email();
+                email.tradeEmail(model, view);
                 view.finish();
-
-                String subject = "SSCTE Trade Completed" ;
-                String body = model.getOwner().getName() + " has accepted a trade with " + model.getBorrower().getName() + ".\n" +
-                        "+=================================+\n" +
-                        " " + model.getOwner().getName() + "'s cards traded:\n";
-                for (Card card : model.getOwnerList()) {
-                    body = body + " [" + card.getQuantity() + "] " + card.getName() + "\n";
-                }
-                body = body +
-                        "+=====================+\n" +
-                        " " + model.getBorrower().getName() + "'s cards traded:\n";
-                for (Card card : model.getBorrowList()) {
-                    body = body + " [" + card.getQuantity() + "] " + card.getName() + "\n";
-                }
-                body = body +
-                        "+=================================+\n\n" +
-                        " [Add some comments for continuing trade here]";
-
-
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",model.getOwner().getEmail() + ","+model.getBorrower().getEmail(), null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-                view.startActivity(Intent.createChooser(emailIntent, "Send email..."));
 
             }
         });
@@ -123,5 +144,10 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 v.getContext().startActivity(intent);
             }
         });
+    }
+
+    private void setLocalProfile(Profile profile) {
+        ISerializer<Profile> serializer = new LocalProfileSerializer();
+        serializer.Serialize(profile, view);
     }
 }

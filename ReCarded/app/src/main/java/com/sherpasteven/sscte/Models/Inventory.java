@@ -1,7 +1,5 @@
 package com.sherpasteven.sscte.Models;
 
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 /**
@@ -29,12 +27,18 @@ public class Inventory extends Model {
     }
 
 
+    /**
+     * Identifies if the inventory contains a specific card, and
+     * if found will increment the quantity of the card. If not
+     * it will add the card in the inventory.
+     * @param card
+     */
     public void addCard(Card card){
 
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
-        else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCatagory(),
+        else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCategory(),
                 card.getSeries(), card.isTradable(), card.getComments(), card.getImages(), card.getOwner()));}
 
         notifyViews();

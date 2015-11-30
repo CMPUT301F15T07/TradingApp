@@ -20,7 +20,8 @@ import com.sherpasteven.sscte.R;
 import java.util.ArrayList;
 
 /**
- * Controller for AddCardActivity.
+ * Controller for AddCardActivity. Mainly
+ * handles the submit button on click event
  */
 public class AddCardController extends Controller<AddCardActivity, Profile>{
 
@@ -42,6 +43,12 @@ public class AddCardController extends Controller<AddCardActivity, Profile>{
     protected void setListeners(final AddCardActivity view) {
         Button submitButton = view.getEnterButton();
         submitButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Handles the model changes when the submit add card
+             * button is hit such as constructing the card and
+             * adding it to the user's inventory
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 

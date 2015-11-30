@@ -20,13 +20,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Controllers.AddCardController;
-import com.sherpasteven.sscte.Controllers.FriendsListController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
-import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.Model;
 import com.sherpasteven.sscte.Views.IView;
-import com.sherpasteven.sscte.Views.RecyclerView.CardAdapter;
-import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
 import com.sherpasteven.sscte.Views.RecyclerView.MediaAdapter;
 
 import java.util.ArrayList;

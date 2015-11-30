@@ -54,9 +54,9 @@
         android:layout_marginTop="15dp"
         android:layout_alignStart="@+id/card_image"
         android:ellipsize="end"
-        android:maxLines="5"
-        android:layout_alignEnd="@+id/card_image"
-        android:layout_marginLeft="30dp" />
+        android:maxLines="1"
+        android:layout_marginLeft="15dp"
+        android:layout_toStartOf="@+id/btnDeleteFriend" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +69,8 @@
         android:textSize="12dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/txtName"
-        android:layout_alignStart="@+id/txtName" />
+        android:layout_alignStart="@+id/txtName"
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -84,7 +85,8 @@
         android:layout_alignStart="@+id/txtName"
         android:maxLines="1"
         android:ellipsize="middle"
-        android:layout_alignEnd="@+id/card_image" />
+        android:layout_alignEnd="@+id/card_image"
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,7 +99,8 @@
         android:textSize="12sp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/cityInfo"
-        android:layout_alignStart="@+id/txtName" />
+        android:layout_alignStart="@+id/txtName"
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,7 +115,8 @@
         android:layout_alignStart="@+id/txtName"
         android:layout_alignEnd="@+id/cityInfo"
         android:maxLines="1"
-        android:ellipsize="middle" />
+        android:ellipsize="middle"
+        android:layout_marginLeft="15dp" />
 
     <ImageButton
         android:layout_width="wrap_content"

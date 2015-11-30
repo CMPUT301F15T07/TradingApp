@@ -19,6 +19,11 @@ import com.sherpasteven.sscte.ViewTradeActivity;
 /**
  * Created by salim_000 on 2015-11-28.
  */
+
+/**
+ * Controller used to for the ViewFriendActivity, in which we use
+ * to implement the delete friend button.
+ */
 public class ViewFriendController extends Controller<ViewFriendActivity, Friend>{
 
     private final ViewFriendActivity view;
@@ -26,16 +31,18 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
 
     ImageButton deleteFriendButton;
 
-
     public ViewFriendController(ViewFriendActivity view, Friend model) {
         super(view, model);
         this.view = view;
         this.model = model;
     }
 
+    /**
+     * Set the listeners for the viewFriendActivity buttons.
+     * @param view view to set listeners on.
+     */
     @Override
     protected void setListeners(ViewFriendActivity view) {
-
         deleteFriendButton = view.getDeclineButton();
         deleteFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,13 +53,17 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
         });
     }
 
+    /**
+     * Alert dialog to ask whether to remove friend or not from the user friend list.
+     * @return
+     */
     private AlertDialog ConfirmDelete()
     {
         AlertDialog myQuittingDialogBox =new AlertDialog.Builder(view)
                 //set message, title, and icon
                 .setTitle("Delete")
                 .setMessage("Are you sure you want to delete Friend?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Friend friend = view.getFriend();
                         Profile profile = CurrentProfile.getCurrentProfile().getProfile(view);
@@ -62,7 +73,7 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
                     }
                 })
 
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
@@ -72,6 +83,10 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
 
     }
 
+    /**
+     * Updates the profiles data through out the app, by saving to the data file.
+     * @param profile
+     */
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, view);

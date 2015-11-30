@@ -9,17 +9,15 @@ import java.util.ArrayList;
 /**
  * This class represents a trading card and all of the data associated with it.
  * These cards will be the basis of the app since they are the objects that users will trade.
- *
- * Issues: the ability for cards to have images needs to be added.
  */
 public class Card extends Model {
 
     private String name;
     private int quantity;
     private Quality quality;
-    private String catagory;
+    private String category;
     private String series;
-    private Boolean tradable;
+    private Boolean tradeable;
     private String comments;
     private ArrayList<Image> images;
     private String owner;
@@ -31,14 +29,12 @@ public class Card extends Model {
         this.name = name;
         this.quantity = quantity;
         this.quality = quality;
-        this.catagory = catagory;
+        this.category = catagory;
         this.series = series;
-        this.tradable = tradable;
+        this.tradeable = tradable;
         this.comments = comments;
         this.images = images;
-        setOwner(owner);;
-
-
+        setOwner(owner);
     }
 
     public Card(String name, int quantity, Quality quality, String catagory,
@@ -47,9 +43,9 @@ public class Card extends Model {
         this.name = name;
         this.quantity = quantity;
         this.quality = quality;
-        this.catagory = catagory;
+        this.category = catagory;
         this.series = series;
-        this.tradable = tradable;
+        this.tradeable = tradable;
         this.comments = comments;
         this.images = images;
         this.owner = owner;
@@ -59,35 +55,35 @@ public class Card extends Model {
 
 
 
-    public Card(String name, int quantity, Quality quality, String catagory,
+    public Card(String name, int quantity, Quality quality, String category,
                 String series, Boolean tradable, String comments , User owner){
 
         this.name = name;
         this.quantity = quantity;
         this.quality = quality;
-        this.catagory = catagory;
+        this.category = category;
         this.series = series;
-        this.tradable = tradable;
+        this.tradeable = tradable;
         this.comments = comments;
-        this.images = new ArrayList<Image>();
+        this.images = new ArrayList<>();
         setOwner(owner);
 
 
     }
 
     public Card(String name, int imageID, int quantity, Quality quality, String catagory,
-                String series, Boolean tradable, String comments , User owner, Context context){
+                String series, Boolean tradeable, String comments , User owner, Context context){
 
         BitmapFactory bmf = new BitmapFactory();
 
         this.name = name;
         this.quantity = quantity;
         this.quality = quality;
-        this.catagory = catagory;
+        this.category = catagory;
         this.series = series;
-        this.tradable = tradable;
+        this.tradeable = tradeable;
         this.comments = comments;
-        this.images = new ArrayList<Image>();
+        this.images = new ArrayList<>();
         setOwner(owner);
         addImage(new Image(imageID, context));
     }
@@ -95,20 +91,34 @@ public class Card extends Model {
     public Card(String name, Image image, int quantity, Quality quality, String catagory,
                 String series, Boolean tradable, String comments , User owner){
 
-        BitmapFactory bmf = new BitmapFactory();
-
         this.name = name;
         this.quantity = quantity;
         this.quality = quality;
-        this.catagory = catagory;
+        this.category = catagory;
         this.series = series;
-        this.tradable = tradable;
+        this.tradeable = tradable;
         this.comments = comments;
-        this.images = new ArrayList<Image>();
+        this.images = new ArrayList<>();
         setOwner(owner);
         addImage(image);
     }
+    public Card( Card card){
+        this.name = card.getName();
+        this.quantity = card.getQuantity();
+        this.quality = card.getQuality();
+        this.category = card.getCategory();
+        this.series = card.getSeries();
+        this.tradeable = card.isTradable();
+        this.comments = card.getComments();
+        this.images = card.getImages();
+        setOwner(card.getOwner());
+    }
 
+    /**
+     * Retrieves the image from the album of a card.
+     * @param index of image to pull
+     * @return image from card structure
+     */
     public Image getImagebyIndex(int index){
         if (index < getImages().size()) {
             return getImages().get(index);
@@ -136,6 +146,11 @@ public class Card extends Model {
 
     }
 
+    /**
+     * Constructs the image in the card.
+     * @param index of images' position in the album.
+     * @return the bitmap constructed from the image.
+     */
     public Bitmap constructImage(int index){
         return getImages().get(index).constructImage();
     }
@@ -149,10 +164,6 @@ public class Card extends Model {
         this.images = images;
     }
 
-
-    //public int getImageID() { return imageID; }
-
-    //public void setImageID(int imageID) { this.imageID = imageID; }
 
     public String getName() {
         return name;
@@ -181,12 +192,12 @@ public class Card extends Model {
         notifyViews();
     }
 
-    public String getCatagory() {
-        return catagory;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCatagory(String catagory) {
-        this.catagory = catagory;
+    public void setCategory(String category) {
+        this.category = category;
         notifyViews();
     }
 
@@ -200,11 +211,11 @@ public class Card extends Model {
     }
 
     public Boolean isTradable() {
-        return tradable;
+        return tradeable;
     }
 
     public void setTradable(Boolean tradable) {
-        this.tradable = tradable;
+        this.tradeable = tradable;
         notifyViews();
     }
 
@@ -230,18 +241,21 @@ public class Card extends Model {
     public void setOwner(User owner) {
         this.owner = owner.getEmail() + "," + owner.getName() + "," + owner.getLocation();
     }
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
 
     /**
      * Identify whether two cards match. Key - the cards must be identical
      * in all values except for quantity.
-     * @param card
+     * @param card tested for equality.
      * @return true if all used values are equal, or returns false if not.
      */
     public Boolean equals(Card card){
         return this.getName().equals(card.getName()) &&
                 this.getQuality().getQuality().equals(card.getQuality().getQuality()) &&
-                this.getCatagory().equals(card.getCatagory()) &&
+                this.getCategory().equals(card.getCategory()) &&
                 this.getSeries().equals(card.getSeries()) &&
                 this.isTradable().equals(card.isTradable()) &&
                 this.getComments().equals(card.getComments()) &&
@@ -249,13 +263,13 @@ public class Card extends Model {
     }
 
     /**
-     * get the different cards categories that can be traded
+     * Get the different cards categories that can be traded
      * @return names of different card types that can be traded
      */
-    public static String[] getRelevantCatagories(){
+    public static String[] getRelevantCategories(){
 
-        String relevantcatagories[] = {"Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
+        String relevantcategories[] = {"Magic The Gathering","Pokemon","YuGiOh","Digimon","Sports","Steam Trading Card",
                 "Neopets", "Amiibo Cards", "Shrek Trading Cards", "MISC"};
-        return relevantcatagories;
+        return relevantcategories;
     }
 }

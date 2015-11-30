@@ -40,6 +40,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private String[] mDataSet;
     List<Card> cards;
     static View view;
+    static boolean wassearched;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -71,6 +72,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
                     alertDialog.show(); */
                     Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
+                    if (wassearched){
+                        myIntent.putExtra("com.sherpasteven.sscte.searched", 1);
+                    }
                     view.getContext().startActivity(myIntent);
 
                 }
@@ -96,8 +100,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
      * @param card Initialise list of cards for loading.
      */
 
-    public CardAdapter(List<Card> card){
+    public CardAdapter(List<Card> card, boolean checkforsearch){
         this.cards = card;
+        this.wassearched = checkforsearch;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -119,7 +124,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.cardName.setText(cards.get(position).getName());
-        viewHolder.cardDescription.setText(cards.get(position).getCatagory());
+        viewHolder.cardDescription.setText(cards.get(position).getCategory());
         if (cards.get(position).getImagebyIndex(0) != null) {
             viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
         }
@@ -128,7 +133,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         } else if (cards.get(position).isTradable() == false) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
-
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 

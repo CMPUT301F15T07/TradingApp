@@ -22,17 +22,22 @@ import java.util.ArrayList;
 /**
  * Created by joshua on 23/11/15.
  */
+
+/**
+ * controller used to implement functionality used in ViewCardActivity.
+ * Includes Menu function and
+ */
 public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
     ViewCardActivity view;
     Card model;
     int deletequantity;
 
-        public ViewCardController(ViewCardActivity view, Card model) {
-            super(view, model);
-            this.view = view;
-            this.model = model;
-        }
+    public ViewCardController(ViewCardActivity view, Card model) {
+        super(view, model);
+        this.view = view;
+        this.model = model;
+    }
 
     @Override
     protected void setListeners(ViewCardActivity view) {

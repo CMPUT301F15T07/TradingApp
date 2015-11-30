@@ -8,12 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.sherpasteven.sscte.Controllers.FriendsListController;
 import com.sherpasteven.sscte.Controllers.FriendsTabController;
 import com.sherpasteven.sscte.Models.CurrentProfile;
 import com.sherpasteven.sscte.Models.Friend;
 import com.sherpasteven.sscte.Models.Model;
-import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.User;
 import com.sherpasteven.sscte.Views.IView;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
@@ -28,7 +26,6 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
 
     private User currentUser;
-    private FriendsListController friendslistcontroller;
 
     protected LayoutManagerType mCurrentLayoutManagerType;
 
@@ -64,7 +61,6 @@ public class FriendListActivity extends AppCompatActivity implements IView<Model
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
         currentUser = CurrentProfile.getCurrentProfile().getProfile(this).getUser();
-        friendslistcontroller = new FriendsListController(this, currentUser);
 
         mAdapter = new FriendAdapter(currentUser);
         mAdapter.setActivity(this);

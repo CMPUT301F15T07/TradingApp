@@ -71,6 +71,11 @@ public class TradeLog extends Model {
         this.pastTrades = pastTrades;
     }
 
+    /**
+     * Returns trade if found trade ID in pending or past trade list.
+     * @param id
+     * @return return trade if found; null if not found.
+     */
     public Trade getTrade(UUID id){
         for (Trade trade : pendingTrades) {
             if (trade.getId().equals(id)) {

@@ -9,6 +9,8 @@ import com.sherpasteven.sscte.Views.InventoryTab;
 
 /**
  * Controller for InventoryTab.
+ * Used for navigating to the add card activity
+ * when the add card button is hit
  */
 public class InventoryTabController extends Controller<InventoryTab,Inventory>{
     private final InventoryTab view;
@@ -33,26 +35,5 @@ public class InventoryTabController extends Controller<InventoryTab,Inventory>{
                 view.navigateToAddCardActivity();
             }
         });
-
-
-
-        /*
-        Button editItem = (Button) view.getView().findViewById(R.id.btnEditItem);
-        editItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                view.navigateToEditCardActivity();
-            }
-        });
-
-        Button viewItem = (Button) view.getView().findViewById(R.id.btnViewItem);
-        viewItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                view.navigateToViewCardActivity();
-            }
-        });
-        */
-
     }
 }

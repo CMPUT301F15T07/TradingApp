@@ -1,6 +1,8 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.sherpasteven.sscte.CardTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.TradeComposer;
 import com.sherpasteven.sscte.R;
 
@@ -31,6 +34,8 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
     static View view;
     static Activity cta;
     static Boolean userState;
+    static int deletequantity;
+    static Card tradeCard;
 
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
@@ -50,46 +55,53 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                 @Override
                 public void onClick(View v) {
                     if (userState) {
-                        Card tradeCard = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getInventoryItem(getPosition());
+                        tradeCard = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getInventoryItem(getPosition());
                         if (tradeCard != null) {
                             if(tradeCard.isTradable()) {
                                 if(!TradeComposer.getTradeComposer().getComponents().getBorrowList().contains(tradeCard)) {
-                                    TradeComposer.getTradeComposer().getComponents().addToBorrower(tradeCard);
-                                    Toast.makeText(v.getContext(), "Card added to your trade list.", Toast.LENGTH_SHORT).show();
+                                    AlertDialog confirmDel = ConfirmDelete().create();
+                                    confirmDel.show();
                                 }
                                 else {
                                     Toast.makeText(v.getContext(), "Card is already in your trade list.", Toast.LENGTH_SHORT).show();
+                                    cta.finish();
                                 }
                             }
 
                             else {
                                 Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+                                cta.finish();
 
                             }
                         } else {
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                            cta.finish();
                         }
-                        cta.finish();
+
                     } else { // FIXME: Demo until friend's cards can be pulled
-                        Card tradeCard = cardList.get(getPosition());
+                        tradeCard = cardList.get(getPosition());
                         if (tradeCard != null) {
                             if(tradeCard.isTradable()) {
                                 if(!TradeComposer.getTradeComposer().getComponents().getOwnerList().contains(tradeCard)) {
-                                    TradeComposer.getTradeComposer().getComponents().addToOwner(tradeCard);
-                                    Toast.makeText(v.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
+                                    AlertDialog confirmDel = ConfirmDelete().create();
+                                    confirmDel.show();
+
 
                                 }
                                 else {
                                     Toast.makeText(v.getContext(), "Card is already in their trade list", Toast.LENGTH_SHORT).show();
+                                    cta.finish();
                                 }
                             }
                             else {
                                 Toast.makeText(v.getContext(), "Card is not tradeable.", Toast.LENGTH_SHORT).show();
+                                cta.finish();
                             }
                         } else {
                             Toast.makeText(v.getContext(), "Card could not be added to trade...", Toast.LENGTH_SHORT).show();
+                            cta.finish();
                         }
-                        cta.finish();
+
                     }
 
                     /*
@@ -149,7 +161,7 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.cardName.setText(cardList.get(position).getName());
-        viewHolder.cardDescription.setText(cardList.get(position).getCatagory());
+        viewHolder.cardDescription.setText(cardList.get(position).getCategory());
         if (cardList.get(position).getImagebyIndex(0) != null) {
             viewHolder.cardPhoto.setImageBitmap(cardList.get(position).constructImage(0));
         }
@@ -166,6 +178,60 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
      */    @Override
     public int getItemCount() {
         return cardList.size();
+    }
+    private static AlertDialog.Builder ConfirmDelete()
+    {
+
+        AlertDialog.Builder myQuittingDialogBox =new AlertDialog.Builder(view.getContext());
+
+        myQuittingDialogBox.setTitle("How many would you like to trade?");
+        //myQuittingDialogBox.setMessage("Are you sure you want to delete all copies of this card?");
+        myQuittingDialogBox.setSingleChoiceItems(getQuantityList(), -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                deletequantity = item;
+                deletequantity++; //iterate
+
+            }
+        });
+        myQuittingDialogBox.setPositiveButton("Trade", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Card pendingCard = new Card(tradeCard);
+                pendingCard.setQuantity((deletequantity));
+                tradeCard.setQuantity(tradeCard.getQuantity()-deletequantity);
+                if(userState) {
+                    TradeComposer.getTradeComposer().getComponents().addToBorrower(pendingCard);
+                } else {
+                    TradeComposer.getTradeComposer().getComponents().addToOwner(pendingCard);
+                }
+                Toast.makeText(view.getContext(), "Card added to your friend's trade list.", Toast.LENGTH_SHORT).show();
+                cta.finish();
+
+            }
+
+        });
+
+
+        myQuittingDialogBox.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        myQuittingDialogBox.create();
+        return myQuittingDialogBox;
+
+
+    }
+    private static CharSequence[] getQuantityList(){
+        int i;
+        CharSequence[] quantityArray = new CharSequence[tradeCard.getQuantity()];
+
+        for(i = 0; i<tradeCard.getQuantity();i++) {
+            quantityArray[i] = String.valueOf(i+1);
+        }
+        return quantityArray;
+
     }
 
 }

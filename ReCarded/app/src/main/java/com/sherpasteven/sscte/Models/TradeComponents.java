@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Created by joshua on 25/11/15.
+ * Components used to generate the trade.
+ * Contains a list of components used by the TradeComposer singleton,
+ * in order to create a 'temporary' trade to process.
  */
 public class TradeComponents extends Model {
 
@@ -21,6 +23,11 @@ public class TradeComponents extends Model {
         setBorrowList(new ArrayList<Card>());
     }
 
+    /**
+     * Unique trade id's are used primarily to ensure that
+     * counteroffers are completed using the same trade id.
+     * @return UUID of the trade.
+     */
     public UUID getTradeId() {
         return tradeId;
     }
@@ -29,6 +36,11 @@ public class TradeComponents extends Model {
         this.tradeId = tradeId;
     }
 
+    /**
+     * Provides the logic to determine whether or not the trade is ready to process.
+     * If it's not ready to process, further actions taken to export a trade are prevented.
+     * @return boolean declaring whether or not the trade is composable
+     */
     public Boolean isComposable(){
         if(getOwnerList() != null && getBorrowList() != null){
             if(!getOwnerList().isEmpty() &&  !getBorrowList().isEmpty()){
@@ -60,7 +72,6 @@ public class TradeComponents extends Model {
         }
     }
 
-
     public void addToBorrower(Card card){
         if(card.isTradable()) {
             if(!getBorrowList().contains(card)) {
@@ -69,7 +80,6 @@ public class TradeComponents extends Model {
             }
         }
     }
-
 
     public Trader getBorrower() {
         return borrower;
@@ -108,6 +118,11 @@ public class TradeComponents extends Model {
         notifyViews();
     }
 
+    /**
+     * Gets a string value providing the key details of a user.
+     * @param user to parse
+     * @return string containing concatenated details.
+     */
     public String userStringValue(User user) {
         return user.getEmail() + "," + user.getName() + "," + user.getLocation();
     }

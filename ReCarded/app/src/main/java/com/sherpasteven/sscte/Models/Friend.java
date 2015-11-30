@@ -8,21 +8,26 @@ import com.sherpasteven.sscte.Controllers.Controller;
 import java.util.ArrayList;
 
 /**
- * Created by joshua on 27/11/15.
+ * Friend extends User, and retains critical values that are required for the
+ * application to understand other 'users', without resulting in critical failures.
+ * Reduced to serve ElasticSearch properties.
  */
 public class Friend extends User{
 
     public Friend(User user, Context context){
-        super(user.getName(), user.getLocation(), user.getEmail(), context);
+        super(user.getName(), user.getLocation(), user.getEmail(), user.getProfilePic(), user.getProfileId());
         setInventory(user.getInventory());
-        setProfilePic(user.getProfilePic());
         setFriends(null);
         setTrades(user.getTrades());
-        setProfileID(user.getProfileId());
     }
 
+    /**
+     * Overrides the User model with a RuntimeException.
+     * Developed in order to notify users that the friends' friends is called,
+     * which cannot be completed in the application (and is designed so).
+     */
     @Override
     public ArrayList<Friend> getFriends() {
-        throw new RuntimeException("This functionality is not permissable");
+        throw new RuntimeException("This functionality is not permissible");
     }
 }

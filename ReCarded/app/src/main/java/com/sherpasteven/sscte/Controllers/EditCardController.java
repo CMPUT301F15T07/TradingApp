@@ -1,25 +1,18 @@
 package com.sherpasteven.sscte.Controllers;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.sherpasteven.sscte.EditCardActivity;
-import com.sherpasteven.sscte.Models.Image;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
 import com.sherpasteven.sscte.Models.Quality;
-import com.sherpasteven.sscte.R;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
- * Controller for EditCardActivity.
+ * Controller for EditCardActivity. Mainly just
+ * used for editing fields of a card and then
+ * saving them to the card model.
  */
 public class EditCardController extends Controller<EditCardActivity, Profile> {
 
@@ -42,6 +35,12 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
     protected void setListeners(final EditCardActivity view) {
         Button submitButton = view.getEnterButton();
         submitButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On submit, we want to grab all the
+             * fields from the views and then update the
+             * model
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 
@@ -77,7 +76,7 @@ public class EditCardController extends Controller<EditCardActivity, Profile> {
                 model.getUser().getInventoryItem(view.getPosition()).setName(name);
                 model.getUser().getInventoryItem(view.getPosition()).setQuantity(quantity);
                 model.getUser().getInventoryItem(view.getPosition()).setQuality(quality);
-                model.getUser().getInventoryItem(view.getPosition()).setCatagory(catagory);
+                model.getUser().getInventoryItem(view.getPosition()).setCategory(catagory);
                 model.getUser().getInventoryItem(view.getPosition()).setSeries(series);
                 model.getUser().getInventoryItem(view.getPosition()).setTradable(tradable);
                 model.getUser().getInventoryItem(view.getPosition()).setComments(comments);

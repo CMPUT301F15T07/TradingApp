@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is a generic Model class using active model MVC
+ * This is a generic Model class using active model MVC.
+ * Views are added and then called to update when the
+ * underlying model changes.
  * @param <V> The View class to associate with this model
  */
 public class Model<V extends IView> {
@@ -30,6 +32,10 @@ public class Model<V extends IView> {
         views.remove(view);
     }
 
+    /**
+     * Notify views that the underlying
+     * model has changed.
+     */
     public void notifyViews(){
         if(views != null) {
             for (IView view : views) {
