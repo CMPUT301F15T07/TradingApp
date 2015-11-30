@@ -31,6 +31,7 @@ public class TradeLog extends Model {
         if(trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")){
             pastTrades.add(trade);
             pendingTrades.remove(trade);
+            notifyViews();
         }
     }
 
