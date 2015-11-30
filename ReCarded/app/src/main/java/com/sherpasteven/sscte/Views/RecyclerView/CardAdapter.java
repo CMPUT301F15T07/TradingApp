@@ -128,6 +128,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         if (cards.get(position).getImagebyIndex(0) != null) {
             viewHolder.cardPhoto.setImageBitmap(cards.get(position).constructImage(0));
         }
+        Card card = cards.get(position);
         if (cards.get(position).isTradable() == true) {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_available));
         } else if (cards.get(position).isTradable() == false) {

@@ -107,10 +107,12 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
 
         InventoryActivity receiverActivity = (InventoryActivity)
                 receiverActivityMonitor.waitForActivityWithTimeout(1000);
+
         assertNotNull("ReceiverActivity is null", receiverActivity);
         assertEquals("Monitor for ReceiverActivity has not been called",
                 1, receiverActivityMonitor.getHits());
-        assertEquals("Activity is of wrong type",
+        assertEquals("Activityat com.sherpasteven.sscte.AddCardActivityTest.testRegistration(AddCardActivityTest.java:110)\n" +
+                        "at java.lang.reflect.Method.invoke(Native Method)\n is of wrong type",
                 InventoryActivity.class, receiverActivity.getClass());
 
         // Remove the ActivityMonitor
