@@ -38,6 +38,7 @@ public class Inventory extends Model {
         if(containsCard(card)){
             incrementCard(card, card.getQuantity());
         }
+        //TODO(we want to swap the owner here)
         else {getCards().add( new Card(card.getName(), card.getQuantity(), card.getQuality(), card.getCategory(),
                 card.getSeries(), card.isTradable(), card.getComments(), card.getImages(), card.getOwner()));}
 
@@ -82,11 +83,10 @@ public class Inventory extends Model {
 
             if(getCard(i).equals(card)){
                 getCards().remove(i);
+                notifyViews();
                 return;
             }
         }
-
-        notifyViews();
     }
 
 

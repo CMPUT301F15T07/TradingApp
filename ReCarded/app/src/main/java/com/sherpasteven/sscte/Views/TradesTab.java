@@ -92,6 +92,8 @@ public class TradesTab extends Fragment implements IView<Model> {
         super.onCreate(savedInstanceState);
         User currentUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
         trades = currentUser.getTrades();
+        ProfileSynchronizer synchronizer = SynchronizeSingleton.GetSynchronize(hostActivity);
+        synchronizer.addView(this);
         dynamicLoad();
     }
 

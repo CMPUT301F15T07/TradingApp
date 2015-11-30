@@ -87,7 +87,6 @@ public class ElasticSearch extends Model {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        String json = gson.toJson(friend);
         httpPost.setHeader("Accept","application/json");
 
         httpPost.setEntity(stringentity);

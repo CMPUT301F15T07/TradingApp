@@ -33,6 +33,7 @@ public class TradeLog extends Model {
             //pendingTrades.remove(trade);
             notifyViews();
         }
+        //TODO(take out one of these notifyViews())
         notifyViews();
     }
 
