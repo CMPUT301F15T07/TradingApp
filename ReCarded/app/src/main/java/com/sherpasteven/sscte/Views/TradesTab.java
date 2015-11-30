@@ -100,7 +100,7 @@ public class TradesTab extends Fragment implements IView<Model> {
     public void dynamicLoad() {
         //tradelist = createTradesList();
 
-        //tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
+        //tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUttrr().getTrades().getPendingTrades();
         User localUser = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser();
         TradeLog localTrades = localUser.getTrades();
         if (tradelist == null) {

@@ -117,6 +117,7 @@ public class FriendsTab extends Fragment implements IView<Model> {
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
         mAdapter = new FriendAdapter(currentUser);
+        mAdapter.setTradeState(false);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
