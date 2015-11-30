@@ -61,18 +61,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        /*
-                        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                        alertDialog.setTitle("Alert");
-                        alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                        */
+
                         Intent myIntent = new Intent(v.getContext(), ViewFriendActivity.class);
                         myIntent.putExtra("com.sherpasteven.sscte.viewfriend", getPosition());
                         v.getContext().startActivity(myIntent);
@@ -82,13 +71,11 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         Intent myIntent = new Intent(v.getContext(), AddTradeActivity.class);
                         myIntent.putExtra("com.sherpasteven.sscte.friend", getPosition());
                         a.finish();
                         v.getContext().startActivity(myIntent);
-                        //ArrayList<User> friends = CurrentProfile.getCurrentProfile().getProfile(v.getContext()).getUser().getFriends();
-                        //TradeComposer.getTradeComposer().getComponents().setOwner(friends.get(getPosition()));
-
                     }
                 });
             }
@@ -101,7 +88,6 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         }
 
     }
-    // END_INCLUDE(recyclerViewSampleViewHolder)
 
     /**
      * Initialize the dataset of the Adapter.
@@ -112,8 +98,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         this.currentUser = user;
     }
 
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
-    // Create new views (invoked by the layout manager)
+    /**
+     * Creates the viewHolder based on the XML structure.
+     * @param viewGroup viewGroup to process.
+     * @param viewType viewType to use, unedited.
+     * @return
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -122,10 +112,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
         return new ViewHolder(v);
     }
-    // END_INCLUDE(recyclerViewOnCreateViewHolder)
 
-    // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     *
+     * @param viewHolder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
@@ -142,7 +134,6 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             }
         }
     }
-    // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     /** Gets item for dynamic loading.
      * @return size of dataset (invoked by layout manager)

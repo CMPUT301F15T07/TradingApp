@@ -31,6 +31,7 @@ import com.sherpasteven.sscte.Views.RecyclerView.TradeAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -42,6 +43,7 @@ public class TradesTab extends Fragment implements IView<Model> {
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60;
     private List<Trade> tradelist;
+    int pendingCount = 0;
 
     private TradeLog trades;
     private TradesTabController tradestabcontroller;
@@ -96,7 +98,8 @@ public class TradesTab extends Fragment implements IView<Model> {
     public void dynamicLoad() {
         //tradelist = createTradesList();
         tradelist = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades();
-
+        //tradelist.addAll(CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPastTrades());
+        //pendingCount = CurrentProfile.getCurrentProfile().getProfile(this.getContext()).getUser().getTrades().getPendingTrades().size();
         if (mAdapter != null) mAdapter.notifyDataSetChanged();
         // doesn't get the other trades
     }
@@ -132,12 +135,46 @@ public class TradesTab extends Fragment implements IView<Model> {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new TradeAdapter(tradelist, CurrentProfile.getCurrentProfile().getProfile(hostActivity).getUser());
+        sortByStatus(tradelist);
+        mAdapter = new TradeAdapter(tradelist, CurrentProfile.getCurrentProfile().getProfile(hostActivity).getUser(), pendingCount);
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
         return rootView;
     }
+
+    public void sortByStatus(List<Trade> tradelist) {
+        Collections.sort(tradelist, tradelistSort);
+    }
+
+    static private Comparator<Trade> tradelistSort;
+    static {
+        tradelistSort = new Comparator<Trade>() {
+            @Override
+            public int compare(Trade t1, Trade t2){
+                if (t1 == null || t2 == null) {
+                    return 0;
+                }
+                if (t1.getStatus().equals(t2.getStatus())) {
+                    return 0;
+                }
+                if (t1.getStatus().equals("PENDING")) {
+                    return -1;
+                }
+                if (t2.getStatus().equals("PENDING")) {
+                    return 1;
+                }
+                if (t1.getStatus().equals("ACCEPTED")) {
+                    return -1;
+                }
+                if (t2.getStatus().equals("ACCEPTED")) {
+                    return 1;
+                }
+                return 0;
+            }
+        };
+    }
+
 
     @Override
     public void Update(Model model) {
@@ -162,6 +199,7 @@ public class TradesTab extends Fragment implements IView<Model> {
         Toast.makeText(this.getContext(), "Adding a trade...", Toast.LENGTH_SHORT).show();
         getActivity().startActivity(myIntent);
     }
+
     public void navigateToEditTradeActivity(){
         Intent myIntent = new Intent(getActivity(), EditTradeActivity.class);
         Toast.makeText(this.getContext(), "Editing selected trade...", Toast.LENGTH_SHORT).show();

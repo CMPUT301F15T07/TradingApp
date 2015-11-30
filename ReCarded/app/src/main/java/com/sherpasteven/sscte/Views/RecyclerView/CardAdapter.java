@@ -1,6 +1,6 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
 /*
-* Copyright (C) 2014 The Android Open Source Project
+* Copyright (C) 2015 Sherpa Steven Ltd., The Android Open Source Project
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -59,17 +59,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show(); */
                     Intent myIntent = new Intent(view.getContext(), ViewCardActivity.class);
                     myIntent.putExtra("com.sherpasteven.sscte.viewcard", getPosition());
                     if (wassearched){
@@ -93,7 +82,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         }
 
     }
-    // END_INCLUDE(recyclerViewSampleViewHolder)
 
     /**
      * Initialize the dataset of the Adapter.
@@ -105,8 +93,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         this.wassearched = checkforsearch;
     }
 
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
-    // Create new views (invoked by the layout manager)
+    /**
+     * Setup viewholder based on the XML.
+     * @param viewGroup ViewGroup to style with the xml
+     * @param viewType ViewType, unused.
+     * @return Viewholder for the cards.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -115,10 +107,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         return new ViewHolder(v);
     }
-    // END_INCLUDE(recyclerViewOnCreateViewHolder)
 
-    // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Setup the individual style for each viewHolder.
+     * Develop the cards styles depending on each card state
+     * @param viewHolder the base viewholder to edit
+     * @param position the position to get the card from
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         // Get element from your dataset at this position and replace the contents of the view
@@ -134,7 +129,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
     }
-    // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     /**
      * @return the size of your dataset (invoked by the layout manager)

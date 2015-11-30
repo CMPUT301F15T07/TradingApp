@@ -23,7 +23,7 @@ import com.sherpasteven.sscte.R;
 import java.util.ArrayList;
 
 /**
- * Created by ansonli on 2015-11-23.
+ * CardTradeAdapter sets the card adapter for add trades functionality.
  */
 public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.ViewHolder>{
 
@@ -38,7 +38,6 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
     static Card tradeCard;
 
 
-    // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
@@ -103,19 +102,6 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
                         }
 
                     }
-
-                    /*
-                    AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Element " + getPosition() + " to be shown");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
-                    */
                 }
             });
             cv = (CardView) v.findViewById(R.id.cv);
@@ -134,15 +120,19 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
      * Initialize the dataset of the Adapter.
      * @param cardList User data loaded to identify friends used by adapter.
      */
-
     public CardTradeAdapter(ArrayList<Card> cardList, Boolean state, CardTradeActivity cta){
         this.cardList = cardList;
         this.userState = state;
         this.cta = cta;
     }
 
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
-    // Create new views (invoked by the layout manager)
+    /**
+     * Setup the view holder for the cards for trade,
+     * designed by the XML.
+     * @param viewGroup group of cards to be set.
+     * @param viewType optional, not implemented.
+     * @return viewholder to process.
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -151,10 +141,12 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
         return new ViewHolder(v);
     }
-    // END_INCLUDE(recyclerViewOnCreateViewHolder)
 
-    // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Sets the viewHolder to the determined styles preset.
+     * @param viewHolder viewHolder to be implemented
+     * @param position position of the card to use.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
@@ -171,11 +163,12 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             viewHolder.cardStatus.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.ic_trade_unavailable));
         }
     }
-    // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    /** Gets item for dynamic loading.
+    /**
+     * Gets item for dynamic loading.
      * @return size of dataset (invoked by layout manager)
-     */    @Override
+     */
+    @Override
     public int getItemCount() {
         return cardList.size();
     }
@@ -198,7 +191,8 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             public void onClick(DialogInterface dialog, int whichButton) {
                 Card pendingCard = new Card(tradeCard);
                 pendingCard.setQuantity((deletequantity));
-                tradeCard.setQuantity(tradeCard.getQuantity()-deletequantity);
+                //CurrentProfile.getCurrentProfile().getProfile(view.getContext()).getUser().removeInventoryItem(tradeCard, deletequantity);
+                //tradeCard.setQuantity(tradeCard.getQuantitquantity);
                 if(userState) {
                     TradeComposer.getTradeComposer().getComponents().addToBorrower(pendingCard);
                 } else {
@@ -223,6 +217,12 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
 
 
     }
+
+    /**
+     * Gets the quantity for the cards when selecting the number to trade.
+     * Zero indexed - as a result, +1 must be added to the selected value.
+     * @return the array to be processed in the alertdialog.
+     */
     private static CharSequence[] getQuantityList(){
         int i;
         CharSequence[] quantityArray = new CharSequence[tradeCard.getQuantity()];

@@ -31,7 +31,6 @@ public class ViewFriendController extends Controller<ViewFriendActivity, Friend>
 
     ImageButton deleteFriendButton;
 
-
     public ViewFriendController(ViewFriendActivity view, Friend model) {
         super(view, model);
         this.view = view;

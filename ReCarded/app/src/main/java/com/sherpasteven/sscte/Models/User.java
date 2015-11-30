@@ -17,7 +17,7 @@ public class User extends Model {
     private String name;
     private String location;
     private String email;
-    private Integer rating;
+    private int rating;
     private Image profilepic;
     private ArrayList<Friend> friends = new ArrayList<Friend>();
     private Inventory inventory;
@@ -54,21 +54,23 @@ public class User extends Model {
      * @param profilepic
      * @param id
      */
-    public User(String name, String location, String email, Image profilepic, ProfileId id){
+    public User(String name, String location, String email, Image profilepic, ProfileId id, Integer rating){
 
         this.name = name;
         this.location = location;
         this.email = email;
         this.inventory = new Inventory();
         this.trades = new TradeLog();
-        rating = 0;
+        this.rating = rating;
         setFriends(new ArrayList<Friend>());
         setProfilePic(profilepic);
         //get id here
         profileId = id;
     }
 
-
+    public Integer getRating() {
+        return rating;
+    }
 
     public String getEmail() {
         return email;
@@ -269,9 +271,6 @@ public class User extends Model {
         return true;
     }
 
-    public Integer getRating() {
-        return rating;
-    }
 
     public void setRating(Integer rating) {
         this.rating = rating;
@@ -279,5 +278,10 @@ public class User extends Model {
 
     public void incrementRating() {
         rating++;
+    }
+
+
+    public String getOwnerInfo() {
+        return(getEmail() + "," + getName() + "," + getLocation());
     }
 }

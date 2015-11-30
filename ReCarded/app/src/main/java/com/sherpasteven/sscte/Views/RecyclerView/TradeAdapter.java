@@ -17,7 +17,11 @@ package com.sherpasteven.sscte.Views.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.internal.widget.TintManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -44,6 +48,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
     private String[] mDataSet;
     List<Trade> trades;
     private User currentUser;
+    static int pendingCount;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -92,9 +97,10 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
      * Initialize the dataset of the Adapter.
      * @param trades List of trades initialised for loading.
      */
-    public TradeAdapter(List<Trade> trades, User currentUser){
+    public TradeAdapter(List<Trade> trades, User currentUser, int pendingCount){
         this.trades = trades;
         this.currentUser = currentUser;
+        this.pendingCount = pendingCount;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -134,11 +140,16 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
         }
         viewHolder.tradeDescription.setText(trades.get(position).getStatus() + ": " + cardsum + " cards in trade.");
 
+        final int lightgreen = 0xFFCCFFC3;
+        final int lightred = 0xFFFFDED4;
+
         if(trades.get(position).getStatus().equals("ACCEPTED")){
-            viewHolder.itemView.setBackgroundColor(0xccffcc);
+            viewHolder.cv.setCardBackgroundColor(lightgreen); // will change the background color of the card view to green
         }
         else if(trades.get(position).getStatus().equals("DECLINED")){
-            viewHolder.itemView.setBackgroundColor(0xffcccc);
+            viewHolder.cv.setCardBackgroundColor(lightred); // will change the background color of the card view to green
+        } else {
+            viewHolder.cv.setCardBackgroundColor(0xFFFFFFFF);
         }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)

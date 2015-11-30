@@ -14,7 +14,7 @@ public class TradeLog extends Model {
 
     public TradeLog(ArrayList<Trade> pendingTrades, ArrayList<Trade> pastTrades) {
         this.pendingTrades = pendingTrades;
-        this.pastTrades = pastTrades;
+        //this.pastTrades = pastTrades;
     }
 
     public TradeLog(){
@@ -27,11 +27,13 @@ public class TradeLog extends Model {
      * FIXME: Requires notification addition.
      * @param trade Trade to be added to the trade log.
      */
-    public void tradeFinalized(Trade trade){
-        if(trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")){
-            pastTrades.add(trade);
-            pendingTrades.remove(trade);
+    public void tradeFinalized(Trade trade) {
+        if (trade.getStatus().equals("ACCEPTED") || trade.getStatus().equals("DECLINED")) {
+           // pastTrades.add(trade);
+            //pendingTrades.remove(trade);
+            notifyViews();
         }
+        notifyViews();
     }
 
     public void addTrade(Trade trade){
@@ -55,7 +57,12 @@ public class TradeLog extends Model {
     }
 
     public ArrayList<Trade> getPendingTrades() {
-        return pendingTrades;
+        if(pendingTrades == null){
+            return new ArrayList<Trade>();
+        }
+        else {
+            return pendingTrades;
+        }
     }
 
     public void setPendingTrades(ArrayList<Trade> pendingTrades) {
