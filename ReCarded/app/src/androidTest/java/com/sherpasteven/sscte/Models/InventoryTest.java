@@ -2,21 +2,15 @@ package com.sherpasteven.sscte.Models;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.AndroidTestCase;
 
 import junit.framework.TestCase;
 
 /**
  * Created by joshua on 29/11/15.
  */
-public class InventoryTest extends ActivityInstrumentationTestCase2 {
+public class InventoryTest extends AndroidTestCase {
 
-    public InventoryTest(){
-        super(com.sherpasteven.sscte.InventoryActivity.class);
-    }
-
-    public void testStart() throws Exception {
-        Activity activity = getActivity();
-    }
 
     private Inventory inventory;
 
@@ -29,7 +23,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
 
     public void setUp() throws Exception {
         super.setUp();
-        user = new User("Josh", "Edmonton", "jjwhite@ualberta.ca", getActivity());
+        user = new User("Josh", "Edmonton", "jjwhite@ualberta.ca", getContext());
 
         String name1 = "Charizard";
         Quality quality1 = new Quality(50);
@@ -90,7 +84,7 @@ public class InventoryTest extends ActivityInstrumentationTestCase2 {
     public void testRemoveCard() throws Exception {
         user.addInventoryItem(card1);
 
-        assertEquals(card1, user.returnInventoryItem(card1));
+        assertTrue(card1.equals(user.returnInventoryItem(card1)));
 
         user.removeInventoryItem(card1, 1);
         assertEquals(user.returnInventoryItem(card1).getQuantity(), 2);

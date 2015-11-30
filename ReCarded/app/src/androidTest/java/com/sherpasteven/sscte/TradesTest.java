@@ -14,6 +14,7 @@ import com.sherpasteven.sscte.Models.User;
  * Created by elias on 17/10/15.
  */
 public class TradesTest extends ApplicationTestCase<Application> {
+
     public TradesTest() {
         super(Application.class);
     }
@@ -52,7 +53,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
         return new Trader(joshua, this.getContext());
 
     }
-
+/*
     public void testCreateTrade() {
 
 
@@ -258,7 +259,8 @@ public class TradesTest extends ApplicationTestCase<Application> {
         assertEquals(emailOwner.status() ,"SENT");
         assertEquals(emailBorrower.status(), "SENT");
     }
+    */
 
-}
+//}
 
 }
