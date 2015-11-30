@@ -3,6 +3,7 @@ package com.sherpasteven.sscte.Models;
 import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.AndroidTestCase;
 
 import com.sherpasteven.sscte.ProfileActivity;
 import com.sherpasteven.sscte.Views.IView;
@@ -10,7 +11,7 @@ import com.sherpasteven.sscte.Views.IView;
 /**
  * Created by elias on 29/11/15.
  */
-public class ElasticSearchTest extends ActivityInstrumentationTestCase2<ProfileActivity> implements IView {
+public class ElasticSearchTest extends AndroidTestCase implements IView {
 
     ElasticSearch elasticSearch;
     Friend friend;
@@ -20,7 +21,7 @@ public class ElasticSearchTest extends ActivityInstrumentationTestCase2<ProfileA
 
 
     public ElasticSearchTest() {
-        super(ProfileActivity.class);
+        super();
     }
 
     @Override
@@ -32,15 +33,12 @@ public class ElasticSearchTest extends ActivityInstrumentationTestCase2<ProfileA
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
-        splashPage = getActivity();
         elasticSearch = new ElasticSearch();
         elasticSearch.addView(this);
-        User user = new User("test", "test", "test", splashPage);
-        friend = new Friend(user, splashPage);
-
-
+        User user = new User("test", "test", "test", getContext());
+        friend = new Friend(user, getContext());
     }
+
     @Override
     protected void tearDown() throws Exception {
         //elasticSearch.deleteView(this);
