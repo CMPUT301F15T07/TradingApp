@@ -198,7 +198,8 @@ public class CardTradeAdapter extends RecyclerView.Adapter<CardTradeAdapter.View
             public void onClick(DialogInterface dialog, int whichButton) {
                 Card pendingCard = new Card(tradeCard);
                 pendingCard.setQuantity((deletequantity));
-                tradeCard.setQuantity(tradeCard.getQuantity()-deletequantity);
+                //CurrentProfile.getCurrentProfile().getProfile(view.getContext()).getUser().removeInventoryItem(tradeCard, deletequantity);
+                //tradeCard.setQuantity(tradeCard.getQuantitquantity);
                 if(userState) {
                     TradeComposer.getTradeComposer().getComponents().addToBorrower(pendingCard);
                 } else {
