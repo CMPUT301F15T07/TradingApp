@@ -33,6 +33,7 @@ public class TradeLog extends Model {
             pendingTrades.remove(trade);
             notifyViews();
         }
+
     }
 
     public void addTrade(Trade trade){
@@ -56,7 +57,12 @@ public class TradeLog extends Model {
     }
 
     public ArrayList<Trade> getPendingTrades() {
-        return pendingTrades;
+        if(pendingTrades == null){
+            return new ArrayList<Trade>();
+        }
+        else {
+            return pendingTrades;
+        }
     }
 
     public void setPendingTrades(ArrayList<Trade> pendingTrades) {
