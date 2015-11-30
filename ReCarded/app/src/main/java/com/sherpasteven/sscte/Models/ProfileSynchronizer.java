@@ -19,12 +19,14 @@ public class ProfileSynchronizer extends Model implements IView<Model> {
     private AppCompatActivity activity;
     private FriendSynchronizer friendSynchronizer;
     private TradeSynchronizer tradeSynchronizer;
+    private LocalProfileSerializer serializer;
 
     public ProfileSynchronizer(Profile profile){
         this.localProfile = profile;
         elasticSearch = new ElasticSearch();
         friendSynchronizer = new FriendSynchronizer(profile);
         tradeSynchronizer = new TradeSynchronizer(profile);
+        serializer = new LocalProfileSerializer();
         elasticSearch.addView(this);
     }
 
@@ -91,6 +93,7 @@ public class ProfileSynchronizer extends Model implements IView<Model> {
     public void UpdateProfile() {
         UpdateFriends();
         UpdateTrades();
+        serializer.Serialize(localProfile, activity);
     }
 
     /**

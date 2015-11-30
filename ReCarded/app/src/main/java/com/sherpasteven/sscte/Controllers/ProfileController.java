@@ -12,7 +12,9 @@ import com.sherpasteven.sscte.ProfileActivity;
 import com.sherpasteven.sscte.R;
 
 /**
- * Controller for ProfileActivity.
+ * Controller for the ProfileActivity.
+ * Used for updated the Profile model when the
+ * fields of the profile are submitted.
  */
 public class ProfileController extends Controller<ProfileActivity, Profile> {
     private final ProfileActivity view;
@@ -28,6 +30,10 @@ public class ProfileController extends Controller<ProfileActivity, Profile> {
 
     }
 
+    /**
+     * populate the view text using the
+     * previous values of profile.
+     */
     public void setFields(){
         final EditText nameText = view.getNameText();
         final EditText cityText = view.getCityText();
@@ -41,6 +47,10 @@ public class ProfileController extends Controller<ProfileActivity, Profile> {
         imageView.setTag("Default");
     }
 
+    /**
+     * update the profile model using the values
+     * of the views.
+     */
     public void submit(){
         view.getProfile().getUser().setName(view.getNameText().getText().toString());
         view.getProfile().getUser().setLocation(view.getCityText().getText().toString());
