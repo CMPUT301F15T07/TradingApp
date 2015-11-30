@@ -122,12 +122,14 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        if (trades.get(position).getOwnerList().get(0).getImagebyIndex(0) != null) {
-            viewHolder.tradePhoto.setImageBitmap(trades.get(position).getOwnerList().get(0).constructImage(0));
+        if (trades.get(position).getOwner().getProfileId().equals(currentUser.getProfileId())) {
+            //you are the owner
+            //TODO(should a trade show the other persons card or yours?)
+            //TODO(for now it will display the other user's card)
+            viewHolder.tradePhoto.setImageBitmap(trades.get(position).getBorrowList().get(0).constructImage(0));
         } else {
-            if (trades.get(position).getBorrowList().get(0).getImagebyIndex(0) != null) {
-                viewHolder.tradePhoto.setImageBitmap(trades.get(position).getBorrowList().get(0).constructImage(0));
-            }
+            //you are the borrower
+            viewHolder.tradePhoto.setImageBitmap(trades.get(position).getOwnerList().get(0).constructImage(0));
         }
 
         Integer cardsum = trades.get(position).getOwnerList().size() + trades.get(position).getBorrowList().size();
