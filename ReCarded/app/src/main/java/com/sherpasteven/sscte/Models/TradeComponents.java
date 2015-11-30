@@ -10,12 +10,16 @@ import java.util.UUID;
  */
 public class TradeComponents extends Model {
 
-
-
     private Trader borrower;
     private Trader owner;
     private ArrayList<Card> borrowlist;
     private ArrayList<Card> ownerlist;
+    private UUID tradeId;
+
+    public TradeComponents()  {
+        setOwnerList(new ArrayList<Card>());
+        setBorrowList(new ArrayList<Card>());
+    }
 
     public UUID getTradeId() {
         return tradeId;
@@ -23,14 +27,6 @@ public class TradeComponents extends Model {
 
     public void setTradeId(UUID tradeId) {
         this.tradeId = tradeId;
-    }
-
-    private UUID tradeId;
-
-    public TradeComponents()  {
-
-        setOwnerList(new ArrayList<Card>());
-        setBorrowList(new ArrayList<Card>());
     }
 
     public Boolean isComposable(){
@@ -65,7 +61,7 @@ public class TradeComponents extends Model {
     }
 
 
-public void addToBorrower(Card card){
+    public void addToBorrower(Card card){
         if(card.isTradable()) {
             if(!getBorrowList().contains(card)) {
                 getBorrowList().add(card);
