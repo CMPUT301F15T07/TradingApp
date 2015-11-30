@@ -87,8 +87,10 @@ public class ViewCardActivity extends AppCompatActivity implements IView<Model> 
         } else if (intent.hasExtra("com.sherpasteven.sscte.searched") && SearchSingleton.getSearchSingleton().getSearchedInventory() != null){
             setCard(SearchSingleton.getSearchSingleton().getSearchedInventory().get(getPosition()));
             setTitle("View Card - " + card.getName());
-            menuselector = 1;
-            invalidateOptionsMenu();
+            if(!card.getOwner().equals(getProfile().getUser().getOwnerInfo())) {
+                menuselector = 1;
+                invalidateOptionsMenu();
+            }
         } else{
 
             setCard(getProfile().getUser().getInventoryItem(getPosition()));

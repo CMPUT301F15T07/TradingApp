@@ -1,5 +1,7 @@
 package com.sherpasteven.sscte.Models;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +13,7 @@ import java.util.UUID;
  */
 public class TradeSynchronizer {
     private Profile localProfile;
+    private LocalProfileSerializer serializer;
     public TradeSynchronizer(Profile localProfile){
         this.localProfile = localProfile;
     }
@@ -21,6 +24,7 @@ public class TradeSynchronizer {
      */
     public void SynchronizeTrades(){
         User localUser = localProfile.getUser();
+        serializer = new LocalProfileSerializer();
         ProfileId localId = localUser.getProfileId();
         ArrayList<Trade> pendingTrades = localUser.getTrades().getPendingTrades();
         ArrayList<Trade> pastTrades = localUser.getTrades().getPastTrades();
@@ -60,7 +64,9 @@ public class TradeSynchronizer {
                     if (friendTrade.getStatus().equals("PENDING")){
                         pendingTrades.add(friendTrade);
                     } else {
+                        //trade was accepted
                         pastTrades.add(friendTrade);
+                        swapItems(friendTrade);
                     }
                 }
             }
@@ -68,5 +74,29 @@ public class TradeSynchronizer {
 
         localUser.getTrades().setPendingTrades(pendingTrades);
         localUser.getTrades().setPastTrades(pastTrades);
+    }
+
+    public void swapItems(Trade trade){
+        Inventory inventory = localProfile.getUser().getInventory();
+        List<Card> userList;
+        List<Card> friendList;
+        //local profile is owner
+        if (trade.getOwner().getProfileId().equals(localProfile.getProfileId())) {
+            userList = trade.getOwnerList();
+            friendList = trade.getBorrowList();
+
+        } else {
+            //local profile is borrower
+            userList = trade.getBorrowList();
+            friendList = trade.getOwnerList();
+        }
+
+        for (Card card : userList) {
+            inventory.removeCard(card, card.getQuantity());
+        }
+
+        for (Card card : friendList) {
+            inventory.addCard(card);
+        }
     }
 }
