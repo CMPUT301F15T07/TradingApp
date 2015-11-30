@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.Inventory;
@@ -20,7 +21,7 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
 
 
     private EditText nametext;
-    private EditText catagorytext;
+    private Spinner catagorytext;
     private EditText seriestext;
     private EditText qualitytext;
     private EditText quantitytext;
@@ -31,8 +32,8 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
     private CheckBox checkbox;
 
     public AddCardActivityTest(){
-
-        super(com.sherpasteven.sscte.AddCardActivity.class);}
+        super(com.sherpasteven.sscte.AddCardActivity.class);
+    }
 
     public void testStart() throws Exception{
 
@@ -64,7 +65,7 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         activity.runOnUiThread((new Runnable() {
             public void run() {
                 nametext.setText(name);
-                catagorytext.setText(catagory);
+                //catagorytext.setText(catagory);
                 seriestext.setText(series);
                 qualitytext.setText(quality);
                 quantitytext.setText(quantity);
@@ -97,7 +98,7 @@ public class AddCardActivityTest extends ActivityInstrumentationTestCase2 {
         getInstrumentation().waitForIdleSync();
 
         //get the local user and see if that new card was added to inventory
-        User user = new User("joshua","edmonton", "jjwhite@ualberta.ca"); //-> replace with method to obtain local user
+        User user = new User("joshua","edmonton", "jjwhite@ualberta.ca", this.getActivity()); //-> replace with method to obtain local user
         Inventory inventory = user.getInventory();
         Card card = new Card(name, Integer.parseInt(quantity), new Quality(Integer.parseInt(quality)), catagory, series,
                 Boolean.TRUE, comments, user);

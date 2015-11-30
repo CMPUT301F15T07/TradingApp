@@ -28,7 +28,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
     public void testAddCard() {
         InventoryActivity activity = (InventoryActivity) getActivity();
 
-        btnadditem = activity.getAddButton();
+        btnadditem = null; //activity.getAddButton();
 
 
         // Set up an ActivityMonitor
@@ -67,7 +67,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
     public void testViewCard() {
         InventoryActivity activity = (InventoryActivity) getActivity();
 
-        btnviewitem = activity.getViewButton();
+        btnviewitem = null; //activity.getViewButton();
 
 
         // Set up an ActivityMonitor
@@ -106,7 +106,7 @@ public class InventoryActivityTest extends ActivityInstrumentationTestCase2 {
     public void testEditCard() {
         InventoryActivity activity = (InventoryActivity) getActivity();
 
-        btnedititem = activity.getEditButton();
+        btnedititem = null; //activity.getEditButton();
 
 
         // Set up an ActivityMonitor
