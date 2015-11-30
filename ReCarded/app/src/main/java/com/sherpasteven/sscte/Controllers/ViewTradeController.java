@@ -77,32 +77,33 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 owner = model.getOwner();
                 borrower = model.getBorrower();
                 profile = CurrentProfile.getCurrentProfile().getProfile(view.getApplicationContext());
-
-                newownerlist = model.getOwnerList();
-                newborrowlist = model.getBorrowList();
+                User localUser = profile.getUser();
 
                 if(borrower.equals(profile.getUser())){
-                    for(Card bc: newborrowlist){
-                        borrower.getInventory().removeCard(bc, bc.getQuantity());
+                    for(Card bc: model.getBorrowList()){
+                        //remove borrow cards from user
+                        localUser.getInventory().removeCard(bc, bc.getQuantity());
                     }
-                    for(Card oc: newownerlist){
-                        borrower.getInventory().addCard(oc);
+                    for(Card oc: model.getOwnerList()){
+                        //add owner cards to user
+                        localUser.getInventory().addCard(oc);
                     }
                     profile.setUser(borrower);
                 } else {
-                    for(Card bc: newborrowlist){
-                        owner.getInventory().addCard(bc);
+                    //user is owner
+                    for(Card bc: model.getBorrowList()){
+                        //add borrower cards
+                        localUser.getInventory().addCard(bc);
                     }
-                    for(Card oc: newownerlist){
-                        owner.getInventory().removeCard(oc, oc.getQuantity());
+                    for(Card oc: model.getOwnerList()){
+                        //remove owner cards
+                        localUser.getInventory().removeCard(oc, oc.getQuantity());
                     }
-                    profile.setUser(owner);
                 }
-                setLocalProfile(profile);
+                localUser.incrementRating();
                 model.setStatus("ACCEPTED");
-                model.getBorrower().incrementRating();
-                model.getOwner().incrementRating();
                 tradelog.tradeFinalized(model);
+                setLocalProfile(profile);
                 model.notifyViews();
                 Email email = new Email();
                 email.tradeEmail(model, view);
