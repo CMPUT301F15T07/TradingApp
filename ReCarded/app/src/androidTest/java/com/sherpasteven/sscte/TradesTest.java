@@ -17,7 +17,7 @@ public class TradesTest extends ApplicationTestCase<Application> {
     public TradesTest() {
         super(Application.class);
     }
-/*
+
     public Card setupCards(int i, User user){
         switch(i){
             case 1:
@@ -179,9 +179,9 @@ public class TradesTest extends ApplicationTestCase<Application> {
 
             //TODO(rewrite this, counter offer was changed a bunch)
 
-            /*
+
             Trade trade2 = new Trade(owner, borrower);
-            trade2.list1.add(owner.getInventory().getCard("Deoxys"));
+            trade2.addOwnerList(owner.getInventory().getCard("Deoxys"));
             trade2.list1.add(owner.getInventory().getCard("Register"));
             trade2.list1.remove(1);
             trade2.list2.add(borrower.getInventory().getCard("Mew");
@@ -192,16 +192,10 @@ public class TradesTest extends ApplicationTestCase<Application> {
 
             trade2.sendTrade(owner);
             //trade2.setNotification(borrower);
-            */
+
         }
-    } 
-<<<<<<< HEAD
-        */
-/*
-=======
+    }
 
-
->>>>>>> bd17babbd1ca8aab8c6c5b3f34b9d54089373c7a
     public void testDeleteTrade() {
 
         Trader joshua = setupJoshua();
@@ -238,8 +232,6 @@ public class TradesTest extends ApplicationTestCase<Application> {
 
     }
 
-
-    /*
     public void testConfirmTrade() {
         User borrower = new User(currentUser.Name, "Canada");
         User owner = new User("Mr. Bean", "Canada");
@@ -267,11 +259,6 @@ public class TradesTest extends ApplicationTestCase<Application> {
         assertEquals(emailBorrower.status(), "SENT");
     }
 
-<<<<<<< HEAD
-*/
-=======
-    */
+}
 
-
->>>>>>> bd17babbd1ca8aab8c6c5b3f34b9d54089373c7a
 }
