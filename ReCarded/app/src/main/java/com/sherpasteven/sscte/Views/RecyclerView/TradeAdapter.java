@@ -149,7 +149,7 @@ public class TradeAdapter extends RecyclerView.Adapter<TradeAdapter.ViewHolder> 
         else if(trades.get(position).getStatus().equals("DECLINED")){
             viewHolder.cv.setCardBackgroundColor(lightred); // will change the background color of the card view to green
         } else {
-            viewHolder.cv.setCardBackgroundColor(R.color.white); // will change the background color of the card view to green
+            viewHolder.cv.setCardBackgroundColor(0xFFFFFFFF);
         }
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)

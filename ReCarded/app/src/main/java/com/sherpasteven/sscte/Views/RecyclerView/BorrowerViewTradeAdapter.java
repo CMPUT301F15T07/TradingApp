@@ -1,6 +1,7 @@
 package com.sherpasteven.sscte.Views.RecyclerView;
+
 /*
-* Copyright (C) 2014 The Android Open Source Project
+* Copyright (C) 2015 Sherpa Steven Ltd., The Android Open Source Project
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -43,7 +44,6 @@ public class BorrowerViewTradeAdapter extends RecyclerView.Adapter<BorrowerViewT
     static ViewTradeActivity act;
     static int tradelistpos;
 
-    // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
@@ -81,7 +81,6 @@ public class BorrowerViewTradeAdapter extends RecyclerView.Adapter<BorrowerViewT
         }
 
     }
-    // END_INCLUDE(recyclerViewSampleViewHolder)
 
     /**
      * Initialize the dataset of the Adapter.
@@ -95,8 +94,12 @@ public class BorrowerViewTradeAdapter extends RecyclerView.Adapter<BorrowerViewT
         this.tradelistpos = tradelistpos;
     }
 
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
-    // Create new views (invoked by the layout manager)
+    /**
+     * Creates the view holder using the xml style to process.
+     * @param viewGroup Sets the group view style
+     * @param viewType Sets the viewtype
+     * @return viewholder to process
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -105,10 +108,12 @@ public class BorrowerViewTradeAdapter extends RecyclerView.Adapter<BorrowerViewT
 
         return new ViewHolder(v);
     }
-    // END_INCLUDE(recyclerViewOnCreateViewHolder)
 
-    // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Overrides the image set for the card. Adds styles and structure.
+     * @param viewHolder to style
+     * @param position of card in the tradelist.
+     */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         // Get element from your dataset at this position and replace the contents of the view
@@ -120,7 +125,6 @@ public class BorrowerViewTradeAdapter extends RecyclerView.Adapter<BorrowerViewT
         }
 
     }
-    // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     /**
      * @return the size of your dataset (invoked by the layout manager)
