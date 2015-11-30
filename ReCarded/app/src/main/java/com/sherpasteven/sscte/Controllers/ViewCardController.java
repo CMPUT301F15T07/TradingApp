@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  * controller used to implement functionality used in ViewCardActivity.
- * Includes MEnu function and
+ * Includes menu functions and buttons
  */
 public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
@@ -33,17 +33,21 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
     Card model;
     int deletequantity;
 
-        public ViewCardController(ViewCardActivity view, Card model) {
-            super(view, model);
-            this.view = view;
-            this.model = model;
-        }
+    public ViewCardController(ViewCardActivity view, Card model) {
+        super(view, model);
+        this.view = view;
+        this.model = model;
+    }
 
     @Override
     protected void setListeners(ViewCardActivity view) {
 
     }
 
+    /**
+     * Implements the function for the menu system, such as editing, cloning and deleting.
+     * @param id This id is passed form the activity.
+     */
     public void menuOptions(int id){
 
         if (id == R.id.action_settings) {
@@ -63,7 +67,11 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
     }
 
-
+    /**
+     * The dialog builder to confirm deletion of a card,
+     * or remove a certain quantity from the card.
+     * @return
+     */
     private AlertDialog.Builder ConfirmDelete()
     {
 
@@ -103,6 +111,12 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
 
     }
+
+    /**
+     * The dialog to show whether you want to clone cards
+     * If yes it will then add the card to the invnetory
+     * @return
+     */
     private AlertDialog ConfirmClone()
     {
         AlertDialog myCloningDialogBox =new AlertDialog.Builder(view)
@@ -132,10 +146,21 @@ public class ViewCardController extends Controller<ViewCardActivity, Card>{
 
 
     }
+
+    /**
+     * Save profile to update throughout the app
+     * @param profile
+     */
     private void setLocalProfile(Profile profile) {
         ISerializer<Profile> serializer = new LocalProfileSerializer();
         serializer.Serialize(profile, view);
     }
+
+    /**
+     * Gets all possible quantities for cards and then displays
+     * them in the dialog window
+     * @return CharSequence[]
+     */
     private CharSequence[] getQuantityList(){
         int i;
         CharSequence[] quantityArray = new CharSequence[model.getQuantity()];

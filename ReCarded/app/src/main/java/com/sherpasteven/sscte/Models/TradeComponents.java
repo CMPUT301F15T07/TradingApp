@@ -18,6 +18,11 @@ public class TradeComponents extends Model {
     private ArrayList<Card> ownerlist;
     private UUID tradeId;
 
+    public TradeComponents()  {
+        setOwnerList(new ArrayList<Card>());
+        setBorrowList(new ArrayList<Card>());
+    }
+
     /**
      * Unique trade id's are used primarily to ensure that
      * counteroffers are completed using the same trade id.
@@ -29,12 +34,6 @@ public class TradeComponents extends Model {
 
     public void setTradeId(UUID tradeId) {
         this.tradeId = tradeId;
-    }
-
-    public TradeComponents()  {
-
-        setOwnerList(new ArrayList<Card>());
-        setBorrowList(new ArrayList<Card>());
     }
 
     /**

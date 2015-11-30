@@ -36,7 +36,6 @@ public class FriendInventoryActivity extends AppCompatActivity implements IView<
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60;
-    private InventoryTabController inventorytabcontroller;
     private View inflate_view;
     private User user;
     private int position;

@@ -22,6 +22,10 @@ import com.sherpasteven.sscte.R;
 import com.sherpasteven.sscte.ViewFriendActivity;
 import com.sherpasteven.sscte.Views.RecyclerView.FriendAdapter;
 
+/**
+ * Friends tab includes all the friends list, and incorporates many of the useful
+ * functions that includes friends. Also manages how the friend list is viewed.
+ */
 public class FriendsTab extends Fragment implements IView<Model> {
 
     private FriendsTabController friendstabcontroller;
@@ -35,18 +39,14 @@ public class FriendsTab extends Fragment implements IView<Model> {
     protected RecyclerView mRecyclerView;
     protected FriendAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    private ElasticSearch elasticSearch;
-
 
     public FriendsTab() {
         super();
-        this.elasticSearch = new ElasticSearch();
     }
 
     @SuppressLint("ValidFragment")
     public FriendsTab(User currentUser){
         super();
-        this.elasticSearch = new ElasticSearch();
     }
 
     @Override
