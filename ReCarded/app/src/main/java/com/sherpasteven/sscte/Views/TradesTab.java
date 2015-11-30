@@ -152,17 +152,25 @@ public class TradesTab extends Fragment implements IView<Model> {
         tradelistSort = new Comparator<Trade>() {
             @Override
             public int compare(Trade t1, Trade t2){
+                if (t1 == null || t2 == null) {
+                    return 0;
+                }
+                if (t1.getStatus().equals(t2.getStatus())) {
+                    return 0;
+                }
                 if (t1.getStatus().equals("PENDING")) {
                     return -1;
-                } else if (t2.getStatus().equals("PENDING")) {
-                    return 1;
-                } else if (t1.getStatus().equals("ACCEPTED")) {
-                    return -1;
-                } else if (t2.getStatus().equals("ACCEPTED")) {
-                    return 1;
-                } else {
+                }
+                if (t2.getStatus().equals("PENDING")) {
                     return 1;
                 }
+                if (t1.getStatus().equals("ACCEPTED")) {
+                    return -1;
+                }
+                if (t2.getStatus().equals("ACCEPTED")) {
+                    return 1;
+                }
+                return 0;
             }
         };
     }
