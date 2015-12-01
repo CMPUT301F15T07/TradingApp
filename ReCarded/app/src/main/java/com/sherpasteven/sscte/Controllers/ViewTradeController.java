@@ -7,6 +7,7 @@ import android.widget.Button;
 import com.sherpasteven.sscte.AddTradeActivity;
 import com.sherpasteven.sscte.Models.Card;
 import com.sherpasteven.sscte.Models.CurrentProfile;
+import com.sherpasteven.sscte.Models.Email;
 import com.sherpasteven.sscte.Models.ISerializer;
 import com.sherpasteven.sscte.Models.LocalProfileSerializer;
 import com.sherpasteven.sscte.Models.Profile;
@@ -99,8 +100,8 @@ public class ViewTradeController extends Controller<ViewTradeActivity, Trade> {
                 tradelog.tradeFinalized(model);
                 setLocalProfile(profile);
                 model.notifyViews();
-                //Email email = new Email();
-                //email.tradeEmail(model, view);
+                Email email = new Email();
+                email.tradeEmail(model, view);
                 view.finish();
 
             }
