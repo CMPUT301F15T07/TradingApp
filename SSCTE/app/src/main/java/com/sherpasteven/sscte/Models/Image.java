@@ -53,7 +53,7 @@ public class Image extends Model {
     private Bitmap resizeBitmap(Bitmap bitmap) {
         Double width = (double) bitmap.getWidth();
         Double height = (double) bitmap.getHeight();
-        Double max = 300.0;
+        Double max = 500.0;
 
         if (width > height) {
             height = max * (height / width);
